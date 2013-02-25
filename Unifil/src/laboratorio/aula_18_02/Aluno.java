@@ -24,24 +24,35 @@ package laboratorio.aula_18_02;
 import javax.swing.JOptionPane;
 
 public class Aluno {
+	
+	//definicao de atributos
 	private String nome;
-	private float nota[] = new float[4];
-	private float exame;
+	private double nota[];// = new double[4];
+	private double exame;
+	private String cidade;
 
+	//construtor
 	public Aluno() {
-		nota[0] = 0;
-		nota[1] = 0;
-		nota[2] = 0;
-		nota[3] = 0;
-		exame = 0;
+		nota = new double[4];
+		inicializarAtributos();
+		
 	}
-
-	public Aluno(String nome, float exame, float nota[]) {
+	
+	//construtor sobrecarga ---- com parametro
+	public Aluno(String nome) {
 		this.nome = nome;
-		this.exame = exame;
-		this.nota = nota;
+		inicializarAtributos();
 	}
 
+	//metodos para inicializar o atributo
+	private void inicializarAtributos(){
+		for (int i = 0; i < nota.length; i++) {
+			nota[i] =  -1;//- 1 indica a nota
+		}					//nao definida
+		exame = -1;
+		cidade = "Londrina";
+	}
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -50,17 +61,21 @@ public class Aluno {
 		return nome;
 	}
 
-	public void setNota() {
-		for (int i = 0; i < nota.length; i++) {
-			nota[i] = Float.parseFloat(JOptionPane.showInputDialog("Informe a nota do " + (i + 1) + " Bimestre"));
-			verificaNota(nota[i]);
+	public void setNota(double novaNota, int bimestre) {
+//		for (int i = 0; i < nota.length; i++) {
+//			nota[i] = Double.parseDouble(JOptionPane.showInputDialog("Informe a nota do " + (i + 1) + " Bimestre"));
+//			verificaNota(nota[i]);
+//		}
+		this.nota[bimestre] = novaNota;
+		if(bimestre >= 1 && bimestre <= 4 && novaNota >= 1 && novaNota <= 4){
+			
 		}
 	}
 	
-	public void verificaNota(float valor){
+	public void verificaNota(double valor){
 		while (valor > 100 || valor < 0) {
 			JOptionPane.showMessageDialog(null,"Erro, a nota deve estar de 0 a 100");
-			valor = Float.parseFloat(JOptionPane.showInputDialog("Informa a nota"));
+			valor = Double.parseDouble(JOptionPane.showInputDialog("Informa a nota"));
 		}
 	}
 
@@ -73,7 +88,7 @@ public class Aluno {
 		}
 
 		if (n != 4) {
-			exame = Float.parseFloat(JOptionPane.showInputDialog("Informe a nota do exame"));
+			exame = Double.parseDouble(JOptionPane.showInputDialog("Informe a nota do exame"));
 			verificaNota(exame);
 		} else {
 			JOptionPane.showMessageDialog(null, "as notas ainda não foram informada");
@@ -81,8 +96,8 @@ public class Aluno {
 	}
 
 
-	public float getMedia() {
-		float total = 0;
+	public double getMedia() {
+		double total = 0;
 		for (int i = 0; i < nota.length; i++) {
 			total = total + nota[i];
 		}
@@ -91,7 +106,7 @@ public class Aluno {
 	}
 	
 	public String getSituacao() {
-		float total;
+		double total;
 		total = getMediaFinal();
 		if(total < 70){
 			return  "vc está de exame ou reprovado nota " + total;
@@ -100,8 +115,8 @@ public class Aluno {
 		}
 	}
 	
-	public float getMediaFinal(){
-		float mediaFinal = 0;
+	public double getMediaFinal(){
+		double mediaFinal = 0;
 		mediaFinal = getMedia() + exame;
 		return mediaFinal;
 	}
