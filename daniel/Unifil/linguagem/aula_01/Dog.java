@@ -1,4 +1,4 @@
-package aula_26_02;
+package aula_01;
 
 public class Dog {
 

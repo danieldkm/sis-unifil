@@ -1,4 +1,4 @@
-package laboratorio.aula_18_02;
+package aula_01;
 
 import javax.swing.JOptionPane;
 
