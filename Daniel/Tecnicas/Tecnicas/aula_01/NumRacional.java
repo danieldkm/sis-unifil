@@ -31,7 +31,6 @@ public class NumRacional {
 		c.setNumerador((this.numerador * a.getDenominador())
 				+ (a.getNumerador() * this.denominador));
 		c.setDenominador(this.denominador * a.getDenominador());
-		System.out.println(c);
 		return c;
 	}
 
