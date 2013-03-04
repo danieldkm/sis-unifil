@@ -4,8 +4,8 @@ public class TesteNumRacional {
 
 
 	public static void main(String[] args) {
-		NumRacional a = new NumRacional(1, 2);
-		NumRacional b = new NumRacional(1, 3);
+		NumRacional a = new NumRacional(6, 2);
+		NumRacional b = new NumRacional(2, 10);
 		NumRacional a2 = new NumRacional(1.0, 2.0);
 		NumRacional b2 = new NumRacional(1.0, 3.0);
 		System.out.println(a);

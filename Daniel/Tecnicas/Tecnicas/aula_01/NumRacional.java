@@ -98,7 +98,15 @@ public class NumRacional {
 		} else {
 			if (numerador == denominador) {
 				return "1";
-			} else {
+			} else if ((numerador % 2) == 0) {
+				int n = 1;
+				while((numerador % 2) == 0 && (denominador % 2) == 0){
+					numerador = numerador / 2;
+					denominador = denominador / 2;
+				}
+				return numerador + "/" + denominador;
+				
+			}else{
 				return this.numerador + "/" + this.denominador;
 			}
 		}
