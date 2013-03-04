@@ -25,21 +25,15 @@ import javax.swing.JOptionPane;
 
 public class Aluno {
 	private String nome;
-	private float nota[] = new float[4];
-	private float exame;
+	private double nota[];
+	private double exame;
 
 	public Aluno() {
-		nota[0] = 0;
-		nota[1] = 0;
-		nota[2] = 0;
-		nota[3] = 0;
-		exame = 0;
+
 	}
 
-	public Aluno(String nome, float exame, float nota[]) {
+	public Aluno(String nome) {
 		this.nome = nome;
-		this.exame = exame;
-		this.nota = nota;
 	}
 
 	public void setNome(String nome) {
@@ -52,15 +46,15 @@ public class Aluno {
 
 	public void setNota() {
 		for (int i = 0; i < nota.length; i++) {
-			nota[i] = Float.parseFloat(JOptionPane.showInputDialog("Informe a nota do " + (i + 1) + " Bimestre"));
+			nota[i] = Double.parseDouble(JOptionPane.showInputDialog("Informe a nota do " + (i + 1) + " Bimestre"));
 			verificaNota(nota[i]);
 		}
 	}
 	
-	public void verificaNota(float valor){
+	public void verificaNota(double valor){
 		while (valor > 100 || valor < 0) {
 			JOptionPane.showMessageDialog(null,"Erro, a nota deve estar de 0 a 100");
-			valor = Float.parseFloat(JOptionPane.showInputDialog("Informa a nota"));
+			valor = Double.parseDouble(JOptionPane.showInputDialog("Informa a nota"));
 		}
 	}
 
@@ -81,8 +75,8 @@ public class Aluno {
 	}
 
 
-	public float getMedia() {
-		float total = 0;
+	public double getMedia() {
+		double total = 0;
 		for (int i = 0; i < nota.length; i++) {
 			total = total + nota[i];
 		}
@@ -91,7 +85,7 @@ public class Aluno {
 	}
 	
 	public String getSituacao() {
-		float total;
+		double total;
 		total = getMediaFinal();
 		if(total < 70){
 			return  "vc está de exame ou reprovado nota " + total;
@@ -100,8 +94,8 @@ public class Aluno {
 		}
 	}
 	
-	public float getMediaFinal(){
-		float mediaFinal = 0;
+	public double getMediaFinal(){
+		double mediaFinal = 0;
 		mediaFinal = getMedia() + exame;
 		return mediaFinal;
 	}
