@@ -48,15 +48,13 @@ public class NumRacional {
 		c.setNumerador((this.numerador * m.getDenominador())
 				* (m.getNumerador() * this.denominador));
 		c.setDenominador(this.denominador * m.getDenominador());
-		if (c.getNumerador() == c.getDenominador()) {
-			System.out.println("1");
-		}
 		return c;
 	}
 
 	public NumRacional divisao(NumRacional d) {
 		NumRacional c = new NumRacional();
-		c.setNumerador2((this.numerador2 * d.getDenominador2())	/ (d.getNumerador2() * this.denominador2));
+		c.setNumerador2((this.numerador2 * d.getDenominador2())
+				/ (d.getNumerador2() * this.denominador2));
 		c.setDenominador2(this.denominador2 * d.getDenominador2());
 		return c;
 	}
@@ -98,7 +96,11 @@ public class NumRacional {
 		if (this.numerador2 != 0) {
 			return this.numerador2 + "/" + this.denominador2;
 		} else {
-			return this.numerador + "/" + this.denominador;
+			if (numerador == denominador) {
+				return "1";
+			} else {
+				return this.numerador + "/" + this.denominador;
+			}
 		}
 	}
 }
