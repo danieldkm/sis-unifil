@@ -103,6 +103,14 @@ public class NumRacional {
 					numerador = numerador / 2;
 					denominador = denominador / 2;
 				}
+				while((numerador % 3) == 0 && (denominador % 3) == 0){
+					numerador = numerador / 3;
+					denominador = denominador / 3;
+				}
+				while((numerador % 5) == 0 && (denominador % 5) == 0){
+					numerador = numerador / 5;
+					denominador = denominador / 5;
+				}
 				return numerador + "/" + denominador;
 				
 			}else{
