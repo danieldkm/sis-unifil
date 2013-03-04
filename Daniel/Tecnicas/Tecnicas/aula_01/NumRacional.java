@@ -1,4 +1,5 @@
 package aula_01;
+
 /*
  * Implemente as funções de subtração, multiplicação e divisão de números racionais.
  * 
@@ -7,6 +8,9 @@ public class NumRacional {
 
 	private int numerador;
 	private int denominador;
+
+	private double numerador2;
+	private double denominador2;
 
 	public NumRacional() {
 
@@ -17,32 +21,43 @@ public class NumRacional {
 		this.denominador = denominador;
 	}
 
+	public NumRacional(double numerador2, double denominador2) {
+		this.numerador2 = numerador2;
+		this.denominador2 = denominador2;
+	}
+
 	public NumRacional somar(NumRacional a) {
 		NumRacional c = new NumRacional();
-		c.setNumerador((this.numerador * a.getDenominador()) + (a.getNumerador() * this.denominador));
+		c.setNumerador((this.numerador * a.getDenominador())
+				+ (a.getNumerador() * this.denominador));
 		c.setDenominador(this.denominador * a.getDenominador());
 		System.out.println(c);
 		return c;
 	}
-	
-	public NumRacional subtracao(NumRacional s){
+
+	public NumRacional subtracao(NumRacional s) {
 		NumRacional c = new NumRacional();
-		c.setNumerador((this.numerador * s.getDenominador()) - (s.getNumerador() * this.denominador));
+		c.setNumerador((this.numerador * s.getDenominador())
+				- (s.getNumerador() * this.denominador));
 		c.setDenominador(this.denominador * s.getDenominador());
 		return c;
 	}
-	
-	public NumRacional divisao(NumRacional d){
+
+	public NumRacional multiplicacao(NumRacional m) {
 		NumRacional c = new NumRacional();
-		c.setNumerador((this.numerador * d.getDenominador()) / (d.getNumerador() * this.denominador));
-		c.setDenominador(this.denominador * d.getDenominador());
+		c.setNumerador((this.numerador * m.getDenominador())
+				* (m.getNumerador() * this.denominador));
+		c.setDenominador(this.denominador * m.getDenominador());
+		if (c.getNumerador() == c.getDenominador()) {
+			System.out.println("1");
+		}
 		return c;
 	}
-	
-	public NumRacional multiplicacao(NumRacional m){
+
+	public NumRacional divisao(NumRacional d) {
 		NumRacional c = new NumRacional();
-		c.setNumerador((this.numerador * m.getDenominador()) * (m.getNumerador() * this.denominador));
-		c.setDenominador(this.denominador * m.getDenominador());
+		c.setNumerador2((this.numerador2 * d.getDenominador2())	/ (d.getNumerador2() * this.denominador2));
+		c.setDenominador2(this.denominador2 * d.getDenominador2());
 		return c;
 	}
 
@@ -62,9 +77,28 @@ public class NumRacional {
 		return denominador;
 	}
 
-	@Override
-	public String toString() {
-		return this.numerador + "/" + this.denominador;
+	public double getNumerador2() {
+		return numerador2;
 	}
 
+	public void setNumerador2(double numerador2) {
+		this.numerador2 = numerador2;
+	}
+
+	public double getDenominador2() {
+		return denominador2;
+	}
+
+	public void setDenominador2(double denominador2) {
+		this.denominador2 = denominador2;
+	}
+
+	@Override
+	public String toString() {
+		if (this.numerador2 != 0) {
+			return this.numerador2 + "/" + this.denominador2;
+		} else {
+			return this.numerador + "/" + this.denominador;
+		}
+	}
 }
