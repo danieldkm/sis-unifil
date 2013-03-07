@@ -34,10 +34,11 @@ public class NumRacional {
 		return c;
 	}
 
-	public NumRacional divisao(NumRacional d){
+	public NumRacional subtracao(NumRacional s){
 		NumRacional c = new NumRacional();
-		c.setNumerador((this.numerador * d.getDenominador()));
-		c.setDenominador(this.denominador * d.getNumerador());
+		c.setNumerador((this.numerador * s.getDenominador())
+				- (a.getNumerador() * this.denominador));
+		c.setDenominador(this.denominador * s.getDenominador());
 		return c;
 	}
 	
