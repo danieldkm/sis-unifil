@@ -34,18 +34,16 @@ public class NumRacional {
 		return c;
 	}
 
-	public NumRacional subtracao(NumRacional s) {
+	public NumRacional divisao(NumRacional d){
 		NumRacional c = new NumRacional();
-		c.setNumerador((this.numerador * s.getDenominador())
-				- (s.getNumerador() * this.denominador));
-		c.setDenominador(this.denominador * s.getDenominador());
+		c.setNumerador((this.numerador * d.getDenominador()));
+		c.setDenominador(this.denominador * d.getNumerador());
 		return c;
 	}
-
-	public NumRacional multiplicacao(NumRacional m) {
+	
+	public NumRacional multiplicacao(NumRacional m){
 		NumRacional c = new NumRacional();
-		c.setNumerador((this.numerador * m.getDenominador())
-				* (m.getNumerador() * this.denominador));
+		c.setNumerador((this.numerador * m.getNumerador()));
 		c.setDenominador(this.denominador * m.getDenominador());
 		return c;
 	}
