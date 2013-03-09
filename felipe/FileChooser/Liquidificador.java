@@ -1,4 +1,3 @@
-
 public class Liquidificador {
 	private int velocidade;
 	private int velocidadeMaxima;
