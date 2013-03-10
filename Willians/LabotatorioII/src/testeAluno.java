@@ -13,7 +13,7 @@ public class testeAluno {
 
 		
 		a.getNome();
-		a.setNota(90, 2);
+		a.setNota(50, 2);
 		System.out.println(a.getMediaAnual());
 		System.out.println(a.getSituacao());
 		
