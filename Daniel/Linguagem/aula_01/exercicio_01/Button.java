@@ -11,12 +11,12 @@ public class Button {
 		this.color = color;
 	}
 	
-	public void dePress(){
-		
+	public String dePress(){
+		return "Nao Pressionado";
 	}
 	
-	public void unPress(){
-		
+	public String unPress(){
+		return "Pressionado";
 	}
 	
 }
