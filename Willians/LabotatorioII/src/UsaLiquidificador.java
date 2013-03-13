@@ -53,7 +53,7 @@ public class UsaLiquidificador {
 				if(menu == 4){
 					arno.setVelocidade(Integer.parseInt(JOptionPane.showInputDialog("Velocidade de 1 a 5")));
 					 
-					} else {if(arno.getVelocidade() <= 0 && arno.getVelocidade() > 5){
+					if(arno.getVelocidade() < 0 || arno.getVelocidade() > 5){
 						if(arno.getEstado("Desligado") == "Desligado"){
 							JOptionPane.showMessageDialog(null, "ERRO" + '\n'+ "Não é possivel trocar a velocidade");
 						
@@ -63,9 +63,8 @@ public class UsaLiquidificador {
 				
 				if(menu == 5){
 					arno.setVelocidadeMaxima(Integer.parseInt(JOptionPane.showInputDialog("Velocidade de 1 a 5")));
-					
-				} else {if (arno.getVelocidadeMaxima() <= 0 && arno.getVelocidadeMaxima() > 5){
-					if(arno.getVelocidade() >= arno.getVelocidadeMaxima()){
+					if (arno.getVelocidadeMaxima() < 0 || arno.getVelocidadeMaxima() > 5){
+					if(arno.getVelocidade() > arno.getVelocidadeMaxima()){
 						JOptionPane.showMessageDialog(null, "ERRO" + '\n'+ "Não é possivel trocar a velocidade");
 					}
 				}

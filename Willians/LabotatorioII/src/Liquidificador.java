@@ -3,7 +3,7 @@ public class Liquidificador {
 
 	private int velocidade;
 	private int velocidadeMaxima = 5;
-	private String estado = " ";
+	private String estado = "Desligado";
 	
 	public Liquidificador(){
 		
