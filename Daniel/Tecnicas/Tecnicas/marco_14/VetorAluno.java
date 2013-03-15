@@ -10,7 +10,6 @@ public class VetorAluno {
 
 	private int contAluno = 0;
 
-	
 	public Aluno[] getAlunos() {
 		return alunos;
 	}
@@ -45,11 +44,11 @@ public class VetorAluno {
 						break;
 					}
 				}
-				if(n == 1){
+				if (n == 1) {
 					break;
-				}else if(n == 0) {
+				} else if (n == 0) {
 					alunos[i] = aluno;
-					contAluno = contAluno + 1;  
+					contAluno = contAluno + 1;
 					break;
 				}
 			}
@@ -57,26 +56,34 @@ public class VetorAluno {
 	}
 
 	public void adiciona(int posicao, Aluno aluno) {
-		// implementação
+		alunos[posicao] = aluno;
 	}
 
 	public Aluno pega(int posicao) {
-		return null;
-		// implementação
+		return alunos[posicao];
 	}
 
 	public void remove(int posicao) {
-		// implementação
+		alunos[posicao] = null;
 	}
 
 	public boolean contem(Aluno aluno) {
-		return false;
-		// implementação
+		int n = 0;
+		for (int i = 0; i < tamanho_vetor; i++) {
+			if (aluno.equals(alunos[i])) {
+				n = 1;
+				break;
+			}
+		}
+		if (n == 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public int tamanho() {
 		return 0;
-		// implementação
 	}
 
 	@Override
