@@ -14,7 +14,7 @@ public class teste {
 			t.recordTape();
 		}
 		
-		
+		///
 //		ex02 d = new ex02();
 //		d.canRecord = true;
 //		d.playDVD();
