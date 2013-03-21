@@ -1,3 +1,4 @@
+import javax.swing.JOptionPane;
 
 public class testevetor {
 
@@ -5,23 +6,26 @@ public class testevetor {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+
+		VetorAluno a1 = new VetorAluno();
 		
-		VetorAluno aluno3 = new VetorAluno();
+		for (int i = 0; i < 3; i++) {
+
+			Aluno a = new Aluno(JOptionPane.showInputDialog("Informe o nome:"), 
+						Integer.parseInt(JOptionPane.showInputDialog( "Nota")));
+			       a1.adiciona(a);
 		
-		if(aluno3.isEmpty()){
+			       
+			}
+		System.out.println(a1);
+		
+		if (a1.isEmpty()) {
 			System.out.println("Lista Vazia");
-		}else{
+		} else {
+
 			System.out.println("Lista não Vazia");
 		}
-		
-		
-		Aluno aluno1 = new Aluno ("A", 20);
-		
-		
-		aluno3.adiciona(aluno1);
-		
-		System.out.println(aluno3);
-		
+
 	}
 
 }
