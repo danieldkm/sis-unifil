@@ -1,6 +1,7 @@
 package marco_19;
 
 public class Dog {
+	
 	private int size;
 	private String name;
 	
@@ -17,15 +18,23 @@ public class Dog {
 		}else{
 			System.out.println("Nome; " + name + " Yip! Yip!");
 		}
-			
 	}
 
 	void bark(int numOfBarks){
 		while (numOfBarks > 0) {
-			System.out.println("Ruff! Ruff!");
-			numOfBarks--;
+			if(size > 60){
+				System.out.println("Woof! Woof!");
+				numOfBarks --;
+			}else if (size > 14){
+				System.out.println("Ruff! Ruff!");
+				numOfBarks --;
+			}else{
+				System.out.println("Yip! Yip!");
+				numOfBarks --;
+			}
 		}
 	}
+	
 	public int getSize() {
 		return size;
 	}
