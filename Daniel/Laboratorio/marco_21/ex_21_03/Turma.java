@@ -22,22 +22,37 @@ c.	aluno – Vector - Aluno.
 
 8)	Método público para listar alunos da turma. 
 */
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Vector;
 
 import javax.swing.JOptionPane;
 
+import aula_01.Aluno;
+
 public class Turma {
 	private String nomeTurma;
 	private String nomeTurno;
-	private Vector<String> aluno;
+	private Vector aluno;
+	private static int n = 0;
+//	private Aluno nome = new Aluno();
+	
 	
 	public Turma(){
+		aluno = new Vector();
 	}
 	
+	public static int getN() {
+		return n;
+	}
+
+	public static void setN(int n) {
+		Turma.n = n;
+	}
+
 	public Turma(String turma){
 		this.nomeTurma = turma;
-		aluno = new Vector<String>();
+		aluno = new Vector();
 	}
 	
 	public String getNomeTurma(){
@@ -60,6 +75,10 @@ public class Turma {
 		this.aluno.addElement(nomeAluno);
 	}
 	
+	public void adicionar(Aluno nomeAluno){
+		this.aluno.addElement(nomeAluno);
+	}
+	
 	public void cancelarMatricula(String nomeAluno){
 		if(aluno.indexOf(nomeAluno) < 0){
 			JOptionPane.showMessageDialog(null, "Aluno não existe");
@@ -72,15 +91,25 @@ public class Turma {
 	}
 	
 	public void listarAlunos(){
-		Enumeration<String> enume = aluno.elements();
-		for (int i = 0; i < aluno.capacity(); i++) {
-			try {
-				System.out.println(enume.nextElement());
-			} catch (Exception e) {
-				aluno.trimToSize();
-			}
+//		System.out.println(aluno.get(0));
+//		Enumeration<Aluno> enume = aluno.elements();
+//		for (int i = 0; i < aluno.capacity(); i++) {
+//			try {
+//				System.out.println(enume.nextElement());
+//			} catch (Exception e) {
+//				aluno.trimToSize();
+//				System.out.println(e);
+//			}
+//		}
+		for (int i = 0; i < aluno.size(); i++) {
+			Aluno aux = (Aluno)aluno.get(i);
+			System.out.println(aux.getNome() /*+ " " + aux.getSituacao()*/);
 		}
 	}
 	
+	@Override
+	public String toString(){
+		return aluno.toString();
+	}
 	
 }
