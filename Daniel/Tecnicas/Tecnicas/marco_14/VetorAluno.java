@@ -2,6 +2,8 @@ package marco_14;
 
 import java.util.Arrays;
 
+import javax.swing.JOptionPane;
+
 public class VetorAluno {
 
 	private Aluno[] alunos = new Aluno[tamanho_vetor];
@@ -35,28 +37,41 @@ public class VetorAluno {
 	}
 
 	public void adiciona(Aluno aluno) {
-		int n = 0;
+		// int n = 0;
+		// for (int i = 0; i < alunos.length; i++) {
+		// if (alunos[i] == null) {
+		// for (int j = 0; j < contAluno; j++) {
+		// if (aluno.equals(alunos[j])) {
+		// n = 1;
+		// break;
+		// }
+		// }
+		// if (n == 1) {
+		// break;
+		// } else if (n == 0) {
+		// alunos[i] = aluno;
+		// contAluno ++;
+		// break;
+		// }
+		// }
+		// }
 		for (int i = 0; i < alunos.length; i++) {
 			if (alunos[i] == null) {
-				for (int j = 0; j < contAluno; j++) {
-					if (aluno.equals(alunos[j])) {
-						n = 1;
-						break;
-					}
-				}
-				if (n == 1) {
-					break;
-				} else if (n == 0) {
-					alunos[i] = aluno;
-					contAluno = contAluno + 1;
-					break;
-				}
+				alunos[i] = aluno;
+				break;
 			}
 		}
+		contAluno++;
+		System.out.println("metodo cont " + contAluno);
+
 	}
 
 	public void adiciona(int posicao, Aluno aluno) {
-		alunos[posicao] = aluno;
+		if (alunos[posicao] == null) {
+			alunos[posicao] = aluno;
+		} else {
+			JOptionPane.showMessageDialog(null, "Existe aluno nessa pocição");
+		}
 	}
 
 	public Aluno pega(int posicao) {
@@ -64,7 +79,12 @@ public class VetorAluno {
 	}
 
 	public void remove(int posicao) {
-		alunos[posicao] = null;
+		if (alunos[posicao] != null || !alunos[posicao].equals(null)) {
+			alunos[posicao] = null;
+			contAluno--;
+		} else {
+			JOptionPane.showMessageDialog(null, "Aluno já foi excluido");
+		}
 	}
 
 	public boolean contem(Aluno aluno) {
@@ -83,7 +103,7 @@ public class VetorAluno {
 	}
 
 	public int tamanho() {
-		return 0;
+		return contAluno;
 	}
 
 	@Override
@@ -96,6 +116,22 @@ public class VetorAluno {
 			return true;
 		} else {
 			return false;
+		}
+	}
+
+	public void organizar(){
+		int n = 0;
+		for(int i = 0; i < tamanho_vetor; i++){
+			if(alunos[i] == null){
+				n = i;
+				for (int j = n+1; j < tamanho_vetor; j++) {
+					if(alunos[j] != null){
+						alunos[n] = alunos[j];
+						alunos[j] = null;
+						break;
+					}
+				}
+			}
 		}
 	}
 }
