@@ -21,7 +21,8 @@ public class turmaAluno {
 		int continuar = JOptionPane.YES_OPTION;
 
 		while (continuar == 0) {
-			String nome = (JOptionPane.showInputDialog("Informe o nome do aluno"));
+			String nome = (JOptionPane
+					.showInputDialog("Informe o nome do aluno"));
 			Aluno aluno = new Aluno(nome);
 			turma.adicionar(aluno);
 			turma.adicionar(nome);
@@ -30,7 +31,7 @@ public class turmaAluno {
 		}
 
 		turma.listarAlunos();
-//		System.out.println(turma);
+		// System.out.println(turma);
 
 		continuar = JOptionPane.showConfirmDialog(null,
 				"Deseja informar a nota do aluno?");
