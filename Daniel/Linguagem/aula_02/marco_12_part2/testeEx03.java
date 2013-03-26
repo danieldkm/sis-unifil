@@ -14,7 +14,6 @@ public class testeEx03 {
 				
 		int x = 0;
 		
-		
 		myBooks[0].setTitle("The Grapes of Java");
 		myBooks[1].setTitle("The Java Gatsby");
 		myBooks[2].setTitle("The java Cookbook");
@@ -24,7 +23,6 @@ public class testeEx03 {
 		myBooks[2].setAuthor("ian");
 		
 		while(x < 3){
-		
 			System.out.print(myBooks[x].getTitle());
 			System.out.print(" by ");
 			System.out.println(myBooks[x].getAuthor());
