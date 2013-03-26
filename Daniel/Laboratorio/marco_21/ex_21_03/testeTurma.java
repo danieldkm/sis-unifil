@@ -15,7 +15,7 @@ public class testeTurma {
 		int n = JOptionPane.YES_OPTION;
 		
 		while(n == JOptionPane.YES_OPTION){
-			turma.matricular(JOptionPane.showInputDialog("Nome do Aluno"));
+			turma.adicionar(JOptionPane.showInputDialog("Nome do Aluno"));
 			n = JOptionPane.showConfirmDialog(null, "Deseja continuar?");
 		}
 		

@@ -21,21 +21,16 @@ g)	Obter média final
 
 package aula_01;
 
-import java.util.Arrays;
-
 import javax.swing.JOptionPane;
 
 public class Aluno {
+	
+	private int tamanho = 4;
 	private String nome;
-	private double nota[];
+	private double nota[] = new double[tamanho];
 	private double exame;
 
 	public Aluno() {
-		nota[0] = 0;
-		nota[1] = 0;
-		nota[2] = 0;
-		nota[3] = 0;
-		exame = 0;
 	}
 
 	public Aluno(String nome) {
@@ -51,7 +46,7 @@ public class Aluno {
 	}
 
 	public void setNota() {
-		for (int i = 0; i < nota.length; i++) {
+		for (int i = 0; i < 4; i++) {
 			nota[i] = Double.parseDouble(JOptionPane
 					.showInputDialog("Informe a nota do " + (i + 1)
 							+ " Bimestre"));
@@ -87,30 +82,28 @@ public class Aluno {
 	}
 
 	public double getMedia() {
-		double total = 0;
+		double media = 0;
 		for (int i = 0; i < nota.length; i++) {
-			total = total + nota[i];
+			media = media + nota[i];
 		}
-		total = total / 4;
-		return total;
+		media = media / 4;
+		return media;
 	}
 
 	public String getSituacao() {
 		if (getMediaFinal() < 70) {
-			return "vc está de exame ou reprovado nota " + getMediaFinal();
+			return "vc está de exame ou reprovado, nota " + getMediaFinal();
 		} else {
 			return "aprovado nota " + getMediaFinal();
 		}
 	}
 
 	public double getMediaFinal() {
-		double mediaFinal = 0;
-		mediaFinal = getMedia() + exame;
-		return mediaFinal;
+		return getMedia() + exame;
 	}
-
-	// @Override
-	// public String toString(){
-	// return nome;
-	// }
+	
+	@Override
+	public String toString() {
+		return nome;
+	}
 }
