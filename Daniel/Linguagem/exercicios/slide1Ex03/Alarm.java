@@ -1,4 +1,4 @@
-package exercicio_01;
+package slide1Ex03;
 
 public class Alarm {
 	private String dipertar;

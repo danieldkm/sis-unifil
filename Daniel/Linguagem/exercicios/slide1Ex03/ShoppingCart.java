@@ -1,4 +1,4 @@
-package exercicio_01;
+package slide1Ex03;
 
 public class ShoppingCart {
 	private String carContents;
