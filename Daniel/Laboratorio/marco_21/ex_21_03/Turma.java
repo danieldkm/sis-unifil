@@ -41,9 +41,10 @@ public class Turma {
 		aluno = new Vector();
 	}
 
-	//Testando o atributo do tipo final ou static
-	//final não deixa fazer a alteração no atributo 
-	//static ainda deixa fazer a alteração no atributo mas não deixa de ser constante
+	// Testando o atributo do tipo final ou static
+	// final não deixa fazer a alteração no atributo
+	// static ainda deixa fazer a alteração no atributo mas não deixa de ser
+	// constante
 	public static int getN() {
 		return n;
 	}
@@ -71,6 +72,7 @@ public class Turma {
 
 	public void adicionar(String nomeAluno) {
 		this.aluno.addElement(nomeAluno);
+		System.out.println("adicionado " + nomeAluno);
 	}
 
 	public void adicionar(Aluno nomeAluno) {
@@ -88,27 +90,43 @@ public class Turma {
 		System.out.println(aluno.size() + " Alunos matriculados");
 	}
 
-	//lista todos os alunos, pulando sempre um elemento, pois estou gravando duas vezes, um como Objeto e outro como String
+	// lista todos os alunos, pulando sempre um elemento, pois estou gravando
+	// duas vezes, um como Objeto e outro como String
 	public void listarAlunos() {
-//		System.out.println(aluno.get(0));
-//		Enumeration<Aluno> enume = aluno.elements();
+		// System.out.println(aluno.get(0));
+		// Enumeration<Aluno> enume = aluno.elements();
 		for (int i = 0; i < aluno.capacity(); i += 2) {
 			try {
 				System.out.println(aluno.get(i) + " " + i);
-//				System.out.println(enume.nextElement());
+				// System.out.println(enume.nextElement());
 			} catch (Exception e) {
 				aluno.trimToSize();
 				System.out.println(e);
 			}
 		}
-		//correção do professor!!!
+		// correção do professor!!!
 		// for (int i = 0; i < aluno.size(); i++) {
 		// Aluno aux = (Aluno) aluno.get(i);
 		// System.out.println(aux.getNome() + " " + aux.getSituacao());
 		// }
 	}
 
-	//procurar o aluno por vector String e chama os metodos para adicionar as notas
+	//correcao do prof.
+	public void listar() {
+		for (int i = 0; i < aluno.size(); i++) {
+			Aluno aux = (Aluno) aluno.get(i);
+			System.out.println(aux.getNome() + " " + aux.getSituacao());
+		}
+	}
+	
+	public void listar2() {
+		for (int i = 0; i < aluno.size(); i++) {
+			System.out.println(aluno.get(i));
+		}
+	}
+
+	// procurar o aluno por vector String e chama os metodos para adicionar as
+	// notas
 	public void procurarAluno() {
 		String nome = JOptionPane.showInputDialog("Informe o nome do aluno");
 		System.out.println(aluno.contains(nome));
@@ -131,6 +149,28 @@ public class Turma {
 		} else {
 			JOptionPane.showMessageDialog(null, "Esse aluno não existe");
 		}
+	}
+	
+	public int getAlunosMatriculados(){
+		return aluno.size();
+	}
+	
+	public boolean cancelar(Aluno alu){
+		return aluno.removeElement(alu);
+	}
+	public boolean cancelar(String alu){
+		return aluno.removeElement(alu);
+	}
+	
+	public Aluno getAluno(String nome){
+		Aluno aux = null;
+		for (int i = 0; i < aluno.size(); i++) {
+			aux = (Aluno) aluno.get(i);
+			if(aux.getNome().equals(nome)){
+				return aux;
+			}
+		}
+		return aux;
 	}
 
 	@Override
