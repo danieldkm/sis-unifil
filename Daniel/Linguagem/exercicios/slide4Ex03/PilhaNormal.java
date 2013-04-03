@@ -37,7 +37,6 @@ public class PilhaNormal {
 			if (vetor[i] != 0.0) {
 				n = n + 1;
 			}
-
 		}
 		if (n == tamanho) {
 			return true;
@@ -52,7 +51,6 @@ public class PilhaNormal {
 			if (vetor[i] == 0.0) {
 				n = n + 1;
 			}
-
 		}
 		if (n == tamanho) {
 			return true;
