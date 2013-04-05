@@ -11,6 +11,8 @@ public class VetorAluno {
 	private static int tamanho_vetor = 10;
 
 	private int contAluno = 0;
+	
+	public Aluno inicio;
 
 	public Aluno[] getAlunos() {
 		return alunos;
