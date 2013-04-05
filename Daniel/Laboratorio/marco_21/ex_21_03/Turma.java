@@ -72,7 +72,7 @@ public class Turma {
 
 	public void adicionar(String nomeAluno) {
 		this.aluno.addElement(nomeAluno);
-		System.out.println("adicionado " + nomeAluno);
+		System.out.println("adicionado " + aluno);
 	}
 
 	public void adicionar(Aluno nomeAluno) {
@@ -158,6 +158,7 @@ public class Turma {
 	public boolean cancelar(Aluno alu){
 		return aluno.removeElement(alu);
 	}
+	
 	public boolean cancelar(String alu){
 		return aluno.removeElement(alu);
 	}
@@ -165,7 +166,10 @@ public class Turma {
 	public Aluno getAluno(String nome){
 		Aluno aux = null;
 		for (int i = 0; i < aluno.size(); i++) {
-			aux = (Aluno) aluno.get(i);
+//			System.out.println("aux " + aux + " get " + aluno.get(i));
+//			String s = (String) aluno.get(i);//forma 1
+			aux =/*forma1 new Aluno(s);*//*forma2*/(Aluno) aluno.get(i);
+//			System.out.println("aux " + aux);
 			if(aux.getNome().equals(nome)){
 				return aux;
 			}

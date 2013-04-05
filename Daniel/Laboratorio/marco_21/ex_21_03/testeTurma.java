@@ -33,18 +33,42 @@ public class testeTurma {
 		
 		
 		
-		turma.adicionar("jose");
-		turma.adicionar("Maria");
-		turma.adicionar("joao");
-		turma.adicionar("joaquin");
+//		////FOrma 1********************************
+//		turma.adicionar("jose");
+//		turma.adicionar("Maria");
+//		turma.adicionar("joao");
+//		turma.adicionar("joaquin");
+//		
+//		turma.listar2();
+////		turma.listar();
+//		
+//		Aluno alunoGet = turma.getAluno("Maria");
+////		turma.getAluno("Maria");
+//		
+//		System.out.println(alunoGet.getNome());
+//		String s = alunoGet.getNome();
+//		
+//		if(turma.cancelar(s)){
+//			System.out.println("Aluno removido");
+//		}else{
+//			System.out.println("Problema na remocao");
+//		}		
+//		turma.listar2();
+		
+		
+//		////FOrma 2********************************
+		turma.adicionar(new Aluno("jose"));
+		turma.adicionar(new Aluno("Maria"));
+		turma.adicionar(new Aluno("joao"));
+		turma.adicionar(new Aluno("joaquin"));
 		
 		turma.listar2();
 //		turma.listar();
 		
-//		Aluno alunoGet = turma.getAluno("Maria");
-		turma.getAluno("Maria");
+		Aluno alunoGet = turma.getAluno("Maria");
+//		turma.getAluno("Maria");
 		
-//		System.out.println(alunoGet.getNome());
+		System.out.println("Remover Aluno " + alunoGet.getNome());
 		
 		if(turma.cancelar(alunoGet)){
 			System.out.println("Aluno removido");
