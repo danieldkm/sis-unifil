@@ -26,7 +26,7 @@ public class TesteVetor {
 //		lista.inicio.proximo.proximo.proximo.proximo = new Aluno("E",5);//exemplo1
 		
 		for (int i = 0; i < 3; i++) {
-			lista.adiciona(JOptionPane.showInputDialog("Informa um nome"),Integer.parseInt(JOptionPane.showInputDialog("Informe uma pontuacao")), i);
+			lista.adiciona(JOptionPane.showInputDialog("Informa um nome"),Integer.parseInt(JOptionPane.showInputDialog("Informe uma pontuacao")));
 		}
 		
 		Aluno auxiliar = lista.inicio;
@@ -35,6 +35,7 @@ public class TesteVetor {
 			System.out.println(auxiliar);
 			auxiliar = auxiliar.proximo;
 		}
+		System.out.println(auxiliar);
 		
 	}
 }
