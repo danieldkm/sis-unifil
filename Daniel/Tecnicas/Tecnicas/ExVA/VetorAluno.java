@@ -6,29 +6,9 @@ import javax.swing.JOptionPane;
 
 public class VetorAluno {
 
-	private Aluno[] alunos = new Aluno[tamanho_vetor];
-
-	private static int tamanho_vetor = 10;
-
 	private int contAluno = 0;
 
-	public Aluno inicio;
-
-	public Aluno[] getAlunos() {
-		return alunos;
-	}
-
-	public void setAlunos(Aluno[] alunos) {
-		this.alunos = alunos;
-	}
-
-	public static int getTamanho_vetor() {
-		return tamanho_vetor;
-	}
-
-	public static void setTamanho_vetor(int tamanho_vetor) {
-		VetorAluno.tamanho_vetor = tamanho_vetor;
-	}
+	public Aluno inicio = new Aluno();
 
 	public int getContAluno() {
 		return contAluno;
@@ -39,9 +19,6 @@ public class VetorAluno {
 	}
 
 	public void adiciona(String nome, int pontuacao) {
-		// Aluno auxiliar = inicio;
-		// if (inicio == null) {
-		//Aluno aux = inicio.proximo;
 		if (contAluno == 0) {
 			inicio = new Aluno(nome, pontuacao);
 		} else {
@@ -49,30 +26,64 @@ public class VetorAluno {
 			while (proximo.proximo != null) {
 				proximo = proximo.proximo;
 			}
-//			inicio = inicio.proximo;
 			proximo.proximo = new Aluno(nome, pontuacao);
 		}
 		contAluno++;
-		// } else {
-		// inicio = inicio.proximo;
-		// inicio = new Aluno(nome, pontuacao);
-		// System.out.println(nome);
-		// }
+	}
 
+	public void adiciona(String nome, int pontuacao, int posicao) {
+		Aluno proximo = inicio;
+		if (posicao > 0) {
+			for (int i = 0; i < posicao; i++) {
+				proximo = proximo.proximo;
+//				if(proximo == null){
+//					proximo = new Aluno("vazio" , 0);
+//				}
+			}
+			proximo.setNome(nome);
+			proximo.setPontuacao(pontuacao);
+		} else {
+			proximo.setNome(nome);
+			proximo.setPontuacao(pontuacao);
+		}
 	}
 
 	public Aluno pega(int posicao) {
-		return alunos[posicao];
+		Aluno proximo = inicio;
+		if (posicao > 0) {
+			for (int i = 0; i < posicao; i++) {
+				if (proximo != null) {
+					proximo = proximo.proximo;
+				}
+			}
+		}
+		return proximo;
 	}
-//	public Aluno pega() {
-//		return inicio.proximo;
-//	}
 
 	public void remove(int posicao) {
+		Aluno proximo = inicio;
+		if (posicao > 0) {
+			for (int i = 0; i < posicao; i++) {
+				proximo = proximo.proximo;
+			}
+			proximo.setNome("");
+			proximo.setPontuacao(0);
+		} else {
+			proximo.setNome("");
+			proximo.setPontuacao(0);
+		}
 	}
 
-	// public boolean contem(Aluno aluno) {
-	// }
+	public void lista(String nome) {
+		Aluno proximo = inicio;
+		while (proximo != null) {
+			if (proximo.getNome().equals(nome)) {
+				System.out.println("Está na lista " + proximo);
+				break;
+			}
+			proximo = proximo.proximo;
+		}
+	}
 
 	public int tamanho() {
 		return contAluno;
@@ -80,7 +91,7 @@ public class VetorAluno {
 
 	@Override
 	public String toString() {
-		return Arrays.toString(alunos);
+		return inicio.getNome();
 	}
 
 	public boolean isEmpty() {

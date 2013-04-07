@@ -12,11 +12,6 @@ public class Aluno {
 		this.pontuacao = pontuacao;
 	}
 
-	public boolean equals(Object obj) {
-		Aluno outroAluno = (Aluno) obj;
-		return this.nome.equals(outroAluno.nome);
-	}
-
 	public Aluno() {
 		super();
 	}

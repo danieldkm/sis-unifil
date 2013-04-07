@@ -5,17 +5,16 @@ public class Aluno {
 
 	private String nome;
 	private int pontuacao;
-	public Aluno proximo;
 
 	public Aluno(String nome, int pontuacao) {
 		this.nome = nome;
 		this.pontuacao = pontuacao;
 	}
 
-	public boolean equals(Object obj) {
-		Aluno outroAluno = (Aluno) obj;
-		return this.nome.equals(outroAluno.nome);
-	}
+//	public boolean equals(Object obj) {
+//		Aluno outroAluno = (Aluno) obj;
+//		return this.nome.equals(outroAluno.nome);
+//	}
 
 	public Aluno() {
 		super();
