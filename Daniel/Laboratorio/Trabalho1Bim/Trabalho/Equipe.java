@@ -41,9 +41,9 @@ public class Equipe {
 		String nome = "";
 		for (int i = 0; i < nomeJogadores.size(); i++) {
 			if (i == 0) {
-				nome = nomeJogadores.get(i).toString();
+				nome = nomeJogadores.get(i).getNome();
 			} else {
-				nome = nome + ", " + nomeJogadores.get(i).toString();
+				nome = nome + ", " + nomeJogadores.get(i).getNome();
 			}
 		}
 		return nome;

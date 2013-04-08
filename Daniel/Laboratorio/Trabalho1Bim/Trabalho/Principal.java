@@ -44,6 +44,6 @@ public class Principal {
 		
 		System.out.println("\n\n\n\n");
 		System.out.println("posicao");
-		controle.mostrarPosicaoJogador(2);
+		controle.mostrarPosicaoJogador(5);
 	}
 }
