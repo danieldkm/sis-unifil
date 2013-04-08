@@ -22,10 +22,16 @@ public class Principal {
 		System.out.println("Contratar");
 		controle.contratarJogador("Equipe1", "Jogador1");
 		controle.contratarJogador("Equipe1", "Jogador2");
+		controle.contratarJogador("Equipe1", "Jogador3");
+		controle.contratarJogador("Equipe1", "Jogador4");
+		controle.contratarJogador("Equipe1", "Jogador5");
+		controle.contratarJogador("Equipe1", "Jogador6");
 		controle.contratarJogador("Equipe2", "Jogador3");
 		controle.contratarJogador("Equipe2", "Jogador4");
 		controle.contratarJogador("Equipe2", "Jogador5");
 		controle.contratarJogador("Equipe2", "Jogador6");
+		controle.contratarJogador("Equipe2", "Jogador1");
+		controle.contratarJogador("Equipe2", "Jogador2");
 		
 		System.out.println("\n\n\n\n");
 		System.out.println("Demitir");
