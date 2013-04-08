@@ -1,9 +1,6 @@
 package marco_14;
 
 
-import java.util.Enumeration;
-import java.util.Vector;
-
 public class TesteAluno {
 
 	public static void main(String[] args) {

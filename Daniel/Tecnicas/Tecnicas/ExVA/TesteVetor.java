@@ -1,12 +1,6 @@
 package ExVA;
 
-import java.util.Vector;
-
 import javax.swing.JOptionPane;
-
-import abril_05.ListaDinamica;
-import abril_05.NodeAluno;
-
 
 public class TesteVetor {
 

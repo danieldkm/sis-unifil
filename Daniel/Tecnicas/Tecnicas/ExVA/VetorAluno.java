@@ -1,9 +1,5 @@
 package ExVA;
 
-import java.util.Arrays;
-
-import javax.swing.JOptionPane;
-
 public class VetorAluno {
 
 	private int contAluno = 0;
