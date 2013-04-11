@@ -52,7 +52,7 @@ public class VetorAluno {
 		if (alunos[posicao] == null) {
 			alunos[posicao] = aluno;
 		} else {
-			JOptionPane.showMessageDialog(null, "Existe aluno nessa pociÁ„o");
+			JOptionPane.showMessageDialog(null, "Existe aluno nessa poci√ß√£o");
 		}
 	}
 
@@ -65,25 +65,22 @@ public class VetorAluno {
 			alunos[posicao] = null;
 			contAluno--;
 		} else {
-			JOptionPane.showMessageDialog(null, "Aluno j· foi excluido");
+			JOptionPane.showMessageDialog(null, "Aluno j√° foi excluido");
 		}
 	}
 
 	public boolean contem(Aluno aluno) {
 		int n = 0;
 		for (int i = 0; i < tamanho_vetor; i++) {
-			if (aluno.equals(alunos[i]) && aluno.getPontuacao() == alunos[i].getPontuacao()) {
-				n = 1;
-				break;
-			}else{
-				n = 0;
+			if (aluno != null) {
+				if (aluno.equals(alunos[i])) {
+					return true;
+				} else {
+					return false;
+				}
 			}
 		}
-		if (n == 1) {
-			return true;
-		} else {
-			return false;
-		}
+		return false;
 	}
 
 	public int tamanho() {
