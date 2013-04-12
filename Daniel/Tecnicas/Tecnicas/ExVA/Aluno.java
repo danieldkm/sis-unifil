@@ -13,9 +13,17 @@ public class Aluno {
 	}
 
 	public Aluno() {
-		super();
+//		super();
 	}
 
+	public Aluno getProximo(){
+		return proximo;
+	}
+	
+	public void setProximo(Aluno proximo){
+		this.proximo = proximo;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -30,6 +38,12 @@ public class Aluno {
 
 	public void setPontuacao(int pontuacao) {
 		this.pontuacao = pontuacao;
+	}
+	
+	public boolean equals(Object obj) {
+		Aluno outroAluno = (Aluno) obj;
+		Aluno outroAluno2 = (Aluno) obj;
+		return this.nome.equals(outroAluno.nome) && this.pontuacao == outroAluno2.pontuacao;
 	}
 
 	public String toString() {
