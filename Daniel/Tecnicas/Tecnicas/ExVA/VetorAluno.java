@@ -68,6 +68,22 @@ public class VetorAluno {
 		}
 		return proximo;
 	}
+	
+	public String procurarAluno (Aluno aluno){//existe?
+		if(inicio.getNome().equals(aluno.getNome())){
+			return inicio.toString();
+		}else{
+			Aluno aux = inicio;
+			while(aux.proximo != null){
+				if(aux.proximo.getNome().equals(aluno.getNome())){
+					return aux.proximo.toString(); 
+				}else{
+					aux = aux.getProximo();
+				}
+			}
+		}
+		return "Não existe";
+	}
 
 //	public void remove(int posicao) {
 //		Aluno proximo = inicio;
@@ -96,6 +112,7 @@ public class VetorAluno {
 				if(aux.proximo.equals(aluno)){
 					anterior = aux;
 					aux.setProximo(aux.getProximo().getProximo());
+//					aux = aux.getProximo().getProximo();
 				}else{
 					anterior = aux;
 					aux = aux.getProximo();

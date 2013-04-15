@@ -12,6 +12,10 @@ public class Aluno {
 		this.pontuacao = pontuacao;
 	}
 
+	public Aluno(String nome) {
+		this.nome = nome;
+	}
+
 	public Aluno() {
 //		super();
 	}

@@ -28,17 +28,18 @@ public class TesteVetor {
 		lista.adiciona(new Aluno("c", 3));
 		lista.adiciona(new Aluno("d", 4));
 		lista.adiciona(new Aluno("e", 5));
+		lista.adiciona(new Aluno("f", 6));		
 		
-		lista.remove(new Aluno("b", 2));		
+		lista.remove(new Aluno("d", 4));		
 		Aluno auxiliar = lista.inicio;
 		
 		while (auxiliar != null) {
 			System.out.println(auxiliar);
 			auxiliar = auxiliar.proximo;
 		}
-		
+
 //		lista.adiciona("teste", 10, 2);
-		System.out.println("mostrar o aluno " + lista.pega(1));
+		System.out.println("mostrar o aluno " + lista.pega(4));
 		lista.lista("b");
 		System.out.println("qtds de elementos " + lista.getContAluno());
 //		lista.remove(1);
@@ -48,5 +49,8 @@ public class TesteVetor {
 			System.out.println(auxiliar2);
 			auxiliar2 = auxiliar2.proximo;
 		}
+		
+		System.out.println("Mostrar Aluno " + lista.procurarAluno(new Aluno("f")));
 	}
 }
+
