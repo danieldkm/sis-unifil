@@ -8,7 +8,7 @@ public class Jogador {
 	//Atributos privados para nome do jogador e posição de jogo.
 	private String nome;
 	private int posicao;
-	
+
 	//Construtor com parâmetros para inicializar nome e posição.
 	public Jogador(String nome, int posicao){
 		this.nome = nome;

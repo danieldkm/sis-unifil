@@ -22,7 +22,12 @@ public class Controle {
 		jogadores.addElement(aux);
 		System.out.println(aux);
 	}
-
+	/*****************testando******************/
+	public void cadastrarJogador(Jogador jogador) {
+		jogadores.addElement(jogador);
+		System.out.println(jogador);
+	}
+	/*****************testando******************/
 	// Método para cadastrar equipe, parâmetro nome da equipe.
 	public void cadastrarEquipe(String nome) {
 		Equipe aux = new Equipe(nome);
