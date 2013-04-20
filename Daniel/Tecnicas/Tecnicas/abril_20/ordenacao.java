@@ -4,7 +4,7 @@ public class ordenacao {
 
 	
 	//percorre n(tamanho) vezes dependendo do tamanho do vetor
-	
+	//Bubble Sort
 	void bubble(int[] v, int tamanho) {//ordenação por bolha 
 		int k, j, aux;
 		for (int i = 0; i < tamanho; i++) {
@@ -23,6 +23,7 @@ public class ordenacao {
 	}
 
 	//percorrendo o vetor e procurando por valor maior q o esperado e faz a troca
+	//Insert Sort
 	void inserction(int[] vetor, int tamanho) {//ordenação por inserção
 		int i, j, elemento;
 		for (i = 1; i < tamanho; i++) {
@@ -39,6 +40,7 @@ public class ordenacao {
 	}
 
 	//percorre o vetor a cada posição procura um valor menor e joga na posição correta
+	//Selection Sort
 	void selection(int v[], int tamanho) {//ordenação por seleção
 		int aux, menor;
 		for (int i = 0; i < tamanho; i++) {
