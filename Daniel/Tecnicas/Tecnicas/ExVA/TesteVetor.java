@@ -30,7 +30,7 @@ public class TesteVetor {
 		lista.adiciona(new Aluno("e", 5));
 		lista.adiciona(new Aluno("f", 6));		
 		
-		lista.remove(new Aluno("d", 4));		
+		lista.remove(new Aluno("a", 1));		
 		Aluno auxiliar = lista.inicio;
 		
 		while (auxiliar != null) {
