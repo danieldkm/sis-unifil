@@ -60,10 +60,10 @@ public class TesteVetor {
 			System.out.println("Lista não vazia, contém " + va.getContAluno() + " Alunos");
 		}
 		
-//		va.organizar();
-//		
-//		System.out.println("Organizado " + va);
+		va.organizar();
 		
-		System.out.println("Contém o elemento? " + va.contem(new Aluno("a", 2)));
+		System.out.println("Organizado " + va);
+		
+		System.out.println("Contém o elemento? " + va.contem(new Aluno("A", 1)));
 	}
 }

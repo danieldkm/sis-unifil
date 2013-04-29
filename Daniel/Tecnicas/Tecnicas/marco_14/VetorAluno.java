@@ -70,7 +70,6 @@ public class VetorAluno {
 	}
 
 	public boolean contem(Aluno aluno) {
-		int n = 0;
 		for (int i = 0; i < tamanho_vetor; i++) {
 			if (aluno != null) {
 				if (aluno.equals(alunos[i])) {
