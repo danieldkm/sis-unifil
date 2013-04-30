@@ -17,20 +17,24 @@ public class Cal {
 		// dataux.set(Calendar.DAY_OF_MONTH, 1);
 		data.set(GregorianCalendar.DAY_OF_MONTH,
 				dataux.get(Calendar.DAY_OF_MONTH));
-		dados[1] = data.get(Calendar.DAY_OF_MONTH);
-		System.out.println("dias do mês " + data.get(Calendar.DAY_OF_MONTH));
-		data.set(GregorianCalendar.MONTH, dataux.get(Calendar.JANUARY));
-		System.out.println("mes " + data.get(Calendar.MARCH));
-		System.out.println("dias do mês " + data.get(Calendar.DAY_OF_MONTH));
+		dados[1] = data.getActualMaximum(Calendar.DAY_OF_MONTH);
+		System.out.println("dias do mês "
+				+ data.getActualMaximum(Calendar.DAY_OF_MONTH));
+
+		// data.set(GregorianCalendar.MONTH, dataux.get(Calendar.JANUARY));
+		// System.out.println("mes " + data.get(Calendar.MARCH));
+		// System.out.println("dias do mês " + data.get(Calendar.DAY_OF_MONTH));
 		// System.out.println("dia " + data.get(Calendar.DATE));
 		// System.out.println("mes " + data.get(Calendar.MONTH));
 		// System.out.println("ano " + data.get(Calendar.YEAR));
-
+		System.out.println("Ano bissexto? "
+				+ data.isLeapYear(dataux.get(Calendar.YEAR)));
 		return dados;
 	}
 
 	public static int[] cal(int mes) {
 		dados = new int[2];
+		mes = mes - 1;
 		GregorianCalendar dataux = new GregorianCalendar();
 		GregorianCalendar data = new GregorianCalendar(
 				dataux.get(Calendar.YEAR), mes, 1);
@@ -39,11 +43,9 @@ public class Cal {
 		// dataux.set(Calendar.DAY_OF_MONTH, 1);
 		data.set(GregorianCalendar.DAY_OF_MONTH,
 				dataux.get(Calendar.DAY_OF_MONTH));
-		dados[1] = data.get(Calendar.DAY_OF_MONTH);
-		System.out.println("dias do mês " + data.get(Calendar.DAY_OF_MONTH));
-		data.set(GregorianCalendar.MONTH, dataux.get(Calendar.JANUARY));
-		System.out.println("mes " + data.get(Calendar.MARCH));
-		System.out.println("dias do mês " + data.get(Calendar.DAY_OF_MONTH));
+		dados[1] = data.getActualMaximum(Calendar.DAY_OF_MONTH);
+		System.out.println("dias do mês "
+				+ data.getActualMaximum(Calendar.DAY_OF_MONTH));
 		// data.add(1, Calendar.DATE);
 
 		// dados[0] = data.get(Calendar.DAY_OF_WEEK);
@@ -51,143 +53,139 @@ public class Cal {
 		//
 		// dados[1] = dataux.get(Calendar.DAY_OF_MONTH);
 		// System.out.println(dataux.get(Calendar.DAY_OF_MONTH));
+		System.out.println("Ano bissexto? "
+				+ data.isLeapYear(dataux.get(Calendar.YEAR)));
 
 		return dados;
 	}
 
 	public static int[] cal(int mes, int ano) {
-		dados = new int[2];
-		GregorianCalendar dataux = new GregorianCalendar();
+		dados = new int[3];
+		mes = mes - 1;
+//		GregorianCalendar dataux = new GregorianCalendar();
 		GregorianCalendar data = new GregorianCalendar(ano, mes, 1);
 		System.out.println("dia da semana " + data.get(Calendar.DAY_OF_WEEK));
 		dados[0] = data.get(Calendar.DAY_OF_WEEK);
-		// dataux.set(Calendar.DAY_OF_MONTH, 1);
-		data.set(GregorianCalendar.DAY_OF_MONTH,
-				dataux.get(Calendar.DAY_OF_MONTH));
-		dados[1] = data.get(Calendar.DAY_OF_MONTH);
-		System.out.println("dias do mês " + data.get(Calendar.DAY_OF_MONTH));
-		data.set(GregorianCalendar.MONTH, dataux.get(Calendar.JANUARY));
-		System.out.println("mes " + data.get(Calendar.MARCH));
-		System.out.println("dias do mês " + data.get(Calendar.DAY_OF_MONTH));
-		// data.add(1, Calendar.DATE);
+		dados[1] = data.getActualMaximum(Calendar.DAY_OF_MONTH);
+		dados[2] = data.get(Calendar.MONTH);
+		System.out.println("dias do mês "
+				+ data.getActualMaximum(Calendar.DAY_OF_MONTH));
+		System.out.println("Ano bissexto? " + data.isLeapYear(ano));
 		return dados;
 	}
 
 	public String toString() {
-		String n = "";
+		String semana = "", mes = "";
 		switch (dados[0]) {
 		case 1:
-			n = "Domingo";
+			semana = "Domingo";
 			break;
 		case 2:
-			n = "Segunda";
+			semana = "Segunda";
 			break;
 		case 3:
-			n = "Terça";
+			semana = "Terça";
 			break;
 		case 4:
-			n = "Quarta";
+			semana = "Quarta";
 			break;
 		case 5:
-			n = "Quinta";
+			semana = "Quinta";
 			break;
 		case 6:
-			n = "Sexta";
+			semana = "Sexta";
 			break;
 		case 7:
-			n = "Sabado";
+			semana = "Sabado";
 			break;
 		}
-		return n;
+		switch (dados[2]) {
+		case 0:
+			mes = "Janeiro";
+			break;
+		case 1:
+			mes = "Fevereiro";
+			break;
+		case 2:
+			mes = "Março";
+			break;
+		case 3:
+			mes = "Abril";
+			break;
+		case 4:
+			mes = "Maio";
+			break;
+		case 5:
+			mes = "Junho";
+			break;
+		case 6:
+			mes = "Julho";
+			break;
+		case 7:
+			mes = "Agosto";
+			break;
+		case 8:
+			mes = "Setembro";
+			break;
+		case 9:
+			mes = "Outubro";
+			break;
+		case 10:
+			mes = "Novembro";
+			break;
+		case 11:
+			mes = "Dezembro";
+			break;
+		}
+		return "Primeiro dia da semana do mês cai na " + semana
+				+ "!!!!!, o mês de " + mes + " tem " + dados[1] + " dias";
 	}
 
-	// public static void cal2() {
-	// // get the supported ids for GMT-08:00 (Pacific Standard Time)
-	// String[] ids = TimeZone.getAvailableIDs(-8 * 60 * 60 * 1000);
-	// // if no ids were returned, something is wrong. get out.
-	// if (ids.length == 0)
-	// System.exit(0);
-	//
-	// // begin output
-	// System.out.println("Current Time");
-	//
-	// // create a Pacific Standard Time time zone
-	// SimpleTimeZone pdt = new SimpleTimeZone(-8 * 60 * 60 * 1000, ids[0]);
-	//
-	// // set up rules for Daylight Saving Time
-	// pdt.setStartRule(Calendar.APRIL, 1, Calendar.SUNDAY, 2 * 60 * 60 * 1000);
-	// pdt.setEndRule(Calendar.OCTOBER, -1, Calendar.SUNDAY,
-	// 2 * 60 * 60 * 1000);
-	//
-	// // create a GregorianCalendar with the Pacific Daylight time zone
-	// // and the current date and time
-	// Calendar calendar = new GregorianCalendar(pdt);
-	// Date trialTime = new Date();
-	// calendar.setTime(trialTime);
-	//
-	// // print out a bunch of interesting things
-	// System.out.println("ERA: " + calendar.get(Calendar.ERA));
-	// System.out.println("YEAR: " + calendar.get(Calendar.YEAR));
-	// System.out.println("MONTH: " + calendar.get(Calendar.MONTH));
-	// System.out.println("WEEK_OF_YEAR: "
-	// + calendar.get(Calendar.WEEK_OF_YEAR));
-	// System.out.println("WEEK_OF_MONTH: "
-	// + calendar.get(Calendar.WEEK_OF_MONTH));
-	// System.out.println("DATE: " + calendar.get(Calendar.DATE));
-	// System.out.println("DAY_OF_MONTH: "
-	// + calendar.get(Calendar.DAY_OF_MONTH));
-	// System.out
-	// .println("DAY_OF_YEAR: " + calendar.get(Calendar.DAY_OF_YEAR));
-	// System.out
-	// .println("DAY_OF_WEEK: " + calendar.get(Calendar.DAY_OF_WEEK));
-	// System.out.println("DAY_OF_WEEK_IN_MONTH: "
-	// + calendar.get(Calendar.DAY_OF_WEEK_IN_MONTH));
-	// System.out.println("AM_PM: " + calendar.get(Calendar.AM_PM));
-	// System.out.println("HOUR: " + calendar.get(Calendar.HOUR));
-	// System.out
-	// .println("HOUR_OF_DAY: " + calendar.get(Calendar.HOUR_OF_DAY));
-	// System.out.println("MINUTE: " + calendar.get(Calendar.MINUTE));
-	// System.out.println("SECOND: " + calendar.get(Calendar.SECOND));
-	// System.out
-	// .println("MILLISECOND: " + calendar.get(Calendar.MILLISECOND));
-	// System.out.println("ZONE_OFFSET: "
-	// + (calendar.get(Calendar.ZONE_OFFSET) / (60 * 60 * 1000)));
-	// System.out.println("DST_OFFSET: "
-	// + (calendar.get(Calendar.DST_OFFSET) / (60 * 60 * 1000)));
-	//
-	// System.out.println("Current Time, with hour reset to 3");
-	// calendar.clear(Calendar.HOUR_OF_DAY); // so doesn't override
-	// calendar.set(Calendar.HOUR, 3);
-	// System.out.println("ERA: " + calendar.get(Calendar.ERA));
-	// System.out.println("YEAR: " + calendar.get(Calendar.YEAR));
-	// System.out.println("MONTH: " + calendar.get(Calendar.MONTH));
-	// System.out.println("WEEK_OF_YEAR: "
-	// + calendar.get(Calendar.WEEK_OF_YEAR));
-	// System.out.println("WEEK_OF_MONTH: "
-	// + calendar.get(Calendar.WEEK_OF_MONTH));
-	// System.out.println("DATE: " + calendar.get(Calendar.DATE));
-	// System.out.println("DAY_OF_MONTH: "
-	// + calendar.get(Calendar.DAY_OF_MONTH));
-	// System.out
-	// .println("DAY_OF_YEAR: " + calendar.get(Calendar.DAY_OF_YEAR));
-	// System.out
-	// .println("DAY_OF_WEEK: " + calendar.get(Calendar.DAY_OF_WEEK));
-	// System.out.println("DAY_OF_WEEK_IN_MONTH: "
-	// + calendar.get(Calendar.DAY_OF_WEEK_IN_MONTH));
-	// System.out.println("AM_PM: " + calendar.get(Calendar.AM_PM));
-	// System.out.println("HOUR: " + calendar.get(Calendar.HOUR));
-	// System.out
-	// .println("HOUR_OF_DAY: " + calendar.get(Calendar.HOUR_OF_DAY));
-	// System.out.println("MINUTE: " + calendar.get(Calendar.MINUTE));
-	// System.out.println("SECOND: " + calendar.get(Calendar.SECOND));
-	// System.out
-	// .println("MILLISECOND: " + calendar.get(Calendar.MILLISECOND));
-	// System.out.println("ZONE_OFFSET: "
-	// + (calendar.get(Calendar.ZONE_OFFSET) / (60 * 60 * 1000))); // in
-	// // hours
-	// System.out.println("DST_OFFSET: "
-	// + (calendar.get(Calendar.DST_OFFSET) / (60 * 60 * 1000))); // in
-	// // hours
-	// }
+	/*
+	 * java.util.GregorianCalendar A classe Date é bem simples e serve para
+	 * armazenar datas apenas. Ainda temos que manipular as datas não é? Tipo
+	 * acrescentar 10 dias, verificar qual o dia da semana, e coisas assim. Para
+	 * isso vamos usar a classe GregorianCalendar.
+	 * 
+	 * GregorianCalendar gc=new GregorianCalendar(); Como a classe Date, quando
+	 * um objeto é criado a data/hora do sistema é assumido automaticamente.
+	 * Algumas funções da classe são muito úteis. Vamos dar uma olhada:
+	 * 
+	 * GET. Obter o valor de um dos componentes da Data, como dia da semana, dia
+	 * do mês, hora, mês ou qualquer outra coisa:
+	 * 
+	 * GregorianCalendar gc=new GregorianCalendar();
+	 * System.out.println(gc.get(gc.DAY_OF_WEEK)); //Mostra qual o dia da semana
+	 * 1=domingo, 2=segunda, etc Além do dia da semana, é possível mostrar a
+	 * hora (gc.HOUR), minuto (gc.MINUTES), etc. Veja na documentação abaixo os
+	 * outros valores de campo disponíveis.
+	 * 
+	 * ADD. Adicionar um ou mais dias, horas, mês ou qualquer outra coisa a uma
+	 * data:
+	 * 
+	 * GregorianCalendar gc=new GregorianCalendar(); gc.add(gc.MONTH, 2);
+	 * //Adiciona 2 meses à data atual Além de gc.MONTH, é possível adicionar
+	 * horas (gc.HOUR), minutos (gc.MINUTES), etc. É lógico que adicionando
+	 * valores negativos, você subtrai os valores!
+	 * 
+	 * IS LEAP YEAR. Verifica se um ano é bissexto.
+	 * 
+	 * GregorianCalendar gc=new GregorianCalendar();
+	 * System.out.println(gc.isLeapYear(2009)); // imprime falso. 2009 não é
+	 * bissexto. Acho que já deu para entender como funciona. Outras funções
+	 * disponíveis:
+	 * 
+	 * SET – mudar o valor de uma data. gc.set(10,03,2009); ou
+	 * gc.set(10,03,2009,10,30); ou gc.set(gc.HOUR,11); AFTER/BEFORE – verificar
+	 * se um data é depois ou antes de outrar. gc.after(gc2) gc é depois de gc2?
+	 * GETMAXIMUN – obter o maior valor disponível para um campo considerando os
+	 * valores atuais dos outros. gc.getMaximum(gc.DATE); retornaria 28 se o mês
+	 * fosse fevereiro de um ano não bissexto. Por fim, para juntar os dois,
+	 * GregorianCalendar e Date, utilizamos duas funções:
+	 * 
+	 * GregorianCalendar gc=new GregorianCalendar(); Date d1=gc.getTime();
+	 * //"Pega" a data do GregorianCalendar para uma variável Date
+	 * gc.setTime(d1); //Armazena a data de d1 para o GregorianCalendar gc.
+	 */
 
 }
