@@ -8,7 +8,7 @@ public class TesteCalendario {
 
 	public static void main(String[] args) {
 		
-		Cal.cal(1, 2013);
+		Cal.cal(1, 2012);
 //		Cal.cal2();
 		Cal cal = new Cal();
 		System.out.println(cal);
