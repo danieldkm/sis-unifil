@@ -4,6 +4,6 @@
 	<classpathentry kind="src" path="laboratorio"/>
 	<classpathentry kind="src" path="marco_21"/>
 	<classpathentry kind="src" path="Trabalho1Bim"/>
-	<classpathentry kind="src" path="terceiroBim"/>
+	<classpathentry kind="src" path="segundoBim"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
