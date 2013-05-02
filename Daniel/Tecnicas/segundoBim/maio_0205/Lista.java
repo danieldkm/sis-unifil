@@ -35,10 +35,9 @@ public class Lista {
 		} else {
 			String auxString = "[";
 			Node auxiliar = this.inicio;
-			auxString += auxiliar;
-			while (auxiliar.getProximo() != null) {
-				auxiliar = auxiliar.getProximo();
+			while (auxiliar != null) {
 				auxString += auxiliar;
+				auxiliar = auxiliar.getProximo();
 			}
 			auxString += "]";
 			return auxString;
