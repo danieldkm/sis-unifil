@@ -8,13 +8,23 @@ public class TesteCalendario {
 
 	public static void main(String[] args) {
 		
-		Cal.cal(1, 2012);
-//		Cal.cal2();
+		Cal.cal(10,2010);
+		
+		
 		Cal cal = new Cal();
 		System.out.println(cal);
-		System.out.println();
-		System.out.println();
-		System.out.println();
+		
+		int[] v = new int[3];
+		
+		v = cal.cal();
+		System.out.println(v[0] + " " + v[1] + " " + v[2]);
+		System.out.println(cal);
+		v = cal.cal(10);
+		System.out.println(v[0] + " " + v[1] + " " + v[2]);
+		System.out.println(cal);
+		v = cal.cal(10,2010);
+		System.out.println(v[0] + " " + v[1] + " " + v[2]);
+		System.out.println(cal);
 		
 //		GregorianCalendar g = (GregorianCalendar) Calendar.getInstance();
 		GregorianCalendar g = new GregorianCalendar(2013, 1 , 1);
