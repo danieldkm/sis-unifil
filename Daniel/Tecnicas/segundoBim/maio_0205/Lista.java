@@ -15,9 +15,25 @@ public class Lista {
 			auxiliar.setProximo(node);
 		}
 	}
-
-	public void remover() {
-
+	
+	public void remover(Node node) {
+		Node auxiliar = this.inicio;
+		if (inicio.equals(node)) {
+			this.inicio = auxiliar.getProximo();
+		} else {
+			auxiliar = inicio;
+			while (auxiliar.getProximo() != null) {
+				if(node.equals(auxiliar.getProximo())){
+					auxiliar.setProximo(auxiliar.getProximo().getProximo());
+				}else{
+					auxiliar.setAnterior(auxiliar);
+				}				
+				auxiliar = auxiliar.getProximo();
+				if(auxiliar == null){
+					break;
+				}
+			}
+		}
 	}
 
 	public boolean isEmpty() {
@@ -44,7 +60,7 @@ public class Lista {
 		}
 	}
 
-	public Node getElementoNaposicao(int posicao) {
+	public Node getElementoNaPosicao(int posicao) {
 		return null;
 	}
 

@@ -4,7 +4,7 @@ public class Node {
 
 	private int valor;
 	private Node proximo;
-	private Node anteruior;
+	private Node anterior;
 
 	public Node(int valor) {
 		this.valor = valor;
@@ -44,12 +44,12 @@ public class Node {
 		this.proximo = proximo;
 	}
 
-	public Node getAnteruior() {
-		return anteruior;
+	public Node getAnterior() {
+		return anterior;
 	}
 
-	public void setAnteruior(Node anteruior) {
-		this.anteruior = anteruior;
+	public void setAnterior(Node anterior) {
+		this.anterior = anterior;
 	}
 
 }

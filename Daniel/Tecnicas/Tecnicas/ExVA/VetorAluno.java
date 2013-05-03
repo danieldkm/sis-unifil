@@ -48,14 +48,14 @@ public class VetorAluno {
 			inicio = inicio.proximo;
 		} else {
 			Aluno aux = inicio;
-			Aluno anterior = null;
+//			Aluno anterior = null;
 			while (aux.proximo != null) {
 				if (aux.proximo.equals(aluno)) {
-					anterior = aux;
+//					anterior = aux;
 					aux.setProximo(aux.getProximo().getProximo());
 					// aux = aux.getProximo().getProximo();
 				} else {
-					anterior = aux;
+//					anterior = aux;
 					aux = aux.getProximo();
 				}
 			}

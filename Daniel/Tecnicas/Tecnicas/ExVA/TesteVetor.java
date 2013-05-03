@@ -29,8 +29,7 @@ public class TesteVetor {
 		lista.adiciona(new Aluno("d", 4));
 		lista.adiciona(new Aluno("e", 5));
 		lista.adiciona(new Aluno("f", 6));		
-		
-		lista.remove(new Aluno("a", 1));		
+	
 		Aluno auxiliar = lista.inicio;
 		
 		while (auxiliar != null) {
@@ -44,6 +43,7 @@ public class TesteVetor {
 		System.out.println("qtds de elementos " + lista.getContAluno());
 //		lista.remove(1);
 		
+		lista.remove(new Aluno("a", 1));	
 		Aluno auxiliar2 = lista.inicio;
 		while (auxiliar2 != null) {
 			System.out.println(auxiliar2);
