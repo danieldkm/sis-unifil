@@ -52,13 +52,19 @@ public class Cal {
 	public static int[] cal(int mes, int ano) {
 		dados = new int[3];
 		mes = mes - 1;
+		GregorianCalendar d = new GregorianCalendar(1752, 8, 14);
 		GregorianCalendar data = new GregorianCalendar(ano, mes, 1);
+		
+		data.setGregorianChange(d.getTime());
+		data.set(ano,mes,1);
+		
+		/*
 		if (ano == 1752 && mes == 8) {
 			dados[0] = 3;
 			dados[1] = 19;
 			dados[2] = mes;
 			return dados;
-		} else {
+		} else {*/
 			// GregorianCalendar dataux = new GregorianCalendar();
 			System.out.println("dia da semana "
 					+ data.get(Calendar.DAY_OF_WEEK));
@@ -69,7 +75,7 @@ public class Cal {
 					+ data.getActualMaximum(Calendar.DAY_OF_MONTH));
 			System.out.println("Ano bissexto? " + data.isLeapYear(ano));
 			return dados;
-		}
+		//}
 	}
 
 	public String toString() {
