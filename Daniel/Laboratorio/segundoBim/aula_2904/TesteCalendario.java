@@ -7,35 +7,29 @@ public class TesteCalendario {
 
 	public static void main(String[] args) {
 
-		Cal.cal(9, 1752);
+		/*
+		 * int[] v = new int[3];
+		 * 
+		 * v = cal.cal(); System.out.println(v[0] + " " + v[1] + " " + v[2]);
+		 * System.out.println(cal); v = cal.cal(10); System.out.println(v[0] +
+		 * " " + v[1] + " " + v[2]); System.out.println(cal); v = cal.cal(10,
+		 * 2010); System.out.println(v[0] + " " + v[1] + " " + v[2]);
+		 * System.out.println(cal);
+		 * 
+		 * // GregorianCalendar g = (GregorianCalendar) Calendar.getInstance();
+		 * GregorianCalendar g = new GregorianCalendar(2013, 1, 1);
+		 * 
+		 * System.out.println(g.getTime()); System.out.println("Dia " +
+		 * g.get(Calendar.DAY_OF_MONTH)); System.out.println("Mês " +
+		 * (g.get(Calendar.MONTH) + 1)); System.out.println("Ano " +
+		 * g.get(Calendar.YEAR));
+		 * 
+		 * System.out.println("qtd dias do Mês " +
+		 * g.getActualMaximum(Calendar.DAY_OF_MONTH));
+		 */
 
-		Cal cal = new Cal();
-		System.out.println(cal);
-/*
-		int[] v = new int[3];
-
-		v = cal.cal();
-		System.out.println(v[0] + " " + v[1] + " " + v[2]);
-		System.out.println(cal);
-		v = cal.cal(10);
-		System.out.println(v[0] + " " + v[1] + " " + v[2]);
-		System.out.println(cal);
-		v = cal.cal(10, 2010);
-		System.out.println(v[0] + " " + v[1] + " " + v[2]);
-		System.out.println(cal);
-
-		// GregorianCalendar g = (GregorianCalendar) Calendar.getInstance();
-		GregorianCalendar g = new GregorianCalendar(2013, 1, 1);
-
-		System.out.println(g.getTime());
-		System.out.println("Dia " + g.get(Calendar.DAY_OF_MONTH));
-		System.out.println("Mês " + (g.get(Calendar.MONTH) + 1));
-		System.out.println("Ano " + g.get(Calendar.YEAR));
-
-		System.out.println("qtd dias do Mês "
-				+ g.getActualMaximum(Calendar.DAY_OF_MONTH));*/
-
-		// --------------------ver. prof.----------------------------------------//
+		// --------------------ver.
+		// prof.----------------------------------------//
 
 		GregorianCalendar d = new GregorianCalendar(1752, 8, 14);
 		// ano,mes informado e dia 1
@@ -50,9 +44,25 @@ public class TesteCalendario {
 		// percorre calendario e obtem qt dias
 		int qt = 1;
 		int mesAux, mes = data.get(Calendar.MONTH);
+		String omes = " D" + "   " + "S" + "   " + "T" + "   " + "Q" + "   " + "Q" + "   " + "S" + "   " + "S\n";
 		while (true) {
-			System.out.println(data.get(Calendar.DAY_OF_MONTH) + "/"
-					+ data.get(Calendar.MONTH));
+//			System.out.println(data.get(Calendar.DAY_OF_WEEK));
+//			System.out.println(data.get(Calendar.DAY_OF_MONTH) + "/"
+//					+ data.get(Calendar.MONTH));
+
+			
+			if (data.get(Calendar.DAY_OF_WEEK) == 1) {
+				omes += "\n" + data.get(Calendar.DAY_OF_MONTH) + "  ";
+			}else if (data.get(Calendar.DAY_OF_MONTH) == 1){
+				int n = 1;
+				while(data.get(Calendar.DAY_OF_WEEK) > n){
+					omes += "    ";
+					n ++;
+				}
+				omes += " " + data.get(Calendar.DAY_OF_MONTH) + "   ";
+			}else{
+				omes += data.get(Calendar.DAY_OF_MONTH) + "  ";
+			}
 
 			data.add(Calendar.DATE, 1);
 
@@ -63,7 +73,14 @@ public class TesteCalendario {
 				qt++;
 			}
 		}
-		System.out.println(qt);
+		System.out.println("Dias desse mês " + qt);
+		System.out.println(omes);
+
+		
+		 Cal.cal(8, 2013);
+		
+		 Cal cal = new Cal();
+		 System.out.println(cal);
 
 	}
 }
