@@ -24,13 +24,16 @@ public class Lista {
 			this.inicio = node;
 			this.fim = node;
 		} else {
-			Node auxiliar = this.inicio;
-			while (auxiliar.getProximo() != null) {
-				auxiliar = auxiliar.getProximo();
-			}
-			auxiliar.setProximo(node);
-			auxiliar.getProximo().setAnterior(auxiliar);
+			fim.setProximo(node);
+//			Node auxiliar = this.inicio;
+//			while (auxiliar.getProximo() != null) {
+//				auxiliar = auxiliar.getProximo();
+//			}
+//			auxiliar.setProximo(node);
+//			auxiliar.getProximo().setAnterior(auxiliar);
 			this.fim = node;
+			
+			
 		}
 	}
 	
