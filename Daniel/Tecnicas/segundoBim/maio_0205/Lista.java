@@ -17,7 +17,11 @@ public class Lista {
 		}
 	}
 
-	//Remover simples
+	public void removerTodos() {
+		inicio = null;
+	}
+
+	// Remover simples
 	public void remover(Node node) {
 		Node auxiliar = this.inicio;
 		if (inicio.equals(node)) {
@@ -34,18 +38,18 @@ public class Lista {
 		}
 	}
 
-	//remover todos os valores que tenha o mesmo valor de node
+	// remover todos os valores que tenha o mesmo valor de node
 	public void removerTodos(Node node) {
 		Node auxiliar = this.inicio;
 		if (inicio.equals(node)) {
 			this.inicio = auxiliar.getProximo();
 			auxiliar = auxiliar.getProximo();
-			while(auxiliar.getProximo() != null){
+			while (auxiliar.getProximo() != null) {
 				if (node.equals(auxiliar.getProximo())) {
-					while(node.equals(auxiliar.getProximo())){
+					while (node.equals(auxiliar.getProximo())) {
 						auxiliar.setProximo(auxiliar.getProximo().getProximo());
 					}
-					if(auxiliar.equals(node)){
+					if (auxiliar.equals(node)) {
 						inicio = auxiliar.getProximo();
 					}
 				} else {
@@ -60,10 +64,10 @@ public class Lista {
 			auxiliar = inicio;
 			while (auxiliar.getProximo() != null) {
 				if (node.equals(auxiliar.getProximo())) {
-					while(node.equals(auxiliar.getProximo())){
+					while (node.equals(auxiliar.getProximo())) {
 						auxiliar.setProximo(auxiliar.getProximo().getProximo());
 					}
-					if(auxiliar.equals(node)){
+					if (auxiliar.equals(node)) {
 						inicio = auxiliar.getProximo();
 					}
 				} else {
@@ -102,10 +106,42 @@ public class Lista {
 	}
 
 	public Node getElementoNaPosicao(int posicao) {
-		return null;
+		if (isEmpty()) {
+			return null;
+		} else if (posicao == 0) {
+			return this.inicio;
+		} else {
+			Node auxiliar = this.inicio;
+			int n = 1;
+			while (auxiliar.getProximo() != null) {
+				auxiliar = auxiliar.getProximo();
+				if (posicao == n) {
+					n--;
+					break;
+				}
+				n++;
+			}
+			if (n >= posicao) {
+				System.out.println("Não existe essa posição, será mostrado a ultima posição");
+			}
+			return auxiliar;
+		}
 	}
 
 	public boolean contem(Node node) {
+		if (isEmpty()) {
+			if (this.inicio.equals(node)) {
+				return true;
+			}
+		} else {
+			Node auxiliar = this.inicio;
+			while (auxiliar.getProximo() != null) {
+				if (node.equals(auxiliar.getProximo())) {
+					return true;
+				}
+				auxiliar = auxiliar.getProximo();
+			}
+		}
 		return false;
 	}
 }
