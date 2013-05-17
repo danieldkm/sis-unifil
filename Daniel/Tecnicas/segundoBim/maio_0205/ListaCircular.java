@@ -21,12 +21,53 @@ public class ListaCircular {
 	public void remover(Node node) {
 		Node auxiliar = this.inicio;
 		if (inicio.equals(node)) {
-			this.inicio = auxiliar.getProximo();
+			this.inicio.setProximo(auxiliar.getProximo().getProximo());
 		} else {
 			auxiliar = this.inicio;
 			while (auxiliar.getProximo() != this.inicio) {
+				if (node.equals(auxiliar.getProximo())) {
+					auxiliar.setProximo(auxiliar.getProximo().getProximo());
+					break;
+				}
+				auxiliar = auxiliar.getProximo();
+			}
+		}
+	}
+	
+	public void removerTodos(Node node) {
+		Node auxiliar = this.inicio;
+		if (inicio.equals(node)) {
+			this.inicio = auxiliar.getProximo();
+			auxiliar = auxiliar.getProximo();
+			while (auxiliar.getProximo() != this.inicio) {
+				if (auxiliar.getProximo().equals(node)) {
+					while(node.equals(auxiliar.getProximo())){
+						auxiliar.setProximo(auxiliar.getProximo().getProximo());
+					}
+					if(auxiliar.equals(node)){
+						inicio = auxiliar.getProximo();
+					}
+				}
+				if(auxiliar.getProximo().equals(node)){
+					auxiliar.setProximo(auxiliar.getProximo().getProximo());
+				}
+				auxiliar = auxiliar.getProximo();
+			}
+		} else {
+			auxiliar = this.inicio;
+			if(node != this.inicio){
 				if (auxiliar.getProximo().equals(node)) {
 					auxiliar.setProximo(auxiliar.getProximo().getProximo());
+				}
+			}
+			while (auxiliar.getProximo() != this.inicio) {
+				if (node.equals(auxiliar.getProximo())) {
+					while(node.equals(auxiliar.getProximo())){
+						auxiliar.setProximo(auxiliar.getProximo().getProximo());
+					}
+					if(auxiliar.equals(node)){
+						inicio = auxiliar.getProximo();
+					}
 				}
 				auxiliar = auxiliar.getProximo();
 			}

@@ -3,40 +3,21 @@ package maio_0205;
 public class Lista {
 
 	private Node inicio;
-	private Node fim;
 
 	// lista encadeada
-//	public void inserir(Node node) {
-//		if (isEmpty()) {
-//			this.inicio = node;
-//		} else {
-//			Node auxiliar = this.inicio;
-//			while (auxiliar.getProximo() != null) {
-//				auxiliar = auxiliar.getProximo();
-//			}
-//			auxiliar.setProximo(node);
-//		}
-//	}
-	
-	//Lista duplamente encadeada 
-	public void inserirNoFinal(Node node) {
+	public void inserir(Node node) {
 		if (isEmpty()) {
 			this.inicio = node;
-			this.fim = node;
 		} else {
-			fim.setProximo(node);
-//			Node auxiliar = this.inicio;
-//			while (auxiliar.getProximo() != null) {
-//				auxiliar = auxiliar.getProximo();
-//			}
-//			auxiliar.setProximo(node);
-//			auxiliar.getProximo().setAnterior(auxiliar);
-			this.fim = node;
-			
-			
+			Node auxiliar = this.inicio;
+			while (auxiliar.getProximo() != null) {
+				auxiliar = auxiliar.getProximo();
+			}
+			auxiliar.setProximo(node);
 		}
 	}
-	
+
+	//Remover simples
 	public void remover(Node node) {
 		Node auxiliar = this.inicio;
 		if (inicio.equals(node)) {
@@ -44,13 +25,52 @@ public class Lista {
 		} else {
 			auxiliar = inicio;
 			while (auxiliar.getProximo() != null) {
-				if(node.equals(auxiliar.getProximo())){
+				if (node.equals(auxiliar.getProximo())) {
 					auxiliar.setProximo(auxiliar.getProximo().getProximo());
-				}else{
-					auxiliar.setAnterior(auxiliar);
-				}				
+					break;
+				}
 				auxiliar = auxiliar.getProximo();
-				if(auxiliar == null){
+			}
+		}
+	}
+
+	//remover todos os valores que tenha o mesmo valor de node
+	public void removerTodos(Node node) {
+		Node auxiliar = this.inicio;
+		if (inicio.equals(node)) {
+			this.inicio = auxiliar.getProximo();
+			auxiliar = auxiliar.getProximo();
+			while(auxiliar.getProximo() != null){
+				if (node.equals(auxiliar.getProximo())) {
+					while(node.equals(auxiliar.getProximo())){
+						auxiliar.setProximo(auxiliar.getProximo().getProximo());
+					}
+					if(auxiliar.equals(node)){
+						inicio = auxiliar.getProximo();
+					}
+				} else {
+					auxiliar.setAnterior(auxiliar);
+				}
+				auxiliar = auxiliar.getProximo();
+				if (auxiliar == null) {
+					break;
+				}
+			}
+		} else {
+			auxiliar = inicio;
+			while (auxiliar.getProximo() != null) {
+				if (node.equals(auxiliar.getProximo())) {
+					while(node.equals(auxiliar.getProximo())){
+						auxiliar.setProximo(auxiliar.getProximo().getProximo());
+					}
+					if(auxiliar.equals(node)){
+						inicio = auxiliar.getProximo();
+					}
+				} else {
+					auxiliar.setAnterior(auxiliar);
+				}
+				auxiliar = auxiliar.getProximo();
+				if (auxiliar == null) {
 					break;
 				}
 			}
