@@ -69,7 +69,7 @@ public class Teste {
 		System.out.println(lista.getElementoNaPosicao(3));
 		System.out.println(lista.getElementoNaPosicao(4));
 		System.out.println(lista.getElementoNaPosicao(10));
-		System.out.println(lista.contem(new Node(8)));
+		System.out.println("Contém o elemento? " + lista.contem(new Node(8)));
 		
 		
 		System.out.println("\n\nLISTA DUPLAMENTE ENCADEADA");
@@ -122,9 +122,9 @@ public class Teste {
 		System.out.println("\n\nLISTA CIRCULAR");
 		ListaCircular lc = new ListaCircular();
 		System.out.println(lc);
-		lc.adicionar(new Node(1));
-		lc.adicionar(new Node(1));
-		lc.adicionar(new Node(1));
+		lc.adicionar(new Node(6));
+		lc.adicionar(new Node(6));
+		lc.adicionar(new Node(6));
 		lc.adicionar(new Node(6));
 		lc.adicionar(new Node(1));
 		lc.adicionar(new Node(6));

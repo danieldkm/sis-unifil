@@ -48,18 +48,10 @@ public class ListaCircular {
 						inicio = auxiliar.getProximo();
 					}
 				}
-				if(auxiliar.getProximo().equals(node)){
-					auxiliar.setProximo(auxiliar.getProximo().getProximo());
-				}
 				auxiliar = auxiliar.getProximo();
 			}
 		} else {
 			auxiliar = this.inicio;
-			if(node != this.inicio){
-				if (auxiliar.getProximo().equals(node)) {
-					auxiliar.setProximo(auxiliar.getProximo().getProximo());
-				}
-			}
 			while (auxiliar.getProximo() != this.inicio) {
 				if (node.equals(auxiliar.getProximo())) {
 					while(node.equals(auxiliar.getProximo())){
