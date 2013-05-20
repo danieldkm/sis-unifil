@@ -115,6 +115,15 @@ public class Teste {
 		}
 		//--Listar e verificar se está vazio
 		System.out.println(listaDupla);
+		
+		listaDupla.removerTodos();
+		for(int i = 0; i < 10; i++){
+			listaDupla.inserir(new Node(i+1));
+		}
+		System.out.println("Nova lista\n"+listaDupla);
+		System.out.println(listaDupla.getElementoNaPosicao(10));
+		System.out.println(listaDupla.contem(new Node(0)));
+		
 
 		
 		

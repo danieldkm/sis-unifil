@@ -86,10 +86,40 @@ public class ListaCircular {
 				auxiliar = auxiliar.getProximo();
 				auxString += auxiliar;
 			}
-
 			auxString += "]";
 			return auxString;
 		}
+	}
+	
+	public Node getElementoNaPosicao(int posicao) {
+		if(posicao == 0){
+			return inicio;
+		}else{
+			Node auxiliar = inicio;
+			int n = 1;
+			while(auxiliar.getProximo() != null){
+				if(n == posicao){
+					return auxiliar.getProximo();
+				}
+				auxiliar = auxiliar.getProximo();
+			}
+		}
+		return null;
+	}
+
+	public boolean contem(Node node) {
+		if(inicio.equals(node)){
+			return true;
+		}else{
+			Node auxiliar = inicio;
+			while(auxiliar.getProximo() != null){
+				if(auxiliar.getProximo().equals(node)){
+					return true;
+				}
+				auxiliar = auxiliar.getProximo();
+			}
+		}
+		return false;
 	}
 
 }
