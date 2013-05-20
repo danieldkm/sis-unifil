@@ -5,5 +5,4 @@ public class FuncaoTeste {
 		System.out.println("" + Funcao.calcularImc(80, 1.80));
 		System.out.println(Funcao.calcularPerimetro(5));
 	}
-
 }
