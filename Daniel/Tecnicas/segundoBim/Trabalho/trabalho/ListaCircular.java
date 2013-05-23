@@ -34,7 +34,7 @@ public class ListaCircular {
 		}
 	}
 	
-	public void removerTodos(Node node) {
+	public void removerRepetidos(Node node) {
 		Node auxiliar = this.inicio;
 		if (inicio.equals(node)) {
 			this.inicio = auxiliar.getProximo();

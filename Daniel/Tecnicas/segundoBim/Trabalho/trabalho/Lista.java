@@ -39,7 +39,7 @@ public class Lista {
 	}
 
 	// remover todos os valores que tenha o mesmo valor de node
-	public void removerTodos(Node node) {
+	public void removerRepetidos(Node node) {
 		Node auxiliar = this.inicio;
 		if (inicio.equals(node)) {
 			this.inicio = auxiliar.getProximo();

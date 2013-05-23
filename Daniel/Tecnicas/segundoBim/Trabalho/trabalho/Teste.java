@@ -29,7 +29,7 @@ public class Teste {
 		}
 		if(pergunta.equals("S")){
 			System.out.println("\nRemover");
-			lista.removerTodos(new Node(1));
+			lista.removerRepetidos(new Node(1));
 		}else if(pergunta.equals("N")){
 			System.out.println("\nRemover");
 			lista.remover(new Node(1));
