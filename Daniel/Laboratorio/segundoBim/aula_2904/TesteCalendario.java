@@ -67,6 +67,7 @@ public class TesteCalendario {
 			data.add(Calendar.DATE, 1);
 
 			mesAux = data.get(Calendar.MONTH);
+			System.out.println(mesAux + " " + mes);
 			if (mes != mesAux) {
 				break;
 			} else {
@@ -75,9 +76,7 @@ public class TesteCalendario {
 		}
 		System.out.println("Dias desse mês " + qt);
 		System.out.println(omes);
-
-		
-		 Cal.cal(8, 2013);
+//		 Cal.cal(8, 1752);
 		
 		 Cal cal = new Cal();
 		 System.out.println(cal);
