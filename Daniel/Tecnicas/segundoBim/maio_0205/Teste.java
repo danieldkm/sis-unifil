@@ -132,7 +132,7 @@ public class Teste {
 		ListaCircular lc = new ListaCircular();
 		System.out.println(lc);
 		lc.adicionar(new Node(6));
-		lc.adicionar(new Node(6));
+		lc.adicionar(new Node(1));
 		lc.adicionar(new Node(6));
 		lc.adicionar(new Node(6));
 		lc.adicionar(new Node(1));
