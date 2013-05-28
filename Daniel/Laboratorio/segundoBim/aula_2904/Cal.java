@@ -30,10 +30,14 @@ public class Cal {
 				+ data.isLeapYear(dataux.get(Calendar.YEAR)));
 		return dados;
 	}
-
+	private static String mes(int mes) {
+		return "s";
+	}
+	
 	public static int[] cal(int mes) {
 		dados = new int[3];
 		mes = mes - 1;
+		System.out.println(mes);
 		GregorianCalendar dataux = new GregorianCalendar();
 		GregorianCalendar data = new GregorianCalendar(
 				dataux.get(Calendar.YEAR), mes, 1);
