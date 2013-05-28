@@ -12,14 +12,14 @@ public class Cal {
 		GregorianCalendar dataux = new GregorianCalendar();
 		GregorianCalendar data = new GregorianCalendar(
 				dataux.get(Calendar.YEAR), dataux.get(Calendar.MONTH), 1);
-		System.out.println("dia da semana " + data.get(Calendar.DAY_OF_WEEK));
-		dados[0] = data.get(Calendar.DAY_OF_WEEK);
+//		System.out.println("dia da semana " + (data.get(Calendar.DAY_OF_WEEK) - 1));
+		dados[0] = data.get(Calendar.DAY_OF_WEEK) - 1;
 		dados[1] = data.getActualMaximum(Calendar.DAY_OF_MONTH);
 		dados[2] = data.get(Calendar.MONTH);
 		// data.set(GregorianCalendar.DAY_OF_MONTH,dataux.get(Calendar.DAY_OF_MONTH));
-		System.out.println("dias do mês "
-				+ data.getActualMaximum(Calendar.DAY_OF_MONTH));
-		System.out.println("mês " + (data.get(Calendar.MONTH) + 1));
+//		System.out.println("dias do mês "
+//				+ data.getActualMaximum(Calendar.DAY_OF_MONTH));
+//		System.out.println("mês " + (data.get(Calendar.MONTH) + 1));
 		// data.set(GregorianCalendar.MONTH, dataux.get(Calendar.JANUARY));
 		// System.out.println("mes " + data.get(Calendar.MARCH));
 		// System.out.println("dias do mês " + data.get(Calendar.DAY_OF_MONTH));
@@ -37,16 +37,15 @@ public class Cal {
 	public static int[] cal(int mes) {
 		dados = new int[3];
 		mes = mes - 1;
-		System.out.println(mes);
 		GregorianCalendar dataux = new GregorianCalendar();
 		GregorianCalendar data = new GregorianCalendar(
 				dataux.get(Calendar.YEAR), mes, 1);
-		System.out.println("dia da semana " + data.get(Calendar.DAY_OF_WEEK));
-		dados[0] = data.get(Calendar.DAY_OF_WEEK);
+//		System.out.println("dia da semana " + (data.get(Calendar.DAY_OF_WEEK) - 1));
+		dados[0] = data.get(Calendar.DAY_OF_WEEK) - 1;
 		dados[1] = data.getActualMaximum(Calendar.DAY_OF_MONTH);
 		dados[2] = data.get(Calendar.MONTH);
-		System.out.println("dias do mês "
-				+ data.getActualMaximum(Calendar.DAY_OF_MONTH));
+//		System.out.println("dias do mês "
+//				+ data.getActualMaximum(Calendar.DAY_OF_MONTH));
 		System.out.println("Ano bissexto? "
 				+ data.isLeapYear(dataux.get(Calendar.YEAR)));
 
@@ -54,48 +53,88 @@ public class Cal {
 	}
 
 	public static int[] cal(int mes, int ano) {
+		if(mes == 8 && ano == 1752){
+			dados = new int[3];
+			GregorianCalendar d = new GregorianCalendar(ano, mes, 14);
+			// ano,mes informado e dia 1
+			GregorianCalendar data = new GregorianCalendar(ano, mes, 1);// mes eh 1 a
+			// set troca informando um date no parâmetro
+			data.setGregorianChange(d.getTime()); // 15/10/1582 default
+			// ano,mes informado e dia 1
+			data.set(ano, mes, 1);
+			System.out.println(data.getGregorianChange());
+			//mostra o dia da semana subtraindo 1 pois começa pelo 0
+			System.out.println("Dias da semana " + (data.get(Calendar.DAY_OF_WEEK) - 1));
+			dados[0] = data.get(Calendar.DAY_OF_WEEK) - 1;
+			dados[2] = mes;
+			// percorre calendario e obtem qt dias
+			int qt = 1;
+			int mesAux, meses = data.get(Calendar.MONTH);
+			String omes = " D" + "   " + "S" + "   " + "T" + "   " + "Q" + "   " + "Q" + "   " + "S" + "   " + "S\n";
+			while (true) {
+				if (data.get(Calendar.DAY_OF_WEEK) == 1) {
+					omes += "\n" + data.get(Calendar.DAY_OF_MONTH) + "  ";
+				}else if (data.get(Calendar.DAY_OF_MONTH) == 1){
+					int n = 1;
+					while(data.get(Calendar.DAY_OF_WEEK) > n){
+						omes += "    ";
+						n ++;
+					}
+					omes += " " + data.get(Calendar.DAY_OF_MONTH) + "   ";
+				}else{
+					omes += data.get(Calendar.DAY_OF_MONTH) + "  ";
+				}
+
+				data.add(Calendar.DATE, 1);
+
+				mesAux = data.get(Calendar.MONTH);
+				if (meses != mesAux) {
+					break;
+				} else {
+					qt++;
+				}
+			}
+			dados[1] = qt;
+			System.out.println("Dias desse mês " + qt);
+			System.out.println(omes);
+			return dados;
+		}else{
 		dados = new int[3];
 		mes = mes - 1;
-		GregorianCalendar d = new GregorianCalendar(1752, 8, 14);
+		GregorianCalendar d = new GregorianCalendar(ano, mes, 14);
 		GregorianCalendar data = new GregorianCalendar(ano, mes, 1);
-		
 		data.setGregorianChange(d.getTime());
 		data.set(ano,mes,1);
-		
-			System.out.println("dia da semana "
-					+ data.get(Calendar.DAY_OF_WEEK));
-			dados[0] = data.get(Calendar.DAY_OF_WEEK);
+			dados[0] = data.get(Calendar.DAY_OF_WEEK) - 1;
 			dados[1] = data.getActualMaximum(Calendar.DAY_OF_MONTH);
 			dados[2] = data.get(Calendar.MONTH);
-			System.out.println("dias do mês "
-					+ data.getActualMaximum(Calendar.DAY_OF_MONTH));
 			System.out.println("Ano bissexto? " + data.isLeapYear(ano));
 			return dados;
-		//}
+		}
 	}
 
 	public String toString() {
 		String semana = "", mes = "";
 		switch (dados[0]) {
-		case 1:
+		case 0:
 			semana = "Domingo";
 			break;
-		case 2:
+		case 1:
 			semana = "Segunda";
 			break;
-		case 3:
+		case 2:
 			semana = "Terça";
 			break;
-		case 4:
+		case 3:
 			semana = "Quarta";
 			break;
-		case 5:
+		case 4:
 			semana = "Quinta";
 			break;
-		case 6:
+		case 5:
 			semana = "Sexta";
 			break;
-		case 7:
+		case 6:
 			semana = "Sabado";
 			break;
 		}
