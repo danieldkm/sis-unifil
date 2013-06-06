@@ -10,17 +10,16 @@ public class ListaDuplamenteEncadeada {
 			this.inicio = node;
 			this.fim = node;
 		} else {
-			fim.setProximo(node);
+//			fim.setProximo(node);
 			// agora com a váriavel "fim" é possivel sempre adicionar no final
 			// da lista...
-			// Node auxiliar = this.inicio;
-			// while (auxiliar.getProximo() != null) {
-			// auxiliar = auxiliar.getProximo();
-			// }
-			// auxiliar.setProximo(node);
-			// auxiliar.getProximo().setAnterior(auxiliar);
-			this.fim = node;
-
+			 Node auxiliar = this.inicio;
+			 while (auxiliar.getProximo() != null) {
+				 auxiliar = auxiliar.getProximo();
+			 }
+			 auxiliar.setAnterior(auxiliar);
+			 auxiliar.setProximo(node);
+			 this.fim = node;
 		}
 	}
 
@@ -28,13 +27,16 @@ public class ListaDuplamenteEncadeada {
 		Node auxiliar = this.inicio;
 		if (inicio.equals(node)) {
 			this.inicio = auxiliar.getProximo();
+			this.fim = auxiliar;
 		} else {
 			auxiliar = inicio;
 			while (auxiliar.getProximo() != null) {
 				if (node.equals(auxiliar.getProximo())) {
+					auxiliar.setAnterior(auxiliar);
 					auxiliar.setProximo(auxiliar.getProximo().getProximo());
 					break;
 				}
+				auxiliar.setAnterior(auxiliar);
 				auxiliar = auxiliar.getProximo();
 			}
 		}

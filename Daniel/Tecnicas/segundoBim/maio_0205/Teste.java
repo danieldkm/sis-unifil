@@ -159,3 +159,28 @@ public class Teste {
 	}
 
 }
+
+
+/////// Aula 06/06
+
+/*Fila
+ * a primeira que chega é a primeira a sair
+ * representação
+ * [1]--FIFO[2][3][4]
+ * 
+ * FIFO
+ *first in - first out 
+ *
+ * `Pilha
+ * o último a chegar é o primeiro a sair
+ * representação
+ * [3]--LIFO
+ * [2]
+ * [1]
+ * 
+ * LIFO
+ * Last int - first out
+ * 
+ * 
+ * inicio chamado de topo
+ * */
