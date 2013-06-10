@@ -4,8 +4,8 @@ public class TesteProfessor {
 
 	public static void main(String[] args) {
 		ProfessorHorista ph = new ProfessorHorista(01, "Daniel", 20, 40);
-		
-		ph.setIdade(300);
+//		ph.getSalario();
+//		ph.setIdade(300);
 		System.out.println("Matricula " + ph.getMatricula() + 
 							"\nNome " + ph.getNome() + 
 							"\nSalario " + ph.getSalario() + 

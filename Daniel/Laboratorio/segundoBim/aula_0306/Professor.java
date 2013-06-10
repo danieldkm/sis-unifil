@@ -4,8 +4,8 @@ public class Professor{
 
 	private String nome;
 	private int matricula;
-	protected int idade;
-	private double salario;
+	private int idade;
+	protected double salario;
 	
 	public Professor(int matricula, String nome, double salario) {
 		System.out.println("Execucao no construtor Professor");
