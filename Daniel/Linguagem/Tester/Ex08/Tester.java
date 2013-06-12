@@ -7,7 +7,7 @@ public class Tester {
 		System.out.println("Dias tem " + ConversaoDeUnidadesDeTempo.diaConverterHora(1) + " Horas");
 		System.out.println("Horas tem " + ConversaoDeUnidadesDeTempo.horaConverterMinutos(1) + " Minutos");
 		System.out.println("Mes tem " + ConversaoDeUnidadesDeTempo.mesConverterDia(1) + " Dias");
-		System.out.println("Minutos tem " + ConversaoDeUnidadesDeTempo.minutoConverterSegundos(1) + " Segundos");
+		System.out.println("Minutos tem " + ConversaoDeUnidadesDeTempo.minutoConverterSegundos(12) + " Segundos");
 		System.out.println("Semana tem " + ConversaoDeUnidadesDeTempo.semanaConverterDia(1) + " Dias");
 	}
 
