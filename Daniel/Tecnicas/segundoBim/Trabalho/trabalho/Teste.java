@@ -28,7 +28,7 @@ public class Teste {
 			pergunta = JOptionPane.showInputDialog("Deseja remover da lista dois ou mais elementos repetidos?S/N\nApenas uma vez");	
 		}
 		if(pergunta.equals("S")){
-			System.out.println("\nRemover");
+			System.out.println("\nRemovido");
 			lista.removerRepetidos(new Node(1));
 		}else if(pergunta.equals("N")){
 			System.out.println("\nRemover");
@@ -121,7 +121,7 @@ public class Teste {
 		}
 		System.out.println("Nova lista\n"+listaDupla);
 		System.out.println(listaDupla.getElementoNaPosicao(10));
-		System.out.println(listaDupla.contem(new Node(0)));
+		System.out.println(listaDupla.contem(new Node(11)));
 		
 
 		

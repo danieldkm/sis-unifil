@@ -57,6 +57,7 @@ public class ListaDuplamenteEncadeada {
 					// }else{
 					// auxiliar.setAnterior(auxiliar);
 				}
+				auxiliar.setAnterior(auxiliar);
 				auxiliar = auxiliar.getProximo();
 				if (auxiliar == null) {
 					break;

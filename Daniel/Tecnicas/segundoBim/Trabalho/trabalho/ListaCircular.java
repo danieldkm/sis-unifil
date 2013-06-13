@@ -31,6 +31,7 @@ public class ListaCircular {
 				}
 				auxiliar = auxiliar.getProximo();
 			}
+			node.setProximo(inicio);
 		}
 	}
 	
@@ -50,6 +51,7 @@ public class ListaCircular {
 				}
 				auxiliar = auxiliar.getProximo();
 			}
+			node.setProximo(inicio);
 		} else {
 			auxiliar = this.inicio;
 			while (auxiliar.getProximo() != this.inicio) {
@@ -63,6 +65,7 @@ public class ListaCircular {
 				}
 				auxiliar = auxiliar.getProximo();
 			}
+			node.setProximo(inicio);
 		}
 	}
 
