@@ -1,10 +1,9 @@
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.File;
 import java.io.Reader;
 import java.util.Random;
-import java.util.Scanner;
+import util.Scanner;
 
 /*--------------------------------------------------------------------*/
 public class TSP {
