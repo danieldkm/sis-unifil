@@ -32,7 +32,7 @@ public class Liquidificador {
 			this.velocidade = velocidade;
 			/*
 			 * }else{ System.out.println(
-			 * "velocidade não pode ser mais que velocidade maxima");
+			 * "velocidade não pode ser maior que velocidade maxima");
 			 */
 		}
 	}

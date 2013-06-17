@@ -12,7 +12,7 @@ public class TesteProfessor {
 							"\nIdade " + ph.getIdade() + 
 							"\nTotal de horas " + ph.getTotalHoras() + "\n\n\n");
 		
-		ProfessorDedicacaoExclusiva pde = new ProfessorDedicacaoExclusiva(01, "Daniel", 20);
+		ProfessorDedicacaoExclusiva pde = new ProfessorDedicacaoExclusiva(02, "Daniel", 20);
 		
 		pde.setIdade(30);
 		System.out.println("Matricula " + pde.getMatricula() + 

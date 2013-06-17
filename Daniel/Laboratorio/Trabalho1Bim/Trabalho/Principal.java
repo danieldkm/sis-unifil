@@ -38,7 +38,7 @@ public class Principal {
 		controle.demitirJogador("Equipe2", "Jogador5");
 		
 		System.out.println("\n\n\n\n");
-		System.out.println("mostar");
+		System.out.println("mostrar");
 		controle.mostrarJogadoresEquipe("Equipe1");
 		controle.mostrarJogadoresEquipe("Equipe2");
 		

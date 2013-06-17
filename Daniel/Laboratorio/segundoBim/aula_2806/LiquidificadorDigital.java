@@ -8,9 +8,10 @@ public class LiquidificadorDigital extends Liquidificador{
 	
 	public void trocaVelocidade(int velocidade){
 		if(super.getVelocidadeMaxima() >= velocidade){
-			super.velocidade = velocidade;
-		}else{
-			System.out.println("velocidade informada não pode ser maior que a velocidade maxima");
+//			super.velocidade = velocidade;
+			setVelocidade(velocidade);
+//		}else{
+//			System.out.println("velocidade informada não pode ser maior que a velocidade maxima");
 		}
 	}
 }

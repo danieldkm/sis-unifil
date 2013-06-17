@@ -14,15 +14,14 @@ public class LiquidificadorAnalogico extends Liquidificador {
 //		}
 
 		setVelocidade(velocidade + 1);
-
 	}
 
 	public void diminuirVelocidade() {
 		if (velocidade > 0) {
 
 			velocidade--;
-		} else {
-			System.out.println("Impossivel, velocidade ja esta no zero");
+//		} else {
+//			System.out.println("Impossivel, velocidade ja esta no zero");
 		}
 		// ou setVelocidade(velocidade - 1); // na classe liquidificador ja esta
 		// fazendo a verificação do atributo velocidade maxima
