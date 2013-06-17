@@ -28,8 +28,8 @@ public class TestarLiquidificador {
 			}
 		}
 
-		
-		
+
+
 		//
 		// //liquidificador digital
 		int in;

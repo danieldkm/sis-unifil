@@ -12,13 +12,11 @@ public class LiquidificadorAnalogico extends Liquidificador {
 //		} else {
 //			System.out.println("Impossivel, velocidade já está no máximo");
 //		}
-
 		setVelocidade(velocidade + 1);
 	}
 
 	public void diminuirVelocidade() {
 		if (velocidade > 0) {
-
 			velocidade--;
 //		} else {
 //			System.out.println("Impossivel, velocidade ja esta no zero");
