@@ -94,33 +94,43 @@ public class ListaCircular {
 		}
 	}
 	
-	public Node getElementoNaPosicao(int posicao) {
-		if(posicao == 0){
-			return inicio;
-		}else{
-			Node auxiliar = inicio;
+	public Object getObject(int posicao) {
+		if (isEmpty()) {
+			return null;
+		} else if (posicao == 0) {
+			return this.inicio;
+		} else {
+			Node auxiliar = this.inicio;
 			int n = 1;
-			while(auxiliar.getProximo() != null){
-				if(n == posicao){
-					return auxiliar.getProximo();
-				}
+			while (auxiliar.getProximo() != this.inicio) {
 				auxiliar = auxiliar.getProximo();
+				if (posicao == n) {
+//					n--;
+//					break;
+					return auxiliar;
+				}
+				n++;
 			}
+			auxiliar.setProximo(this.inicio);
+			if (n >= posicao) {
+				System.out.println("Não existe essa posição, será mostrado a ultima posição");
+			}
+			return null;
 		}
-		return null;
 	}
-
+	
 	public boolean contem(Node node) {
 		if(inicio.equals(node)){
 			return true;
 		}else{
 			Node auxiliar = inicio;
-			while(auxiliar.getProximo() != null){
+			while(auxiliar.getProximo() != this.inicio){
 				if(auxiliar.getProximo().equals(node)){
 					return true;
 				}
 				auxiliar = auxiliar.getProximo();
 			}
+			auxiliar.setProximo(inicio);
 		}
 		return false;
 	}

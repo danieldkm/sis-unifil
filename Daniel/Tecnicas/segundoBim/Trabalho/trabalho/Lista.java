@@ -105,7 +105,47 @@ public class Lista {
 		}
 	}
 
-	public Node getElementoNaPosicao(int posicao) {
+//	public Node getElementoNaPosicao(int posicao) {
+//		if (isEmpty()) {
+//			return null;
+//		} else if (posicao == 0) {
+//			return this.inicio;
+//		} else {
+//			Node auxiliar = this.inicio;
+//			int n = 1;
+//			while (auxiliar.getProximo() != null) {
+//				auxiliar = auxiliar.getProximo();
+//				if (posicao == n) {
+//					n--;
+//					break;
+//				}
+//				n++;
+//			}
+//			if (n >= posicao) {
+//				System.out.println("Não existe essa posição, será mostrado a ultima posição");
+//			}
+//			return auxiliar;
+//		}
+//	}
+
+	public boolean contem(Node node) {
+		if (isEmpty()) {
+			if (this.inicio.equals(node)) {
+				return true;
+			}
+		} else {
+			Node auxiliar = this.inicio;
+			while (auxiliar.getProximo() != null) {
+				if (node.equals(auxiliar.getProximo())) {
+					return true;
+				}
+				auxiliar = auxiliar.getProximo();
+			}
+		}
+		return false;
+	}
+
+	public Object getObject(int posicao){
 		if (isEmpty()) {
 			return null;
 		} else if (posicao == 0) {
@@ -126,23 +166,6 @@ public class Lista {
 			}
 			return auxiliar;
 		}
+		
 	}
-
-	public boolean contem(Node node) {
-		if (isEmpty()) {
-			if (this.inicio.equals(node)) {
-				return true;
-			}
-		} else {
-			Node auxiliar = this.inicio;
-			while (auxiliar.getProximo() != null) {
-				if (node.equals(auxiliar.getProximo())) {
-					return true;
-				}
-				auxiliar = auxiliar.getProximo();
-			}
-		}
-		return false;
-	}
-
 }

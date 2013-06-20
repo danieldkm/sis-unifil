@@ -4,11 +4,12 @@ import javax.swing.JOptionPane;
 
 public class Teste {
 	public static void main(String[] args) {
-		System.out.println("LISTA NORMAL");
+		//---------------------------------LISTA DUPLAMENTE ENCADEADA----------------------------------------------------------//		
+		System.out.println("LISTA ENCADEADA");
 		Lista lista = new Lista();
 		
 		//--Listar e verificar se está vazio
-		System.out.println(lista);
+		System.out.println("Lista atual " + lista);
 		System.out.println("Inserir");
 		lista.inserir(new Node(1));
 		lista.inserir(new Node(1));
@@ -21,14 +22,14 @@ public class Teste {
 		lista.inserir(new Node(1));
 		lista.inserir(new Node(10));
 		//--Listar e verificar se está vazio
-		System.out.println(lista);
+		System.out.println("Lista atual " + lista);
 		String pergunta = "";
 		while(!pergunta.equals("S") && !pergunta.equals("N")){
 			System.out.println(pergunta);
 			pergunta = JOptionPane.showInputDialog("Deseja remover da lista dois ou mais elementos repetidos?S/N\nApenas uma vez");	
 		}
 		if(pergunta.equals("S")){
-			System.out.println("\nRemovido");
+			System.out.println("\nRemover");
 			lista.removerRepetidos(new Node(1));
 		}else if(pergunta.equals("N")){
 			System.out.println("\nRemover");
@@ -45,12 +46,12 @@ public class Teste {
 //		lista.remover(new Node(10));
 		}
 		//--Listar e verificar se está vazio
-		System.out.println(lista);
+		System.out.println("Lista atual " + lista);
 		
 		lista.removerTodos();
 		
 		
-		System.out.println(lista);
+		System.out.println("Lista atual " + lista);
 		lista.inserir(new Node(1));
 		lista.inserir(new Node(2));
 		lista.inserir(new Node(3));
@@ -61,22 +62,26 @@ public class Teste {
 		lista.inserir(new Node(8));
 		lista.inserir(new Node(9));
 		lista.inserir(new Node(10));
-		System.out.println(lista);
-		System.out.println(lista.getElementoNaPosicao(0));
-		System.out.println(lista.getElementoNaPosicao(1));
-		System.out.println(lista.getElementoNaPosicao(2));
-		System.out.println(lista.getElementoNaPosicao(3));
-		System.out.println(lista.getElementoNaPosicao(4));
-		System.out.println(lista.getElementoNaPosicao(10));
+		System.out.println("Lista atual " + lista);
+		System.out.println("Posição " + lista.getObject(0));
+		System.out.println("Posição " + lista.getObject(1));
+		System.out.println("Posição " + lista.getObject(2));
+		System.out.println("Posição " + lista.getObject(3));
+		System.out.println("Posição " + lista.getObject(4));
+		System.out.println("Posição " + lista.getObject(10));
 		System.out.println("Contém o elemento? " + lista.contem(new Node(8)));
+		//---------------------------------LISTA DUPLAMENTE----------------------------------------------------------//		
 		
 		
+		
+		
+		//---------------------------------LISTA DUPLAMENTE ENCADEADA----------------------------------------------------------//
 		System.out.println("\n\nLISTA DUPLAMENTE ENCADEADA");
 		ListaDuplamenteEncadeada listaDupla = new ListaDuplamenteEncadeada();
 			
 		
 		//--Listar e verificar se está vazio
-		System.out.println(listaDupla);
+		System.out.println("Lista atual " + listaDupla);
 		System.out.println("Inserir");
 		listaDupla.inserir(new Node(1));
 		listaDupla.inserir(new Node(1));
@@ -89,7 +94,7 @@ public class Teste {
 		listaDupla.inserir(new Node(1));
 		listaDupla.inserir(new Node(10));
 		//--Listar e verificar se está vazio
-		System.out.println(listaDupla);
+		System.out.println("Lista atual " + listaDupla);
 		pergunta = "";
 		while(!pergunta.equals("S") && !pergunta.equals("N")){
 			System.out.println(pergunta);
@@ -113,23 +118,30 @@ public class Teste {
 //		lista.remover(new Node(10));
 		}
 		//--Listar e verificar se está vazio
-		System.out.println(listaDupla);
+		System.out.println("Lista atual " + listaDupla);
 		
 		listaDupla.removerTodos();
 		for(int i = 0; i < 10; i++){
 			listaDupla.inserir(new Node(i+1));
 		}
-		System.out.println("Nova lista\n"+listaDupla);
-		System.out.println(listaDupla.getElementoNaPosicao(10));
-		System.out.println(listaDupla.contem(new Node(11)));
-		
+		System.out.println("Lista atual " + listaDupla);
+		System.out.println("Posição " + listaDupla.getObject(0));
+		System.out.println("Posição " + listaDupla.getObject(1));
+		System.out.println("Posição " + listaDupla.getObject(2));
+		System.out.println("Posição " + listaDupla.getObject(3));
+		System.out.println("Posição " + listaDupla.getObject(10));
+		System.out.println("Contém " + listaDupla.contem(new Node(11)));
+		System.out.println("Contém " + listaDupla.contem(new Node(1)));
+		System.out.println("Contém " + listaDupla.contem(new Node(2)));
+		System.out.println("Contém " + listaDupla.contem(new Node(9)));
+		//---------------------------------LISTA DUPLAMENTE ENCADEADA----------------------------------------------------------//		
 
 		
 		
-		
+		//---------------------------------LISTA CIRCULAR----------------------------------------------------------//
 		System.out.println("\n\nLISTA CIRCULAR");
 		ListaCircular lc = new ListaCircular();
-		System.out.println(lc);
+		System.out.println("Lista atual " + lc);
 		lc.adicionar(new Node(6));
 		lc.adicionar(new Node(1));
 		lc.adicionar(new Node(6));
@@ -138,7 +150,7 @@ public class Teste {
 		lc.adicionar(new Node(6));
 		lc.adicionar(new Node(1));
 		
-		System.out.println("Ciruclar " + lc);
+		System.out.println("Lista atual " + lc);
 		
 		pergunta = "";
 		while(!pergunta.equals("S") && !pergunta.equals("N")){
@@ -152,7 +164,16 @@ public class Teste {
 			System.out.println("\nRemover");
 			lc.remover(new Node(1));
 		}
-		System.out.println("Ciruclar " + lc);
+		System.out.println("Lista atual " + lc);
+		
+		System.out.println("Posiçao " + lc.getObject(0));
+		System.out.println("Posiçao " + lc.getObject(1));
+		System.out.println("Posiçao " + lc.getObject(2));
+		System.out.println("Posiçao " + lc.getObject(3));
+		System.out.println("Lista atual " + lc);
+		System.out.println("Contém " + lc.contem(new Node(6)));
+		System.out.println("Contém " + lc.contem(new Node(1)));
+		//---------------------------------LISTA CIRCULAR----------------------------------------------------------//		
 		
 	}
 

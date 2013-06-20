@@ -54,8 +54,6 @@ public class ListaDuplamenteEncadeada {
 					if (auxiliar.equals(node)) {
 						inicio = auxiliar.getProximo();
 					}
-					// }else{
-					// auxiliar.setAnterior(auxiliar);
 				}
 				auxiliar.setAnterior(auxiliar);
 				auxiliar = auxiliar.getProximo();
@@ -73,9 +71,8 @@ public class ListaDuplamenteEncadeada {
 					if (auxiliar.equals(node)) {
 						inicio = auxiliar.getProximo();
 					}
-					// }else{
-					// auxiliar.setAnterior(auxiliar);
 				}
+				auxiliar.setAnterior(auxiliar);
 				auxiliar = auxiliar.getProximo();
 				if (auxiliar == null) {
 					break;
@@ -105,6 +102,7 @@ public class ListaDuplamenteEncadeada {
 			Node auxiliar = this.inicio;
 			while (auxiliar != null) {
 				auxString += auxiliar;
+				auxiliar.setAnterior(auxiliar);
 				auxiliar = auxiliar.getProximo();
 			}
 			auxString += "]";
@@ -112,20 +110,28 @@ public class ListaDuplamenteEncadeada {
 		}
 	}
 
-	public Node getElementoNaPosicao(int posicao) {
-		if(posicao == 0){
-			return inicio;
-		}else{
-			Node auxiliar = inicio;
+	public Object getObject(int posicao) {
+		if (isEmpty()) {
+			return null;
+		} else if (posicao == 0) {
+			return this.inicio;
+		} else {
+			Node auxiliar = this.inicio;
 			int n = 1;
-			while(auxiliar.getProximo() != null){
-				if(n == posicao){
-					return auxiliar.getProximo();
-				}
+			while (auxiliar.getProximo() != null) {
+				auxiliar.setAnterior(auxiliar);
 				auxiliar = auxiliar.getProximo();
+				if (posicao == n) {
+					n--;
+					break;
+				}
+				n++;
 			}
+			if (n >= posicao) {
+				System.out.println("Não existe essa posição, será mostrado a ultima posição");
+			}
+			return auxiliar;
 		}
-		return null;
 	}
 
 	public boolean contem(Node node) {
@@ -137,6 +143,7 @@ public class ListaDuplamenteEncadeada {
 				if(auxiliar.getProximo().equals(node)){
 					return true;
 				}
+				auxiliar.setAnterior(auxiliar);
 				auxiliar = auxiliar.getProximo();
 			}
 		}
