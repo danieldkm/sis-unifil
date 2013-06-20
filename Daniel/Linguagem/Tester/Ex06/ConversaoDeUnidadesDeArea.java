@@ -1,10 +1,10 @@
 package Ex06;
 
 public class ConversaoDeUnidadesDeArea {
-	private final double metroPes = 10.76;// pes
-	private final double pesCentimetros = 929;// centimetros
-	private final double milhaAcres = 640;// acres
-	private final double acrePes = 43.560;// pes
+	private final double metroPes = 10.76;// metros para pes quadrados
+	private final double pesCentimetros = 929;// pes para centimetros quadrados
+	private final double milhaAcres = 640;// milha para acres quadrados
+	private final double acrePes = 43.560;// acre para pes quadrados
 	public static double tt = 0;
 	
 	private ConversaoDeUnidadesDeArea(){
