@@ -70,6 +70,25 @@ public class Teste {
 		System.out.println("Posição " + lista.getObject(4));
 		System.out.println("Posição " + lista.getObject(10));
 		System.out.println("Contém o elemento? " + lista.contem(new Node(8)));
+		System.out.println("Lista Pilha");
+		lista.removerTodos();
+		lista.inserirPilha(new Node(1));
+		lista.inserirPilha(new Node(2));
+		lista.inserirPilha(new Node(3));
+		lista.inserirPilha(new Node(4));
+		lista.inserirPilha(new Node(5));
+		lista.inserirPilha(new Node(6));
+		System.out.println("Lista atual " + lista);
+		System.out.println("Lista normal");
+		lista.removerTodos();
+		lista.inserir(new Node(1));
+		lista.inserir(new Node(2));
+		lista.inserir(new Node(3));
+		lista.inserir(new Node(4));
+		lista.inserir(new Node(5));
+		lista.inserir(new Node(6));
+		System.out.println("Lista atual " + lista);
+		
 		//---------------------------------LISTA DUPLAMENTE----------------------------------------------------------//		
 		
 		

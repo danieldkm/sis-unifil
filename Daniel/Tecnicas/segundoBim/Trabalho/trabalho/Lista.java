@@ -16,6 +16,20 @@ public class Lista {
 			auxiliar.setProximo(node);
 		}
 	}
+	
+	public void inserirPilha(Node node) {
+		if(isEmpty()){
+			this.inicio = node;
+		} else{
+			Node auxiliar = this.inicio;
+			this.inicio = node;
+			this.inicio.setProximo(auxiliar);
+			auxiliar = inicio;
+			while (auxiliar.getProximo() != null) {
+				auxiliar = auxiliar.getProximo();
+			}
+		}
+	}
 
 	public void removerTodos() {
 		inicio = null;
