@@ -4,6 +4,7 @@
 	<classpathentry kind="src" path="marco_21"/>
 	<classpathentry kind="src" path="Trabalho1Bim"/>
 	<classpathentry kind="src" path="segundoBim"/>
+	<classpathentry kind="src" path="terceiroBim"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
