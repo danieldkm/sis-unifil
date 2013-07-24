@@ -1,13 +1,14 @@
 package model;
 
-import java.sql.Date;
+import java.util.Date;
+
 
 //classe cliente terá como atributos os campos da tabela Cliente
 public class Cliente {
 	private long id;
 	private String dataCadastro;
 	private String nome;
-	private String dataNascimento;
+	private Date dataNascimento;
 	private String cpf;
 	private String rg;
 	private String endereco;
@@ -25,7 +26,7 @@ public class Cliente {
 	}
 
 	public Cliente(long id, String dataCadastro, String nome,
-			String dataNascimento, String cpf, String rg, String endereco,
+			Date dataNascimento, String cpf, String rg, String endereco,
 			String bairro, String cidade, String estado, String cep,
 			String telefone, String celular, String sexo, String naturalidade,
 			String estadoCivil) {
@@ -72,11 +73,11 @@ public class Cliente {
 		this.nome = nome;
 	}
 
-	public String getDataNascimento() {
+	public Date getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(String dataNascimento) {
+	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

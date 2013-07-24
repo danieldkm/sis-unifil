@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 
-public class ClienteFrame {
+public class ClienteFrame extends JFrame{
 
 	private JFrame frmCadastro;
 	private JTextField txtClienteId;
@@ -272,28 +272,7 @@ public class ClienteFrame {
 		
 		btnClienteBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new LocalizarClienteFrame();
-//				ArrayList<String> list = banco.buscaCliente(txtClienteNome.getText());
-//				
-//				if (!list.isEmpty()) {
-//					txtClienteId.setText(list.remove(0));
-//					txtClienteNome.setText(list.remove(0));
-//					txtClienteCPF.setText(list.remove(0));
-//					txtClienteRG.setText(list.remove(0));
-//					txtClienteEndereco.setText(list.remove(0));
-//					txtClienteBairro.setText(list.remove(0));
-//					txtClienteCelular.setText(list.remove(0));
-//					txtClienteDataCadastro.setText(list.remove(0));
-//					txtClienteCEP.setText(list.remove(0));
-//					txtClienteCidade.setText(list.remove(0));
-//					txtClienteDataNascimento.setText(list.remove(0));
-//					txtClienteNaturalidade.setText(list.remove(0));
-//					txtClienteProfissao.setText(list.remove(0));
-//					txtClienteTelefone.setText(list.remove(0));
-//					
-//				}
-//				else
-//					JOptionPane.showMessageDialog(null, "Digite o nome primeiro!");
+				new LocalizarClienteFrame().main(null);
 			}
 		});
 		btnClienteBuscar.setBounds(276, 308, 80, 75);

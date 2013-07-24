@@ -1,6 +1,6 @@
 package dao;
 
-import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,17 +12,24 @@ import model.Cliente;
 //Criamos a classe GenericDao para ser herdadas pelos demais dao’s, assim, 
 //vamos agora criar a classe ClienteDao, onde terão os métodos mais específicos da classe
 public class ClienteDao extends GenericDao {
-	Date data = new Date(System.currentTimeMillis());
-	SimpleDateFormat formatarDate = new SimpleDateFormat("dd-MM-yyyy");
-	String dataAtual = formatarDate.format(data);
 
 	// System.out.print(formatarDate.format(data));
+	
+	public String formatarData(){
+		Date data = new Date(System.currentTimeMillis());
+		SimpleDateFormat formatarDate = new SimpleDateFormat("dd-MM-yyyy");
+		String dataAtual = formatarDate.format(data);
+		String dataA = dataAtual.replace('/','-');
+		String dataInv = "";
+		dataInv = "" + dataA.substring(6, 10) + dataA.substring(2, 6) + dataA.substring(0, 2);
+		return dataInv;
+	}
 
 	public void salvar(Cliente cliente) {
 		try {
 			String insert = "INSERT INTO CLIENTE(data_cadastro, nome, data_nasc, cpf, rg, endereco, bairro, cidade, cep, telefone, "
 					+ "celular, sexo, naturalidade, est_civil, estado) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-			save(insert, dataAtual, cliente.getNome(),
+			save(insert, formatarData(), cliente.getNome(),
 					cliente.getDataNascimento(), cliente.getCpf(),
 					cliente.getRg(), cliente.getEndereco(),
 					cliente.getBairro(), cliente.getCidade(), cliente.getCep(),
@@ -41,7 +48,7 @@ public class ClienteDao extends GenericDao {
 					+ "endereco = ?, bairro = ?, cidade = ?, cep = ?, telefone = ?, "
 					+ "celular = ?, sexo = ?, naturalidade = ?, est_civil = ?, estado = ? "
 					+ "WHERE cod_cliente = ?";
-			update(update, dataAtual, cliente.getNome(),
+			update(update, cliente.getId(), formatarData(), cliente.getNome(),
 					cliente.getDataNascimento(), cliente.getCpf(),
 					cliente.getRg(), cliente.getEndereco(),
 					cliente.getBairro(), cliente.getCidade(), cliente.getCep(),
@@ -76,7 +83,7 @@ public class ClienteDao extends GenericDao {
 			cliente.setId(rs.getLong("cod_cliente"));
 			cliente.setNome(rs.getString("nome"));
 			cliente.setDataCadastro(rs.getString("data_cadastro"));
-			cliente.setDataNascimento(rs.getString("data_nasc"));
+			cliente.setDataNascimento(rs.getDate("data_nasc"));
 			cliente.setCpf(rs.getString("cpf"));
 			cliente.setRg(rs.getString("rg"));
 			cliente.setEndereco(rs.getString("endereco"));
@@ -100,7 +107,7 @@ public class ClienteDao extends GenericDao {
 	}
 
 	public Cliente findByName(String nome) throws SQLException {
-		String select = "SELECT * FROM CLIENTES WHERE nome = ?";
+		String select = "SELECT * FROM CLIENTE WHERE nome = ?";
 		Cliente cliente = null;
 		PreparedStatement stmt = getConnection().prepareStatement(select);
 
@@ -112,7 +119,7 @@ public class ClienteDao extends GenericDao {
 			cliente.setId(rs.getLong("cod_cliente"));
 			cliente.setNome(rs.getString("nome"));
 			cliente.setDataCadastro(rs.getString("data_cadastro"));
-			cliente.setDataNascimento(rs.getString("data_nasc"));
+			cliente.setDataNascimento(rs.getDate("data_nasc"));
 			cliente.setCpf(rs.getString("cpf"));
 			cliente.setRg(rs.getString("rg"));
 			cliente.setEndereco(rs.getString("endereco"));
