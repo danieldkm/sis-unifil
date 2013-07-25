@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import dao.ClienteDao;
 
-import model.Cliente;
+import model.entity.Cliente;
 
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -16,32 +16,32 @@ import java.util.List;
 // classe ClienteController faz a comunicação entre o banco de dados e a interface
 public class ClienteController {
 
-	private Date formatarData(String data) {
-//		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-//		return new Date(formatter.parse(data).getTime());
-//		String dataNasc = data.replace('/',	'-');
-//		String dataNascInv = "";
-//		//
-//		dataNascInv = "" + dataNasc.substring(6, 10)
-//				+ dataNasc.substring(2, 6) + dataNasc.substring(0, 1);
-		System.out.println(data);
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		Date d; 
-		try {
-			System.out.println(dateFormat.parse(data));
-			return d = dateFormat.parse(data);
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Erro ao formatar a data");
-			return null;
-		}
-		
-	}
+//	private Date formatarData(String data) {
+////		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+////		return new Date(formatter.parse(data).getTime());
+////		String dataNasc = data.replace('/',	'-');
+////		String dataNascInv = "";
+////		//
+////		dataNascInv = "" + dataNasc.substring(6, 10)
+////				+ dataNasc.substring(2, 6) + dataNasc.substring(0, 1);
+//		System.out.println(data);
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//		Date d; 
+//		try {
+//			System.out.println(dateFormat.parse(data));
+//			return d = dateFormat.parse(data);
+//		} catch (Exception e) {
+//			JOptionPane.showMessageDialog(null, "Erro ao formatar a data");
+//			return null;
+//		}
+//		
+//	}
 
 	public void salvarNome(String nome, String dataNascimento, String cpf)
 			throws SQLException, ParseException {
 		Cliente cliente = new Cliente();
 		cliente.setNome(nome);
-		cliente.setDataNascimento(formatarData(dataNascimento));
+		cliente.setDataNascimento(dataNascimento);
 		cliente.setCpf(cpf);
 		new ClienteDao().salvar(cliente);
 	}
@@ -54,7 +54,7 @@ public class ClienteController {
 		Cliente cliente = new Cliente();
 		cliente.setNome(nome);
 		cliente.setDataCadastro(dataCadastro);
-		cliente.setDataNascimento(formatarData(dataNascimento));
+		cliente.setDataNascimento(dataNascimento);
 		cliente.setCpf(cpf);
 		cliente.setRg(rg);
 		cliente.setEndereco(endereco);
@@ -77,7 +77,7 @@ public class ClienteController {
 		Cliente cliente = new Cliente();
 		cliente.setId(id);
 		cliente.setNome(nome);
-		cliente.setDataNascimento(formatarData(dataNascimento));
+		cliente.setDataNascimento(dataNascimento);
 		cliente.setCpf(cpf);
 		new ClienteDao().alterar(cliente);
 	}
@@ -92,7 +92,7 @@ public class ClienteController {
 		cliente.setId(id);
 		cliente.setNome(nome);
 		cliente.setDataCadastro(dataCadastro);
-		cliente.setDataNascimento(formatarData(dataNascimento));
+		cliente.setDataNascimento(dataNascimento);
 		cliente.setCpf(cpf);
 		cliente.setRg(rg);
 		cliente.setEndereco(endereco);

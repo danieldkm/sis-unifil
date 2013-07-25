@@ -4,32 +4,44 @@ import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Cliente;
+import model.entity.Cliente;
 //Criamos a classe GenericDao para ser herdadas pelos demais dao’s, assim, 
 //vamos agora criar a classe ClienteDao, onde terão os métodos mais específicos da classe
+
 public class ClienteDao extends GenericDao {
 
 	// System.out.print(formatarDate.format(data));
-	
-	public String formatarData(){
+
+	public String formatarDataAtual() {
 		Date data = new Date(System.currentTimeMillis());
 		SimpleDateFormat formatarDate = new SimpleDateFormat("dd-MM-yyyy");
 		String dataAtual = formatarDate.format(data);
-		String dataA = dataAtual.replace('/','-');
+		String dataA = dataAtual.replace('/', '-');
 		String dataInv = "";
-		dataInv = "" + dataA.substring(6, 10) + dataA.substring(2, 6) + dataA.substring(0, 2);
+		dataInv = "" + dataA.substring(6, 10) + dataA.substring(2, 6)
+				+ dataA.substring(0, 2);
 		return dataInv;
 	}
 
+	public String formatarDataString(String data) {
+		String dataA = data.replace('-', '/');
+		String dataInv = "";
+		dataInv = dataA.substring(8, 10) + "/" 
+				+ dataA.substring(5, 7) + "/" + dataA.substring(0, 4);
+		return dataInv;
+	}
+	
 	public void salvar(Cliente cliente) {
 		try {
 			String insert = "INSERT INTO CLIENTE(data_cadastro, nome, data_nasc, cpf, rg, endereco, bairro, cidade, cep, telefone, "
 					+ "celular, sexo, naturalidade, est_civil, estado) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-			save(insert, formatarData(), cliente.getNome(),
+			save(insert, formatarDataAtual(), cliente.getNome(),
 					cliente.getDataNascimento(), cliente.getCpf(),
 					cliente.getRg(), cliente.getEndereco(),
 					cliente.getBairro(), cliente.getCidade(), cliente.getCep(),
@@ -48,7 +60,7 @@ public class ClienteDao extends GenericDao {
 					+ "endereco = ?, bairro = ?, cidade = ?, cep = ?, telefone = ?, "
 					+ "celular = ?, sexo = ?, naturalidade = ?, est_civil = ?, estado = ? "
 					+ "WHERE cod_cliente = ?";
-			update(update, cliente.getId(), formatarData(), cliente.getNome(),
+			update(update, cliente.getId(), formatarDataAtual(), cliente.getNome(),
 					cliente.getDataNascimento(), cliente.getCpf(),
 					cliente.getRg(), cliente.getEndereco(),
 					cliente.getBairro(), cliente.getCidade(), cliente.getCep(),
@@ -82,8 +94,8 @@ public class ClienteDao extends GenericDao {
 			Cliente cliente = new Cliente();
 			cliente.setId(rs.getLong("cod_cliente"));
 			cliente.setNome(rs.getString("nome"));
-			cliente.setDataCadastro(rs.getString("data_cadastro"));
-			cliente.setDataNascimento(rs.getDate("data_nasc"));
+			cliente.setDataCadastro(formatarDataString(rs.getString("data_cadastro")));
+			cliente.setDataNascimento(formatarDataString(rs.getString("data_nasc")));
 			cliente.setCpf(rs.getString("cpf"));
 			cliente.setRg(rs.getString("rg"));
 			cliente.setEndereco(rs.getString("endereco"));
@@ -119,7 +131,7 @@ public class ClienteDao extends GenericDao {
 			cliente.setId(rs.getLong("cod_cliente"));
 			cliente.setNome(rs.getString("nome"));
 			cliente.setDataCadastro(rs.getString("data_cadastro"));
-			cliente.setDataNascimento(rs.getDate("data_nasc"));
+			cliente.setDataNascimento(rs.getString("data_nasc"));
 			cliente.setCpf(rs.getString("cpf"));
 			cliente.setRg(rs.getString("rg"));
 			cliente.setEndereco(rs.getString("endereco"));
@@ -138,5 +150,4 @@ public class ClienteDao extends GenericDao {
 		stmt.close();
 		return cliente;
 	}
-
 }
