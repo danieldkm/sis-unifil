@@ -4,7 +4,9 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,6 +16,10 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+
+import model.entity.Cliente;
+
+import controller.ClienteController;
 
 import tabela.ClienteTabela;
 import dao.ClienteDao;
@@ -52,6 +58,7 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener{
 	private ClienteTabela modelo;
 	private JScrollPane scrollPane;	
 	private ClienteDao clienteDao;
+	private ClienteController clienteController;
 	
 
 	/**
@@ -74,8 +81,6 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener{
 	 * Create the application.
 	 */
 	public LocalizarClienteFrame() {
-
-		
 //		try {
 //			formatoData = new MaskFormatter("##/##/####");
 //			formatoData.setValidCharacters("1234567890");
@@ -103,6 +108,8 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+
+		
 		frmBuscarCliente = new JFrame();
 		frmBuscarCliente.setTitle("Localizar Cliente");
 		frmBuscarCliente.setBounds(100, 100, 800, 600);
@@ -115,6 +122,23 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener{
 //		frmBuscarCliente.getContentPane().add(txtBuscaLocalizar);
 //		txtBuscaLocalizar.setColumns(10);
 		
+		///Table////
+		modelo = new ClienteTabela();
+		clienteDao = new ClienteDao();
+		modelo.addTableModelListener(this);
+		
+		try {
+			modelo.adicionaLista(clienteDao.findClientes());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		tbBuscarClientes = new JTable();
+		tbBuscarClientes.setModel(modelo);
+		scrollPane  = new JScrollPane();
+		scrollPane.setBounds(10, 69, 772, 493);
+		scrollPane.setViewportView(tbBuscarClientes);
+		frmBuscarCliente.getContentPane().add(scrollPane);
+		tamanhoColuna();
 		
 		//JTextField
 		txtBuscaCodigo = new JTextField();
@@ -168,22 +192,28 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener{
 		frmBuscarCliente.getContentPane().add(btnBuscarNome);
 		
 		
-		///Table////
-		modelo = new ClienteTabela();
-		clienteDao = new ClienteDao();
-		tbBuscarClientes = new JTable();
-		modelo.addTableModelListener(this);
-		try {
-			modelo.adicionaLista(clienteDao.findClientes());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		scrollPane  = new JScrollPane();
-		scrollPane.setBounds(10, 69, 772, 493);
-		frmBuscarCliente.getContentPane().add(scrollPane);
-		tbBuscarClientes.setModel(modelo);
-		scrollPane.setViewportView(tbBuscarClientes);
-		tamanhoColuna();
+
+		
+		
+		///função para atualizar logo apos digitar no campo de busca...
+//		tbBuscarClientes.getSelectionModel().addListSelectionListener(
+//		        new ListSelectionListener() {
+//		            public void valueChanged(ListSelectionEvent event) {
+//		                int viewRow = tbBuscarClientes.getSelectedRow();
+//		                if (viewRow < 0) {
+//		                    //Selection got filtered away.
+//		                    statusText.setText("");
+//		                } else {
+//		                    int modelRow = 
+//		                        tbBuscarClientes.convertRowIndexToModel(viewRow);
+//		                    statusText.setText(
+//		                        String.format("Selected Row in view: %d. " +
+//		                            "Selected Row in model: %d.", 
+//		                            viewRow, modelRow));
+//		                }
+//		            }
+//		        }
+//		);
 		
 //		JScrollPane scrollPane = new JScrollPane();
 //		scrollPane.setBounds(10, 69, 772, 493);
@@ -224,6 +254,10 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener{
 		// quando a estrutura de dados muda, imprimimos a informação. Fazer a
 		// persistência no banco seria o comportamento realista desse método.
 		String tipo;
+		System.out.println(e.getFirstRow());
+		System.out.println(e.getLastRow());
+		System.out.println(e.getSource());
+		
 		switch (e.getType()) {
 		case TableModelEvent.DELETE:
 			tipo = "DELETE";

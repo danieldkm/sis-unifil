@@ -87,7 +87,6 @@ public class ClienteController {
 			String bairro, String cidade, String estado, String cep,
 			String telefone, String celular, String sexo, String naturalidade,
 			String estadoCivil) throws ParseException, SQLException {
-
 		Cliente cliente = new Cliente();
 		cliente.setId(id);
 		cliente.setNome(nome);

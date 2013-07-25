@@ -38,7 +38,13 @@ import model.entity.Cliente;
 public class ClienteTabela extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
-
+	private ArrayList linhas = null;  
+    private String [] colunas = null;  
+    public String[] getColunas() {return colunas;}  
+    public ArrayList getLinhas() {return linhas;}  
+    public void setColunas(String[] strings) {colunas = strings;}  
+    public void setLinhas(ArrayList list) {linhas = list;}  
+  
 	/**
 	 * Essa lista armazenará os objetos do tipo {@link Cliente} atualmente
 	 * exibidos na tablela.
@@ -68,6 +74,11 @@ public class ClienteTabela extends AbstractTableModel {
 		this();
 		clientes.addAll(lista);
 	}
+	
+	public ClienteTabela(ArrayList dados, String[] colunas){  
+	    setLinhas(dados);  
+	    setColunas(colunas);  
+	} 
 
 	// ==============================================================
 	// Métodos implementados.
