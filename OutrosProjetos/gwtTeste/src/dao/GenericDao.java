@@ -53,4 +53,15 @@ public abstract class GenericDao {
 		pstmt.execute();
 		pstmt.close();
 	}
+	
+	protected void selectNome(String selectNome,Object id, Object... parametros) throws SQLException{
+		PreparedStatement pstmt = getConnection().prepareStatement(selectNome);
+
+		for (int i = 0; i < parametros.length; i++) {
+			pstmt.setObject(i + 1, parametros[i]);
+		}
+		pstmt.setObject(parametros.length + 1, id);
+		pstmt.execute();
+		pstmt.close();		
+	}
 }

@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
 import model.entity.Cliente;
@@ -38,13 +39,25 @@ import model.entity.Cliente;
 public class ClienteTabela extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
-	private ArrayList linhas = null;  
-    private String [] colunas = null;  
-    public String[] getColunas() {return colunas;}  
-    public ArrayList getLinhas() {return linhas;}  
-    public void setColunas(String[] strings) {colunas = strings;}  
-    public void setLinhas(ArrayList list) {linhas = list;}  
-  
+	private ArrayList linhas = null;
+	private String[] colunas = null;
+
+	public String[] getColunas() {
+		return colunas;
+	}
+
+	public ArrayList getLinhas() {
+		return linhas;
+	}
+
+	public void setColunas(String[] strings) {
+		colunas = strings;
+	}
+
+	public void setLinhas(ArrayList list) {
+		linhas = list;
+	}
+
 	/**
 	 * Essa lista armazenará os objetos do tipo {@link Cliente} atualmente
 	 * exibidos na tablela.
@@ -74,11 +87,11 @@ public class ClienteTabela extends AbstractTableModel {
 		this();
 		clientes.addAll(lista);
 	}
-	
-	public ClienteTabela(ArrayList dados, String[] colunas){  
-	    setLinhas(dados);  
-	    setColunas(colunas);  
-	} 
+
+	public ClienteTabela(ArrayList dados, String[] colunas) {
+		setLinhas(dados);
+		setColunas(colunas);
+	}
 
 	// ==============================================================
 	// Métodos implementados.
@@ -93,8 +106,12 @@ public class ClienteTabela extends AbstractTableModel {
 	// retorno o números de colunas
 	@Override
 	public int getColumnCount() {
-		return 10;
+		return 16;
 	}
+
+	// public void setAddRows(){
+	// fireTableRowsInserted(0, 20);
+	// }
 
 	@Override
 	public String getColumnName(int coluna) {
@@ -110,6 +127,28 @@ public class ClienteTabela extends AbstractTableModel {
 			return "Data de Nascimento";
 		case 4:
 			return "CPF";
+		case 5:
+			return "RG";
+		case 6:
+			return "Endereço";
+		case 7:
+			return "Bairro";
+		case 8:
+			return "Cidade";
+		case 9:
+			return "Estado";
+		case 10:
+			return "CEP";
+		case 11:
+			return "Telefone";
+		case 12:
+			return "Celular";
+		case 13:
+			return "Sexo";
+		case 14:
+			return "Naturalidade";
+		case 15:
+			return "Est. Civil";
 		default:
 			return "";
 		}
@@ -125,8 +164,8 @@ public class ClienteTabela extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int linha, int coluna) {
 		// vai retornar o valor de determinada célula. A linha representa a
-		// posição do Cliente na nossa lista e a coluna vai ser: 1 - nome, 2 -
-		// sobrenome e 3 - apelido
+		// posição do Cliente na nossa lista e a coluna vai ser: 1 - id, 2 -
+		// data de cadastro e 3 - nome
 		// primeiro vamos pegar o Cliente da linha
 		Cliente c = clientes.get(linha);
 		// façamos um switch
@@ -141,31 +180,36 @@ public class ClienteTabela extends AbstractTableModel {
 			return c.getDataNascimento();
 		case 4:
 			return c.getCpf();
-			// case 6:
-			// return c.getApelido();
-			// case 7:
-			// return c.getApelido();
-			// case 8:
-			// return c.getApelido();
-			// case 9:
-			// return c.getApelido();
-			// case 10:
-			// return c.getApelido();
-			// case 11:
-			// return c.getApelido();
-			// case 12:
-			// return c.getApelido();
-			// case 13:
-			// return c.getApelido();
-			// case 14:
-			// return c.getApelido();
-			// case 15:
-			// return c.getApelido();
-			// case 16:
-			// return c.getApelido();
+		case 5:
+			return c.getRg();
+		case 6:
+			return c.getEndereco();
+		case 7:
+			return c.getBairro();
+		case 8:
+			return c.getCidade();
+		case 9:
+			return c.getEstado();
+		case 10:
+			return c.getCep();
+		case 11:
+			return c.getTelefone();
+		case 12:
+			return c.getCelular();
+		case 13:
+			return c.getSexo();
+		case 14:
+			return c.getNaturalidade();
+		case 15:
+			return c.getEstadoCivil();
 		default:
 			return null;
 		}
+	}
+
+	public Cliente cliente(int linha) {
+		Cliente c = clientes.get(linha);
+		return c;
 	}
 
 	@Override
@@ -209,19 +253,6 @@ public class ClienteTabela extends AbstractTableModel {
 		}
 	}
 
-	// public Date formatarData(String data) throws Exception {
-	// if (data == null || data.equals(""))
-	// return null;
-	// Date date = null;
-	// try {
-	// DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-	// date = (java.util.Date) formatter.parse(data);
-	// } catch (ParseException e) {
-	// throw e;
-	// }
-	// return date;
-	// }
-
 	@Override
 	public void setValueAt(Object valor, int linha, int coluna) {
 		// aqui devemos atualizar o valor de nossos Clientes
@@ -230,19 +261,61 @@ public class ClienteTabela extends AbstractTableModel {
 		// e vemos o que será atualizado
 		switch (coluna) {
 		case 0:
-			c.setNome(valor.toString());
+			// c.setNome(valor.toString());
 			break;
 		case 1:
-			c.setDataNascimento(valor.toString());
+			// c.setDa(valor.toString());
 			break;
 		case 2:
+			c.setNome(valor.toString());
+			break;
+		case 3:
+			c.setDataNascimento(valor.toString());
+			break;
+		case 4:
 			c.setCpf(valor.toString());
 			break;
+		case 5:
+			c.setRg(valor.toString());
+			break;
+		case 6:
+			c.setEndereco(valor.toString());
+			break;
+		case 7:
+			c.setBairro(valor.toString());
+			break;
+		case 8:
+			c.setCidade(valor.toString());
+			break;
+		case 9:
+			c.setEstado(valor.toString());
+			break;
+		case 10:
+			c.setCep(valor.toString());
+			break;
+		case 11:
+			c.setTelefone(valor.toString());
+			break;
+		case 12:
+			c.setCelular(valor.toString());
+			break;
+		case 13:
+			c.setSexo(valor.toString());
+			break;
+		case 14:
+			c.setNaturalidade(valor.toString());
+			break;
+		case 15:
+			c.setEstadoCivil(valor.toString());
+			break;
 		}
-		// é importante notificar os listeners a cada alteração
-		fireTableDataChanged();
-	}
 
+		// é importante notificar os listeners a cada alteração
+		// fireTableDataChanged();
+		// agora mostra as celular que foram alteradas, linha e coluna.
+		fireTableCellUpdated(linha, coluna);
+	}
+	
 	// ==============================================================
 	// Até aqui seria o mínimo necessário para um TableModel funcional, mas
 	// ainda não há métodos para adicionar, remover ou resgatar objetos. Vamos
@@ -281,8 +354,12 @@ public class ClienteTabela extends AbstractTableModel {
 	 */
 	public void adicionaLista(List<Cliente> lista) {
 		int i = clientes.size();
-		clientes.addAll(lista);
-		fireTableRowsInserted(i, i + lista.size());
+		if (lista.size() == i) {
+
+		} else {
+			clientes.addAll(lista);
+			fireTableRowsInserted(i, i + lista.size());
+		}
 	}
 
 	/**
@@ -294,4 +371,12 @@ public class ClienteTabela extends AbstractTableModel {
 		fireTableRowsDeleted(0, i - 1);
 	}
 
+	public boolean buscaNome(String nome) {
+		return clientes.contains(nome);
+	}
+
+	public void inserir(Cliente c) {
+		clientes.add(c);
+		fireTableDataChanged();
+	}
 }

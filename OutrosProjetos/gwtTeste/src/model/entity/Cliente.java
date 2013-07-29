@@ -22,31 +22,63 @@ public class Cliente implements Comparable<Cliente>, Serializable {
 	private String naturalidade;
 	private String estadoCivil;
 
-	// public Cliente() {
-	// }
-	//
-	// public Cliente(long id, String dataCadastro, String nome,
-	// Date dataNascimento, String cpf, String rg, String endereco,
-	// String bairro, String cidade, String estado, String cep,
-	// String telefone, String celular, String sexo, String naturalidade,
-	// String estadoCivil) {
-	// this.id = id;
-	// this.dataCadastro = dataCadastro;
-	// this.nome = nome;
-	// this.dataNascimento = dataNascimento;
-	// this.cpf = cpf;
-	// this.rg = rg;
-	// this.endereco = endereco;
-	// this.bairro = bairro;
-	// this.cidade = cidade;
-	// this.estado = estado;
-	// this.cep = cep;
-	// this.telefone = telefone;
-	// this.celular = celular;
-	// this.sexo = sexo;
-	// this.naturalidade = naturalidade;
-	// this.estadoCivil = estadoCivil;
-	// }
+	public Cliente() {
+	}
+
+	public Cliente(long id, String dataCadastro, String nome,
+			String dataNascimento, String cpf, String rg, String endereco,
+			String bairro, String cidade, String estado, String cep,
+			String telefone, String celular, String sexo, String naturalidade,
+			String estadoCivil) {
+		this.id = id;
+		this.dataCadastro = dataCadastro;
+		this.nome = nome;
+		this.dataNascimento = dataNascimento;
+		this.cpf = cpf;
+		this.rg = rg;
+		this.endereco = endereco;
+		this.bairro = bairro;
+		this.cidade = cidade;
+		this.estado = estado;
+		this.cep = cep;
+		this.telefone = telefone;
+		this.celular = celular;
+		this.sexo = sexo;
+		this.naturalidade = naturalidade;
+		this.estadoCivil = estadoCivil;
+	}
+
+	public Cliente(String nome, String dataNascimento, String cpf, String rg,
+			String endereco, String bairro, String cidade, String estado,
+			String cep, String telefone, String celular, String sexo,
+			String naturalidade, String estadoCivil) {
+		this.nome = nome;
+		this.dataNascimento = dataNascimento;
+		this.cpf = cpf;
+		this.rg = rg;
+		this.endereco = endereco;
+		this.bairro = bairro;
+		this.cidade = cidade;
+		this.estado = estado;
+		this.cep = cep;
+		this.telefone = telefone;
+		this.celular = celular;
+		this.sexo = sexo;
+		this.naturalidade = naturalidade;
+		this.estadoCivil = estadoCivil;
+	}
+//TODO----????
+	public String formatarData(String data) {
+		if (data.contains("-")) {
+			String dataA = data.replace('-', '/');
+			String dataInv = "";
+			dataInv = dataA.substring(8, 10) + "/" + dataA.substring(5, 7)
+					+ "/" + dataA.substring(0, 4);
+			System.out.println("????????????????????"+dataInv);
+			return dataInv;
+		}
+		return null;
+	}
 
 	// Get and Set
 	public Long getId() {
@@ -222,19 +254,25 @@ public class Cliente implements Comparable<Cliente>, Serializable {
 		int result = 1;
 		result = prime * result + ((bairro == null) ? 0 : bairro.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result	+ ((celular == null) ? 0 : celular.hashCode());
-		result = prime * result	+ ((cep == null) ? 0 : cep.hashCode());
-		result = prime * result	+ ((cidade == null) ? 0 : cidade.hashCode());
-		result = prime * result	+ ((cpf == null) ? 0 : cpf.hashCode());
-		result = prime * result	+ ((dataCadastro == null) ? 0 : dataCadastro.hashCode());
-		result = prime * result	+ ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
-		result = prime * result	+ ((endereco == null) ? 0 : endereco.hashCode());
-		result = prime * result	+ ((estado == null) ? 0 : estado.hashCode());
-		result = prime * result	+ ((estadoCivil == null) ? 0 : estadoCivil.hashCode());
-		result = prime * result	+ ((naturalidade == null) ? 0 : naturalidade.hashCode());
-		result = prime * result	+ ((rg == null) ? 0 : rg.hashCode());
-		result = prime * result	+ ((sexo == null) ? 0 : sexo.hashCode());
-		result = prime * result	+ ((telefone == null) ? 0 : telefone.hashCode());
+		result = prime * result + ((celular == null) ? 0 : celular.hashCode());
+		result = prime * result + ((cep == null) ? 0 : cep.hashCode());
+		result = prime * result + ((cidade == null) ? 0 : cidade.hashCode());
+		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		result = prime * result
+				+ ((dataCadastro == null) ? 0 : dataCadastro.hashCode());
+		result = prime * result
+				+ ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
+		result = prime * result
+				+ ((endereco == null) ? 0 : endereco.hashCode());
+		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
+		result = prime * result
+				+ ((estadoCivil == null) ? 0 : estadoCivil.hashCode());
+		result = prime * result
+				+ ((naturalidade == null) ? 0 : naturalidade.hashCode());
+		result = prime * result + ((rg == null) ? 0 : rg.hashCode());
+		result = prime * result + ((sexo == null) ? 0 : sexo.hashCode());
+		result = prime * result
+				+ ((telefone == null) ? 0 : telefone.hashCode());
 		return result;
 	}
 
@@ -248,12 +286,15 @@ public class Cliente implements Comparable<Cliente>, Serializable {
 		}
 		Cliente other = (Cliente) obj;
 		return nome.equals(other.nome) && bairro.equals(other.bairro)
-				&& celular.equals(other.celular)&& cep.equals(other.cep)
-				&& cidade.equals(other.cidade)&& cpf.equals(other.cpf)
-				&& dataCadastro.equals(other.dataCadastro)&& dataNascimento.equals(other.dataNascimento)
-				&& endereco.equals(other.endereco)&& estado.equals(other.estado)
-				&& estadoCivil.equals(other.estadoCivil)&& id == other.id
-				&& naturalidade.equals(other.naturalidade)&& rg.equals(other.rg)
-				&& sexo.equals(other.sexo)&& telefone.equals(other.telefone);
+				&& celular.equals(other.celular) && cep.equals(other.cep)
+				&& cidade.equals(other.cidade) && cpf.equals(other.cpf)
+				&& dataCadastro.equals(other.dataCadastro)
+				&& dataNascimento.equals(other.dataNascimento)
+				&& endereco.equals(other.endereco)
+				&& estado.equals(other.estado)
+				&& estadoCivil.equals(other.estadoCivil) && id == other.id
+				&& naturalidade.equals(other.naturalidade)
+				&& rg.equals(other.rg) && sexo.equals(other.sexo)
+				&& telefone.equals(other.telefone);
 	}
 }

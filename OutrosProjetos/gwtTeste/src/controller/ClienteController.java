@@ -16,45 +16,68 @@ import java.util.List;
 // classe ClienteController faz a comunicação entre o banco de dados e a interface
 public class ClienteController {
 
-//	private Date formatarData(String data) {
-////		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-////		return new Date(formatter.parse(data).getTime());
-////		String dataNasc = data.replace('/',	'-');
-////		String dataNascInv = "";
-////		//
-////		dataNascInv = "" + dataNasc.substring(6, 10)
-////				+ dataNasc.substring(2, 6) + dataNasc.substring(0, 1);
-//		System.out.println(data);
-//		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-//		Date d; 
-//		try {
-//			System.out.println(dateFormat.parse(data));
-//			return d = dateFormat.parse(data);
-//		} catch (Exception e) {
-//			JOptionPane.showMessageDialog(null, "Erro ao formatar a data");
-//			return null;
-//		}
-//		
-//	}
 
-	public void salvarNome(String nome, String dataNascimento, String cpf)
-			throws SQLException, ParseException {
-		Cliente cliente = new Cliente();
-		cliente.setNome(nome);
-		cliente.setDataNascimento(dataNascimento);
-		cliente.setCpf(cpf);
-		new ClienteDao().salvar(cliente);
+	private String dataAtual() {
+		Date data = new Date(System.currentTimeMillis());
+		SimpleDateFormat formatarDate = new SimpleDateFormat("yyyy-MM-dd");
+		String dataAtual = formatarDate.format(data);
+		System.out.println(dataAtual);
+		return dataAtual;
 	}
 
-	public void salvar(String dataCadastro, String nome, String dataNascimento,
-			String cpf, String rg, String endereco, String bairro,
-			String cidade, String estado, String cep, String telefone,
-			String celular, String sexo, String naturalidade, String estadoCivil)
+	private String formatarDataInv(String data) {
+		if(data.contains("-")){
+			int ano = Integer.parseInt(data.substring(0, 4));
+			int mes = Integer.parseInt(data.substring(3, 5));
+			int dia = Integer.parseInt(data.substring(6, 8));
+			data = ano + "-" + mes + "-" + dia;
+			System.out.println("com ----");
+		}else{
+			int dia = Integer.parseInt(data.substring(0, 2));
+			int mes = Integer.parseInt(data.substring(3, 5));
+			int ano = Integer.parseInt(data.substring(6, 10));
+			data = ano + "-" + mes + "-" + dia;
+			System.out.println("com /////");
+		}
+		return data;
+	}
+
+	public void salvar(String nome, String dataNascimento, String cpf,
+			String rg, String endereco, String bairro, String cidade,
+			String estado, String cep, String telefone, String celular,
+			String sexo, String naturalidade, String estadoCivil)
 			throws SQLException, ParseException {
 		Cliente cliente = new Cliente();
 		cliente.setNome(nome);
-		cliente.setDataCadastro(dataCadastro);
-		cliente.setDataNascimento(dataNascimento);
+		cliente.setDataCadastro(dataAtual());
+		cliente.setDataNascimento(formatarDataInv(dataNascimento));
+		cliente.setCpf(cpf);
+		cliente.setRg(rg);
+		cliente.setEndereco(endereco);
+		cliente.setBairro(bairro);
+		cliente.setCidade(cidade);
+		cliente.setCep(cep);
+		cliente.setTelefone(telefone);
+		cliente.setCelular(celular);
+		cliente.setSexo(sexo);
+		cliente.setNaturalidade(naturalidade);
+		cliente.setEstadoCivil(estadoCivil);
+		cliente.setEstado(estado);
+
+		new ClienteDao().salvar(cliente);
+	}
+	
+	public void salvarFull(long id, String dataCadastro, String nome, String dataNascimento, String cpf,
+			String rg, String endereco, String bairro, String cidade,
+			String estado, String cep, String telefone, String celular,
+			String sexo, String naturalidade, String estadoCivil)
+			throws SQLException, ParseException {
+		Cliente cliente = new Cliente();
+		cliente.setId(id);
+		cliente.setDataCadastro(dataAtual());
+		cliente.setNome(nome);
+		cliente.setDataCadastro(dataAtual());
+		cliente.setDataNascimento(formatarDataInv(dataNascimento));
 		cliente.setCpf(cpf);
 		cliente.setRg(rg);
 		cliente.setEndereco(endereco);
@@ -71,8 +94,8 @@ public class ClienteController {
 		new ClienteDao().salvar(cliente);
 	}
 
-	public void alterarNome(long id, String nome, String dataNascimento, String cpf)
-			throws ParseException, SQLException {
+	public void alterarNome(long id, String nome, String dataNascimento,
+			String cpf) throws ParseException, SQLException {
 
 		Cliente cliente = new Cliente();
 		cliente.setId(id);
@@ -82,16 +105,15 @@ public class ClienteController {
 		new ClienteDao().alterar(cliente);
 	}
 
-	public void alterar(long id, String dataCadastro, String nome,
-			String dataNascimento, String cpf, String rg, String endereco,
-			String bairro, String cidade, String estado, String cep,
-			String telefone, String celular, String sexo, String naturalidade,
-			String estadoCivil) throws ParseException, SQLException {
+	public void alterar(long id, String nome, String dataNascimento,
+			String cpf, String rg, String endereco, String bairro,
+			String cidade, String estado, String cep, String telefone,
+			String celular, String sexo, String naturalidade, String estadoCivil)
+			throws ParseException, SQLException {
 		Cliente cliente = new Cliente();
 		cliente.setId(id);
 		cliente.setNome(nome);
-		cliente.setDataCadastro(dataCadastro);
-		cliente.setDataNascimento(dataNascimento);
+		cliente.setDataNascimento(formatarDataInv(dataNascimento));
 		cliente.setCpf(cpf);
 		cliente.setRg(rg);
 		cliente.setEndereco(endereco);
@@ -119,12 +141,12 @@ public class ClienteController {
 		return null;
 	}
 
-	public void excluir(long id) throws SQLException {
+	public void excluir(Object id) throws SQLException {
 		new ClienteDao().excluir(id);
 	}
 
-	public Cliente buscaClientePorNome(String nome) throws SQLException {
-		ClienteDao dao = new ClienteDao();
-		return dao.findByName(nome);
-	}
+//	public Cliente buscaClientePorNome(String nome) throws SQLException {
+//		ClienteDao dao = new ClienteDao();
+//		return dao.findByName(nome);
+//	}
 }
