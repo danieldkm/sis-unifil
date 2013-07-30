@@ -3,8 +3,8 @@ package controller;
 import javax.swing.*;
 
 import dao.ClienteDao;
+import entity.Cliente;
 
-import model.entity.Cliente;
 
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -155,4 +155,10 @@ public class ClienteController {
 		ClienteDao dao = new ClienteDao();
 		return dao.findById(id);
 	}
+	
+	public Cliente buscaClientePorCpf(String cpf) throws SQLException {
+		ClienteDao dao = new ClienteDao();
+		return dao.findByCpf(cpf);
+	}
+	
 }

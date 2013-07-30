@@ -27,10 +27,10 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
 
-import model.entity.Cliente;
 import tabela.ClienteTabela;
 import controller.ClienteController;
 import dao.ClienteDao;
+import entity.Cliente;
 
 public class BuscarClienteFrame extends JFrame implements TableModelListener {
 
@@ -89,7 +89,7 @@ public class BuscarClienteFrame extends JFrame implements TableModelListener {
 		frmBuscarCliente.setTitle("Localizar Cliente");
 		frmBuscarCliente.setBounds(100, 100, 800, 600);
 		// finaliza o programa**
-		frmBuscarCliente.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmBuscarCliente.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmBuscarCliente.getContentPane().setLayout(null);
 
 		// /Table////
@@ -220,44 +220,51 @@ public class BuscarClienteFrame extends JFrame implements TableModelListener {
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				frmBuscarCliente.dispose();
-				clienteFrame = new ClienteFrame();
-				String codigo = modelo.getValueAt(
-						tbBuscarClientes.getSelectedRow(), 0).toString();
-				String nome = modelo.getValueAt(
-						tbBuscarClientes.getSelectedRow(), 3).toString();
-				String dataCadastro = modelo.getValueAt(
-						tbBuscarClientes.getSelectedRow(), 1).toString();
-				String dataNascimento = modelo.getValueAt(
-						tbBuscarClientes.getSelectedRow(), 4).toString();
-				String cpf = modelo.getValueAt(
-						tbBuscarClientes.getSelectedRow(), 5).toString();
-				String rg = modelo.getValueAt(
-						tbBuscarClientes.getSelectedRow(), 6).toString();
-				String endereco = modelo.getValueAt(
-						tbBuscarClientes.getSelectedRow(), 7).toString();
-				String bairro = modelo.getValueAt(
-						tbBuscarClientes.getSelectedRow(), 8).toString();
-				String cidade = modelo.getValueAt(
-						tbBuscarClientes.getSelectedRow(), 9).toString();
-				String estado = modelo.getValueAt(
-						tbBuscarClientes.getSelectedRow(), 10).toString();
-				String cep = modelo.getValueAt(
-						tbBuscarClientes.getSelectedRow(), 11).toString();
-				String telefone = modelo.getValueAt(
-						tbBuscarClientes.getSelectedRow(), 12).toString();
-				String celular = modelo.getValueAt(
-						tbBuscarClientes.getSelectedRow(), 13).toString();
-				String sexo = modelo.getValueAt(
-						tbBuscarClientes.getSelectedRow(), 14).toString();
-				String natu = modelo.getValueAt(
-						tbBuscarClientes.getSelectedRow(), 15).toString();
-				String estCivil = modelo.getValueAt(
-						tbBuscarClientes.getSelectedRow(), 16).toString();
-				clienteFrame.metodo(codigo, nome, dataCadastro, dataNascimento,
-						cpf, rg, endereco, bairro, cidade, estado, cep,
-						telefone, celular, sexo, natu, estCivil);
+				if (tbBuscarClientes.getSelectedRow() < 0) {
+					JOptionPane.showMessageDialog(null,
+							"Seleciona uma linha para voltar!!");
+				} else {
+					frmBuscarCliente.dispose();
+					clienteFrame = new ClienteFrame();
+					String codigo = modelo.getValueAt(
+							tbBuscarClientes.getSelectedRow(), 0).toString();
+					String nome = modelo.getValueAt(
+							tbBuscarClientes.getSelectedRow(), 3).toString();
+					String dataCadastro = modelo.getValueAt(
+							tbBuscarClientes.getSelectedRow(), 1).toString();
+					String dataNascimento = modelo.getValueAt(
+							tbBuscarClientes.getSelectedRow(), 4).toString();
+					String cpf = modelo.getValueAt(
+							tbBuscarClientes.getSelectedRow(), 5).toString();
+					String rg = modelo.getValueAt(
+							tbBuscarClientes.getSelectedRow(), 6).toString();
+					String endereco = modelo.getValueAt(
+							tbBuscarClientes.getSelectedRow(), 7).toString();
+					String bairro = modelo.getValueAt(
+							tbBuscarClientes.getSelectedRow(), 8).toString();
+					String cidade = modelo.getValueAt(
+							tbBuscarClientes.getSelectedRow(), 9).toString();
+					String estado = modelo.getValueAt(
+							tbBuscarClientes.getSelectedRow(), 10).toString();
+					String cep = modelo.getValueAt(
+							tbBuscarClientes.getSelectedRow(), 11).toString();
+					String telefone = modelo.getValueAt(
+							tbBuscarClientes.getSelectedRow(), 12).toString();
+					String celular = modelo.getValueAt(
+							tbBuscarClientes.getSelectedRow(), 13).toString();
+					String sexo = modelo.getValueAt(
+							tbBuscarClientes.getSelectedRow(), 14).toString();
+					String natu = modelo.getValueAt(
+							tbBuscarClientes.getSelectedRow(), 15).toString();
+					String estCivil = modelo.getValueAt(
+							tbBuscarClientes.getSelectedRow(), 16).toString();
+					clienteFrame.metodo(codigo, nome, dataCadastro,
+							dataNascimento, cpf, rg, endereco, bairro, cidade,
+							estado, cep, telefone, celular, sexo, natu,
+							estCivil);
+				}
 			}
+
 		});
 		btnVoltar.setBounds(489, 12, 91, 46);
 		frmBuscarCliente.getContentPane().add(btnVoltar);

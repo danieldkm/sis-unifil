@@ -1,4 +1,4 @@
-package model.entity;
+package entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -70,18 +70,18 @@ public class Cliente implements Comparable<Cliente>, Serializable {
 		this.estadoCivil = estadoCivil;
 	}
 
-	// TODO----????
-	public String formatarData(String data) {
-		if (data.contains("-")) {
-			String dataA = data.replace('-', '/');
-			String dataInv = "";
-			dataInv = dataA.substring(8, 10) + "/" + dataA.substring(5, 7)
-					+ "/" + dataA.substring(0, 4);
-			System.out.println("????????????????????" + dataInv);
-			return dataInv;
-		}
-		return null;
-	}
+//	// TODO----????
+//	public String formatarData(String data) {
+//		if (data.contains("-")) {
+//			String dataA = data.replace('-', '/');
+//			String dataInv = "";
+//			dataInv = dataA.substring(8, 10) + "/" + dataA.substring(5, 7)
+//					+ "/" + dataA.substring(0, 4);
+//			System.out.println("????????????????????" + dataInv);
+//			return dataInv;
+//		}
+//		return null;
+//	}
 
 	// Get and Set
 	public Long getId() {

@@ -13,7 +13,8 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
-import model.entity.Cliente;
+import entity.Cliente;
+
 
 /**
  * A interface {@link TableModel} define 9 métodos, sendo que 2 deles cuidam da

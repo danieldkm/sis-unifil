@@ -10,9 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.entity.Cliente;
-//Criamos a classe GenericDao para ser herdadas pelos demais dao’s, assim, 
-//vamos agora criar a classe ClienteDao, onde terão os métodos mais específicos da classe
+import entity.Cliente;
 
 public class ClienteDao extends GenericDao {
 
@@ -36,14 +34,14 @@ public class ClienteDao extends GenericDao {
 				+ dataA.substring(0, 4);
 		return dataInv;
 	}
-	
+
 	public String formatarDataInv(String data) {
 		if (data.contains("-")) {
 			String dataA = data.replace('-', '/');
 			String dataInv = "";
 			dataInv = dataA.substring(8, 10) + "/" + dataA.substring(5, 7)
 					+ "/" + dataA.substring(0, 4);
-			System.out.println("????????????????????"+dataInv);
+			System.out.println("????????????????????" + dataInv);
 			return dataInv;
 		}
 		return null;
@@ -53,9 +51,9 @@ public class ClienteDao extends GenericDao {
 		try {
 			String insert = "INSERT INTO CLIENTE(data_cadastro, data_ultimaAlteracao, nome, data_nasc, cpf, rg, endereco, bairro, cidade, cep, telefone, "
 					+ "celular, sexo, naturalidade, est_civil, estado) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-			save(insert, formatarDataAtual(), formatarDataAtual(),cliente.getNome(),
-					cliente.getDataNascimento(), cliente.getCpf(),
-					cliente.getRg(), cliente.getEndereco(),
+			save(insert, formatarDataAtual(), formatarDataAtual(),
+					cliente.getNome(), cliente.getDataNascimento(),
+					cliente.getCpf(), cliente.getRg(), cliente.getEndereco(),
 					cliente.getBairro(), cliente.getCidade(), cliente.getCep(),
 					cliente.getTelefone(), cliente.getCelular(),
 					cliente.getSexo(), cliente.getNaturalidade(),
@@ -72,9 +70,9 @@ public class ClienteDao extends GenericDao {
 					+ "endereco = ?, bairro = ?, cidade = ?, cep = ?, telefone = ?, "
 					+ "celular = ?, sexo = ?, naturalidade = ?, est_civil = ?, estado = ? "
 					+ "WHERE cod_cliente = ?";
-			update(update, cliente.getId(), cliente.getDataUltimaAlteracao(), cliente.getNome(),
-					cliente.getDataNascimento(), cliente.getCpf(),
-					cliente.getRg(), cliente.getEndereco(),
+			update(update, cliente.getId(), cliente.getDataUltimaAlteracao(),
+					cliente.getNome(), cliente.getDataNascimento(),
+					cliente.getCpf(), cliente.getRg(), cliente.getEndereco(),
 					cliente.getBairro(), cliente.getCidade(), cliente.getCep(),
 					cliente.getTelefone(), cliente.getCelular(),
 					cliente.getSexo(), cliente.getNaturalidade(),
@@ -139,7 +137,7 @@ public class ClienteDao extends GenericDao {
 			String sql = "SELECT MAX(cod_cliente) AS cod_cliente FROM CLIENTE";
 			PreparedStatement stmt = getConnection().prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
-			rs.next(); 
+			rs.next();
 			long id = rs.getLong("cod_cliente") + 1;
 			return id;
 		} catch (Exception e) {
@@ -147,6 +145,7 @@ public class ClienteDao extends GenericDao {
 		}
 		return 0;
 	}
+
 	// public Cliente findByName(String nome) throws SQLException {
 	// String select = "SELECT * FROM CLIENTE WHERE nome = ?";
 	// Cliente cliente = null;
@@ -179,37 +178,71 @@ public class ClienteDao extends GenericDao {
 	// stmt.close();
 	// return cliente;
 	// }
-	
-	 public Cliente findById (int id) throws SQLException {
-		 String select = "SELECT * FROM CLIENTE WHERE cod_cliente = ?";
-		 Cliente cliente = null;
-		 PreparedStatement stmt = getConnection().prepareStatement(select);
-		
-		 stmt.setInt(1, id);
-		 ResultSet rs = stmt.executeQuery();
-		
-		 while (rs.next()) {
-		 cliente = new Cliente();
-		 cliente.setId(rs.getLong("cod_cliente"));
-		 cliente.setNome(rs.getString("nome"));
-		 cliente.setDataCadastro(rs.getString("data_cadastro"));
-		 cliente.setDataNascimento(rs.getString("data_nasc"));
-		 cliente.setCpf(rs.getString("cpf"));
-		 cliente.setRg(rs.getString("rg"));
-		 cliente.setEndereco(rs.getString("endereco"));
-		 cliente.setBairro(rs.getString("bairro"));
-		 cliente.setCidade(rs.getString("cidade"));
-		 cliente.setCep(rs.getString("cep"));
-		 cliente.setTelefone(rs.getString("telefone"));
-		 cliente.setCelular(rs.getString("celular"));
-		 cliente.setSexo(rs.getString("sexo"));
-		 cliente.setNaturalidade(rs.getString("naturalidade"));
-		 cliente.setEstadoCivil(rs.getString("est_civil"));
-		 cliente.setEstado(rs.getString("estado"));
-		 }
-		
-		 rs.close();
-		 stmt.close();
-		 return cliente;
-		 }
+
+	public Cliente findById(int id) throws SQLException {
+		String select = "SELECT * FROM CLIENTE WHERE cod_cliente = ?";
+		Cliente cliente = null;
+		PreparedStatement stmt = getConnection().prepareStatement(select);
+
+		stmt.setInt(1, id);
+		ResultSet rs = stmt.executeQuery();
+
+		while (rs.next()) {
+			cliente = new Cliente();
+			cliente.setId(rs.getLong("cod_cliente"));
+			cliente.setNome(rs.getString("nome"));
+			cliente.setDataCadastro(rs.getString("data_cadastro"));
+			cliente.setDataNascimento(rs.getString("data_nasc"));
+			cliente.setCpf(rs.getString("cpf"));
+			cliente.setRg(rs.getString("rg"));
+			cliente.setEndereco(rs.getString("endereco"));
+			cliente.setBairro(rs.getString("bairro"));
+			cliente.setCidade(rs.getString("cidade"));
+			cliente.setCep(rs.getString("cep"));
+			cliente.setTelefone(rs.getString("telefone"));
+			cliente.setCelular(rs.getString("celular"));
+			cliente.setSexo(rs.getString("sexo"));
+			cliente.setNaturalidade(rs.getString("naturalidade"));
+			cliente.setEstadoCivil(rs.getString("est_civil"));
+			cliente.setEstado(rs.getString("estado"));
+		}
+
+		rs.close();
+		stmt.close();
+		return cliente;
+	}
+
+	public Cliente findByCpf(String cpf) throws SQLException {
+		String select = "SELECT * FROM CLIENTE WHERE cpf = ?";
+		Cliente cliente = null;
+		PreparedStatement stmt = getConnection().prepareStatement(select);
+
+		stmt.setString(1, cpf);
+		ResultSet rs = stmt.executeQuery();
+
+		while (rs.next()) {
+			cliente = new Cliente();
+			cliente.setId(rs.getLong("cod_cliente"));
+			cliente.setNome(rs.getString("nome"));
+			cliente.setDataCadastro(rs.getString("data_cadastro"));
+			cliente.setDataNascimento(rs.getString("data_nasc"));
+			cliente.setCpf(rs.getString("cpf"));
+			cliente.setRg(rs.getString("rg"));
+			cliente.setEndereco(rs.getString("endereco"));
+			cliente.setBairro(rs.getString("bairro"));
+			cliente.setCidade(rs.getString("cidade"));
+			cliente.setCep(rs.getString("cep"));
+			cliente.setTelefone(rs.getString("telefone"));
+			cliente.setCelular(rs.getString("celular"));
+			cliente.setSexo(rs.getString("sexo"));
+			cliente.setNaturalidade(rs.getString("naturalidade"));
+			cliente.setEstadoCivil(rs.getString("est_civil"));
+			cliente.setEstado(rs.getString("estado"));
+		}
+
+		rs.close();
+		stmt.close();
+		return cliente;
+	}
+
 }

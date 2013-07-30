@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.naming.LimitExceededException;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,12 +20,17 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.LookAndFeel;
+import javax.swing.UIManager;
 import javax.swing.text.MaskFormatter;
+
+import model.ValidaçãoCPF;
 
 import controller.ClienteController;
 
 public class ClienteFrame extends JFrame {
-
+	 private UIManager.LookAndFeelInfo[] looks =   
+			 UIManager.getInstalledLookAndFeels(); 
 	private JFrame frmCadastro;
 	private JTextField txtClienteId;
 	private JTextField txtClienteNome;
@@ -108,127 +114,127 @@ public class ClienteFrame extends JFrame {
 	private void initialize() {
 		frmCadastro = new JFrame();
 		frmCadastro.setTitle("Cadastro de Cliente");
-		frmCadastro.setBounds(100, 100, 642, 432);
-		frmCadastro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmCadastro.setBounds(100, 100, 698, 392);
+		frmCadastro.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		// Text field's
 		txtClienteId = new JTextField();
-		txtClienteId.setBounds(65, 11, 86, 20);
+		txtClienteId.setBounds(81, 11, 86, 20);
 		txtClienteId.setEditable(false);
 		txtClienteId.setColumns(10);
 
 		txtClienteNome = new JTextField();
-		txtClienteNome.setBounds(65, 52, 332, 20);
+		txtClienteNome.setBounds(81, 52, 332, 20);
 		txtClienteNome.setColumns(10);
 
 		txtClienteDataNascimento = new JFormattedTextField(formatData);
 		txtClienteDataNascimento.setText("(  )     -     ");
-		txtClienteDataNascimento.setBounds(513, 52, 106, 20);
+		txtClienteDataNascimento.setBounds(561, 52, 118, 20);
 		txtClienteDataNascimento.setColumns(10);
 
 		txtClienteCPF = new JFormattedTextField(formatCPF);
-		txtClienteCPF.setBounds(65, 87, 162, 20);
+		txtClienteCPF.setBounds(81, 80, 162, 20);
 		txtClienteCPF.setColumns(10);
 
 		txtClienteRG = new JFormattedTextField(formatRG);
-		txtClienteRG.setBounds(282, 87, 115, 20);
+		txtClienteRG.setBounds(276, 80, 137, 20);
 		txtClienteRG.setColumns(10);
 
 		txtClienteBairro = new JTextField();
-		txtClienteBairro.setBounds(513, 122, 106, 20);
+		txtClienteBairro.setBounds(561, 108, 118, 20);
 		txtClienteBairro.setColumns(10);
 
 		txtClienteEndereco = new JTextField();
-		txtClienteEndereco.setBounds(65, 122, 332, 20);
+		txtClienteEndereco.setBounds(81, 108, 332, 20);
 		txtClienteEndereco.setColumns(10);
 
 		txtClienteCEP = new JFormattedTextField(formatCEP);
-		txtClienteCEP.setBounds(513, 87, 106, 20);
+		txtClienteCEP.setBounds(561, 80, 118, 20);
 		txtClienteCEP.setColumns(10);
 
 		txtClienteCidade = new JTextField();
-		txtClienteCidade.setBounds(65, 164, 162, 20);
+		txtClienteCidade.setBounds(81, 136, 162, 20);
 		txtClienteCidade.setColumns(10);
 
 		txtClienteTelefone = new JFormattedTextField(formatTel);
-		txtClienteTelefone.setBounds(65, 207, 162, 20);
+		txtClienteTelefone.setBounds(81, 165, 142, 20);
 		txtClienteTelefone.setColumns(10);
 
 		txtClienteCelular = new JFormattedTextField(formatCel);
-		txtClienteCelular.setBounds(285, 207, 115, 20);
+		txtClienteCelular.setBounds(276, 165, 137, 20);
 		txtClienteCelular.setColumns(10);
 
 		txtClienteProfissao = new JTextField();
-		txtClienteProfissao.setBounds(68, 249, 219, 20);
+		txtClienteProfissao.setBounds(81, 193, 219, 20);
 		txtClienteProfissao.setColumns(10);
 
 		txtClienteNaturalidade = new JTextField();
-		txtClienteNaturalidade.setBounds(368, 249, 256, 20);
+		txtClienteNaturalidade.setBounds(423, 193, 256, 20);
 		txtClienteNaturalidade.setColumns(10);
 
 		txtClienteDataCadastro = new JTextField();
 		txtClienteDataCadastro.setEditable(false);
-		txtClienteDataCadastro.setBounds(513, 11, 86, 20);
+		txtClienteDataCadastro.setBounds(561, 11, 118, 20);
 		txtClienteDataCadastro.setColumns(10);
 		// Label`s
 
 		JLabel lblId = new JLabel("C\u00F3digo");
-		lblId.setBounds(10, 14, 33, 14);
+		lblId.setBounds(10, 14, 61, 14);
 
 		JLabel lblDataDeCadastro = new JLabel("Data de Cadastro");
-		lblDataDeCadastro.setBounds(407, 14, 85, 14);
+		lblDataDeCadastro.setBounds(423, 14, 115, 14);
 
 		JLabel lblNome = new JLabel("Nome");
-		lblNome.setBounds(10, 55, 27, 14);
+		lblNome.setBounds(10, 55, 61, 14);
 
 		JLabel lblDataDeNascimento = new JLabel("Data de Nascimento");
-		lblDataDeNascimento.setBounds(407, 55, 96, 14);
+		lblDataDeNascimento.setBounds(423, 55, 130, 14);
 
 		JLabel lblCpf = new JLabel("CPF");
-		lblCpf.setBounds(10, 90, 19, 14);
+		lblCpf.setBounds(10, 83, 61, 14);
 
 		JLabel lblRg = new JLabel("RG");
-		lblRg.setBounds(237, 90, 14, 14);
+		lblRg.setBounds(253, 83, 50, 14);
 
 		JLabel lblBairro = new JLabel("Bairro");
-		lblBairro.setBounds(407, 125, 28, 14);
+		lblBairro.setBounds(423, 111, 80, 14);
 
 		JLabel lblEndereo = new JLabel("Endere\u00E7o");
-		lblEndereo.setBounds(10, 125, 45, 14);
+		lblEndereo.setBounds(10, 111, 61, 14);
 
 		JLabel lblCep = new JLabel("CEP");
-		lblCep.setBounds(407, 90, 19, 14);
+		lblCep.setBounds(423, 83, 80, 14);
 
 		JLabel lblCidade = new JLabel("Cidade");
-		lblCidade.setBounds(10, 167, 33, 14);
+		lblCidade.setBounds(10, 139, 61, 14);
 
 		JLabel lblUf = new JLabel("UF");
-		lblUf.setBounds(240, 167, 13, 14);
+		lblUf.setBounds(253, 139, 47, 14);
 
 		JLabel lblSexo = new JLabel("Sexo");
-		lblSexo.setBounds(407, 167, 24, 14);
+		lblSexo.setBounds(423, 139, 61, 14);
 
 		JLabel lblTelefone = new JLabel("Telefone");
-		lblTelefone.setBounds(10, 210, 42, 14);
+		lblTelefone.setBounds(10, 168, 61, 14);
 
 		JLabel lblCelular = new JLabel("Celular");
-		lblCelular.setBounds(240, 210, 33, 14);
+		lblCelular.setBounds(230, 168, 47, 14);
 
 		JLabel lblEstCivil = new JLabel("Est. Civil");
-		lblEstCivil.setBounds(407, 210, 41, 14);
+		lblEstCivil.setBounds(423, 168, 80, 14);
 
 		JLabel lblProfisso = new JLabel("Profiss\u00E3o");
-		lblProfisso.setBounds(10, 252, 44, 14);
+		lblProfisso.setBounds(10, 196, 61, 14);
 
 		JLabel lblNaturalidade = new JLabel("Naturalidade");
-		lblNaturalidade.setBounds(297, 252, 61, 14);
+		lblNaturalidade.setBounds(310, 196, 103, 14);
 
 		// Radio Button's
 		rdbtnClienteMasculino = new JRadioButton("Masculino");
-		rdbtnClienteMasculino.setBounds(458, 163, 71, 23);
+		rdbtnClienteMasculino.setBounds(490, 135, 96, 23);
 
 		rdbtnClienteFeminino = new JRadioButton("Feminino");
-		rdbtnClienteFeminino.setBounds(557, 163, 67, 23);
+		rdbtnClienteFeminino.setBounds(588, 135, 79, 23);
 
 		final ButtonGroup myButtonGroup = new ButtonGroup();
 		myButtonGroup.add(rdbtnClienteFeminino);
@@ -236,7 +242,7 @@ public class ClienteFrame extends JFrame {
 
 		// ComboBox
 		cbClienteUF = new JComboBox();
-		cbClienteUF.setBounds(285, 163, 115, 22);
+		cbClienteUF.setBounds(276, 135, 137, 22);
 		cbClienteUF.addItem("AC");
 		cbClienteUF.addItem("AL");
 		cbClienteUF.addItem("AP");
@@ -266,7 +272,7 @@ public class ClienteFrame extends JFrame {
 		cbClienteUF.addItem("TO");
 
 		cbClienteEstCivil = new JComboBox();
-		cbClienteEstCivil.setBounds(513, 206, 111, 22);
+		cbClienteEstCivil.setBounds(556, 164, 123, 22);
 		cbClienteEstCivil.addItem("Solteiro");
 		cbClienteEstCivil.addItem("Casado");
 		cbClienteEstCivil.addItem("Viúvo");
@@ -275,17 +281,25 @@ public class ClienteFrame extends JFrame {
 
 		// Button's
 		btnClienteSalvar = new JButton("Salvar");
-		btnClienteSalvar.setBounds(454, 308, 80, 75);
+		btnClienteSalvar.setBounds(521, 266, 80, 75);
 		// TODO - erro de validação
 		btnClienteSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				clienteController = new ClienteController();
+				// ValidaçãoCPF existe = new ValidaçãoCPF();
+
+				// atributos
 				String estado = (String) cbClienteUF.getSelectedItem();
 				System.out.println("Estado!!! " + estado);
 				String estadoCivil = (String) cbClienteEstCivil
 						.getSelectedItem();
 				System.out.println("Estado civil! " + estadoCivil);
 				String sexo = "";
+				String cpf = txtClienteCPF.getText().replace(".", "");
+				cpf = cpf.replace("-", "");
+				String cpf2 = txtClienteCPF.getText();
+				JOptionPane.showMessageDialog(null, "???cpf???" + cpf2);
+				// Condições
 				if (rdbtnClienteMasculino.isSelected() == true) {
 					sexo = rdbtnClienteMasculino.getText();
 					System.out.println("sexo!! " + sexo);
@@ -294,13 +308,15 @@ public class ClienteFrame extends JFrame {
 					sexo = rdbtnClienteFeminino.getText();
 					System.out.println("sexo!! " + sexo);
 				}
+
+				// Validações
 				boolean erro = false;
 
 				if (txtClienteNome.getText().equals("")) {
 					JOptionPane.showMessageDialog(null,
 							"Favor preencher o nome");
 					erro = true;
-				} else if (!txtClienteDataNascimento.getText().equals("")) {
+				} else if (txtClienteDataNascimento.getText().equals("")) {
 					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 					sdf.setLenient(false);
 					String dataString = txtClienteDataNascimento.getText();
@@ -312,7 +328,7 @@ public class ClienteFrame extends JFrame {
 					} catch (ParseException e1) {
 						JOptionPane.showMessageDialog(null, "Data Inválida");
 					}
-
+					// Validação de data
 					// Pattern p = Pattern
 					// .compile("^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$");
 					// Matcher m =
@@ -320,41 +336,58 @@ public class ClienteFrame extends JFrame {
 					// if (!m.find())
 					// System.err.println("Data inválida.");
 					erro = true;
-				}
-				try {
-					clienteController.salvar(txtClienteNome.getText(),
-							txtClienteDataNascimento.getText(),
-							txtClienteCPF.getText(), txtClienteRG.getText(),
-							txtClienteEndereco.getText(),
-							txtClienteBairro.getText(),
-							txtClienteCidade.getText(), estado,
-							txtClienteCEP.getText(),
-							txtClienteTelefone.getText(),
-							txtClienteCelular.getText(), sexo,
-							txtClienteNaturalidade.getText(), estadoCivil);
-				} catch (SQLException e1) {
-					JOptionPane
-							.showMessageDialog(null,
-									"Erro ao salvar\nFavor preencher os campos corretamente!!");
-					e1.printStackTrace();
+				} else if (ValidaçãoCPF.isCPF(cpf) == false) {
+					JOptionPane.showMessageDialog(null, "CPF inválido");
 					erro = true;
-				} catch (ParseException e1) {
-					JOptionPane
-							.showMessageDialog(null,
-									"Erro ao salvar\nFavor preencher os campos corretamente!!");
-					e1.printStackTrace();
+				} else if (rdbtnClienteMasculino.isSelected() == false
+						&& rdbtnClienteFeminino.isSelected() == false) {
+					JOptionPane.showMessageDialog(null, "Selecione o sexo");
 					erro = true;
-				} catch (Exception e1) {
-					JOptionPane
-							.showMessageDialog(null,
-									"Erro ao salvar\nFavor preencher os campos corretamente!!");
-					e1.printStackTrace();
-					erro = true;
-				}
-				if (erro == false) {
-					JOptionPane.showMessageDialog(null, "Salvo com Sucesso!!");
 				}
 
+				if (ValidaçãoCPF.existeCPF(cpf2)) {
+					JOptionPane.showMessageDialog(null, "CPF já existe");
+					erro = true;
+				}
+				
+				if (erro == false) {
+
+					try {
+						clienteController.salvar(txtClienteNome.getText(),
+								txtClienteDataNascimento.getText(),
+								txtClienteCPF.getText(),
+								txtClienteRG.getText(),
+								txtClienteEndereco.getText(),
+								txtClienteBairro.getText(),
+								txtClienteCidade.getText(), estado,
+								txtClienteCEP.getText(),
+								txtClienteTelefone.getText(),
+								txtClienteCelular.getText(), sexo,
+								txtClienteNaturalidade.getText(), estadoCivil);
+						limparCampos();
+						// JOptionPane.showMessageDialog(null,
+						// "Cadastrado com sucesso!");
+					} catch (SQLException e1) {
+						JOptionPane
+								.showMessageDialog(null,
+										"Erro ao salvar\nFavor preencher os campos corretamente!!");
+						e1.printStackTrace();
+						erro = true;
+					} catch (ParseException e1) {
+						JOptionPane
+								.showMessageDialog(null,
+										"Erro ao salvar\nFavor preencher os campos corretamente!!");
+						e1.printStackTrace();
+						erro = true;
+					} catch (Exception e1) {
+						JOptionPane
+								.showMessageDialog(null,
+										"Erro ao salvar\nFavor preencher os campos corretamente!!");
+						e1.printStackTrace();
+						erro = true;
+					}
+					JOptionPane.showMessageDialog(null, "Salvo com Sucesso!!");
+				}
 			}
 		});
 
@@ -362,7 +395,7 @@ public class ClienteFrame extends JFrame {
 		ImageIcon imagemBuscar = new ImageIcon("imagens\\buscar24.png");
 		btnClienteBuscar = new JButton(imagemBuscar);
 		btnClienteBuscar.setPreferredSize(new java.awt.Dimension(105, 40));
-		btnClienteBuscar.setBounds(276, 308, 80, 75);
+		btnClienteBuscar.setBounds(310, 266, 80, 75);
 		btnClienteBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new BuscarClienteFrame();
@@ -371,27 +404,10 @@ public class ClienteFrame extends JFrame {
 		});
 
 		JButton btnClienteCancelar = new JButton("Cancelar");
-		btnClienteCancelar.setBounds(98, 308, 90, 75);
+		btnClienteCancelar.setBounds(90, 266, 90, 75);
 		btnClienteCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				txtClienteBairro.setText("");
-				txtClienteCelular.setText("");
-				txtClienteCEP.setText("");
-				txtClienteCidade.setText("");
-				txtClienteCPF.setText("");
-				txtClienteDataCadastro.setText("");
-				txtClienteDataNascimento.setText("");
-				txtClienteEndereco.setText("");
-				txtClienteId.setText("");
-				txtClienteNaturalidade.setText("");
-				txtClienteNome.setText("");
-				txtClienteProfissao.setText("");
-				txtClienteRG.setText("");
-				txtClienteTelefone.setText("");
-				// rdbtnClienteFeminino.setSelected(false);
-				// rdbtnClienteMasculino.setSelected(false);
-				// cbClienteEstCivil.setDefaultLocale();
-				// cbClienteUF.setName("");
+				limparCampos();
 				btnClienteSalvar.setEnabled(true);
 			}
 		});
@@ -471,5 +487,26 @@ public class ClienteFrame extends JFrame {
 		txtClienteNaturalidade.setText(natu);
 		cbClienteEstCivil.setSelectedItem(estCivil);
 		btnClienteSalvar.setEnabled(false);
+	}
+
+	public void limparCampos() {
+		txtClienteBairro.setText("");
+		txtClienteCelular.setText("");
+		txtClienteCEP.setText("");
+		txtClienteCidade.setText("");
+		txtClienteCPF.setText("");
+		txtClienteDataCadastro.setText("");
+		txtClienteDataNascimento.setText("");
+		txtClienteEndereco.setText("");
+		txtClienteId.setText("");
+		txtClienteNaturalidade.setText("");
+		txtClienteNome.setText("");
+		txtClienteProfissao.setText("");
+		txtClienteRG.setText("");
+		txtClienteTelefone.setText("");
+		// rdbtnClienteFeminino.setSelected(false);
+		// rdbtnClienteMasculino.setSelected(false);
+		// cbClienteEstCivil.setDefaultLocale();
+		// cbClienteUF.setName("");
 	}
 }
