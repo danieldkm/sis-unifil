@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
@@ -106,7 +108,7 @@ public class ClienteTabela extends AbstractTableModel {
 	// retorno o números de colunas
 	@Override
 	public int getColumnCount() {
-		return 16;
+		return 17;
 	}
 
 	// public void setAddRows(){
@@ -122,32 +124,34 @@ public class ClienteTabela extends AbstractTableModel {
 		case 1:
 			return "Data de Cadastro";
 		case 2:
-			return "Nome";
+			return "Data da Última Alteração";
 		case 3:
-			return "Data de Nascimento";
+			return "Nome";
 		case 4:
-			return "CPF";
+			return "Data de Nascimento";
 		case 5:
-			return "RG";
+			return "CPF";
 		case 6:
-			return "Endereço";
+			return "RG";
 		case 7:
-			return "Bairro";
+			return "Endereço";
 		case 8:
-			return "Cidade";
+			return "Bairro";
 		case 9:
-			return "Estado";
+			return "Cidade";
 		case 10:
-			return "CEP";
+			return "Estado";
 		case 11:
-			return "Telefone";
+			return "CEP";
 		case 12:
-			return "Celular";
+			return "Telefone";
 		case 13:
-			return "Sexo";
+			return "Celular";
 		case 14:
-			return "Naturalidade";
+			return "Sexo";
 		case 15:
+			return "Naturalidade";
+		case 16:
 			return "Est. Civil";
 		default:
 			return "";
@@ -175,32 +179,34 @@ public class ClienteTabela extends AbstractTableModel {
 		case 1:
 			return c.getDataCadastro();
 		case 2:
-			return c.getNome();
+			return c.getDataUltimaAlteracao();
 		case 3:
-			return c.getDataNascimento();
+			return c.getNome();
 		case 4:
-			return c.getCpf();
+			return c.getDataNascimento();
 		case 5:
-			return c.getRg();
+			return c.getCpf();
 		case 6:
-			return c.getEndereco();
+			return c.getRg();
 		case 7:
-			return c.getBairro();
+			return c.getEndereco();
 		case 8:
-			return c.getCidade();
+			return c.getBairro();
 		case 9:
-			return c.getEstado();
+			return c.getCidade();
 		case 10:
-			return c.getCep();
+			return c.getEstado();
 		case 11:
-			return c.getTelefone();
+			return c.getCep();
 		case 12:
-			return c.getCelular();
+			return c.getTelefone();
 		case 13:
-			return c.getSexo();
+			return c.getCelular();
 		case 14:
-			return c.getNaturalidade();
+			return c.getSexo();
 		case 15:
+			return c.getNaturalidade();
+		case 16:
 			return c.getEstadoCivil();
 		default:
 			return null;
@@ -221,7 +227,7 @@ public class ClienteTabela extends AbstractTableModel {
 		case 1:
 			return false;
 		case 2:
-			return true;
+			return false;
 		case 3:
 			return true;
 		case 4:
@@ -247,6 +253,8 @@ public class ClienteTabela extends AbstractTableModel {
 		case 14:
 			return true;
 		case 15:
+			return true;
+		case 16:
 			return true;
 		default:
 			return false;
@@ -267,45 +275,48 @@ public class ClienteTabela extends AbstractTableModel {
 			// c.setDa(valor.toString());
 			break;
 		case 2:
-			c.setNome(valor.toString());
+			// c.setDa(valor.toString());
 			break;
 		case 3:
-			c.setDataNascimento(valor.toString());
+			c.setNome(valor.toString());
 			break;
 		case 4:
-			c.setCpf(valor.toString());
+			c.setDataNascimento(valor.toString());
 			break;
 		case 5:
-			c.setRg(valor.toString());
+			c.setCpf(valor.toString());
 			break;
 		case 6:
-			c.setEndereco(valor.toString());
+			c.setRg(valor.toString());
 			break;
 		case 7:
-			c.setBairro(valor.toString());
+			c.setEndereco(valor.toString());
 			break;
 		case 8:
-			c.setCidade(valor.toString());
+			c.setBairro(valor.toString());
 			break;
 		case 9:
-			c.setEstado(valor.toString());
+			c.setCidade(valor.toString());
 			break;
 		case 10:
-			c.setCep(valor.toString());
+			c.setEstado(valor.toString());
 			break;
 		case 11:
-			c.setTelefone(valor.toString());
+			c.setCep(valor.toString());
 			break;
 		case 12:
-			c.setCelular(valor.toString());
+			c.setTelefone(valor.toString());
 			break;
 		case 13:
-			c.setSexo(valor.toString());
+			c.setCelular(valor.toString());
 			break;
 		case 14:
-			c.setNaturalidade(valor.toString());
+			c.setSexo(valor.toString());
 			break;
 		case 15:
+			c.setNaturalidade(valor.toString());
+			break;
+		case 16:
 			c.setEstadoCivil(valor.toString());
 			break;
 		}
@@ -378,5 +389,55 @@ public class ClienteTabela extends AbstractTableModel {
 	public void inserir(Cliente c) {
 		clientes.add(c);
 		fireTableDataChanged();
+	}
+	
+	// Pega valores da JTABLE
+	public int PegaRegistro(JTable jTable) {
+
+		// variavel q guarda o valor do código p/ retorno
+		int codigo = 0;
+		/*
+		 * Captura o numero da linha selecionada na tabela e coloca o valor na
+		 * variavel linha. Se nenhuma linha for selecionada o valor da variavel
+		 * linha será = -1
+		 */
+
+		int linha = jTable.getSelectedRow();
+
+		/*
+		 * Verificar se alguma linha da tabela esta selecionada, caso não esteja
+		 * selecionado o valor da váriavel será menor que zero, e o IF abaixo
+		 * será executado.
+		 */
+		if (linha < 0) {
+			JOptionPane.showMessageDialog(null, "Selecione algum registro");
+		} else {
+
+			// cria uma variavel do tipo object que recebe o valor do codigo da
+			// linha lecionada e coluna 1 <
+			Object cod = jTable.getValueAt(linha, 1);
+
+			// Caso seja selecionado uma linha da tabela que não contem dados o
+			// IF abaixo sera executado.
+			if (cod == null) {
+				JOptionPane.showMessageDialog(null,
+						"A linha selecionado não contem dados");
+			} else {
+
+				/*
+				 * Caso os if acima não seja executado, é porque a tabela esta
+				 * selecionada e a linha selecionada contem dados, então sera
+				 * executado o else, que pega os dados da linha selecionada de
+				 * cada coluna e coloca nos campos de textos
+				 */
+				codigo = Integer.parseInt(String.valueOf(jTable.getValueAt(
+						linha, 0)));
+			}
+
+		}
+
+		// Retorna o valor que esta na celula selecionada
+		return codigo;
+
 	}
 }

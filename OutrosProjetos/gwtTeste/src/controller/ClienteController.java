@@ -16,7 +16,6 @@ import java.util.List;
 // classe ClienteController faz a comunicação entre o banco de dados e a interface
 public class ClienteController {
 
-
 	private String dataAtual() {
 		Date data = new Date(System.currentTimeMillis());
 		SimpleDateFormat formatarDate = new SimpleDateFormat("yyyy-MM-dd");
@@ -26,13 +25,13 @@ public class ClienteController {
 	}
 
 	private String formatarDataInv(String data) {
-		if(data.contains("-")){
+		if (data.contains("-")) {
 			int ano = Integer.parseInt(data.substring(0, 4));
 			int mes = Integer.parseInt(data.substring(3, 5));
 			int dia = Integer.parseInt(data.substring(6, 8));
 			data = ano + "-" + mes + "-" + dia;
 			System.out.println("com ----");
-		}else{
+		} else {
 			int dia = Integer.parseInt(data.substring(0, 2));
 			int mes = Integer.parseInt(data.substring(3, 5));
 			int ano = Integer.parseInt(data.substring(6, 10));
@@ -50,6 +49,7 @@ public class ClienteController {
 		Cliente cliente = new Cliente();
 		cliente.setNome(nome);
 		cliente.setDataCadastro(dataAtual());
+		cliente.setDataUltimaAlteracao(dataAtual());
 		cliente.setDataNascimento(formatarDataInv(dataNascimento));
 		cliente.setCpf(cpf);
 		cliente.setRg(rg);
@@ -66,17 +66,17 @@ public class ClienteController {
 
 		new ClienteDao().salvar(cliente);
 	}
-	
-	public void salvarFull(long id, String dataCadastro, String nome, String dataNascimento, String cpf,
-			String rg, String endereco, String bairro, String cidade,
-			String estado, String cep, String telefone, String celular,
-			String sexo, String naturalidade, String estadoCivil)
-			throws SQLException, ParseException {
+
+	public void salvarFull(long id, String dataCadastro, String nome,
+			String dataNascimento, String cpf, String rg, String endereco,
+			String bairro, String cidade, String estado, String cep,
+			String telefone, String celular, String sexo, String naturalidade,
+			String estadoCivil) throws SQLException, ParseException {
 		Cliente cliente = new Cliente();
 		cliente.setId(id);
 		cliente.setDataCadastro(dataAtual());
+		cliente.setDataUltimaAlteracao(dataAtual());
 		cliente.setNome(nome);
-		cliente.setDataCadastro(dataAtual());
 		cliente.setDataNascimento(formatarDataInv(dataNascimento));
 		cliente.setCpf(cpf);
 		cliente.setRg(rg);
@@ -113,6 +113,7 @@ public class ClienteController {
 		Cliente cliente = new Cliente();
 		cliente.setId(id);
 		cliente.setNome(nome);
+		cliente.setDataUltimaAlteracao(dataAtual());
 		cliente.setDataNascimento(formatarDataInv(dataNascimento));
 		cliente.setCpf(cpf);
 		cliente.setRg(rg);
@@ -145,8 +146,13 @@ public class ClienteController {
 		new ClienteDao().excluir(id);
 	}
 
-//	public Cliente buscaClientePorNome(String nome) throws SQLException {
-//		ClienteDao dao = new ClienteDao();
-//		return dao.findByName(nome);
-//	}
+	// public Cliente buscaClientePorNome(String nome) throws SQLException {
+	// ClienteDao dao = new ClienteDao();
+	// return dao.findByName(nome);
+	// }
+
+	public Cliente buscaClientePorId(int id) throws SQLException {
+		ClienteDao dao = new ClienteDao();
+		return dao.findById(id);
+	}
 }

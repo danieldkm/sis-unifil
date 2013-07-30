@@ -9,6 +9,7 @@ public class Cliente implements Comparable<Cliente>, Serializable {
 	private String dataCadastro;
 	private String nome;
 	private String dataNascimento;
+	private String dataUltimaAlteracao;
 	private String cpf;
 	private String rg;
 	private String endereco;
@@ -25,13 +26,14 @@ public class Cliente implements Comparable<Cliente>, Serializable {
 	public Cliente() {
 	}
 
-	public Cliente(long id, String dataCadastro, String nome,
-			String dataNascimento, String cpf, String rg, String endereco,
-			String bairro, String cidade, String estado, String cep,
-			String telefone, String celular, String sexo, String naturalidade,
-			String estadoCivil) {
+	public Cliente(long id, String dataCadastro, String dataUltimaAlteracao,
+			String nome, String dataNascimento, String cpf, String rg,
+			String endereco, String bairro, String cidade, String estado,
+			String cep, String telefone, String celular, String sexo,
+			String naturalidade, String estadoCivil) {
 		this.id = id;
 		this.dataCadastro = dataCadastro;
+		this.dataUltimaAlteracao = dataUltimaAlteracao;
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 		this.cpf = cpf;
@@ -67,14 +69,15 @@ public class Cliente implements Comparable<Cliente>, Serializable {
 		this.naturalidade = naturalidade;
 		this.estadoCivil = estadoCivil;
 	}
-//TODO----????
+
+	// TODO----????
 	public String formatarData(String data) {
 		if (data.contains("-")) {
 			String dataA = data.replace('-', '/');
 			String dataInv = "";
 			dataInv = dataA.substring(8, 10) + "/" + dataA.substring(5, 7)
 					+ "/" + dataA.substring(0, 4);
-			System.out.println("????????????????????"+dataInv);
+			System.out.println("????????????????????" + dataInv);
 			return dataInv;
 		}
 		return null;
@@ -95,6 +98,14 @@ public class Cliente implements Comparable<Cliente>, Serializable {
 
 	public void setDataCadastro(String dataCadastro) {
 		this.dataCadastro = dataCadastro;
+	}
+
+	public String getDataUltimaAlteracao() {
+		return dataUltimaAlteracao;
+	}
+
+	public void setDataUltimaAlteracao(String dataUltimaAlteracao) {
+		this.dataUltimaAlteracao = dataUltimaAlteracao;
 	}
 
 	public String getNome() {

@@ -51,9 +51,9 @@ public class ClienteDao extends GenericDao {
 
 	public void salvar(Cliente cliente) {
 		try {
-			String insert = "INSERT INTO CLIENTE(data_cadastro, nome, data_nasc, cpf, rg, endereco, bairro, cidade, cep, telefone, "
-					+ "celular, sexo, naturalidade, est_civil, estado) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-			save(insert, formatarDataAtual(), cliente.getNome(),
+			String insert = "INSERT INTO CLIENTE(data_cadastro, data_ultimaAlteracao, nome, data_nasc, cpf, rg, endereco, bairro, cidade, cep, telefone, "
+					+ "celular, sexo, naturalidade, est_civil, estado) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			save(insert, formatarDataAtual(), formatarDataAtual(),cliente.getNome(),
 					cliente.getDataNascimento(), cliente.getCpf(),
 					cliente.getRg(), cliente.getEndereco(),
 					cliente.getBairro(), cliente.getCidade(), cliente.getCep(),
@@ -68,11 +68,11 @@ public class ClienteDao extends GenericDao {
 	public void alterar(Cliente cliente) {
 		try {
 			String update = "UPDATE CLIENTE "
-					+ "SET nome = ?, data_nasc = ?, cpf = ?, rg = ?, "
+					+ "SET data_ultimaAlteracao = ?, nome = ?, data_nasc = ?, cpf = ?, rg = ?, "
 					+ "endereco = ?, bairro = ?, cidade = ?, cep = ?, telefone = ?, "
 					+ "celular = ?, sexo = ?, naturalidade = ?, est_civil = ?, estado = ? "
 					+ "WHERE cod_cliente = ?";
-			update(update, cliente.getId(), cliente.getNome(),
+			update(update, cliente.getId(), cliente.getDataUltimaAlteracao(), cliente.getNome(),
 					cliente.getDataNascimento(), cliente.getCpf(),
 					cliente.getRg(), cliente.getEndereco(),
 					cliente.getBairro(), cliente.getCidade(), cliente.getCep(),
@@ -108,6 +108,8 @@ public class ClienteDao extends GenericDao {
 			cliente.setNome(rs.getString("nome"));
 			cliente.setDataCadastro(formatarDataString(rs
 					.getString("data_cadastro")));
+			cliente.setDataUltimaAlteracao(formatarDataString(rs
+					.getString("data_ultimaAlteracao")));
 			cliente.setDataNascimento(formatarDataString(rs
 					.getString("data_nasc")));
 			cliente.setCpf(rs.getString("cpf"));
@@ -177,4 +179,37 @@ public class ClienteDao extends GenericDao {
 	// stmt.close();
 	// return cliente;
 	// }
+	
+	 public Cliente findById (int id) throws SQLException {
+		 String select = "SELECT * FROM CLIENTE WHERE cod_cliente = ?";
+		 Cliente cliente = null;
+		 PreparedStatement stmt = getConnection().prepareStatement(select);
+		
+		 stmt.setInt(1, id);
+		 ResultSet rs = stmt.executeQuery();
+		
+		 while (rs.next()) {
+		 cliente = new Cliente();
+		 cliente.setId(rs.getLong("cod_cliente"));
+		 cliente.setNome(rs.getString("nome"));
+		 cliente.setDataCadastro(rs.getString("data_cadastro"));
+		 cliente.setDataNascimento(rs.getString("data_nasc"));
+		 cliente.setCpf(rs.getString("cpf"));
+		 cliente.setRg(rs.getString("rg"));
+		 cliente.setEndereco(rs.getString("endereco"));
+		 cliente.setBairro(rs.getString("bairro"));
+		 cliente.setCidade(rs.getString("cidade"));
+		 cliente.setCep(rs.getString("cep"));
+		 cliente.setTelefone(rs.getString("telefone"));
+		 cliente.setCelular(rs.getString("celular"));
+		 cliente.setSexo(rs.getString("sexo"));
+		 cliente.setNaturalidade(rs.getString("naturalidade"));
+		 cliente.setEstadoCivil(rs.getString("est_civil"));
+		 cliente.setEstado(rs.getString("estado"));
+		 }
+		
+		 rs.close();
+		 stmt.close();
+		 return cliente;
+		 }
 }

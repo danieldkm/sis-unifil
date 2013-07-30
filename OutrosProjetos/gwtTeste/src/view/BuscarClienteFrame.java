@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,7 +22,6 @@ import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -34,11 +32,8 @@ import tabela.ClienteTabela;
 import controller.ClienteController;
 import dao.ClienteDao;
 
-public class LocalizarClienteFrame extends JFrame implements TableModelListener {
+public class BuscarClienteFrame extends JFrame implements TableModelListener {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JFrame frmBuscarCliente;
 	Font fontTextCima = new Font(Font.DIALOG, Font.BOLD, 16);
@@ -56,29 +51,32 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener 
 	private MaskFormatter formatCEP;
 	private MaskFormatter formatTel;
 	private MaskFormatter formatCel;
+	// p/ listeners da tabela
+	// private JButton btnOk = null;
+	// private JButton btnCancelar = null;
+	// protected boolean okSelecionado;
+	private ClienteFrame clienteFrame;
+
 	// busca
 	private TableRowSorter<TableModel> rowSorter;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LocalizarClienteFrame window = new LocalizarClienteFrame();
-					window.frmBuscarCliente.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	// public static void main(String[] args) {
+	// EventQueue.invokeLater(new Runnable() {
+	// public void run() {
+	// try {
+	// BuscarClienteFrame window = new BuscarClienteFrame();
+	// window.frmBuscarCliente.setVisible(true);
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	// }
+	// });
+	// }
 
 	/**
 	 * Create the application.
 	 */
-	public LocalizarClienteFrame() {
+	public BuscarClienteFrame() {
 		initialize();
 	}
 
@@ -91,7 +89,7 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener 
 		frmBuscarCliente.setTitle("Localizar Cliente");
 		frmBuscarCliente.setBounds(100, 100, 800, 600);
 		// finaliza o programa**
-		// frmBuscarCliente.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmBuscarCliente.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmBuscarCliente.getContentPane().setLayout(null);
 
 		// /Table////
@@ -102,7 +100,6 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener 
 		try {
 			modelo.adicionaLista(clienteDao.findClientes());
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		tbBuscarClientes.setModel(modelo);
@@ -112,10 +109,11 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener 
 		frmBuscarCliente.getContentPane().add(scrollPane);
 		tamanhoColuna();
 		formatarCelulas();
+		tbBuscarClientes.setAutoCreateRowSorter(true);
 
 		// JTextField
 		txtBuscaCodigo = new JTextField();
-		txtBuscaCodigo.setBounds(190, 41, 372, 20);
+		txtBuscaCodigo.setBounds(190, 41, 187, 20);
 		frmBuscarCliente.getContentPane().add(txtBuscaCodigo);
 		txtBuscaCodigo.setColumns(10);
 		txtBuscaCodigo.setFont(fontTextCima);
@@ -128,7 +126,7 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener 
 		});
 
 		txtBuscaNome = new JTextField();
-		txtBuscaNome.setBounds(190, 10, 372, 20);
+		txtBuscaNome.setBounds(190, 10, 187, 20);
 		frmBuscarCliente.getContentPane().add(txtBuscaNome);
 		txtBuscaNome.setColumns(10);
 		txtBuscaNome.setFont(fontTextCima);
@@ -136,7 +134,7 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener 
 		txtBuscaNome.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent arg0) {
 				String text = txtBuscaNome.getText().trim();
-				rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text, 2));
+				rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text, 3));
 			}
 		});
 
@@ -150,16 +148,6 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener 
 		lblLocalizarPorNome.setBounds(10, 11, 169, 14);
 		frmBuscarCliente.getContentPane().add(lblLocalizarPorNome);
 		lblLocalizarPorNome.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
-
-		// JButton
-		JButton btnBuscarCodigo = new JButton("Buscar");
-		btnBuscarCodigo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
-		btnBuscarCodigo.setBounds(572, 40, 91, 23);
-		frmBuscarCliente.getContentPane().add(btnBuscarCodigo);
 
 		JButton btnBuscarExcluir = new JButton("Excluir");
 		btnBuscarExcluir.addActionListener(new ActionListener() {
@@ -186,8 +174,7 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener 
 					// pega a linha selecionada
 					int indice = tbBuscarClientes.getSelectedRow();
 					JOptionPane.showMessageDialog(null, "Excluído");
-					Object Object = modelo.getValueAt(
-							indice, 0);
+					Object Object = modelo.getValueAt(indice, 0);
 					clienteDao.excluir(Object);
 					modelo.remove(indice);
 				} else {
@@ -198,7 +185,7 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener 
 		btnBuscarExcluir.setBounds(691, 8, 91, 51);
 		frmBuscarCliente.getContentPane().add(btnBuscarExcluir);
 
-		JButton btnBuscarAdicionar = new JButton("ADD");
+		JButton btnBuscarAdicionar = new JButton("Novo");
 		btnBuscarAdicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String[] options = new String[] { "Sim", "Não" };
@@ -211,11 +198,12 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener 
 
 				if (ret.equals(JOptionPane.YES_NO_OPTION)) {
 					Cliente c = new Cliente(clienteDao.lastId(), dataAtual(),
-							"", "01/01/1999", "", "", "", "", "", "", "", "",
-							"", "Masculino", "", "Solteiro");
+							dataAtual(), "", "01/01/1999", "", "", "", "", "",
+							"", "", "", "", "Masculino", "", "Solteiro");
 					ClienteController cc = new ClienteController();
 					try {
-						cc.salvar("", "01/01/1999", "", "", "", "", "", "", "", "", "", "Masculino", "", "Solteiro");
+						cc.salvar("", "01/01/1999", "", "", "", "", "", "", "",
+								"", "", "Masculino", "", "Solteiro");
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					} catch (ParseException e1) {
@@ -226,8 +214,54 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener 
 			}
 
 		});
-		btnBuscarAdicionar.setBounds(572, 10, 91, 23);
+		btnBuscarAdicionar.setBounds(590, 10, 91, 48);
 		frmBuscarCliente.getContentPane().add(btnBuscarAdicionar);
+
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmBuscarCliente.dispose();
+				clienteFrame = new ClienteFrame();
+				String codigo = modelo.getValueAt(
+						tbBuscarClientes.getSelectedRow(), 0).toString();
+				String nome = modelo.getValueAt(
+						tbBuscarClientes.getSelectedRow(), 3).toString();
+				String dataCadastro = modelo.getValueAt(
+						tbBuscarClientes.getSelectedRow(), 1).toString();
+				String dataNascimento = modelo.getValueAt(
+						tbBuscarClientes.getSelectedRow(), 4).toString();
+				String cpf = modelo.getValueAt(
+						tbBuscarClientes.getSelectedRow(), 5).toString();
+				String rg = modelo.getValueAt(
+						tbBuscarClientes.getSelectedRow(), 6).toString();
+				String endereco = modelo.getValueAt(
+						tbBuscarClientes.getSelectedRow(), 7).toString();
+				String bairro = modelo.getValueAt(
+						tbBuscarClientes.getSelectedRow(), 8).toString();
+				String cidade = modelo.getValueAt(
+						tbBuscarClientes.getSelectedRow(), 9).toString();
+				String estado = modelo.getValueAt(
+						tbBuscarClientes.getSelectedRow(), 10).toString();
+				String cep = modelo.getValueAt(
+						tbBuscarClientes.getSelectedRow(), 11).toString();
+				String telefone = modelo.getValueAt(
+						tbBuscarClientes.getSelectedRow(), 12).toString();
+				String celular = modelo.getValueAt(
+						tbBuscarClientes.getSelectedRow(), 13).toString();
+				String sexo = modelo.getValueAt(
+						tbBuscarClientes.getSelectedRow(), 14).toString();
+				String natu = modelo.getValueAt(
+						tbBuscarClientes.getSelectedRow(), 15).toString();
+				String estCivil = modelo.getValueAt(
+						tbBuscarClientes.getSelectedRow(), 16).toString();
+				clienteFrame.metodo(codigo, nome, dataCadastro, dataNascimento,
+						cpf, rg, endereco, bairro, cidade, estado, cep,
+						telefone, celular, sexo, natu, estCivil);
+			}
+		});
+		btnVoltar.setBounds(489, 12, 91, 46);
+		frmBuscarCliente.getContentPane().add(btnVoltar);
+
 		formatarCelulas();
 		setColunaDtNascimento();
 		setColunaSexo();
@@ -239,6 +273,8 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener 
 		setColunaEstCivil();
 		setColunaEstado();
 		setRowSorter();
+		frmBuscarCliente.setVisible(true);
+		frmBuscarCliente.setResizable(false);
 	}
 
 	// atualiza a tabela quando é digitado nos campos nome e id
@@ -274,7 +310,7 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener 
 			// e3.printStackTrace();
 			// }
 			// Object Object = tbBuscarClientes.getValueAt(indice, 0);
-		
+
 			break;
 		case TableModelEvent.INSERT:
 			tipo = "INSERT";
@@ -327,13 +363,13 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener 
 		tbBuscarClientes.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		tbBuscarClientes.getColumnModel().getColumn(0).setPreferredWidth(25);
 		tbBuscarClientes.getColumnModel().getColumn(1).setPreferredWidth(75);
-		tbBuscarClientes.getColumnModel().getColumn(2).setPreferredWidth(150);
-		tbBuscarClientes.getColumnModel().getColumn(3).setPreferredWidth(75);
-		tbBuscarClientes.getColumnModel().getColumn(4).setPreferredWidth(100);
-		tbBuscarClientes.getColumnModel().getColumn(5).setPreferredWidth(85);
-		tbBuscarClientes.getColumnModel().getColumn(6).setPreferredWidth(200);
-		tbBuscarClientes.getColumnModel().getColumn(11).setPreferredWidth(100);
+		tbBuscarClientes.getColumnModel().getColumn(3).setPreferredWidth(150);
+		tbBuscarClientes.getColumnModel().getColumn(4).setPreferredWidth(75);
+		tbBuscarClientes.getColumnModel().getColumn(5).setPreferredWidth(100);
+		tbBuscarClientes.getColumnModel().getColumn(6).setPreferredWidth(85);
+		tbBuscarClientes.getColumnModel().getColumn(7).setPreferredWidth(200);
 		tbBuscarClientes.getColumnModel().getColumn(12).setPreferredWidth(100);
+		tbBuscarClientes.getColumnModel().getColumn(13).setPreferredWidth(100);
 	}
 
 	public String dataAtual() {
@@ -349,7 +385,7 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener 
 
 	// Formatar coluna Sexo
 	public void setColunaSexo() {
-		TableColumn sexo = tbBuscarClientes.getColumnModel().getColumn(13);
+		TableColumn sexo = tbBuscarClientes.getColumnModel().getColumn(14);
 		javax.swing.JComboBox comboBox = new javax.swing.JComboBox();
 		comboBox.addItem("Masculino");
 		comboBox.addItem("Feminino");
@@ -358,7 +394,7 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener 
 
 	// Formatar coluna Estado civil
 	public void setColunaEstCivil() {
-		TableColumn estCivil = tbBuscarClientes.getColumnModel().getColumn(15);
+		TableColumn estCivil = tbBuscarClientes.getColumnModel().getColumn(16);
 		javax.swing.JComboBox comboBox = new javax.swing.JComboBox();
 		comboBox.addItem("Solteiro");
 		comboBox.addItem("Casado");
@@ -370,7 +406,7 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener 
 
 	// Formatar coluna Estado civil
 	public void setColunaEstado() {
-		TableColumn estado = tbBuscarClientes.getColumnModel().getColumn(9);
+		TableColumn estado = tbBuscarClientes.getColumnModel().getColumn(10);
 		javax.swing.JComboBox comboBox = new javax.swing.JComboBox();
 		comboBox.addItem("AC");
 		comboBox.addItem("AL");
@@ -404,7 +440,7 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener 
 
 	// Formatar coluna CPF
 	public void setColunaCPF() {
-		TableColumn cpf = tbBuscarClientes.getColumnModel().getColumn(4);
+		TableColumn cpf = tbBuscarClientes.getColumnModel().getColumn(5);
 		// formatarCelulas();
 		JFormattedTextField formatado = new JFormattedTextField(formatCPF);
 		cpf.setCellEditor(new DefaultCellEditor(formatado));
@@ -412,33 +448,33 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener 
 
 	// Formatar coluna RG
 	public void setColunaRG() {
-		TableColumn rg = tbBuscarClientes.getColumnModel().getColumn(5);
+		TableColumn rg = tbBuscarClientes.getColumnModel().getColumn(6);
 		// formatarCelulas();
 		JFormattedTextField formatado = new JFormattedTextField(formatRG);
 		rg.setCellEditor(new DefaultCellEditor(formatado));
 	}
 
-	// Formatar coluna Data de nasci TODO
+	// Formatar coluna Data de nasci
 	public void setColunaDtNascimento() {
-		TableColumn dt = tbBuscarClientes.getColumnModel().getColumn(3);
+		TableColumn dt = tbBuscarClientes.getColumnModel().getColumn(4);
 		JFormattedTextField formatado = new JFormattedTextField(formatData);
 		dt.setCellEditor(new DefaultCellEditor(formatado));
 	}
 
 	public void setColunaCep() {
-		TableColumn cep = tbBuscarClientes.getColumnModel().getColumn(10);
+		TableColumn cep = tbBuscarClientes.getColumnModel().getColumn(11);
 		JFormattedTextField formatado = new JFormattedTextField(formatCEP);
 		cep.setCellEditor(new DefaultCellEditor(formatado));
 	}
 
 	public void setColunaTel() {
-		TableColumn tel = tbBuscarClientes.getColumnModel().getColumn(11);
+		TableColumn tel = tbBuscarClientes.getColumnModel().getColumn(12);
 		JFormattedTextField formatado = new JFormattedTextField(formatTel);
 		tel.setCellEditor(new DefaultCellEditor(formatado));
 	}
 
 	public void setColunaCel() {
-		TableColumn cel = tbBuscarClientes.getColumnModel().getColumn(12);
+		TableColumn cel = tbBuscarClientes.getColumnModel().getColumn(13);
 		JFormattedTextField formatado = new JFormattedTextField(formatCel);
 		cel.setCellEditor(new DefaultCellEditor(formatado));
 	}
@@ -463,4 +499,99 @@ public class LocalizarClienteFrame extends JFrame implements TableModelListener 
 			e.printStackTrace();
 		}
 	}
+
+	// // Pega valores da JTABLE
+	// public int PegaRegistro(JTable jTable) {
+	//
+	// // variavel q guarda o valor do código p/ retorno
+	// int codigo = 0;
+	// /*
+	// * Captura o numero da linha selecionada na tabela e coloca o valor na
+	// * variavel linha. Se nenhuma linha for selecionada o valor da variavel
+	// * linha será = -1
+	// */
+	//
+	// int linha = jTable.getSelectedRow();
+	//
+	// /*
+	// * Verificar se alguma linha da tabela esta selecionada, caso não esteja
+	// * selecionado o valor da váriavel será menor que zero, e o IF abaixo
+	// * será executado.
+	// */
+	// if (linha < 0) {
+	// JOptionPane.showMessageDialog(null, "Selecione algum registro");
+	// } else {
+	//
+	// // cria uma variavel do tipo object que recebe o valor do codigo da
+	// // linha lecionada e coluna 1 <
+	// Object cod = jTable.getValueAt(linha, 1);
+	//
+	// // Caso seja selecionado uma linha da tabela que não contem dados o
+	// // IF abaixo sera executado.
+	// if (cod == null) {
+	// JOptionPane.showMessageDialog(null,
+	// "A linha selecionado não contem dados");
+	// } else {
+	//
+	// /*
+	// * Caso os if acima não seja executado, é porque a tabela esta
+	// * selecionada e a linha selecionada contem dados, então sera
+	// * executado o else, que pega os dados da linha selecionada de
+	// * cada coluna e coloca nos campos de textos
+	// */
+	// codigo = Integer.parseInt(String.valueOf(jTable.getValueAt(
+	// linha, 0)));
+	// }
+	//
+	// }
+	//
+	// // Retorna o valor que esta na celula selecionada
+	// return codigo;
+	//
+	// }
+
+	// // LISTENERS
+	// public boolean alterarDados() {
+	// okSelecionado = false; // Marcamos que o ok não foi selecionado
+	// // setModal(true); //A dialog tem que ser modal. Só pode retornar do
+	// // setVisible após ficar invisível.
+	// setVisible(true); // Mostramos a dialog e esperamos o usuário escolher
+	// // alguma coisa.
+	// return okSelecionado; // Retornamos true, se ele pressionou ok.
+	// }
+	//
+	// public String getNome() {
+	// return tbBuscarClientes.getColumnName(3);
+	// }
+
+	// private JButton getBtnVoltar()
+	// {
+	// if (btnOk == null)
+	// {
+	// btnOk = new JButton();
+	// btnOk.setText("Voltar");
+	// btnOk.setBounds(489, 12, 91, 46);
+	// btnOk.addActionListener(new java.awt.event.ActionListener()
+	// {
+	// public void actionPerformed(java.awt.event.ActionEvent e)
+	// {
+	// //Um pouco de validação, para não aceitar uma idade textual.
+	// // try
+	// // {
+	// // Integer.parseInt(txtIdade.getText());
+	// // }
+	// // catch (NumberFormatException ex)
+	// // {
+	// // JOptionPane.showMessageDialog(DlgAlterarDados.this,
+	// "A idade deve ser um número!");
+	// // }
+	// okSelecionado = true; //Dizemos que o ok foi selecionado.
+	// frmBuscarCliente.dispose();
+	// PegaRegistro(tbBuscarClientes);
+	// }
+	// });
+	// }
+	// return btnOk;
+	// }
+
 }
