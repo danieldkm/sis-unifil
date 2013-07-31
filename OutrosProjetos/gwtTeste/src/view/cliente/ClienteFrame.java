@@ -1,4 +1,4 @@
-package view;
+package view.cliente;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -7,12 +7,14 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import javax.naming.LimitExceededException;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,17 +22,17 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.text.MaskFormatter;
 
+import model.Validacao;
 import model.ValidaçãoCPF;
-
 import controller.ClienteController;
+import entity.Cliente;
 
-public class ClienteFrame extends JFrame {
-	 private UIManager.LookAndFeelInfo[] looks =   
-			 UIManager.getInstalledLookAndFeels(); 
+public class ClienteFrame extends JDialog {
+	private UIManager.LookAndFeelInfo[] looks = UIManager
+			.getInstalledLookAndFeels();
 	private JFrame frmCadastro;
 	private JTextField txtClienteId;
 	private JTextField txtClienteNome;
@@ -63,27 +65,39 @@ public class ClienteFrame extends JFrame {
 	private ClienteController clienteController;
 	private JButton btnClienteBuscar = null;
 	private JButton btnClienteSalvar;
+	private JButton btnClienteAtualizar;
+	private boolean erro;
+	private Validacao validar = new Validacao();
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ClienteFrame window = new ClienteFrame();
-					window.frmCadastro.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	// public static void main(String[] args) {
+	// EventQueue.invokeLater(new Runnable() {
+	// public void run() {
+	// try {
+	// ClienteFrame window = new ClienteFrame();
+	// window.frmCadastro.setVisible(true);
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	// }
+	// });
+	// }
 
 	/**
 	 * Create the application.
 	 */
+
 	public ClienteFrame() {
+		initialize();
+		// JOptionPane.showMessageDialog(null, frmCadastro.isVisible());
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	public void initialize() {
 		try {
 			formatoData = new MaskFormatter("##/##/####");
 			formatoData.setValidCharacters("1234567890");
@@ -105,17 +119,11 @@ public class ClienteFrame extends JFrame {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
 		frmCadastro = new JFrame();
 		frmCadastro.setTitle("Cadastro de Cliente");
 		frmCadastro.setBounds(100, 100, 698, 392);
 		frmCadastro.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		// frmCadastro.setVisible(true);
 
 		// Text field's
 		txtClienteId = new JTextField();
@@ -280,25 +288,21 @@ public class ClienteFrame extends JFrame {
 		cbClienteEstCivil.addItem("Amasiado");
 
 		// Button's
-		btnClienteSalvar = new JButton("Salvar");
+		ImageIcon imagemSalvarCliente = new ImageIcon(
+				"imagens\\cadastroCliente.png");
+		btnClienteSalvar = new JButton(imagemSalvarCliente);
+		btnClienteSalvar.setToolTipText("Salvar");
 		btnClienteSalvar.setBounds(521, 266, 80, 75);
 		// TODO - erro de validação
 		btnClienteSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				clienteController = new ClienteController();
-				// ValidaçãoCPF existe = new ValidaçãoCPF();
-
 				// atributos
 				String estado = (String) cbClienteUF.getSelectedItem();
-				System.out.println("Estado!!! " + estado);
 				String estadoCivil = (String) cbClienteEstCivil
 						.getSelectedItem();
-				System.out.println("Estado civil! " + estadoCivil);
 				String sexo = "";
-				String cpf = txtClienteCPF.getText().replace(".", "");
-				cpf = cpf.replace("-", "");
-				String cpf2 = txtClienteCPF.getText();
-				JOptionPane.showMessageDialog(null, "???cpf???" + cpf2);
+
 				// Condições
 				if (rdbtnClienteMasculino.isSelected() == true) {
 					sexo = rdbtnClienteMasculino.getText();
@@ -309,49 +313,9 @@ public class ClienteFrame extends JFrame {
 					System.out.println("sexo!! " + sexo);
 				}
 
-				// Validações
-				boolean erro = false;
+				validacao();
 
-				if (txtClienteNome.getText().equals("")) {
-					JOptionPane.showMessageDialog(null,
-							"Favor preencher o nome");
-					erro = true;
-				} else if (txtClienteDataNascimento.getText().equals("")) {
-					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-					sdf.setLenient(false);
-					String dataString = txtClienteDataNascimento.getText();
-					// TODO - erro nas validações
-					try {
-						Date data = sdf.parse(dataString);
-						JOptionPane.showMessageDialog(null, "?????data?????"
-								+ data);
-					} catch (ParseException e1) {
-						JOptionPane.showMessageDialog(null, "Data Inválida");
-					}
-					// Validação de data
-					// Pattern p = Pattern
-					// .compile("^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$");
-					// Matcher m =
-					// p.matcher(txtClienteDataNascimento.getText());
-					// if (!m.find())
-					// System.err.println("Data inválida.");
-					erro = true;
-				} else if (ValidaçãoCPF.isCPF(cpf) == false) {
-					JOptionPane.showMessageDialog(null, "CPF inválido");
-					erro = true;
-				} else if (rdbtnClienteMasculino.isSelected() == false
-						&& rdbtnClienteFeminino.isSelected() == false) {
-					JOptionPane.showMessageDialog(null, "Selecione o sexo");
-					erro = true;
-				}
-
-				if (ValidaçãoCPF.existeCPF(cpf2)) {
-					JOptionPane.showMessageDialog(null, "CPF já existe");
-					erro = true;
-				}
-				
 				if (erro == false) {
-
 					try {
 						clienteController.salvar(txtClienteNome.getText(),
 								txtClienteDataNascimento.getText(),
@@ -363,8 +327,164 @@ public class ClienteFrame extends JFrame {
 								txtClienteCEP.getText(),
 								txtClienteTelefone.getText(),
 								txtClienteCelular.getText(), sexo,
-								txtClienteNaturalidade.getText(), estadoCivil);
+								txtClienteNaturalidade.getText(), estadoCivil,
+								txtClienteProfissao.getText());
 						limparCampos();
+						// JOptionPane.showMessageDialog(null,
+						// "Cadastrado com sucesso!");
+					} catch (SQLException e1) {
+						// JOptionPane
+						// .showMessageDialog(null,
+						// "Erro ao salvar\nFavor preencher os campos corretamente!!");
+						erro = true;
+						e1.printStackTrace();
+					} catch (ParseException e1) {
+						// JOptionPane
+						// .showMessageDialog(null,
+						// "Erro ao salvar\nFavor preencher os campos corretamente!!");
+						erro = true;
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						// JOptionPane
+						// .showMessageDialog(null,
+						// "Erro ao salvar\nFavor preencher os campos corretamente!!");
+						erro = true;
+						e1.printStackTrace();
+					}
+					JOptionPane.showMessageDialog(null, "Salvo com Sucesso!!");
+				}
+			}
+		});
+
+		ImageIcon imagemBuscarCliente = new ImageIcon(
+				"imagens\\buscarCliente.png");
+		JButton btnClienteBuscar = new JButton(imagemBuscarCliente);
+		btnClienteBuscar.setToolTipText("Buscar");
+		btnClienteBuscar.setPreferredSize(new java.awt.Dimension(105, 40));
+		btnClienteBuscar.setBounds(310, 266, 80, 75);
+		btnClienteBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new BuscarClienteFrame();
+				frmCadastro.setVisible(false);
+			}
+		});
+
+		ImageIcon imagemCancelarCliente = new ImageIcon(
+				"imagens\\cancelarCliente.png");
+		JButton btnClienteCancelar = new JButton(imagemCancelarCliente);
+		btnClienteCancelar.setToolTipText("Cancelar");
+		btnClienteCancelar.setBounds(90, 266, 90, 75);
+		btnClienteCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				limparCampos();
+				btnClienteAtualizar.setVisible(false);
+				btnClienteSalvar.setVisible(true);
+			}
+		});
+
+		ImageIcon imagemAtualizarCliente = new ImageIcon(
+				"imagens\\atualizarCliente.png");
+		btnClienteAtualizar = new JButton(imagemAtualizarCliente);
+		btnClienteAtualizar.setToolTipText("Atualizar");
+		btnClienteAtualizar.setBounds(521, 266, 80, 75);
+		btnClienteAtualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clienteController = new ClienteController();
+				// Cliente cliente = null;
+				// boolean erro = false;
+				// try {
+				// cliente = clienteController.buscaClientePorId(Integer
+				// .parseInt(txtClienteId.getText()));
+				// } catch (NumberFormatException e2) {
+				// e2.printStackTrace();
+				// } catch (SQLException e2) {
+				// e2.printStackTrace();
+				// }
+				// atributo e condições estado
+				String estado = (String) cbClienteUF.getSelectedItem();
+				// atributo e condições estado civil
+				String estadoCivil = (String) cbClienteEstCivil
+						.getSelectedItem();
+				// atributo e condições sexo
+				String sexo = "";
+				if (rdbtnClienteMasculino.isSelected() == true) {
+					sexo = rdbtnClienteMasculino.getText();
+					System.out.println("sexo!! " + sexo);
+
+				} else if (rdbtnClienteFeminino.isSelected() == true) {
+					sexo = rdbtnClienteFeminino.getText();
+					System.out.println("sexo!! " + sexo);
+				}
+
+				validacao();
+				// // atributo e condições CPF
+				// String cpf = "";
+				// if (!cliente.getCpf().equals(txtClienteCPF.getText())) {
+				// cpf = txtClienteCPF.getText().replace("-", "");
+				// cpf = cpf.replace(".", "");
+				// if (ValidaçãoCPF.isCPF(cpf) == false) {
+				// JOptionPane.showMessageDialog(null, "CPF inválido");
+				// txtClienteCPF.setText("");
+				// erro = true;
+				// txtClienteCPF.setText(cliente.getCpf());
+				// }
+				// } else {
+				// cpf = txtClienteCPF.getText();
+				// }
+				// // String cpf = txtClienteCPF.getText().replace(".", "");
+				// // cpf = cpf.replace("-", "");
+				// // String cpf2 = txtClienteCPF.getText();
+				//
+				// // Validações
+				//
+				// // if (txtClienteNome.getText().equals("")) {
+				// // JOptionPane.showMessageDialog(null,
+				// // "Favor preencher o nome");
+				// // erro = true;
+				// // } else if (txtClienteDataNascimento.getText().equals(""))
+				// // {
+				// // SimpleDateFormat sdf = new
+				// // SimpleDateFormat("dd/MM/yyyy");
+				// // sdf.setLenient(false);
+				// // String dataString = txtClienteDataNascimento.getText();
+				// // try {
+				// // Date data = sdf.parse(dataString);
+				// // } catch (ParseException e1) {
+				// // JOptionPane.showMessageDialog(null, "Data Inválida");
+				// // }
+				// // erro = true;
+				// // } else if (ValidaçãoCPF.isCPF(cpf) == false) {
+				// // JOptionPane.showMessageDialog(null, "CPF inválido");
+				// // erro = true;
+				// // } else if (rdbtnClienteMasculino.isSelected() == false
+				// // && rdbtnClienteFeminino.isSelected() == false) {
+				// // JOptionPane.showMessageDialog(null, "Selecione o sexo");
+				// // erro = true;
+				// // }
+				// //
+				// // if (ValidaçãoCPF.existeCPF(cpf2)) {
+				// // JOptionPane.showMessageDialog(null, "CPF já existe");
+				// // erro = true;
+				// // }
+
+				if (erro == false) {
+					try {
+						long n = Long.parseLong(txtClienteId.getText());
+						clienteController.alterar(n, txtClienteNome.getText(),
+								txtClienteDataNascimento.getText(),
+								txtClienteCPF.getText(),
+								txtClienteRG.getText(),
+								txtClienteEndereco.getText(),
+								txtClienteBairro.getText(),
+								txtClienteCidade.getText(), estado,
+								txtClienteCEP.getText(),
+								txtClienteTelefone.getText(),
+								txtClienteCelular.getText(), sexo,
+								txtClienteNaturalidade.getText(), estadoCivil,
+								txtClienteProfissao.getText());
+						limparCampos();
+						btnClienteAtualizar.setVisible(false);
+						btnClienteSalvar.setVisible(true);
 						// JOptionPane.showMessageDialog(null,
 						// "Cadastrado com sucesso!");
 					} catch (SQLException e1) {
@@ -388,27 +508,7 @@ public class ClienteFrame extends JFrame {
 					}
 					JOptionPane.showMessageDialog(null, "Salvo com Sucesso!!");
 				}
-			}
-		});
 
-		JButton btnClienteBuscar = new JButton();
-		ImageIcon imagemBuscar = new ImageIcon("imagens\\buscar24.png");
-		btnClienteBuscar = new JButton(imagemBuscar);
-		btnClienteBuscar.setPreferredSize(new java.awt.Dimension(105, 40));
-		btnClienteBuscar.setBounds(310, 266, 80, 75);
-		btnClienteBuscar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				new BuscarClienteFrame();
-				frmCadastro.setVisible(false);
-			}
-		});
-
-		JButton btnClienteCancelar = new JButton("Cancelar");
-		btnClienteCancelar.setBounds(90, 266, 90, 75);
-		btnClienteCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				limparCampos();
-				btnClienteSalvar.setEnabled(true);
 			}
 		});
 
@@ -453,8 +553,10 @@ public class ClienteFrame extends JFrame {
 		frmCadastro.getContentPane().add(lblDataDeCadastro);
 		frmCadastro.getContentPane().add(btnClienteBuscar);
 		frmCadastro.getContentPane().add(btnClienteCancelar);
+		frmCadastro.getContentPane().add(btnClienteAtualizar);
 		frmCadastro.getContentPane().add(txtClienteDataCadastro);
-		frmCadastro.setVisible(true);
+
+		// frmCadastro.setVisible(true);
 		frmCadastro.setResizable(false);
 	}
 
@@ -462,8 +564,8 @@ public class ClienteFrame extends JFrame {
 	public void metodo(String codigo, String nome, String dataCadastro,
 			String dataNascimento, String cpf, String rg, String endereco,
 			String bairro, String cidade, String estado, String cep,
-			String telefone, String celular, String sexo, String natu,
-			String estCivil) {
+			String telefone, String celular, String sexo, String profissao,
+			String natu, String estCivil) {
 		txtClienteNome.setText(nome);
 		txtClienteId.setText(codigo);
 		txtClienteDataCadastro.setText(dataCadastro);
@@ -486,7 +588,9 @@ public class ClienteFrame extends JFrame {
 		}
 		txtClienteNaturalidade.setText(natu);
 		cbClienteEstCivil.setSelectedItem(estCivil);
-		btnClienteSalvar.setEnabled(false);
+		btnClienteAtualizar.setVisible(true);
+		btnClienteSalvar.setVisible(false);
+		txtClienteProfissao.setText(profissao);
 	}
 
 	public void limparCampos() {
@@ -508,5 +612,100 @@ public class ClienteFrame extends JFrame {
 		// rdbtnClienteMasculino.setSelected(false);
 		// cbClienteEstCivil.setDefaultLocale();
 		// cbClienteUF.setName("");
+	}
+
+	public void validacao() {
+		erro = false;
+		if (erro == false) {
+			erro = validar.validarNome(txtClienteNome.getText());
+			if (erro == true) {
+				JOptionPane.showMessageDialog(null, "Favor preencher o nome");
+			}
+		}
+
+		if (erro == false) {
+			erro = validar.validarDataNascimento(txtClienteDataNascimento
+					.getText());
+			if (erro == true) {
+				JOptionPane.showMessageDialog(null, "Data Inválida");
+				txtClienteDataNascimento.setText("");
+			}
+		}
+
+		if (erro == false) {
+			erro = validar.validarSexo(rdbtnClienteFeminino.isSelected(),
+					rdbtnClienteMasculino.isSelected());
+			if (erro == true) {
+				JOptionPane.showMessageDialog(null, "Selecione o sexo");
+			}
+		}
+
+		if (erro == false) {
+			erro = validar.validarCPFValido(txtClienteCPF.getText());
+			boolean erro2 = false;
+			if (erro == true) {
+				JOptionPane.showMessageDialog(null, "CPF Inválido");
+				txtClienteCPF.setText("");
+				erro2 = true;
+			}
+
+			if (erro2 == true) {
+				erro = validar.validarCPFExistente(txtClienteCPF.getText());
+				if (erro == true) {
+					JOptionPane.showMessageDialog(null, "CPF já foi cadastrado");
+					txtClienteCPF.setText("");
+				}
+			}
+		}
+
+		// String cpf = txtClienteCPF.getText().replace(".", "");
+		// cpf = cpf.replace("-", "");
+		// String cpf2 = txtClienteCPF.getText();
+		// erro = false;
+		// boolean cpfValido = ValidaçãoCPF.isCPF(cpf);
+		// if (txtClienteNome.getText().equals("")) {
+		// JOptionPane.showMessageDialog(null, "Favor preencher o nome");
+		// erro = true;
+		// }
+		//
+		// if (erro == false) {
+		// if (txtClienteDataNascimento.getText().equals("  /  /    ")
+		// || !txtClienteDataNascimento.getText().equals("")) {
+		// Pattern p = Pattern
+		// .compile("^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$");
+		// Matcher m = p.matcher(txtClienteDataNascimento.getText());
+		// if (!m.find()) {
+		// System.err.println("Data inválida.");
+		// erro = true;
+		// txtClienteDataNascimento.setText("");
+		// JOptionPane.showMessageDialog(null, "Data Inválida");
+		// }
+		// }
+		// }
+		//
+		// if (erro == false) {
+		// if (rdbtnClienteMasculino.isSelected() == false
+		// && rdbtnClienteFeminino.isSelected() == false) {
+		// JOptionPane.showMessageDialog(null, "Selecione o sexo");
+		// erro = true;
+		// }
+		// }
+		//
+		// if (erro == false) {
+		// if (cpfValido == false) {
+		// JOptionPane.showMessageDialog(null, "CPF inválido");
+		// erro = true;
+		// } else if (ValidaçãoCPF.existeCPF(cpf2)) {
+		// JOptionPane.showMessageDialog(null, "CPF já cadastrado");
+		// txtClienteCPF.setText("");
+		// erro = true;
+		// }
+		// }
+	}
+
+	// retorna o frame para que a tela principal possa manipular e não deixar
+	// abrir duas tela
+	public JFrame retornaTela() {
+		return frmCadastro;
 	}
 }

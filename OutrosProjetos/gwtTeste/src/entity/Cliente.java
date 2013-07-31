@@ -3,6 +3,8 @@ package entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.lang.model.type.PrimitiveType;
+
 //classe cliente terá como atributos os campos da tabela Cliente
 public class Cliente implements Comparable<Cliente>, Serializable {
 	private long id;
@@ -22,6 +24,7 @@ public class Cliente implements Comparable<Cliente>, Serializable {
 	private String sexo;
 	private String naturalidade;
 	private String estadoCivil;
+	private String profissao;
 
 	public Cliente() {
 	}
@@ -30,7 +33,7 @@ public class Cliente implements Comparable<Cliente>, Serializable {
 			String nome, String dataNascimento, String cpf, String rg,
 			String endereco, String bairro, String cidade, String estado,
 			String cep, String telefone, String celular, String sexo,
-			String naturalidade, String estadoCivil) {
+			String naturalidade, String estadoCivil, String profissao) {
 		this.id = id;
 		this.dataCadastro = dataCadastro;
 		this.dataUltimaAlteracao = dataUltimaAlteracao;
@@ -48,12 +51,13 @@ public class Cliente implements Comparable<Cliente>, Serializable {
 		this.sexo = sexo;
 		this.naturalidade = naturalidade;
 		this.estadoCivil = estadoCivil;
+		this.profissao = profissao;
 	}
 
 	public Cliente(String nome, String dataNascimento, String cpf, String rg,
 			String endereco, String bairro, String cidade, String estado,
 			String cep, String telefone, String celular, String sexo,
-			String naturalidade, String estadoCivil) {
+			String naturalidade, String estadoCivil, String profissao) {
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 		this.cpf = cpf;
@@ -68,20 +72,8 @@ public class Cliente implements Comparable<Cliente>, Serializable {
 		this.sexo = sexo;
 		this.naturalidade = naturalidade;
 		this.estadoCivil = estadoCivil;
+		this.profissao = profissao;
 	}
-
-//	// TODO----????
-//	public String formatarData(String data) {
-//		if (data.contains("-")) {
-//			String dataA = data.replace('-', '/');
-//			String dataInv = "";
-//			dataInv = dataA.substring(8, 10) + "/" + dataA.substring(5, 7)
-//					+ "/" + dataA.substring(0, 4);
-//			System.out.println("????????????????????" + dataInv);
-//			return dataInv;
-//		}
-//		return null;
-//	}
 
 	// Get and Set
 	public Long getId() {
@@ -218,6 +210,14 @@ public class Cliente implements Comparable<Cliente>, Serializable {
 
 	public void setEstadoCivil(String estadoCivil) {
 		this.estadoCivil = estadoCivil;
+	}
+
+	public String getProfissao() {
+		return profissao;
+	}
+
+	public void setProfissao(String profissao) {
+		this.profissao = profissao;
 	}
 
 	@Override

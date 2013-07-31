@@ -5,7 +5,6 @@ import javax.swing.*;
 import dao.ClienteDao;
 import entity.Cliente;
 
-
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -44,7 +43,7 @@ public class ClienteController {
 	public void salvar(String nome, String dataNascimento, String cpf,
 			String rg, String endereco, String bairro, String cidade,
 			String estado, String cep, String telefone, String celular,
-			String sexo, String naturalidade, String estadoCivil)
+			String sexo, String naturalidade, String estadoCivil, String profissao)
 			throws SQLException, ParseException {
 		Cliente cliente = new Cliente();
 		cliente.setNome(nome);
@@ -63,6 +62,7 @@ public class ClienteController {
 		cliente.setNaturalidade(naturalidade);
 		cliente.setEstadoCivil(estadoCivil);
 		cliente.setEstado(estado);
+		cliente.setProfissao(profissao);
 
 		new ClienteDao().salvar(cliente);
 	}
@@ -71,7 +71,7 @@ public class ClienteController {
 			String dataNascimento, String cpf, String rg, String endereco,
 			String bairro, String cidade, String estado, String cep,
 			String telefone, String celular, String sexo, String naturalidade,
-			String estadoCivil) throws SQLException, ParseException {
+			String estadoCivil, String profissao) throws SQLException, ParseException {
 		Cliente cliente = new Cliente();
 		cliente.setId(id);
 		cliente.setDataCadastro(dataAtual());
@@ -90,7 +90,7 @@ public class ClienteController {
 		cliente.setNaturalidade(naturalidade);
 		cliente.setEstadoCivil(estadoCivil);
 		cliente.setEstado(estado);
-
+		cliente.setProfissao(profissao);
 		new ClienteDao().salvar(cliente);
 	}
 
@@ -108,7 +108,7 @@ public class ClienteController {
 	public void alterar(long id, String nome, String dataNascimento,
 			String cpf, String rg, String endereco, String bairro,
 			String cidade, String estado, String cep, String telefone,
-			String celular, String sexo, String naturalidade, String estadoCivil)
+			String celular, String sexo, String naturalidade, String estadoCivil, String profissao)
 			throws ParseException, SQLException {
 		Cliente cliente = new Cliente();
 		cliente.setId(id);
@@ -127,7 +127,7 @@ public class ClienteController {
 		cliente.setNaturalidade(naturalidade);
 		cliente.setEstadoCivil(estadoCivil);
 		cliente.setEstado(estado);
-
+		cliente.setProfissao(profissao);
 		new ClienteDao().alterar(cliente);
 	}
 
@@ -155,10 +155,21 @@ public class ClienteController {
 		ClienteDao dao = new ClienteDao();
 		return dao.findById(id);
 	}
-	
-	public Cliente buscaClientePorCpf(String cpf) throws SQLException {
+
+	public Cliente buscaClientePorCpf(String cpf) {
+		Cliente cliente = null;
 		ClienteDao dao = new ClienteDao();
-		return dao.findByCpf(cpf);
+		try {
+			if (dao.findByCpf(cpf) == null) {
+				return cliente;
+			} else {
+				return dao.findByCpf(cpf);
+			}
+		} catch (Exception e) {
+//			JOptionPane.showMessageDialog(null, "eeeeeee?????" + cliente.getCpf());
+			e.printStackTrace();
+		}
+		return null;
 	}
-	
+
 }

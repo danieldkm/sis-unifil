@@ -1,4 +1,4 @@
-package view;
+package view.cliente;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.DefaultCellEditor;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -27,6 +28,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
 
+import model.ValidaçãoCPF;
 import tabela.ClienteTabela;
 import controller.ClienteController;
 import dao.ClienteDao;
@@ -149,7 +151,9 @@ public class BuscarClienteFrame extends JFrame implements TableModelListener {
 		frmBuscarCliente.getContentPane().add(lblLocalizarPorNome);
 		lblLocalizarPorNome.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 
-		JButton btnBuscarExcluir = new JButton("Excluir");
+		ImageIcon imagemExcluirCliente = new ImageIcon("imagens\\excluirCliente.png");
+		JButton btnBuscarExcluir = new JButton(imagemExcluirCliente);
+		btnBuscarExcluir.setToolTipText("Excluir");
 		btnBuscarExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// modelo.remove(tbBuscarClientes.getSelectedRow());
@@ -173,19 +177,21 @@ public class BuscarClienteFrame extends JFrame implements TableModelListener {
 				if (ret.equals(JOptionPane.YES_NO_OPTION)) {
 					// pega a linha selecionada
 					int indice = tbBuscarClientes.getSelectedRow();
-					JOptionPane.showMessageDialog(null, "Excluído");
+//					JOptionPane.showMessageDialog(null, "Excluído");
 					Object Object = modelo.getValueAt(indice, 0);
 					clienteDao.excluir(Object);
 					modelo.remove(indice);
-				} else {
-					JOptionPane.showMessageDialog(null, "Erro ao excluir");
+//				} else {
+//					JOptionPane.showMessageDialog(null, "Erro ao excluir");
 				}
 			}
 		});
-		btnBuscarExcluir.setBounds(691, 8, 91, 51);
+		btnBuscarExcluir.setBounds(693, 10, 91, 51);
 		frmBuscarCliente.getContentPane().add(btnBuscarExcluir);
 
-		JButton btnBuscarAdicionar = new JButton("Novo");
+		ImageIcon imagemCadastrarCliente = new ImageIcon("imagens\\cadastroCliente.png");
+		JButton btnBuscarAdicionar = new JButton(imagemCadastrarCliente);
+		btnBuscarAdicionar.setToolTipText("Adicionar Novo cliente");
 		btnBuscarAdicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String[] options = new String[] { "Sim", "Não" };
@@ -199,11 +205,11 @@ public class BuscarClienteFrame extends JFrame implements TableModelListener {
 				if (ret.equals(JOptionPane.YES_NO_OPTION)) {
 					Cliente c = new Cliente(clienteDao.lastId(), dataAtual(),
 							dataAtual(), "", "01/01/1999", "", "", "", "", "",
-							"", "", "", "", "Masculino", "", "Solteiro");
+							"", "", "", "", "Masculino", "", "Solteiro","");
 					ClienteController cc = new ClienteController();
 					try {
 						cc.salvar("", "01/01/1999", "", "", "", "", "", "", "",
-								"", "", "Masculino", "", "Solteiro");
+								"", "", "Masculino", "", "Solteiro","");
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					} catch (ParseException e1) {
@@ -214,10 +220,12 @@ public class BuscarClienteFrame extends JFrame implements TableModelListener {
 			}
 
 		});
-		btnBuscarAdicionar.setBounds(590, 10, 91, 48);
+		btnBuscarAdicionar.setBounds(592, 10, 91, 51);
 		frmBuscarCliente.getContentPane().add(btnBuscarAdicionar);
 
-		JButton btnVoltar = new JButton("Voltar");
+		ImageIcon imagemVoltarCliente = new ImageIcon("imagens\\voltar.png");
+		JButton btnVoltar = new JButton(imagemVoltarCliente);
+		btnVoltar.setToolTipText("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (tbBuscarClientes.getSelectedRow() < 0) {
@@ -226,6 +234,7 @@ public class BuscarClienteFrame extends JFrame implements TableModelListener {
 				} else {
 					frmBuscarCliente.dispose();
 					clienteFrame = new ClienteFrame();
+					clienteFrame.retornaTela().setVisible(true);
 					String codigo = modelo.getValueAt(
 							tbBuscarClientes.getSelectedRow(), 0).toString();
 					String nome = modelo.getValueAt(
@@ -254,19 +263,21 @@ public class BuscarClienteFrame extends JFrame implements TableModelListener {
 							tbBuscarClientes.getSelectedRow(), 13).toString();
 					String sexo = modelo.getValueAt(
 							tbBuscarClientes.getSelectedRow(), 14).toString();
-					String natu = modelo.getValueAt(
+					String profissao = modelo.getValueAt(
 							tbBuscarClientes.getSelectedRow(), 15).toString();
-					String estCivil = modelo.getValueAt(
+					String natu = modelo.getValueAt(
 							tbBuscarClientes.getSelectedRow(), 16).toString();
+					String estCivil = modelo.getValueAt(
+							tbBuscarClientes.getSelectedRow(), 17).toString();
 					clienteFrame.metodo(codigo, nome, dataCadastro,
 							dataNascimento, cpf, rg, endereco, bairro, cidade,
-							estado, cep, telefone, celular, sexo, natu,
+							estado, cep, telefone, celular, sexo, profissao, natu,
 							estCivil);
 				}
 			}
 
 		});
-		btnVoltar.setBounds(489, 12, 91, 46);
+		btnVoltar.setBounds(491, 10, 91, 51);
 		frmBuscarCliente.getContentPane().add(btnVoltar);
 
 		formatarCelulas();
@@ -324,11 +335,23 @@ public class BuscarClienteFrame extends JFrame implements TableModelListener {
 			if (e.getFirstRow() == 0) {
 			} else {
 				try {
+					// Validando CPF
+					String cpf = c.getCpf().replace("-", "");
+					cpf = cpf.replace(".", "");
+					boolean v = ValidaçãoCPF.isCPF(cpf);
+					if (v == false) {
+						JOptionPane.showMessageDialog(null, "CPF inválido");
+						c.setCpf("");
+					} else if (ValidaçãoCPF.existeCPF(c.getCpf())) {
+						JOptionPane.showMessageDialog(null,
+								"CPF já cadastrado, digite outro");
+						c.setCpf("");
+					}
 					cc.salvar(c.getNome(), c.getDataNascimento(), c.getCpf(),
 							c.getRg(), c.getEndereco(), c.getBairro(),
 							c.getCidade(), c.getEstado(), c.getCep(),
 							c.getTelefone(), c.getCelular(), c.getSexo(),
-							c.getNaturalidade(), c.getEstadoCivil());
+							c.getNaturalidade(), c.getEstadoCivil(), c.getProfissao());
 				} catch (SQLException e2) {
 					JOptionPane.showMessageDialog(null, "Erro ao Inserir");
 					e2.printStackTrace();
@@ -340,11 +363,43 @@ public class BuscarClienteFrame extends JFrame implements TableModelListener {
 			break;
 		case TableModelEvent.UPDATE:
 			try {
+				int n = cc.buscaClientePorId(c.getId().intValue()).getId()
+						.intValue();
+				String cpf = c.getCpf();
+				boolean v = true;
+				if (n > 0) {
+					if(!cpf.equals(cc.buscaClientePorId(c.getId().intValue()).getCpf())){
+						// Validando CPF
+						cpf = c.getCpf().replace("-", "");
+						cpf = cpf.replace(".", "");
+						v = ValidaçãoCPF.isCPF(cpf);
+						if (v == false) {
+							JOptionPane.showMessageDialog(null, "CPF inválido");
+							c.setCpf(cc.buscaClientePorId(c.getId().intValue()).getCpf());
+						}
+					}
+				} else {
+					// Validando CPF
+					cpf = c.getCpf().replace("-", "");
+					cpf = cpf.replace(".", "");
+					v = ValidaçãoCPF.isCPF(cpf);
+					if (v == false) {
+						JOptionPane.showMessageDialog(null, "CPF inválido");
+						c.setCpf("");
+					} else if (ValidaçãoCPF.existeCPF(c.getCpf())) {
+						JOptionPane.showMessageDialog(null,
+								"CPF já cadastrado, digite outro");
+						c.setCpf("");
+					}
+				}
+				if(v == true){
+				// alterando a linha
 				cc.alterar(c.getId(), c.getNome(), c.getDataNascimento(),
 						c.getCpf(), c.getRg(), c.getEndereco(), c.getBairro(),
 						c.getCidade(), c.getEstado(), c.getCep(),
 						c.getTelefone(), c.getCelular(), c.getSexo(),
-						c.getNaturalidade(), c.getEstadoCivil());
+						c.getNaturalidade(), c.getEstadoCivil(), c.getProfissao());
+				}
 			} catch (SQLException e1) {
 				JOptionPane.showMessageDialog(null, "Erro ao Atualizar");
 				e1.printStackTrace();
@@ -401,7 +456,7 @@ public class BuscarClienteFrame extends JFrame implements TableModelListener {
 
 	// Formatar coluna Estado civil
 	public void setColunaEstCivil() {
-		TableColumn estCivil = tbBuscarClientes.getColumnModel().getColumn(16);
+		TableColumn estCivil = tbBuscarClientes.getColumnModel().getColumn(17);
 		javax.swing.JComboBox comboBox = new javax.swing.JComboBox();
 		comboBox.addItem("Solteiro");
 		comboBox.addItem("Casado");
@@ -411,7 +466,7 @@ public class BuscarClienteFrame extends JFrame implements TableModelListener {
 		estCivil.setCellEditor(new DefaultCellEditor(comboBox));
 	}
 
-	// Formatar coluna Estado civil
+	// Formatar coluna Estado
 	public void setColunaEstado() {
 		TableColumn estado = tbBuscarClientes.getColumnModel().getColumn(10);
 		javax.swing.JComboBox comboBox = new javax.swing.JComboBox();

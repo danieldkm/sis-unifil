@@ -75,11 +75,10 @@ public class ValidaçãoCPF {
 	public static boolean existeCPF(String cpf) {
 		ClienteController cc = new ClienteController();
 		String igual = "";
-		try {
+		if(cc.buscaClientePorCpf(cpf) == null){
+			return false;
+		} else{
 			igual = cc.buscaClientePorCpf(cpf).getCpf();
-			JOptionPane.showMessageDialog(null, "????cpf ja existe????" + igual);
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		if (igual.equals(cpf)) {
 			return true;

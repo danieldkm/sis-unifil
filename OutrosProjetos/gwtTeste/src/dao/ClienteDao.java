@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import entity.Cliente;
 
 public class ClienteDao extends GenericDao {
@@ -50,13 +52,14 @@ public class ClienteDao extends GenericDao {
 	public void salvar(Cliente cliente) {
 		try {
 			String insert = "INSERT INTO CLIENTE(data_cadastro, data_ultimaAlteracao, nome, data_nasc, cpf, rg, endereco, bairro, cidade, cep, telefone, "
-					+ "celular, sexo, naturalidade, est_civil, estado) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					+ "celular, sexo, naturalidade, profissao, est_civil, estado) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			save(insert, formatarDataAtual(), formatarDataAtual(),
 					cliente.getNome(), cliente.getDataNascimento(),
 					cliente.getCpf(), cliente.getRg(), cliente.getEndereco(),
 					cliente.getBairro(), cliente.getCidade(), cliente.getCep(),
 					cliente.getTelefone(), cliente.getCelular(),
 					cliente.getSexo(), cliente.getNaturalidade(),
+					cliente.getProfissao(),
 					cliente.getEstadoCivil(), cliente.getEstado());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -68,7 +71,7 @@ public class ClienteDao extends GenericDao {
 			String update = "UPDATE CLIENTE "
 					+ "SET data_ultimaAlteracao = ?, nome = ?, data_nasc = ?, cpf = ?, rg = ?, "
 					+ "endereco = ?, bairro = ?, cidade = ?, cep = ?, telefone = ?, "
-					+ "celular = ?, sexo = ?, naturalidade = ?, est_civil = ?, estado = ? "
+					+ "celular = ?, sexo = ?, naturalidade = ?, profissao = ?, est_civil = ?, estado = ? "
 					+ "WHERE cod_cliente = ?";
 			update(update, cliente.getId(), cliente.getDataUltimaAlteracao(),
 					cliente.getNome(), cliente.getDataNascimento(),
@@ -76,6 +79,7 @@ public class ClienteDao extends GenericDao {
 					cliente.getBairro(), cliente.getCidade(), cliente.getCep(),
 					cliente.getTelefone(), cliente.getCelular(),
 					cliente.getSexo(), cliente.getNaturalidade(),
+					cliente.getProfissao(),
 					cliente.getEstadoCivil(), cliente.getEstado());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -120,6 +124,7 @@ public class ClienteDao extends GenericDao {
 			cliente.setCelular(rs.getString("celular"));
 			cliente.setSexo(rs.getString("sexo"));
 			cliente.setNaturalidade(rs.getString("naturalidade"));
+			cliente.setProfissao(rs.getString("profissao"));
 			cliente.setEstadoCivil(rs.getString("est_civil"));
 			cliente.setEstado(rs.getString("estado"));
 
@@ -203,6 +208,7 @@ public class ClienteDao extends GenericDao {
 			cliente.setCelular(rs.getString("celular"));
 			cliente.setSexo(rs.getString("sexo"));
 			cliente.setNaturalidade(rs.getString("naturalidade"));
+			cliente.setProfissao(rs.getString("profissao"));
 			cliente.setEstadoCivil(rs.getString("est_civil"));
 			cliente.setEstado(rs.getString("estado"));
 		}
@@ -212,37 +218,43 @@ public class ClienteDao extends GenericDao {
 		return cliente;
 	}
 
-	public Cliente findByCpf(String cpf) throws SQLException {
-		String select = "SELECT * FROM CLIENTE WHERE cpf = ?";
-		Cliente cliente = null;
-		PreparedStatement stmt = getConnection().prepareStatement(select);
+	public Cliente findByCpf(String cpf) {
+		try {
+			String select = "SELECT * FROM CLIENTE WHERE cpf = ?";
+			Cliente cliente = null;
+			PreparedStatement stmt = getConnection().prepareStatement(select);
 
-		stmt.setString(1, cpf);
-		ResultSet rs = stmt.executeQuery();
+			stmt.setString(1, cpf);
+			ResultSet rs = stmt.executeQuery();
 
-		while (rs.next()) {
-			cliente = new Cliente();
-			cliente.setId(rs.getLong("cod_cliente"));
-			cliente.setNome(rs.getString("nome"));
-			cliente.setDataCadastro(rs.getString("data_cadastro"));
-			cliente.setDataNascimento(rs.getString("data_nasc"));
-			cliente.setCpf(rs.getString("cpf"));
-			cliente.setRg(rs.getString("rg"));
-			cliente.setEndereco(rs.getString("endereco"));
-			cliente.setBairro(rs.getString("bairro"));
-			cliente.setCidade(rs.getString("cidade"));
-			cliente.setCep(rs.getString("cep"));
-			cliente.setTelefone(rs.getString("telefone"));
-			cliente.setCelular(rs.getString("celular"));
-			cliente.setSexo(rs.getString("sexo"));
-			cliente.setNaturalidade(rs.getString("naturalidade"));
-			cliente.setEstadoCivil(rs.getString("est_civil"));
-			cliente.setEstado(rs.getString("estado"));
+			while (rs.next()) {
+				cliente = new Cliente();
+				cliente.setId(rs.getLong("cod_cliente"));
+				cliente.setNome(rs.getString("nome"));
+				cliente.setDataCadastro(rs.getString("data_cadastro"));
+				cliente.setDataNascimento(rs.getString("data_nasc"));
+				cliente.setCpf(rs.getString("cpf"));
+				cliente.setRg(rs.getString("rg"));
+				cliente.setEndereco(rs.getString("endereco"));
+				cliente.setBairro(rs.getString("bairro"));
+				cliente.setCidade(rs.getString("cidade"));
+				cliente.setCep(rs.getString("cep"));
+				cliente.setTelefone(rs.getString("telefone"));
+				cliente.setCelular(rs.getString("celular"));
+				cliente.setSexo(rs.getString("sexo"));
+				cliente.setNaturalidade(rs.getString("naturalidade"));
+				cliente.setProfissao(rs.getString("profissao"));
+				cliente.setEstadoCivil(rs.getString("est_civil"));
+				cliente.setEstado(rs.getString("estado"));
+			}
+
+			rs.close();
+			stmt.close();
+			return cliente;
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-
-		rs.close();
-		stmt.close();
-		return cliente;
+		return null;
 	}
 
 }

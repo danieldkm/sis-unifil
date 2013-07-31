@@ -13,6 +13,8 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
+import model.ValidaçãoCPF;
+
 import entity.Cliente;
 
 
@@ -109,7 +111,7 @@ public class ClienteTabela extends AbstractTableModel {
 	// retorno o números de colunas
 	@Override
 	public int getColumnCount() {
-		return 17;
+		return 18;
 	}
 
 	// public void setAddRows(){
@@ -151,8 +153,10 @@ public class ClienteTabela extends AbstractTableModel {
 		case 14:
 			return "Sexo";
 		case 15:
-			return "Naturalidade";
+			return "Profissão";
 		case 16:
+			return "Naturalidade";
+		case 17:
 			return "Est. Civil";
 		default:
 			return "";
@@ -206,8 +210,10 @@ public class ClienteTabela extends AbstractTableModel {
 		case 14:
 			return c.getSexo();
 		case 15:
-			return c.getNaturalidade();
+			return c.getProfissao();
 		case 16:
+			return c.getNaturalidade();
+		case 17:
 			return c.getEstadoCivil();
 		default:
 			return null;
@@ -256,6 +262,8 @@ public class ClienteTabela extends AbstractTableModel {
 		case 15:
 			return true;
 		case 16:
+			return true;
+		case 17:
 			return true;
 		default:
 			return false;
@@ -315,9 +323,12 @@ public class ClienteTabela extends AbstractTableModel {
 			c.setSexo(valor.toString());
 			break;
 		case 15:
-			c.setNaturalidade(valor.toString());
+			c.setProfissao(valor.toString());
 			break;
 		case 16:
+			c.setNaturalidade(valor.toString());
+			break;
+		case 17:
 			c.setEstadoCivil(valor.toString());
 			break;
 		}
