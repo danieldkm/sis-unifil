@@ -29,7 +29,7 @@ public class teste {
 
 		for (int i = 0; i < ordenado.length; i++) {
 			if (i == 4) {
-				System.out.print(ordenado[i] + "]\n");
+				System.out.print(ordenado[i] + "] ordenar1\n");
 			} else if (i == 0) {
 				System.out.print("[" + ordenado[i] + " - ");
 			} else {
@@ -42,7 +42,7 @@ public class teste {
 
 		for (int i = 0; i < ordenado2.length; i++) {
 			if (i == 4) {
-				System.out.print(ordenado2[i] + "]");
+				System.out.print(ordenado2[i] + "] ordenar2 ");
 			} else if (i == 0) {
 				System.out.print("[" + ordenado2[i] + " - ");
 			} else {
