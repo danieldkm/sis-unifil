@@ -14,7 +14,7 @@ public class Principal {
 		 */
 		Controle c = new Controle();
 		boolean con = true;
-		while (true) {
+		while (con) {
 
 			int opcao = Integer
 					.parseInt(JOptionPane

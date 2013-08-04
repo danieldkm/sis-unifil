@@ -5,7 +5,6 @@ import javax.swing.JOptionPane;
 public class Controle {
 
 	private Consulta[] consultas;
-	private int qtdConsulta;
 
 	public Controle() {
 		consultas = new Consulta[4];
