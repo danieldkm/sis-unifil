@@ -14,14 +14,5 @@ public class ConsultaOuro extends Consulta {
 			return super.getValorConsulta() - desconto;
 		}
 	}
-	
-	public void setInstaciar(String nome, int matricula, int numeroDepe,
-			int ano, double valor) {
-		super.setNome(nome);
-		super.setMatricula(matricula);
-		super.setNumeroDepe(numeroDepe);
-		super.setAno(ano);
-		super.setValorConsulta(valor);
-	}
 
 }

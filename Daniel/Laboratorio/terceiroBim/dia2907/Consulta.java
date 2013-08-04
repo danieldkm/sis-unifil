@@ -62,13 +62,13 @@ public class Consulta {
 		this.valorConsulta = valorConsulta;
 	}
 
-	public void setInstaciar(/*String nome, int matricula, int numeroDepe,
-			int ano, double valor*/) {
-		/*this.nome = nome;
+	public void setInstaciar(String nome, int matricula, int numeroDepe,
+			int ano, double valor) {
+		this.nome = nome;
 		this.matricula = matricula;
 		this.numeroDepe = numeroDepe;
 		this.ano = ano;
-		this.valorConsulta = valor;*/
+		this.valorConsulta = valor;
 	}
 
 	private int[] qtd = new int[4];
