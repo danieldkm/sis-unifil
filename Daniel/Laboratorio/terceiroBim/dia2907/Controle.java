@@ -37,7 +37,8 @@ public class Controle {
 			System.out.println("Tipo inválido");
 		}
 	}
-
+	
+	// TODO -- exibir por tipo, passando por parametro nos metodos, o tipo do plano.
 	public void exibir() {
 		String aux = "";
 		System.out.println("felipa viadinho"+consultas[0].getClass().getSimpleName().substring(2, 5));
