@@ -5,9 +5,10 @@ import javax.swing.JOptionPane;
 public class Controle {
 
 	private Consulta[] consultas;
+	private int cont = 0;
 
 	public Controle() {
-		consultas = new Consulta[4];
+		consultas = new Consulta[10];
 	}
 
 	public void incluir(String tipo, String nome, int matricula,
@@ -15,92 +16,101 @@ public class Controle {
 		if (tipo.equals("PRATA")) {
 			ConsultaPrata cp = new ConsultaPrata();
 			cp.setInstaciar(nome, matricula, numeroDepe, ano, valor);
-			consultas[0] = cp;
-			consultas[0].setQtd(0);
+			consultas[cont] = cp;
+			cont++;
 		} else if (tipo.equals("OURO")) {
 			ConsultaOuro co = new ConsultaOuro();
 			co.setInstaciar(nome, matricula, numeroDepe, ano, valor);
-			consultas[1] = co;
-			consultas[1].setQtd(1);
-		} else if (tipo.equals("DIA")) {
+			consultas[cont] = co;
+			cont++;
+		} else if (tipo.equals("DIAMANTE")) {
 			ConsultaDiamante cd = new ConsultaDiamante();
 			cd.setInstaciar(nome, matricula, numeroDepe, ano, valor);
-			consultas[2] = cd;
-			consultas[2].setQtd(2);
-		} else if (tipo.equals("FAM")) {
+			consultas[cont] = cd;
+			cont++;
+		} else if (tipo.equals("FAMILIA")) {
 			ConsultaFamilia cf = new ConsultaFamilia();
 			cf.setInstaciar(nome, matricula, numeroDepe, ano, valor);
-			consultas[3] = cf;
-			consultas[3].setQtd(3);
+			consultas[cont] = cf;
+			cont++;
 		} else {
 			System.out.println("Tipo inválido");
 		}
 	}
 
 	public void exibir() {
-		if (consultas[0] != null) {
-			JOptionPane.showMessageDialog(null,
-					"Tipo; PRATA\nMatricula " + consultas[0].getMatricula()
-							+ " Nome: " + consultas[0].getNome());
-		}
-		if (consultas[1] != null) {
-			JOptionPane.showMessageDialog(null,
-					"Tipo; OURO\nMatricula " + consultas[1].getMatricula()
-							+ " Nome: " + consultas[1].getNome());
-		}
-
-		if (consultas[2] != null) {
-			JOptionPane.showMessageDialog(null,
-					"Tipo; DIAMANTE\nMatricula " + consultas[2].getMatricula()
-							+ " Nome: " + consultas[2].getNome());
-		}
-		if (consultas[3] != null) {
-			JOptionPane.showMessageDialog(null,
-					"Tipo; FAMILIA\nMatricula " + consultas[3].getMatricula()
-							+ " Nome: " + consultas[3].getNome());
+		String aux = "";
+		System.out.println("felipa viadinho"+consultas[0].getClass().getSimpleName().substring(2, 5));
+		for (int i = 0; i < consultas.length; i++) {
+			if (consultas[i] != null) {
+				aux = consultas[i].getClass().toString().substring(22)
+						.toUpperCase();
+				System.out.println("????????????????" + aux);
+				if (aux.equals("PRATA")) {
+					JOptionPane.showMessageDialog(null, consultas[i].getNome()
+							+ "\n" + consultas[i].getMatricula());
+				} else if (consultas[i].getClass().toString().substring(22)
+						.toUpperCase().equals("OURO")) {
+					JOptionPane.showMessageDialog(null, consultas[i].getNome()
+							+ "\n" + consultas[i].getMatricula());
+				} else if (consultas[i].getClass().toString().substring(22)
+						.toUpperCase().equals("DIAMANTE")) {
+					JOptionPane.showMessageDialog(null, consultas[i].getNome()
+							+ "\n" + consultas[i].getMatricula());
+				} else if (consultas[i].getClass().toString().substring(22)
+						.toUpperCase().equals("FAMILIA")) {
+					JOptionPane.showMessageDialog(null, consultas[i].getNome()
+							+ "\n" + consultas[i].getMatricula());
+				}
+			}
 		}
 	}
 
 	public void totalConsulta() {
-		if (consultas[0] != null) {
-			JOptionPane.showMessageDialog(null,
-					"Tipo; PRATA\n" + consultas[0].getQtd(0));
+		int prata = 0, ouro = 0, diamante = 0, familia = 0;
+		for (int i = 0; i < consultas.length; i++) {
+			if (consultas[i] != null) {
+				if (consultas[i].getClass().toString().substring(22)
+						.toUpperCase().equals("PRATA")) {
+					prata++;
+				} else if (consultas[i].getClass().toString().substring(22)
+						.toUpperCase().equals("OURO")) {
+					ouro++;
+				} else if (consultas[i].getClass().toString().substring(22)
+						.toUpperCase().equals("DIAMANTE")) {
+					diamante++;
+				} else if (consultas[i].getClass().toString().substring(22)
+						.toUpperCase().equals("FAMILIA")) {
+					familia++;
+				}
+			}
 		}
-
-		if (consultas[1] != null) {
-			JOptionPane.showMessageDialog(null,
-					"Tipo; OURO\n" + consultas[1].getQtd(1));
-		}
-
-		if (consultas[2] != null) {
-			JOptionPane.showMessageDialog(null, "Tipo; DIAMANTE\n"
-					+ consultas[2].getQtd(2));
-		}
-		if (consultas[3] != null) {
-			JOptionPane.showMessageDialog(null, "Tipo; FAMILIA\n"
-					+ consultas[3].getQtd(3));
-		}
-
+		JOptionPane.showMessageDialog(null, "Quantidade por tipo\nPrata: "
+				+ prata + "\nOuro: " + ouro + "\nDiamante: " + diamante
+				+ "\nFamilia: " + familia);
 	}
 
 	public void valorTotal() {
-		if (consultas[0] != null) {
-			JOptionPane.showMessageDialog(null,
-					"Tipo; PRATA\n" + consultas[0].getValorConsulta());
-		}
-
-		if (consultas[1] != null) {
-			JOptionPane.showMessageDialog(null,
-					"Tipo; OURO\n" + consultas[1].getValorConsulta());
-		}
-
-		if (consultas[2] != null) {
-			JOptionPane.showMessageDialog(null, "Tipo; DIAMANTE\n"
-					+ consultas[2].getValorConsulta());
-		}
-		if (consultas[3] != null) {
-			JOptionPane.showMessageDialog(null, "Tipo; FAMILIA\n"
-					+ consultas[3].getValorConsulta());
+		for (int i = 0; i < consultas.length; i++) {
+			if (consultas[i] != null) {
+				if (consultas[i].getClass().toString().substring(22)
+						.toUpperCase().equals("PRATA")) {
+					JOptionPane.showMessageDialog(null, "Valor total: "
+							+ consultas[i].getValorConsulta());
+				} else if (consultas[i].getClass().toString().substring(22)
+						.toUpperCase().equals("OURO")) {
+					JOptionPane.showMessageDialog(null, "Valor total: "
+							+ consultas[i].getValorConsulta());
+				} else if (consultas[i].getClass().toString().substring(22)
+						.toUpperCase().equals("DIAMANTE")) {
+					JOptionPane.showMessageDialog(null, "Valor total: "
+							+ consultas[i].getValorConsulta());
+				} else if (consultas[i].getClass().toString().substring(22)
+						.toUpperCase().equals("FAMILIA")) {
+					JOptionPane.showMessageDialog(null, "Valor total: "
+							+ consultas[i].getValorConsulta());
+				}
+			}
 		}
 	}
 }
