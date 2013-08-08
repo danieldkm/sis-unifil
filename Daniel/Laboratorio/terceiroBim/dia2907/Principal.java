@@ -38,13 +38,13 @@ public class Principal {
 										.showInputDialog("Informe o valor")));
 				break;
 			case 2:
-				c.exibir();
+				c.exibir(JOptionPane.showInputDialog("Informe o tipo da Consulta"));
 				break;
 			case 3:
-				c.totalConsulta();
+				c.totalConsulta(JOptionPane.showInputDialog("Informe o tipo da Consulta"));
 				break;
 			case 4:
-				c.valorTotal();
+				c.valorTotal(JOptionPane.showInputDialog("Informe o tipo da Consulta"));
 				break;
 			}
 

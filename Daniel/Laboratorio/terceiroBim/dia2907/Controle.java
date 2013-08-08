@@ -37,77 +37,65 @@ public class Controle {
 			System.out.println("Tipo inválido");
 		}
 	}
-	
-	// TODO -- exibir por tipo, passando por parametro nos metodos, o tipo do plano.
-	public void exibir() {
+
+	// TODO -- exibir por tipo, passando por parametro nos metodos, o tipo do
+	// plano.
+	public void exibir(String tipo) {
 		String aux = "";
-		System.out.println("felipa viadinho"+consultas[0].getClass().getSimpleName().substring(2, 5));
+		System.out.println("felipa viadinho"
+				+ consultas[0].getClass().getSimpleName().substring(2, 5));
 		for (int i = 0; i < consultas.length; i++) {
 			if (consultas[i] != null) {
 				aux = consultas[i].getClass().toString().substring(22)
 						.toUpperCase();
 				System.out.println("????????????????" + aux);
-				if (aux.equals("PRATA")) {
-					JOptionPane.showMessageDialog(null, consultas[i].getNome()
-							+ "\n" + consultas[i].getMatricula());
-				} else if (consultas[i].getClass().toString().substring(22)
-						.toUpperCase().equals("OURO")) {
-					JOptionPane.showMessageDialog(null, consultas[i].getNome()
-							+ "\n" + consultas[i].getMatricula());
-				} else if (consultas[i].getClass().toString().substring(22)
-						.toUpperCase().equals("DIAMANTE")) {
-					JOptionPane.showMessageDialog(null, consultas[i].getNome()
-							+ "\n" + consultas[i].getMatricula());
-				} else if (consultas[i].getClass().toString().substring(22)
-						.toUpperCase().equals("FAMILIA")) {
+
+				if (aux.equals(tipo.toUpperCase())) {
 					JOptionPane.showMessageDialog(null, consultas[i].getNome()
 							+ "\n" + consultas[i].getMatricula());
 				}
+				// if (aux.equals("PRATA")) {
+				// JOptionPane.showMessageDialog(null, consultas[i].getNome()
+				// + "\n" + consultas[i].getMatricula());
+				// } else if (consultas[i].getClass().toString().substring(22)
+				// .toUpperCase().equals("OURO")) {
+				// JOptionPane.showMessageDialog(null, consultas[i].getNome()
+				// + "\n" + consultas[i].getMatricula());
+				// } else if (consultas[i].getClass().toString().substring(22)
+				// .toUpperCase().equals("DIAMANTE")) {
+				// JOptionPane.showMessageDialog(null, consultas[i].getNome()
+				// + "\n" + consultas[i].getMatricula());
+				// } else if (consultas[i].getClass().toString().substring(22)
+				// .toUpperCase().equals("FAMILIA")) {
+				// JOptionPane.showMessageDialog(null, consultas[i].getNome()
+				// + "\n" + consultas[i].getMatricula());
+				// }
 			}
 		}
 	}
 
-	public void totalConsulta() {
-		int prata = 0, ouro = 0, diamante = 0, familia = 0;
+	public void totalConsulta(String tipo) {
+		int n = 0;
 		for (int i = 0; i < consultas.length; i++) {
 			if (consultas[i] != null) {
 				if (consultas[i].getClass().toString().substring(22)
-						.toUpperCase().equals("PRATA")) {
-					prata++;
-				} else if (consultas[i].getClass().toString().substring(22)
-						.toUpperCase().equals("OURO")) {
-					ouro++;
-				} else if (consultas[i].getClass().toString().substring(22)
-						.toUpperCase().equals("DIAMANTE")) {
-					diamante++;
-				} else if (consultas[i].getClass().toString().substring(22)
-						.toUpperCase().equals("FAMILIA")) {
-					familia++;
+						.toUpperCase().equals(tipo.toUpperCase())) {
+					n++;
 				}
 			}
 		}
-		JOptionPane.showMessageDialog(null, "Quantidade por tipo\nPrata: "
-				+ prata + "\nOuro: " + ouro + "\nDiamante: " + diamante
-				+ "\nFamilia: " + familia);
+		JOptionPane.showMessageDialog(null, "Qtd " + n);
+		// JOptionPane.showMessageDialog(null, "Quantidade por tipo\nPrata: "
+		// + prata + "\nOuro: " + ouro + "\nDiamante: " + diamante
+		// + "\nFamilia: " + familia);
 	}
 
-	public void valorTotal() {
+	public void valorTotal(String tipo) {
 		for (int i = 0; i < consultas.length; i++) {
 			if (consultas[i] != null) {
+
 				if (consultas[i].getClass().toString().substring(22)
-						.toUpperCase().equals("PRATA")) {
-					JOptionPane.showMessageDialog(null, "Valor total: "
-							+ consultas[i].getValorConsulta());
-				} else if (consultas[i].getClass().toString().substring(22)
-						.toUpperCase().equals("OURO")) {
-					JOptionPane.showMessageDialog(null, "Valor total: "
-							+ consultas[i].getValorConsulta());
-				} else if (consultas[i].getClass().toString().substring(22)
-						.toUpperCase().equals("DIAMANTE")) {
-					JOptionPane.showMessageDialog(null, "Valor total: "
-							+ consultas[i].getValorConsulta());
-				} else if (consultas[i].getClass().toString().substring(22)
-						.toUpperCase().equals("FAMILIA")) {
+						.toUpperCase().equals(tipo.toUpperCase())) {
 					JOptionPane.showMessageDialog(null, "Valor total: "
 							+ consultas[i].getValorConsulta());
 				}
