@@ -14,15 +14,21 @@ public class TV {
 	 * */
 
 	public TV() {
+		canal = 0;
+		volume = 0;
+		ligada = true;
 	}
 
 	public TV(int canal, int volume) {
 		this.canal = canal;
 		this.volume = volume;
+		this.ligada = true;
 	}
 
 	public TV(boolean ligada) {
 		this.ligada = ligada;
+		this.canal = 0;
+		this.volume = 0;
 	}
 
 	public TV(int canal, int volume, boolean ligada) {
