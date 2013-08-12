@@ -26,9 +26,10 @@ public class TV {
 	}
 
 	public TV(boolean ligada) {
-		this.ligada = ligada;
-		this.canal = 1;
-		this.volume = 20;
+//		this.ligada = ligada;
+//		this.canal = 1;
+//		this.volume = 20;
+		this(3,15,ligada);
 	}
 
 	public TV(int canal, int volume, boolean ligada) {
