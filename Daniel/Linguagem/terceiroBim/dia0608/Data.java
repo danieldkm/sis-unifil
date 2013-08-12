@@ -51,7 +51,7 @@ public class Data {
 
 	public static void main(String[] args) {
 
-		Data d = new Data((byte) 20, (byte) 12, (short) 2000);
+		Data d = new Data((byte) 32, (byte) 12, (short) 2000);
 		System.out.println(d.getDia());
 		System.out.println(d.getMes());
 		System.out.println(d.getAno());

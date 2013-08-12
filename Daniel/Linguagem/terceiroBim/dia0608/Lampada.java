@@ -6,12 +6,10 @@ public class Lampada {
 
 	public Lampada(boolean estado) {
 		this.estadoLampada = estado;
-//		this();
 	}
 
 	public Lampada() {
 		this.watts = 60;
-//		new Lampada(true);
 	}
 
 	public Lampada(short watts) {
@@ -26,5 +24,22 @@ public class Lampada {
 	public void apaga() {
 		this.estadoLampada = false;
 	}
+	
+	public void estadoAtual(){
+		if(estadoLampada == true){
+			System.out.println("Lampada acesa, " + " lampada de " + watts + " watts");
+		} else {
+			System.out.println("Lampada apagada, " + " lampada de " + watts + " watts");
+		}
+		
+	}
 
+	
+	public static void main(String[] args) {
+		Lampada l = new Lampada((short)40);
+		l.acende();
+		
+		
+		l.estadoAtual();
+	}
 }
