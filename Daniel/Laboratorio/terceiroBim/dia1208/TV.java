@@ -14,8 +14,8 @@ public class TV {
 	 * */
 
 	public TV() {
-		canal = 0;
-		volume = 0;
+		canal = 1;
+		volume = 20;
 		ligada = true;
 	}
 
@@ -27,8 +27,8 @@ public class TV {
 
 	public TV(boolean ligada) {
 		this.ligada = ligada;
-		this.canal = 0;
-		this.volume = 0;
+		this.canal = 1;
+		this.volume = 20;
 	}
 
 	public TV(int canal, int volume, boolean ligada) {
