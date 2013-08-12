@@ -91,15 +91,18 @@ public class Controle {
 	}
 
 	public void valorTotal(String tipo) {
+		double valorTotal = 0;
 		for (int i = 0; i < consultas.length; i++) {
 			if (consultas[i] != null) {
 
 				if (consultas[i].getClass().toString().substring(22)
 						.toUpperCase().equals(tipo.toUpperCase())) {
-					JOptionPane.showMessageDialog(null, "Valor total: "
-							+ consultas[i].getValorConsulta());
+					valorTotal += consultas[i].getValorConsulta();
+
 				}
 			}
 		}
+		JOptionPane.showMessageDialog(null, "Valor total: "
+				+ valorTotal);
 	}
 }

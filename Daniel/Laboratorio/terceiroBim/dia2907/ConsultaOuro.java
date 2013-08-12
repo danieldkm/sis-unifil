@@ -6,6 +6,7 @@ public class ConsultaOuro extends Consulta {
 		super();
 	}
 
+	@Override
 	public double getValorConsulta() {
 		if (super.getAno() <= 2000) {
 			return super.getValorConsulta();

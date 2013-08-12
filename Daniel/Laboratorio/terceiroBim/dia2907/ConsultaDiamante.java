@@ -6,6 +6,7 @@ public class ConsultaDiamante extends Consulta {
 		super();
 	}
 
+	@Override
 	public double getValorConsulta() {
 		double desconto = super.getValorConsulta() * 0.4;
 		return super.getValorConsulta() - desconto;

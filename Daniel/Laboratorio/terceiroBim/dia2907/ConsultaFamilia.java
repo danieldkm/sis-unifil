@@ -6,6 +6,7 @@ public class ConsultaFamilia extends Consulta {
 		super();
 	}
 
+	@Override
 	public double getValorConsulta() {
 		if(super.getNumeroDepe() > 2){
 			double desconto = super.getValorConsulta() * 0.5;

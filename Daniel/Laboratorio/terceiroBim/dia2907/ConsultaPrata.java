@@ -8,6 +8,7 @@ public class ConsultaPrata extends Consulta {
 		super();
 	}
 
+	@Override
 	public double getValorConsulta() {
 		double desconto = super.getValorConsulta() * 0.2;
 		return super.getValorConsulta() - desconto;
