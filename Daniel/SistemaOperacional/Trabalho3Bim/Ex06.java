@@ -100,11 +100,9 @@ public class Ex06 {
 			if (i == 0) {
 				doubleSomaTotal += carga[i];
 				n += doubleSomaTotal;
-				System.out.println(n);
 			} else {
 				doubleSomaTotal += overhead + carga[i] - chegada[i];
 				n += doubleSomaTotal;
-				System.out.println(n);
 			}
 		}
 		textoTurnaround = "Turnaround: "
