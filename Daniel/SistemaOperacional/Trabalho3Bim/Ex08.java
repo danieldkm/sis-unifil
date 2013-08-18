@@ -82,19 +82,19 @@ public class Ex08 {
 			posicao = prontos.indexOf(":");
 			if (i == 0) {
 				execu = prontos.substring(0, posicao);
-				texto += "Execução: nenhum " + "Escolhido: "
+				texto += "Execucao: nenhum " + "Escolhido: "
 						+ prontos.substring(0, posicao) + " Prontos: "
 						+ (prontos = prontos.substring(posicao + 1)) + "\n";
 			} else if (posicao == 8) {
-				texto += "Execução: " + execu + " Escolhido: "
+				texto += "Execucao: " + execu + " Escolhido: "
 						+ prontos.substring(0, posicao) + " Prontos: "
 						+ (prontos = prontos.substring(posicao + 1)) + "\n";
 				execu = prontos.substring(0, posicao);
 			}
 			if (posicao == -1) {
-				texto += "Execução: " + execu + " Escolhido: " + prontos
+				texto += "Execucao: " + execu + " Escolhido: " + prontos
 						+ " Prontos: vazio\n";
-				texto += "Execução: " + prontos + " Escolhido: Vazio"
+				texto += "Execucao: " + prontos + " Escolhido: Vazio"
 						+ " Prontos: vazio";
 				prontos = "";
 			}

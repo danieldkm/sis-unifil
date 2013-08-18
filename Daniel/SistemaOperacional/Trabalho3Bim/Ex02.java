@@ -10,7 +10,7 @@ public class Ex02 {
 	public void lerArquivo(String[] args) throws IOException {
 		arquivo = new File(args[1]);
 		if (!arquivo.exists()) {
-			System.out.println("Arquivo não existe executando exercício 01");
+			System.out.println("Arquivo nao existe executando exercicio 01");
 			new Ex01().executar(args);
 		}
 	}

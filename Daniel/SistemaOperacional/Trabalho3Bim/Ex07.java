@@ -77,8 +77,8 @@ public class Ex07 {
 	private int quantum;
 	
 	public void executar(String[] args) throws IOException{
-		zerar(args);
 		new Ex04().executar(args);
+		zerar(args);
 		separarColuna(args);
 		int[] novaCarga = null;
 		overhead = Integer.parseInt(args[2]);
@@ -106,7 +106,7 @@ public class Ex07 {
 		utilizacaoCPU = ((novaCarga.length + 1) / ut) * 100;
 		System.out.println("Tempo Total: " + (tempoTotal + overhead));
 		DecimalFormat aproximador = new DecimalFormat("0.00");
-		System.out.println("Utilização de CPU: " + aproximador.format(utilizacaoCPU) + "%");
+		System.out.println("Utilizacao de CPU: " + aproximador.format(utilizacaoCPU) + "%");
 		System.out.println("Tempo de Resposta: " + aproximador.format(tempoResposta / (carga.length + 1)));
 	}
 }

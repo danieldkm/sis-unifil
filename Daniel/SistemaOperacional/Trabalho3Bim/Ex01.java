@@ -101,7 +101,7 @@ public class Ex01 {
 				System.out.println("Erro");
 				continuar = true;
 				System.out
-						.println("Deseja digitar a proxima linha? \nSIM[S] / NÃO[N]");
+						.println("Deseja digitar a proxima linha? \nSIM[S] / NAO[N]");
 				pergunta();
 			}
 		}

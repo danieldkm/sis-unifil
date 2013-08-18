@@ -14,35 +14,49 @@ public class SimProc {
 		Ex08 ex08 = new Ex08(args);
 		boolean con = true;
 		int exercicio = 0;
-		System.out.println("Exercício " + args[0]);
-		// switch (args[0]) {
-		// case "ex1":
-		// sp.ex01(args);
-		// break;
-		// case "ex2":
-		// sp.ex02(args);
-		// break;
-		// case "ex3":
-		// break;
-		// case "ex4":
-		// break;
-		// case "ex5":
-		// break;
-		// case "ex6":
-		// break;
-		// case "ex7":
-		// break;
-		// case "ex8":
-		// break;
-		// }
+		System.out.println("Exercicio " + args[0]);
+		 switch (args[0]) {
+			case "ex01":
+				ex01.executar(args);
+				System.out.println("Execucao Completada.\n");
+				break;
+			case "ex02":
+				ex02.executar(args);
+				System.out.println("Execucao Completada.\n");
+				break;
+			case "ex03":
+				ex03.executar(args);
+				System.out.println("Execucao Completada.\n");
+				break;
+			case "ex04":
+				ex04.executar(args);
+				System.out.println("Execucao Completada.\n");
+				break;
+			case "ex05":
+				ex05.executar(args);
+				System.out.println("Execucao Completada.\n");
+				break;
+			case "ex06":
+				ex06.executar(args);
+				System.out.println("Execucao Completada.\n");
+				break;
+			case "ex07":
+				ex07.executar(args);
+				System.out.println("Execucao Completada.\n");
+				break;
+			case "ex08":
+				ex08.executar(args);
+				System.out.println("Execucao Completada.\n");
+				break;
+		 }
 
 		do {
-			System.out.println("Informe qual exercício deseja executar [1-8]");
+			System.out.println("Informe qual exercicio deseja executar [1-8]");
 			try {
 				exercicio = s.nextInt();
 				if (exercicio <= 0 || exercicio > 8) {
 					con = true;
-					System.out.println("Exercício incorreto");
+					System.out.println("Exercicio incorreto");
 				} else {
 					con = false;
 				}
@@ -61,51 +75,51 @@ public class SimProc {
 			switch (exercicio) {
 			case 1:
 				ex01.executar(args);
-				System.out.println("Execução Completada.\n");
+				System.out.println("Execucao Completada.\n");
 				break;
 			case 2:
 				ex02.executar(args);
-				System.out.println("Execução Completada.\n");
+				System.out.println("Execucao Completada.\n");
 				break;
 			case 3:
 				ex03.executar(args);
-				System.out.println("Execução Completada.\n");
+				System.out.println("Execucao Completada.\n");
 				break;
 			case 4:
 				ex04.executar(args);
-				System.out.println("Execução Completada.\n");
+				System.out.println("Execucao Completada.\n");
 				break;
 			case 5:
 				ex05.executar(args);
-				System.out.println("Execução Completada.\n");
+				System.out.println("Execucao Completada.\n");
 				break;
 			case 6:
 				ex06.executar(args);
-				System.out.println("Execução Completada.\n");
+				System.out.println("Execucao Completada.\n");
 				break;
 			case 7:
 				ex07.executar(args);
-				System.out.println("Execução Completada.\n");
+				System.out.println("Execucao Completada.\n");
 				break;
 			case 8:
 				ex08.executar(args);
-				System.out.println("Execução Completada.\n");
+				System.out.println("Execucao Completada.\n");
 				break;
 			}
-			System.out.println("Finalizar programa? SIM[S] NÃO[N]");
+			System.out.println("Finalizar programa? SIM[S] NAO[N]");
 			p = s.next().toUpperCase();
 			if (p.equals("S") || p.equals("N")) {
 				if (p.equals("N")) {
 					exercicio = 0;
 					do {
 						System.out
-								.println("Informe qual exercício deseja executar [1-8]?");
+								.println("Informe qual exercicio deseja executar [1-8]?");
 						con = true;
 						try {
 							exercicio = s.nextInt();
 							if (exercicio <= 0 || exercicio > 8) {
 								con = false;
-								System.out.println("Exercício incorreto");
+								System.out.println("Exercicio incorreto");
 							} else {
 								con = true;
 							}
