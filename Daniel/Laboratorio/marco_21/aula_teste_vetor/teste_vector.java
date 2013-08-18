@@ -80,6 +80,5 @@ public class teste_vector {
 				vetor.trimToSize();
 			}
 		}
-
 	}
 }

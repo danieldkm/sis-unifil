@@ -1,7 +1,5 @@
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -15,7 +13,7 @@ public class Ex01 {
 	private Scanner scanner;
 	
 	public void zerar(String[] args) throws IOException {
-		bw = new BufferedWriter(new FileWriter(args[1]));
+//		bw = new BufferedWriter(new FileWriter(args[1]));
 		// arquivo = new File(args[1]);
 		continuar = true;
 		pergunta = "";
@@ -37,7 +35,7 @@ public class Ex01 {
 	public void executar(String[] args) throws IOException {
 		editarArquivo(args);
 		zerar(args);
-
+		bw = new BufferedWriter(new FileWriter(args[1]));
 		continuar = true;
 
 		while (continuar) {
