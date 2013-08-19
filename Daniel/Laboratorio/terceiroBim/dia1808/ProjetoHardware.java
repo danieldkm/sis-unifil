@@ -1,5 +1,6 @@
 package dia1808;
 
+
 public class ProjetoHardware extends Projeto {
 
 	private float custoComponente;
@@ -9,7 +10,7 @@ public class ProjetoHardware extends Projeto {
 
 	public ProjetoHardware(String descricao, float custoHora,
 			float custoComponente, float custoPlaca, float custoMecanica,
-			float custoDesign,) {
+			float custoDesign) {
 		super(descricao, custoHora);
 		this.custoComponente = custoComponente;
 		this.custoPlaca = custoPlaca;
@@ -54,7 +55,3 @@ public class ProjetoHardware extends Projeto {
 				custoComponente + custoDesign + custoMecanica + custoPlaca;
 	}
 }
-/*d)	Crie o método getCustoAtual() para retornar o custo atual do 
- * projeto de hardware através da fórmula: custo por hora x quantidade de
-horas concluídas + custo de componentes + custo de placa + custo de mecânica + 
-custo de design.*/
