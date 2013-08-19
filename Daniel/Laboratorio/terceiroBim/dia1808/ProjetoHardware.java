@@ -9,7 +9,7 @@ public class ProjetoHardware extends Projeto {
 
 	public ProjetoHardware(String descricao, float custoHora,
 			float custoComponente, float custoPlaca, float custoMecanica,
-			float custoDesign) {
+			float custoDesign,) {
 		super(descricao, custoHora);
 		this.custoComponente = custoComponente;
 		this.custoPlaca = custoPlaca;
