@@ -27,4 +27,8 @@ public class Projeto {
 	public float getCustoHora() {
 		return custoHora;
 	}
+	
+	public String getDescricao() {
+		return descricao;
+	}
 }
