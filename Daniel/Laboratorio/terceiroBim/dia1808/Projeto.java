@@ -6,6 +6,9 @@ public class Projeto {
 	private float custoHora;
 	private int qtdHora;
 
+	public Projeto() {
+	}
+	
 	public Projeto(String descricao, float custoHora) {
 		super();
 		this.descricao = descricao;

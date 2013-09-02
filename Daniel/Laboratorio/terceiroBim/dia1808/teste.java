@@ -78,8 +78,7 @@ public class teste {
 			sair = false;
 			if (tipoCadastro < 0) {
 				sair = true;
-			}
-			if (JOptionPane.showConfirmDialog(null, "Deseja continuar?") == 0) {
+			} else if (JOptionPane.showConfirmDialog(null, "Deseja continuar?") == 0) {
 				sair = true;
 			} else {
 				sair = false;
@@ -111,6 +110,18 @@ public class teste {
 				sair = false;
 			}
 		}
+		
+		sair = true;
+		while (sair) {
+			pc.exibirProjetoEspecifico(JOptionPane.showInputDialog("Informe um projeto especifico?\n1 - Hardware\n2 - Software"));
+			if (JOptionPane.showConfirmDialog(null, "Deseja continuar?") == 0) {
+				sair = true;
+			} else {
+				sair = false;
+			}
+		}
+		
+		
 	}
 
 }
