@@ -25,7 +25,7 @@ public class Funcionario0 extends Pessoa0// declaração da classe
 
 	public String toString() {
 		String resultado;
-		resultado = funcionario + "\n"; // chamada implícita ao método
+		resultado = super.toString() + "\n"; // chamada implícita ao método
 										// toString
 										// da classe Pessoa
 		resultado = resultado + "Data de admiss�o:" + admissao + "\n";
