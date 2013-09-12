@@ -17,7 +17,7 @@ public class Buscando extends Buscar {
 		int esquerda = 0, direita = (vetor.length - 1), meio = 0;
 		while (esquerda <= direita) {
 			meio = esquerda + ((direita - esquerda) / 2);
-			System.out.println("???? " + meio);
+//			System.out.println("???? " + meio);
 			if (vetor[meio] < elemento) {
 				esquerda = meio + 1;
 			} else if (vetor[meio] > elemento) {

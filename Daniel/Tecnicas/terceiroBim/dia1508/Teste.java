@@ -1,8 +1,5 @@
 package dia1508;
 
-import dia0108.BubbleSort;
-
-
 public class Teste {
 
 	public static void main(String[] args) {
@@ -13,6 +10,7 @@ public class Teste {
 		v[2] = 50;
 		v[3] = 6;
 		v[4] = 1;
+
 		for (int i = 0; i < v.length; i++) {
 			if (i == 4) {
 				System.out.print(v[i] + "]\n");
@@ -36,14 +34,13 @@ public class Teste {
 				System.out.print(ordenado[i] + " - ");
 			}
 		}
-		
-		
-		//------------------------------ Buscar -----------------------------------------------******
+
+		// ------------------------------ Buscar
+		// -----------------------------------------------******
 		System.out.println("\n Buscar numero");
 		Buscando b = new Buscando();
 		System.out.println("Busca sequencial: " + b.buscaSequencial(v, 50));
 		System.out.println("Busca binaria: " + b.buscaBinaria(v, 6));
 
 	}
-
 }
