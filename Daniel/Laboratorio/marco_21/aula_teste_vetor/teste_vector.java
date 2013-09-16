@@ -53,7 +53,8 @@ public class teste_vector {
 		JOptionPane
 				.showMessageDialog(null,
 						"Entre com esses dados, utilize “sair” para encerrar o programa:");
-		System.out.println("Entre com esses dados, utilize “sair” para encerrar o programa:");
+		System.out
+				.println("Entre com esses dados, utilize “sair” para encerrar o programa:");
 		for (int i = 0; i < 10000; i++) {
 			vetor.addElement(JOptionPane.showInputDialog(""));
 			System.out.println(enume.nextElement());
@@ -67,14 +68,14 @@ public class teste_vector {
 		System.out.println("Número de linhas: " + vetor.size());
 		JOptionPane.showMessageDialog(null, "Linhas em ordem inversa: ");
 		System.out.println("Linhas em ordem inversa: ");
-		
+
 		for (int i = 0; i < vetor.capacity(); i++) {
-//			System.out.println(vetor.size() + " i " + i);
+			// System.out.println(vetor.size() + " i " + i);
 			try {
 				JOptionPane.showMessageDialog(null, vetor.lastElement());
 				System.out.println(vetor.lastElement());
 				vetor.remove(vetor.lastElement());
-				
+
 			} catch (Exception e) {
 				System.out.println("Acabou elementos do vector");
 				vetor.trimToSize();

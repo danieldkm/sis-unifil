@@ -1,8 +1,8 @@
 package Ex8_26;
 
 public class Lampada {
-	private boolean estadoLampada;
-	private short watts;
+	protected boolean estadoLampada;
+	protected short watts;
 
 	public Lampada(boolean estado) {
 		this.estadoLampada = estado;
@@ -38,15 +38,11 @@ public class Lampada {
 //			System.out.println("Lampada apagada, " + " lampada de " + watts + " watts");
 			return "Lampada apagada, " + " lampada de " + watts + " watts";
 		}
-		
 	}
-
 	
 	public static void main(String[] args) {
 		Lampada l = new Lampada((short)40);
 		l.acende();
-		
-		
 		l.estadoAtual();
 	}
 }

@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
@@ -46,12 +45,7 @@ public class Ex05 extends Ex04{
 	}
 	
 	public void executar(String[] args){
-		try {
-			super.executar(args);
-		} catch (IOException e) {
-			System.out.println("Erro exercicio 04");
-			e.printStackTrace();
-		}
+		super.executar(args);
 		calculo = new Calculo();
 		scanner = new Scanner(System.in);
 		carga = fifoCarga(args);
