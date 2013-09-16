@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Ordenar {
 	private int[] ordenar = null;
 	private int troca;
@@ -20,16 +22,51 @@ public class Ordenar {
 					aux = vetor[i];
 					vetor[i] = vetor[j];
 					vetor[j] = aux;
-					troca = ordenar[i];
-					ordenar[i] = ordenar[j];
-					ordenar[j] = troca;
+					// troca = ordenar[i];
+					// ordenar[i] = ordenar[j];
+					// ordenar[j] = troca;
+				}
+			}
+		}
+		return vetor;
+	}
+	
+	public int[] ordenar2(int[] vetor) {
+		int aux = 0;
+		for (int i = 0; i < vetor.length; i++) {
+			for (int j = i + 1; j < vetor.length; j++) {
+				if (vetor[i] < vetor[j]) {
+					aux = vetor[i];
+					vetor[i] = vetor[j];
+					vetor[j] = aux;
+					// troca = ordenar[i];
+					// ordenar[i] = ordenar[j];
+					// ordenar[j] = troca;
 				}
 			}
 		}
 		return vetor;
 	}
 
-	public int[] ordenar2() {
+	public int[] ordenar(int[] vetor, int[] vetor2) {
+		int aux = 0;
+		for (int i = 0; i < vetor.length; i++) {
+			for (int j = i + 1; j < vetor.length; j++) {
+				if (vetor[i] > vetor[j]) {
+					aux = vetor[i];
+					vetor[i] = vetor[j];
+					vetor[j] = aux;
+
+					aux = vetor2[i];
+					vetor2[i] = vetor2[j];
+					vetor2[j] = aux;
+				}
+			}
+		}
+		return vetor2;
+	}
+
+	public int[] getOrdenar() {
 		return ordenar;
 	}
 
@@ -69,4 +106,113 @@ public class Ordenar {
 			System.out.println(s[i]);
 		}
 	}
+
+	public String mostrarPids(int[] pid) {
+		String texto = "";
+		int executar = 0, escolhido = 0;
+		while (pid[0] != 0) {
+			if (executar == 0) {
+				texto += "Executar: nenhum";
+			} else {
+				texto += "Executar: " + executar;
+			}
+			if (escolhido == 0) {
+				texto += " Escolhido: nenhum ";
+			} else {
+				texto += " Escolhido: " + escolhido;
+				executar = escolhido;
+			}
+			if (pid[0] == 0) {
+				texto += " Prontos: vazio ";
+			} else {
+				String p = "";
+				for (int i = 0; i < pid.length; i++) {
+					if (pid[i] != 0) {
+						p += pid[i] + ":";
+					}
+				}
+				texto += " Prontos: " + p;
+				escolhido = pid[0];
+				for (int i = 0; i < pid.length; i++) {
+					if ((i + 1) == pid.length) {
+						pid[i] = 0;
+					} else if (i < pid.length) {
+						pid[i] = pid[i + 1];
+					}
+				}
+			}
+			texto += "\n";
+		}
+		texto += "Executar: " + executar + " Escolhido: " + escolhido
+				+ " Prontos: vazio\n";
+		texto += "Executar: " + escolhido + " Escolhido: nenhum"
+				+ " Prontos: vazio\n";
+		return texto;
+	}
+
+	private int escolhido;
+	private int executar;
+
+	public String mostrarPidQuantum(int[] carga, int[] pid, int quantum) {
+		String texto = "";
+		int executar = 0, escolhido = 0;
+		int[] pro = new int[pid.length];
+		pro = pid;
+		while (pid[0] != 0) {
+			if (executar == 0) {
+				texto += "Executar: nenhum";
+			} else {
+				texto += "Executar: " + executar;
+			}
+			if (escolhido == 0) {
+				texto += " Escolhido: nenhum ";
+			} else {
+				texto += " Escolhido: " + escolhido;
+				if(executar != 0){
+					for (int i = 0; i < pro.length; i++) {
+						if(executar == pro[i]){
+							carga[i] += - quantum;
+							if(carga[i] > 0){
+								for (int j = 0; j < pid.length; j++) {
+									if(pid[j] == 0){
+										pid[j] = executar;
+									}
+								}
+							}
+						}
+					}
+				}
+				for (int i = 0; i < pid.length; i++) {
+					System.out.println(pid[i]);
+				}
+				executar = escolhido;
+			}
+			if (pid[0] == 0) {
+				texto += " Prontos: vazio ";
+			} else {
+				String p = "";
+				for (int i = 0; i < pid.length; i++) {
+					if (pid[i] != 0) {
+						p += pid[i] + ":";
+					}
+				}
+				texto += " Prontos: " + p;
+				escolhido = pid[0];
+				for (int i = 0; i < pid.length; i++) {
+					if ((i + 1) == pid.length) {
+						pid[i] = 0;
+					} else if (i < pid.length) {
+						pid[i] = pid[i + 1];
+					}
+				}
+			}
+			texto += "\n";
+		}
+		texto += "Executar: " + executar + " Escolhido: " + escolhido
+				+ " Prontos: vazio\n";
+		texto += "Executar: " + escolhido + " Escolhido: nenhum"
+				+ " Prontos: vazio\n";
+		return texto;
+	}
+	
 }

@@ -10,43 +10,43 @@ public class SimProc {
 		Ex04 ex04 = new Ex04();
 		Ex05 ex05 = new Ex05();
 		Ex06 ex06 = new Ex06();
-		Ex07 ex07 = new Ex07(args);
-		Ex08 ex08 = new Ex08(args);
+		Ex07 ex07 = new Ex07();
+		Ex08 ex08 = new Ex08();
 		boolean con = true;
 		int exercicio = 0;
 		System.out.println("Exercicio " + args[0]);
 		 switch (args[0]) {
 			case "ex01":
 				ex01.executar(args);
-				System.out.println("Execucao Completada.\n");
+				System.out.println("Execução Completada.\n");
 				break;
 			case "ex02":
 				ex02.executar(args);
-				System.out.println("Execucao Completada.\n");
+				System.out.println("Execução Completada.\n");
 				break;
 			case "ex03":
 				ex03.executar(args);
-				System.out.println("Execucao Completada.\n");
+				System.out.println("Execução Completada.\n");
 				break;
 			case "ex04":
 				ex04.executar(args);
-				System.out.println("Execucao Completada.\n");
+				System.out.println("Execução Completada.\n");
 				break;
 			case "ex05":
 				ex05.executar(args);
-				System.out.println("Execucao Completada.\n");
+				System.out.println("Execução Completada.\n");
 				break;
 			case "ex06":
 				ex06.executar(args);
-				System.out.println("Execucao Completada.\n");
+				System.out.println("Execução Completada.\n");
 				break;
 			case "ex07":
 				ex07.executar(args);
-				System.out.println("Execucao Completada.\n");
+				System.out.println("Execução Completada.\n");
 				break;
 			case "ex08":
 				ex08.executar(args);
-				System.out.println("Execucao Completada.\n");
+				System.out.println("Execução Completada.\n");
 				break;
 		 }
 
@@ -75,35 +75,35 @@ public class SimProc {
 			switch (exercicio) {
 			case 1:
 				ex01.executar(args);
-				System.out.println("Execucao Completada.\n");
+				System.out.println("Execução Completada.\n");
 				break;
 			case 2:
 				ex02.executar(args);
-				System.out.println("Execucao Completada.\n");
+				System.out.println("Execução Completada.\n");
 				break;
 			case 3:
 				ex03.executar(args);
-				System.out.println("Execucao Completada.\n");
+				System.out.println("Execução Completada.\n");
 				break;
 			case 4:
 				ex04.executar(args);
-				System.out.println("Execucao Completada.\n");
+				System.out.println("Execução Completada.\n");
 				break;
 			case 5:
 				ex05.executar(args);
-				System.out.println("Execucao Completada.\n");
+				System.out.println("Execução Completada.\n");
 				break;
 			case 6:
 				ex06.executar(args);
-				System.out.println("Execucao Completada.\n");
+				System.out.println("Execução Completada.\n");
 				break;
 			case 7:
 				ex07.executar(args);
-				System.out.println("Execucao Completada.\n");
+				System.out.println("Execução Completada.\n");
 				break;
 			case 8:
 				ex08.executar(args);
-				System.out.println("Execucao Completada.\n");
+				System.out.println("Execução Completada.\n");
 				break;
 			}
 			System.out.println("Finalizar programa? SIM[S] NAO[N]");

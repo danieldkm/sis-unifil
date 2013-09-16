@@ -70,7 +70,7 @@ public class teste {
 			
 		}
 		
-		int[] corrigir = ordenar.ordenar2();
+		int[] corrigir = ordenar.getOrdenar();
 		int correcao = 0;
 		for (int j2 = 0; j2 < corrigir.length; j2++) {
 			if (corrigir[j2] != j2) {

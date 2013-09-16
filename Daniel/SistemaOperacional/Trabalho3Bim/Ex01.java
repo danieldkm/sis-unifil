@@ -1,37 +1,31 @@
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-
-public class Ex01 {
-	private File arquivo;
-	private BufferedWriter bw;
-	private boolean continuar;
+/**
+ * @author Daniel K. Morita
+ * */
+public class Ex01 extends Arquivo{
+	
+	private BufferedWriter bw; 
+	private boolean continuar; 
 	private String pergunta;
 	private Scanner scanner;
 	
+	/** Zerar os atributos
+	 * @param recebe os argumentos
+	 * */
 	public void zerar(String[] args) throws IOException {
-//		bw = new BufferedWriter(new FileWriter(args[1]));
-		// arquivo = new File(args[1]);
 		continuar = true;
 		pergunta = "";
 		scanner = new Scanner(System.in);
-//		pid = null;
-//		chegada = null;
-//		carga = null;
-//		prioridade = null;
 	}
 	
-	public void editarArquivo(String[] args) throws IOException {
-		arquivo = new File(args[1]);
-		if (arquivo.exists()) {
-			arquivo.delete();
-			arquivo.createNewFile();
-		}
-	}
-	
+	/** Metodo responsavel para executar o ex 01
+	 * @param recebe os argumentos
+	 * @throws IOException - lança esssa excessão caso der erro ao ler o arquivo
+	 * */
 	public void executar(String[] args) throws IOException {
 		editarArquivo(args);
 		zerar(args);
@@ -56,7 +50,7 @@ public class Ex01 {
 				bw.write(scanner.nextLine());
 				bw.newLine();
 				System.out
-						.println("Deseja digitar a proxima linha? \nSIM[S] / NÃO[N]");
+						.println("Deseja digitar a proximo processo? \nSIM[S] / NÃO[N]");
 				pergunta();
 			}
 		} else if (pergunta.equals("N")) {
@@ -80,6 +74,9 @@ public class Ex01 {
 		bw.close();
 	}
 	
+	/**
+	 * Metodo para saber se o usuário deseja continuar digitando o proximo processo
+	 * */
 	public void pergunta() {
 		if (pergunta.equals("")) {
 			pergunta = scanner.nextLine().toUpperCase();
@@ -101,7 +98,7 @@ public class Ex01 {
 				System.out.println("Erro");
 				continuar = true;
 				System.out
-						.println("Deseja digitar a proxima linha? \nSIM[S] / NAO[N]");
+						.println("Deseja digitar a proximo processo? \nSIM[S] / NAO[N]");
 				pergunta();
 			}
 		}
