@@ -1,57 +1,59 @@
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.Scanner;
 
 public class Ex07 extends FilaProntos {
 
-	private int tempoTotal;
+	private double tempoTotal;
 	private double utilizacaoCPU;
-	private int tempoResposta;
-	private int overhead;
+	private double tempoResposta;
+	private double overhead;
+	private double throughput;
+	private double turnaround;
 	private int quantum;
 	private int[] carga = null;
 	private int[] pid = null;
+	private int[] chegada = null;
 	private Ordenar ordenar;
+	private Scanner scanner;
+	private Calculo calculo;
+	private DecimalFormat aproximador;
+
+	private void cpu() {
+		aproximador = new DecimalFormat("0.0");
+		utilizacaoCPU = calculo.cpu(carga, overhead, quantum);
+		System.out.println("Utillização de CPU: " + aproximador.format(utilizacaoCPU) + "%");
+	}
+
+	private void tempoResposta(){
+		tempoResposta = calculo.tempoResposta(quantum, overhead, carga, chegada);
+		System.out.println("Tempo de Resposta: " + tempoResposta);
+	}
 
 	public void executar(String[] args) throws IOException {
-
+		calculo = new Calculo();
+		scanner = new Scanner(System.in);
 		ordenar = new Ordenar();
 		pid = fifoPid(args);
 		carga = fifoCarga(args);
-		quantum = Integer.parseInt(args[3]);
+		if (args[3] == null) {
+			System.out.println("Informe o quantum para este exercício");
+			quantum = scanner.nextInt();
+		} else {
+			quantum = Integer.parseInt(args[3]);
+		}
+		if (args[2] == null) {
+			System.out.println("Informe o overhead para este exercício");
+			overhead = scanner.nextDouble();
+		} else {
+			overhead = Double.parseDouble(args[2]);
+		}
 		String texto = ordenar.mostrarPidQuantum(carga, pid, quantum);
 		System.out.println(texto);
-
-		// int[] novaCarga = null;
-		// ordenar = new Ordenar();
-		// overhead = Integer.parseInt(args[2]);
-		// quantum = Integer.parseInt(args[3]);
-		// carga = fifoCarga(args);
-		// for (int i = 0; i < carga.length; i++) {
-		// while (carga[i] > 0) {
-		// if (carga[i] <= 0) {
-		// novaCarga = ordenar.addElemento(0);
-		// } else {
-		// novaCarga = ordenar.addElemento(carga[i]);
-		// }
-		// carga[i] += -quantum;
-		// }
-		//
-		// }
-		// for (int i = 0; i < novaCarga.length; i++) {
-		// if (i > 0) {
-		// overhead++;
-		// tempoResposta += novaCarga[i - 1] + overhead;
-		// tempoResposta += overhead;
-		// }
-		// tempoTotal += novaCarga[i];
-		// }
-		// double ut = novaCarga.length + 1 + overhead;
-		// utilizacaoCPU = ((novaCarga.length + 1) / ut) * 100;
-		// System.out.println("Tempo Total: " + (tempoTotal + overhead));
-		// DecimalFormat aproximador = new DecimalFormat("0.00");
-		// System.out.println("Utilizacao de CPU: "
-		// + aproximador.format(utilizacaoCPU) + "%");
-		// System.out.println("Tempo de Resposta: "
-		// + aproximador.format(tempoResposta / (carga.length + 1)));
+		carga = fifoCarga(args);
+		chegada = fifoChegada(args);
+		pid = fifoPid(args);
+		cpu();
+		tempoResposta();
 	}
 }

@@ -1,24 +1,61 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.Scanner;
 
 public class Ex08 extends FilaProntos {
 
 	private Ordenar ordenar;
+	private Scanner scanner;
+	private Calculo calculo;
 	private int[] pid;
 	private int[] carga;
 	private int[] prioridade;
+	private int[] chegada;
+	private double utilizacaoCPU;
+	private double tempoResposta;
+	private double overhead;
+	private int quantum;
+	private DecimalFormat aproximador;
+	
+	private void cpu() {
+		aproximador = new DecimalFormat("0.0");
+		utilizacaoCPU = calculo.cpu(carga, overhead, quantum);
+		System.out.println("Utillização de CPU: " + aproximador.format(utilizacaoCPU) + "%");
+	}
+
+	private void tempoResposta(){
+		tempoResposta = calculo.tempoResposta(quantum, overhead, carga, chegada);
+		System.out.println("Tempo de Resposta: " + tempoResposta);
+	}
 
 	public void executar(String[] args) {
 		pid = psPid(args);
 		carga = psCarga(args);
 		prioridade = psPrioridade(args);
-		for (int i = 0; i < prioridade.length; i++) {
-			System.out.println(prioridade[i]);
+		chegada = psChegada(args);
+		calculo = new Calculo();
+		scanner = new Scanner(System.in);
+		ordenar = new Ordenar();
+		pid = fifoPid(args);
+		carga = fifoCarga(args);
+		if (args[3] == null) {
+			System.out.println("Informe o quantum para este exercício");
+			quantum = scanner.nextInt();
+		} else {
+			quantum = Integer.parseInt(args[3]);
 		}
-		
-		
-		
+		if (args[2] == null) {
+			System.out.println("Informe o overhead para este exercício");
+			overhead = scanner.nextDouble();
+		} else {
+			overhead = Double.parseDouble(args[2]);
+		}
+		String texto = ordenar.mostrarPidQuantum(prioridade, carga, pid, quantum);
+		System.out.println(texto);
+		cpu();
+		tempoResposta();
 		
 	}
 

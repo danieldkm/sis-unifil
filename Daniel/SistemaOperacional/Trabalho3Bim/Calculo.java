@@ -31,28 +31,32 @@ public class Calculo {
 		}
 		return n;
 	}
-	
-	public double totalQuantum(int[] carga, double overhead, int quantum) {
+
+	public double cpu(int[] carga, double overhead, int quantum) {
 		double n = 0;
-		int x = 0;
-		int[] c = carga;
-		System.out.println(quantum);
+		double o = 0;
+		int q = 0;
+		int[] c = new int[carga.length];
+		for (int i = 0; i < c.length; i++) {
+			c[i] = carga[i];
+		}
 		for (int i = 0; i < c.length; i++) {
 			while (c[i] > 0) {
 				c[i] += -quantum;
-				if(c[i] > 0){
-					x += overhead;
+				if (c[i] > 0) {
+					q += overhead;
 				}
 			}
 		}
 		for (int i = 0; i < carga.length; i++) {
-			System.out.println(carga[i]);
 			n += carga[i];
 			if (i > 0) {
-				n += overhead;
+				o += overhead;
 			}
 		}
-		return n + n;
+		// System.out.println(n);
+		// System.out.println((o + q));
+		return (o / (o + q)) * 100;
 	}
 
 	public double cpu(int[] carga, double total) {
@@ -92,23 +96,26 @@ public class Calculo {
 		return turn / carga.length;
 	}
 
-	public double tempoResposta(double overhead, int[] carga, int[] chegada) {
-		double tr = 0.0;
-		double aux = 0.0;
+	public double tempoResposta(int quantum, double overhead, int[] carga,
+			int[] chegada) {
+		double soma = 0;
+		int vezes = 0;
 		for (int i = 0; i < carga.length; i++) {
 			if (i > 0) {
-				for (int j = 0; j <= i; j++) {
-					if(j < (i)){
-						aux += carga[j] + overhead - chegada[j];
+				if (carga[i - 1] >= 10) {
+					while (carga[i - 1] >= 10) {
+						soma += (carga[i - 1] + overhead) - chegada[i - 1];
+						vezes++;
+						carga[i - 1] += -quantum;
 					}
+				} else {
+					soma += (carga[i - 1] + overhead) - chegada[i - 1];
+					vezes++;
 				}
-//				System.out.println(aux);
-//				System.out.println("-----------------------");
-				tr += aux;
-				aux = 0;
 			}
 		}
-		return tr / carga.length;
+
+		return soma / vezes;
 	}
 
 }

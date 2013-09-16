@@ -43,6 +43,19 @@ public class FilaProntos extends Arquivo{
 		return corrigir;
 	}
 	
+	protected int[] psChegada(String[] args){
+		ordenar = new Ordenar();
+		try {
+			processos = new Processos(args);
+		} catch (NumberFormatException | IOException e) {
+			e.printStackTrace();
+			System.out.println("Erro Processos");
+		}
+		
+		int[] corrigir = ordenar.ordenar(processos.getPrioridade(), processos.getChegada());
+		return corrigir;
+	}
+	
 	protected int[] psCarga(String[] args){
 		ordenar = new Ordenar();
 		try {
@@ -65,10 +78,10 @@ public class FilaProntos extends Arquivo{
 			System.out.println("Erro Processos");
 		}
 		
-		int[] corrigir = ordenar.ordenar(processos.getCarga(), processos.getPid());
-		for (int i = 0; i < corrigir.length; i++) {
-			System.out.println(corrigir[i]);
-		}
+		int[] corrigir = ordenar.ordenar(processos.getPrioridade(), processos.getPid());
+//		for (int i = 0; i < corrigir.length; i++) {
+//			System.out.println(corrigir[i]);
+//		}
 		return corrigir;
 	}
 	
