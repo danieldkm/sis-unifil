@@ -1,18 +1,22 @@
-package dia0108;
+package teste;
 
-public class teste {
 
-	/**
-	 * @param args
-	 */
+public class testando {
+
 	public static void main(String[] args) {
 		int[] v = new int[5];
+		int[] v2 = new int[5];
 
 		v[0] = 1;
 		v[1] = 20;
 		v[2] = 50;
 		v[3] = 6;
 		v[4] = 0;
+		v2[0] = 11;
+		v2[1] = 12;
+		v2[2] = 13;
+		v2[3] = 9;
+		v2[4] = 7;
 		for (int i = 0; i < v.length; i++) {
 			if (i == 4) {
 				System.out.print(v[i] + "]\n");
@@ -23,13 +27,13 @@ public class teste {
 			}
 		}
 		
-		BubbleSort bs = new BubbleSort();
+		Bolha b = new Bolha();
 
-		int[] ordenado = bs.ordenar(v);
+		int[] ordenado = b.bolha(v);
 
 		for (int i = 0; i < ordenado.length; i++) {
 			if (i == 4) {
-				System.out.print(ordenado[i] + "] ordenar1\n");
+				System.out.print(ordenado[i] + "] Bolha\n");
 			} else if (i == 0) {
 				System.out.print("[" + ordenado[i] + " - ");
 			} else {
@@ -37,16 +41,29 @@ public class teste {
 			}
 		}
 		
-		
-		int[] ordenado2 = bs.ordenar2(v);
+		Selecionar s = new Selecionar();
+		int[] ordenado2 = s.selecionar(v);
 
 		for (int i = 0; i < ordenado2.length; i++) {
 			if (i == 4) {
-				System.out.print(ordenado2[i] + "] ordenar2 ");
+				System.out.print(ordenado2[i] + "] Selecionar\n");
 			} else if (i == 0) {
 				System.out.print("[" + ordenado2[i] + " - ");
 			} else {
 				System.out.print(ordenado2[i] + " - ");
+			}
+		}
+		
+		INserir in = new INserir();
+		int[] ordenado3 = in.inserir(v);
+
+		for (int i = 0; i < ordenado3.length; i++) {
+			if (i == 4) {
+				System.out.print(ordenado3[i] + "] Inserir\n");
+			} else if (i == 0) {
+				System.out.print("[" + ordenado3[i] + " - ");
+			} else {
+				System.out.print(ordenado3[i] + " - ");
 			}
 		}
 
