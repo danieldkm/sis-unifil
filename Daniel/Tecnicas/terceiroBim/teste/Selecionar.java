@@ -17,4 +17,20 @@ public class Selecionar {
 		}
 		return vetor;
 	}
+	
+	public int[] select (int [] vetor){
+		int aux = 0, indiceMin = 0;
+		for (int i = 0; i < vetor.length; i++){
+			indiceMin = i;
+			for (int j = i + 1; j < vetor.length; j++){
+				if(vetor[j] < vetor[indiceMin]){
+				indiceMin = j;
+				}
+			}
+			aux = vetor[i];
+			vetor[i] = vetor[indiceMin];
+			vetor[indiceMin] = aux;
+		}
+		return vetor;
+	}
 }
