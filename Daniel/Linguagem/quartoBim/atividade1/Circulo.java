@@ -2,22 +2,27 @@ package atividade1;
 
 public class Circulo extends ObjetoGeometrico {
 
-	public Circulo(int centro, int raio) {
-		super(centro, raio);
+	private int centro;
+	private int raio;
+	
+	public Circulo(int x, int y, int centro, int raio) {
+		super(x, y);
+		this.centro = centro;
+		this.raio = raio;
 	}
 	
 	@Override
 	public int calcularArea() {
-		return (int) (Math.PI * super.getD1() * super.getD2());
+		return (int) (Math.PI * centro * raio);
 	}
 	
 	@Override
 	public int calcularPerimetro() {
-		return (int) (2 * Math.PI * super.getD2());
+		return (int) (2 * Math.PI * raio);
 	}
 	
 	@Override
 	public String toString(){
-		return "Area do Circulo é:" + calcularArea() + "\nPerimetro do Circulo é: " + calcularPerimetro();
+		return super.toString()+ "\nArea do Circulo é:" + calcularArea() + "\nPerimetro do Circulo é: " + calcularPerimetro();
 	}
 }

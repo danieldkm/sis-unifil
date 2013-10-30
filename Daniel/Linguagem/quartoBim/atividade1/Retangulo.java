@@ -2,24 +2,46 @@ package atividade1;
 
 public class Retangulo extends ObjetoGeometrico {
 
-	public Retangulo(int base, int altura) {
-		super(base, altura);
+	private int base;
+	private int altura;
+
+	public Retangulo(int x, int y, int base, int altura) {
+		super(x, y);
+		this.base = base;
+		this.altura = altura;
+	}
+
+	public int getBase() {
+		return base;
+	}
+
+	public void setBase(int base) {
+		this.base = base;
+	}
+
+	public int getAltura() {
+		return altura;
+	}
+
+	public void setAltura(int altura) {
+		this.altura = altura;
 	}
 
 	@Override
 	public int calcularArea() {
-		return super.getD1() * super.getD2();
+		return base * altura;
 	}
 
 	@Override
 	public int calcularPerimetro() {
-		// TODO  2*b+2*h
-		return 2 * super.getD1() + 2 * super.getD2();
+		// TODO 2*b+2*h
+		return 2 * base + 2 * altura;
 	}
 
 	@Override
 	public String toString() {
-		return "Area do Retangulo é:" + calcularArea() + "\nPerimetro do Retangulo é: " + calcularPerimetro();
+		return super.toString() + "\nArea é:" + calcularArea()
+				+ "\nPerimetro é: " + calcularPerimetro();
 	}
 
 }
