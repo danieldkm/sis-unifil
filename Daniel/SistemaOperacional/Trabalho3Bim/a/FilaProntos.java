@@ -1,3 +1,4 @@
+package a;
 import java.io.IOException;
 
 public class FilaProntos extends Arquivo{

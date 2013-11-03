@@ -1,3 +1,4 @@
+package a;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -28,11 +29,11 @@ public class Processos {
 		chegada = null;
 		carga = null;
 		prioridade = null;
-		oPid = new Ordenar();
-		oChegada = new Ordenar();
-		oCarga = new Ordenar();
-		oPrioridade = new Ordenar();
-		ordenar = new Ordenar(args.length);
+//		oPid = new Ordenar();
+//		oChegada = new Ordenar();
+//		oCarga = new Ordenar();
+//		oPrioridade = new Ordenar();
+//		ordenar = new Ordenar(args.length);
 	}
 	
 	/**

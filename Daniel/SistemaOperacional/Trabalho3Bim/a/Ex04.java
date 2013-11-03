@@ -1,3 +1,4 @@
+package a;
 import java.io.IOException;
 
 public class Ex04 extends FilaProntos {
