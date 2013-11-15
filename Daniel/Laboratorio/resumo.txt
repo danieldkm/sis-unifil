@@ -1,0 +1,4 @@
+Quantidade executada: 1
+Quantidade incluida: 1
+Quantidade consultada: 1
+Quantidade registro horas: 1

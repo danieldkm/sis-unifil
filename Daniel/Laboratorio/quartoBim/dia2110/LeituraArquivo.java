@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 import java.io.*;
 
 public class LeituraArquivo {
-	static String arquivo = "C:/Documents and Settings/121023035/Meus documentos/logProjeto.txt";
+	static String arquivo = "C:/Users/Programador/Documents/log.txt";
 
 	public static void main(String args[]) {
 		File f = new File("resumo.txt");//onde colocar isso é importante  

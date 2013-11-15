@@ -1,13 +1,12 @@
 package dia2110;
 
-import javax.swing.JOptionPane;
-
-import sun.text.resources.FormatData;
-
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.GregorianCalendar;
+
+import javax.swing.JOptionPane;
 
 public class Exemplo1Agenda {
 
@@ -16,7 +15,7 @@ public class Exemplo1Agenda {
 
 	public Exemplo1Agenda() {
 		try {
-			saida = new BufferedWriter(new FileWriter(arquivo, true));
+			saida = new BufferedWriter(new FileWriter(arquivo, false));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -31,8 +30,8 @@ public class Exemplo1Agenda {
 			JOptionPane.showMessageDialog(null, "Erro de gravação");
 		}
 	}
-	
-	public void fecharArquivo(){
+
+	public void fecharArquivo() {
 		try {
 			saida.close();
 		} catch (IOException e) {
@@ -42,7 +41,8 @@ public class Exemplo1Agenda {
 
 	public String getDataAtual() {
 		Date data = new Date();
-		SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		SimpleDateFormat formatador = new SimpleDateFormat(
+				"dd/MM/yyyy HH:mm:ss");
 		return formatador.format(data);
 	}
 }

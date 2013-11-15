@@ -22,7 +22,7 @@ public class EscolherArquivo {
 		return null;
 	}
 
-//	public static void main(String[] args) {
-//		System.out.println(caminho());
-//	}
+	public static void main(String[] args) {
+		System.out.println(caminho());
+	}
 }
