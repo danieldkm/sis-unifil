@@ -195,30 +195,29 @@ public class ArvoreBinaria {
 	int pDireita = 0;
 
 	public void percorreRaiz(Node no) {
-		System.out.println("valor do " + no.getData());
-		if(no != null){
-			if(no.getEsquerda() != null){
+//		System.out.println("valor do " + no.getData());
+		if (no != null) {
+			if (no.getEsquerda() != null) {
 				verificaRaiz(no.getEsquerda());
 				percorreRaiz(no.getEsquerda());
 				pEsquerda++;
 			}
-			if(no.getDireita() != null){
+			if (no.getDireita() != null) {
 				verificaRaiz(no.getDireita());
 				percorreRaiz(no.getDireita());
 				pDireita++;
 			}
 		}
-		
-		if((pEsquerda - pDireita) > 1 || (pEsquerda - pDireita) < -1){
+
+		if ((pEsquerda - pDireita) > 1 || (pEsquerda - pDireita) < -1) {
 			perfeitamenteBalanceada = false;
 		}
 	}
-	
+
 	boolean balanceada = true;
 	boolean perfeitamenteBalanceada = true;
-	
 
-	private void verificaRaiz(Node no){
+	private void verificaRaiz(Node no) {
 		Node a = no;
 		esquerda = 0;
 		direita = 0;
@@ -234,7 +233,7 @@ public class ArvoreBinaria {
 				}
 			}
 		}
-		
+
 		a = no;
 		while (a != null) {
 			if (a.getDireita() != null) {
@@ -248,17 +247,74 @@ public class ArvoreBinaria {
 				}
 			}
 		}
-		
+
 		if ((esquerda - direita) > 1 || (esquerda - direita) < -1) {
 			balanceada = false;
 		}
-		
+
 	}
-	
-	
+
 	public void listarNodesDaArvore() {
-		System.out.println("NÃ³  |  Grau  |  NÃ­vel ");
-		System.out.println("A  |  2  |  0");
+		System.out.println("Nó  |  Grau  |  Nível ");
+		if (raiz.getDireita() != null) {
+			grau++;
+		}
+		if (raiz.getEsquerda() != null) {
+			grau++;
+		}
+		System.out.println(raiz.getData() + "  |  " + grau + "     |   " + nivel);
+		grau = 0;
+
+		percorreNodesDaAvore(raiz);
+	}
+
+	int grau = 0;
+	int nivel = 0;
+
+	private void getNivelDaArvore(Node no, int valor) {
+		if (no.getData() != valor) {
+			if (valor < no.getData()) {
+				nivel++;
+				getNivelDaArvore(no.getEsquerda(), valor);
+			} else if (valor > no.getData()) {
+				nivel++;
+				getNivelDaArvore(no.getDireita(), valor);
+			}
+		}
+	}
+
+	private void percorreNodesDaAvore(Node no) {
+		if (no != null) {
+			if (no.getEsquerda() != null) {
+				if (no.getEsquerda().getEsquerda() != null) {
+					grau++;
+					if (no.getEsquerda().getDireita() != null) {
+						grau++;
+					}
+				}
+				getNivelDaArvore(raiz, no.getEsquerda().getData());
+				System.out.println(no.getEsquerda().getData() + "  |  " + grau
+						+ "     |   " + nivel);
+				nivel = 0;
+				grau = 0;
+				percorreNodesDaAvore(no.getEsquerda());
+			}
+
+			if (no.getDireita() != null) {
+				if (no.getDireita().getDireita() != null) {
+					grau++;
+					if (no.getDireita().getEsquerda() != null) {
+						grau++;
+					}
+				}
+				getNivelDaArvore(raiz, no.getDireita().getData());
+				System.out.println(no.getDireita().getData() + "  |  " + grau
+						+ "     |   " + nivel);
+				nivel = 0;
+				grau = 0;
+				percorreNodesDaAvore(no.getDireita());
+			}
+		}
 	}
 
 }

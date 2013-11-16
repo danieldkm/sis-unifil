@@ -10,16 +10,12 @@ public class TesteArvore {
 
 		arvoreBinaria.imprimir();
 		
-		
-		
 		arvoreBinaria.inserirNaArvore(5);
 		arvoreBinaria.inserirNaArvore(7);
 		arvoreBinaria.inserirNaArvore(4);
 		arvoreBinaria.inserirNaArvore(3);
 		arvoreBinaria.inserirNaArvore(6);
 		arvoreBinaria.inserirNaArvore(8);
-		
-		
 		arvoreBinaria.inserirNaArvore(13);
 		arvoreBinaria.inserirNaArvore(15);
 		arvoreBinaria.inserirNaArvore(11);
@@ -45,12 +41,14 @@ public class TesteArvore {
 //		arvoreBinaria.inserirNaArvore(19);
 //		arvoreBinaria.inserirNaArvore(21);
 		arvoreBinaria.imprimir();
-//		System.out.println("\n\n\n\nRemover");
-//		arvoreBinaria.removerNaArvore(7);
-//		arvoreBinaria.imprimir();
 		
-		System.out.println("Is Balanced? " + arvoreBinaria.isBalanceada());
-		System.out.println("Is perfectly balanced? " + arvoreBinaria.isBalanceada());
+		System.out.println("\n\n\nRemover");
+		arvoreBinaria.removerNaArvore(7);
+		arvoreBinaria.imprimir();
+		
+		System.out.println("\n\nIs Balanced? " + arvoreBinaria.isBalanceada()+"\n");
+		System.out.println("Is perfectly balanced? " + arvoreBinaria.isBalanceada()+"\n");
+		arvoreBinaria.listarNodesDaArvore();
 		
 	}
 
