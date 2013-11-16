@@ -153,32 +153,6 @@ public class ArvoreBinaria {
 		}
 	}
 
-	private int he = 0;
-	private int hd = 0;
-
-	private void per(Node no) {
-		if (no.getEsquerda() != null) {
-			he ++;
-			per(no.getEsquerda());
-		} else if (no.getDireita() != null) {
-			hd ++;
-			per(no.getDireita());
-		}
-	}
-
-	public boolean isPerfeitamenteBalanceada() {
-		Node esquerda = raiz.getEsquerda();
-//		emordem(esquerda);
-//		System.out.println("\n\n\n");
-//		Node direita = raiz.getDireita();
-//		emordem(direita);
-//		System.out.println("\n\n\n");
-		per(esquerda);
-		System.out.println("he " + he);
-		System.out.println("hd " + hd);
-		return true;
-	}
-
 	public void prefixado(Node no) {
 		if (no != null) {
 			System.out.print(no.getData() + " ");
@@ -195,7 +169,6 @@ public class ArvoreBinaria {
 		}
 	}
 
-
 	public void emordem(Node no) {
 		if (no != null) {
 			emordem(no.getEsquerda());
@@ -204,10 +177,85 @@ public class ArvoreBinaria {
 		}
 	}
 
-	public boolean isBalanceada() {
-		return true;
+	public boolean isPerfeitamenteBalanceada() {
+		Node aux = raiz;
+		percorreRaiz(aux);
+		return perfeitamenteBalanceada;
 	}
 
+	public boolean isBalanceada() {
+		Node aux = raiz;
+		percorreRaiz(aux);
+		return balanceada;
+	}
+
+	int esquerda = 0;
+	int direita = 0;
+	int pEsquerda = 0;
+	int pDireita = 0;
+
+	public void percorreRaiz(Node no) {
+		System.out.println("valor do " + no.getData());
+		if(no != null){
+			if(no.getEsquerda() != null){
+				verificaRaiz(no.getEsquerda());
+				percorreRaiz(no.getEsquerda());
+				pEsquerda++;
+			}
+			if(no.getDireita() != null){
+				verificaRaiz(no.getDireita());
+				percorreRaiz(no.getDireita());
+				pDireita++;
+			}
+		}
+		
+		if((pEsquerda - pDireita) > 1 || (pEsquerda - pDireita) < -1){
+			perfeitamenteBalanceada = false;
+		}
+	}
+	
+	boolean balanceada = true;
+	boolean perfeitamenteBalanceada = true;
+	
+
+	private void verificaRaiz(Node no){
+		Node a = no;
+		esquerda = 0;
+		direita = 0;
+		while (a != null) {
+			if (a.getEsquerda() != null) {
+				esquerda++;
+				a = a.getEsquerda();
+			} else {
+				if (a.getDireita() != null) {
+					a = a.getDireita();
+				} else {
+					a = a.getEsquerda();
+				}
+			}
+		}
+		
+		a = no;
+		while (a != null) {
+			if (a.getDireita() != null) {
+				direita++;
+				a = a.getDireita();
+			} else {
+				if (a.getEsquerda() != null) {
+					a = a.getEsquerda();
+				} else {
+					a = a.getDireita();
+				}
+			}
+		}
+		
+		if ((esquerda - direita) > 1 || (esquerda - direita) < -1) {
+			balanceada = false;
+		}
+		
+	}
+	
+	
 	public void listarNodesDaArvore() {
 		System.out.println("Nó  |  Grau  |  Nível ");
 		System.out.println("A  |  2  |  0");
