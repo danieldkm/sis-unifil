@@ -37,9 +37,9 @@ public class Config extends Processos{
 		return vol;
 	}
 	
-	private File arquivo;
+	protected static File arquivo;
 	protected BufferedWriter bw;
-	protected BufferedReader br;
+	protected static BufferedReader br;
 
 	/**
 	 * @param args
@@ -47,7 +47,7 @@ public class Config extends Processos{
 	 * @throws IOException
 	 *             - lança esssa excessão caso der erro ao ler o arquivo
 	 * */
-	protected void lerArquivo(String[] args) throws IOException {
+	public void lerArquivo(String[] args) throws IOException {
 		arquivo = new File(args[1]);
 		br = new BufferedReader(new FileReader(arquivo));
 		if (!arquivo.exists()) {

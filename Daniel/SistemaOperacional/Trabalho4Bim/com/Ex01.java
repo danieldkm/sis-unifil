@@ -1,5 +1,10 @@
 package com;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 /**
@@ -16,6 +21,11 @@ public class Ex01 extends Config {
 	 *             - lança esssa excessão caso der erro ao ler o arquivo
 	 * */
 	public void executar(String[] args) throws IOException {
+		File f = new File("processos.csv");//onde colocar isso é importante
+		FileWriter fw = new FileWriter(f);  
+        BufferedWriter bw = new BufferedWriter(fw);
+		
+		
 		editarArquivo(args);
 
 		bw.write("A;9417;1;0");
@@ -46,6 +56,7 @@ public class Ex01 extends Config {
 		lerArquivo(args);
 	}
 
+	@Override
 	public void lerArquivo(String[] args) throws IOException {
 		Processos p = new Processos(args);
 //		char[] pid = p.getPid();
@@ -53,7 +64,7 @@ public class Ex01 extends Config {
 //		int[] c = p.getChegada();
 //		int[] s = p.getSaida();
 		System.out.println("____________________________________");
-		System.out.println("Pid    tamanho     chegada     saída");
+		System.out.println("Pid    tamanho     chegada     saida");
 		System.out.println("____________________________________");
 		for (int i = 0; i < saida.length; i++) {
 			System.out.println(" " + pid[i] + "      " + tamanho[i]

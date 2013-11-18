@@ -27,7 +27,7 @@ public class Ex03 extends Config {
 		memoria = Integer.parseInt(args[2]);
 		chunk = Integer.parseInt(args[3]);
 		totalChunks = memoria / chunk;
-		System.out.println("Memória física: " + memoria + " palavras");
+		System.out.println("Memoria fisica: " + memoria + " palavras");
 		System.out.println("Chunk swpping: " + chunk);
 		System.out.println("Total chunks: " + (memoria / chunk));
 		

@@ -9,7 +9,7 @@ public class Ex06 extends Config {
 		// primeira parte
 		Ex03 _3 = new Ex03();
 		_3.executar(args);
-		System.out.println("Ocupação Inicial:");
+		System.out.println("Ocupacao Inicial:");
 		System.out.println("H|0|" + totalChunks);
 		ocupacaoPid(args);
 		processo = new Processos(args);
@@ -51,7 +51,7 @@ public class Ex06 extends Config {
 				}
 			}
 			if ((soma + ocupacao[i]) > totalChunks) {
-				System.out.println("\n"+"Inserido processo " + pid[i] + ", ocupação de "
+				System.out.println("\n"+"Inserido processo " + pid[i] + ", ocupacao de "
 						+ ocupacao[i] + " chunks");
 				removerPid(ocupacao[i]);// TODO
 				inserir(i, args);
@@ -201,11 +201,11 @@ public class Ex06 extends Config {
 
 	private void imprimir(int i, String tipo) {
 		if (tipo.equals("Inserido")) {
-			System.out.println("\n"+tipo + " processo " + pid[i] + ", ocupação de "
+			System.out.println("\n"+tipo + " processo " + pid[i] + ", ocupacao de "
 					+ ocupacao[i] + " chunks");
 		} else if (tipo.equals("Removido")) {
-			System.out.println("AVISO: Compressão de memória");
-			System.out.println(tipo + " processo " + memoria.get(i).getPidAtual() + ", liberação de "
+			System.out.println("AVISO: Compressao de memoria");
+			System.out.println(tipo + " processo " + memoria.get(i).getPidAtual() + ", liberacao de "
 					+ ocupacao[i] + " chunks");
 		}
 		texto = "";
@@ -225,8 +225,8 @@ public class Ex06 extends Config {
 	}
 	
 	private void imprimir2(int i, String tipo){
-		System.out.println("AVISO: Compressão de memória");
-		System.out.println(tipo + " processo " + memoria.get(i).getPidAtual() + ", liberação de "
+		System.out.println("AVISO: Compressao de memoria");
+		System.out.println(tipo + " processo " + memoria.get(i).getPidAtual() + ", liberacao de "
 				+ ocupacao[i] + " chunks");
 		memoria.remove(i);
 		texto = "";

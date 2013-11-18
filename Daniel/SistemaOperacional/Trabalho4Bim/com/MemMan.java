@@ -14,8 +14,7 @@ public class MemMan extends Config {
 		Ex06 ex06 = new Ex06();
 		Ex07 ex07 = new Ex07();
 		Ex08 ex08 = new Ex08();
-		System.out.println("Didite o exercicio da sequencia de 1 a 8");
-		System.out.println("Exercício " + args[0]);
+		System.out.println("Didite o exercicio de 1 a 8");
 		boolean ok = true;
 		String continuar = "";
 		while (ok) {
@@ -58,9 +57,9 @@ public class MemMan extends Config {
 			if(continuar.equals("s")){
 				ok = false;
 			} else {
-				System.out.println("Didite o exercicio da sequencia de 1 a 7");
-				System.out.println("Exercício " + args[0]);
+				System.out.println("Didite o exercicio de 1 a 8");
 				args[0] = scanner.nextLine().toLowerCase();
+				System.out.println("Exercicio " + args[0]);
 			}
 		}
 	}

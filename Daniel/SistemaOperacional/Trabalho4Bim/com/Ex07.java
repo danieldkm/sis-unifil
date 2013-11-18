@@ -16,7 +16,7 @@ public class Ex07 extends Config {
 			_4.novoTexto(pidRemovido.get(0).getPidAtual().charAt(0),
 					"inserido", args);
 			pidRemovido.remove(0);
-			System.out.println("Finalizar programa?S/N");
+			System.out.println("Finalizar ex07?S/N");
 			co = scanner.nextLine().toLowerCase();;
 			if(co.equals("s")){
 				continuar = false;

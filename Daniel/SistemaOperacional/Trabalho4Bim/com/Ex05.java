@@ -12,13 +12,13 @@ public class Ex05 extends Config{
 	public void executar(String[] args) throws IOException {
 		Ex03 _3 = new Ex03();
 		_3.executar(args);
-		System.out.println("Ocupação Inicial:");
+		System.out.println("Ocupacao Inicial:");
 		System.out.println("H|0|" + totalChunks);
 		ocupacaoPid(args);
 		for (int i = 0; i < processos.size(); i++) {
 			for (int j = 0; j < processos.get(i).size(); j++) {
 				if(j == 0){
-					System.out.println(processos.get(i).get(j).getFuncao() + " processo " + processos.get(i).get(j).getPidEscolhido() +", ocupação de " + processos.get(i).get(j).getTamanhoPid() + " chunks");
+					System.out.println(processos.get(i).get(j).getFuncao() + " processo " + processos.get(i).get(j).getPidEscolhido() +", ocupacao de " + processos.get(i).get(j).getTamanhoPid() + " chunks");
 					texto += processos.get(i).get(j).getTipoOcupacao() + "|" + processos.get(i).get(j).getPosicao() + "|" + processos.get(i).get(j).getTamanhoPid();
 				} else {
 					texto += " -> " +  processos.get(i).get(j).getTipoOcupacao() + "|" + processos.get(i).get(j).getPosicao()+"|" + processos.get(i).get(j).getTamanhoPid();

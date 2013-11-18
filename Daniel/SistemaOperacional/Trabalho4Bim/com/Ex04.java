@@ -20,7 +20,7 @@ public class Ex04 extends Config {
 		// primeira parte
 		Ex03 _3 = new Ex03();
 		_3.executar(args);
-		System.out.println("Ocupação inicial:");
+		System.out.println("Ocupacao inicial:");
 		texto = "";
 		for (int i = 0; i <= totalChunks; i++) {
 			if ((totalChunks) == i) {
@@ -79,7 +79,7 @@ public class Ex04 extends Config {
 				tipo = "removido";
 				inserirRemover(tipo, pid, args);
 			} else {
-				System.out.println("Memória cheia....");
+				System.out.println("Memoria cheia....");
 				System.out.println("Tamanho do chunks " + aux);
 				tipo = "removido";
 				verificaRemover = 0;
@@ -174,7 +174,7 @@ public class Ex04 extends Config {
 						novoTexto(pid, tipo, args);
 					}
 				} else {
-					System.out.println("Pid não encontrado");
+					System.out.println("Pid nao encontrado");
 				}
 			}
 		}
@@ -220,7 +220,7 @@ public class Ex04 extends Config {
 	private void resetarTexto(String tipo, char pid, String[] args)
 			throws IOException {
 		if (tipo.equals("inserido")) {
-			System.out.println(tipo + " processo " + pid + ", ocupação de "
+			System.out.println(tipo + " processo " + pid + ", ocupacao de "
 					+ aux + " chunks");
 		}
 		// String novoPid = pid + "";
