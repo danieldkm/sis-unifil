@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Config extends Processos{
@@ -14,6 +15,17 @@ public class Config extends Processos{
 	protected static int memoria;
 	protected static int chunk;
 	protected static Scanner scanner = new Scanner(System.in);
+	protected static int[] ocupacao;
+	protected static ArrayList<ArrayList<Processos>> processos = new ArrayList<>();
+	protected static ArrayList<Processos> pidRemovido = new ArrayList<>();
+	
+	protected void ocupacaoPid(String[] args) throws IOException{
+		new Processos(args);
+		ocupacao = new int[12];
+		for (int i = 0; i < pid.length; i++) {
+			ocupacao[i] = (int) Math.ceil(((double) tamanho[i] / chunk));
+		}
+	}
 	
 	protected String acertarString(String tam, int t) {
 		String vol = "";

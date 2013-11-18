@@ -9,6 +9,12 @@ import java.io.IOException;
  * */
 public class Processos {
 
+	private String pidAtual;
+	private String tipoOcupacao;
+	private int posicao;
+	private int tamanhoPid;
+	private String funcao;
+	private String pidEscolhido;
 	protected BufferedReader br;
 	protected Ordenar oPid;
 	protected Ordenar oChegada;
@@ -19,6 +25,56 @@ public class Processos {
 	protected static int[] tamanho;
 	protected static int[] chegada;
 	protected static int[] saida;
+	
+	
+	
+	public String getPidEscolhido() {
+		return pidEscolhido;
+	}
+
+	public void setPidEscolhido(String pidEscolhido) {
+		this.pidEscolhido = pidEscolhido;
+	}
+
+	public String getFuncao() {
+		return funcao;
+	}
+
+	public void setFuncao(String funcao) {
+		this.funcao = funcao;
+	}
+
+	public String getPidAtual() {
+		return pidAtual;
+	}
+
+	public void setPidAtual(String pidAtual) {
+		this.pidAtual = pidAtual;
+	}
+
+	public String getTipoOcupacao() {
+		return tipoOcupacao;
+	}
+
+	public void setTipoOcupacao(String tipoOcupacao) {
+		this.tipoOcupacao = tipoOcupacao;
+	}
+
+	public int getPosicao() {
+		return posicao;
+	}
+
+	public void setPosicao(int posicao) {
+		this.posicao = posicao;
+	}
+
+	public int getTamanhoPid() {
+		return tamanhoPid;
+	}
+
+	public void setTamanhoPid(int tamanhoPid) {
+		this.tamanhoPid = tamanhoPid;
+	}
 
 	public Processos() {
 		pid = null;
