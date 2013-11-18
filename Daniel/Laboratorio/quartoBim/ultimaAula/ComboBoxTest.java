@@ -23,7 +23,8 @@ public class ComboBoxTest extends JFrame {
 
 		//configura a JComboBox e registra o tratador de eventos
 		imagesComboBox = new JComboBox(nomes);
-		imagesComboBox.setMaximumRowCount(3);
+		imagesComboBox.addItem("aaa");
+		imagesComboBox.setMaximumRowCount(4);
 
 		container.add(imagesComboBox);
 
