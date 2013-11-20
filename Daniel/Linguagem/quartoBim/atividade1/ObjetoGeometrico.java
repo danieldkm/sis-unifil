@@ -4,6 +4,9 @@ public class ObjetoGeometrico {
 
 	private int x;
 	private int y;
+	
+	public ObjetoGeometrico() {
+	}
 
 	public ObjetoGeometrico(int x, int y) {
 		this.x = x;

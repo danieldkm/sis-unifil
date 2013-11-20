@@ -4,12 +4,20 @@ public class Retangulo extends ObjetoGeometrico {
 
 	private int base;
 	private int altura;
-
+	private Ponto2D p2D_1;
+	private Ponto2D p2D_2;
+	
 	public Retangulo(int x, int y, int base, int altura) {
 		super(x, y);
 		this.base = base;
 		this.altura = altura;
 	}
+	
+	public Retangulo(Ponto2D _2D_1, Ponto2D _2D_2) {
+		p2D_1 = _2D_1;
+		p2D_2 = _2D_2;
+	}
+
 
 	public int getBase() {
 		return base;
