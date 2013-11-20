@@ -86,32 +86,40 @@ public class ArvoreBinaria {
 		if (valor < node.getData()) {
 			if (node.getEsquerda().getData() == valor) {
 				/*
-				 * se o valor da esquerda e esquerda da raiz e esquerda e
-				 * direita da raiz for diferente de nulo então pegar esquerda e
-				 * esquerda da raiz e setar a direita com o valor da esquerda e
-				 * direita da raiz logo em seguida setar a esquerda da raiz,
-				 * pegando o valor da esquerda e esquerda da raiz
+				 * se o node pela esquerda.esquerda dele for diferente de nullo
+				 * e o node pela esquerda.direita dele for diferente de nullo
+				 * então: criar dois nodes esquerda e direita, recebendo seus
+				 * nodes correspondentes e o node pela esquerda recebe valor
+				 * nullo chama o metodo inserir2 para realocar os nodes esquerda
+				 * e direita novamente
 				 */
 				if (node.getEsquerda().getEsquerda() != null
 						&& node.getEsquerda().getDireita() != null) {
-					System.out.println("A esquerda da raiz, Inserindo o valor "
-							+ node.getEsquerda().getEsquerda().getData()
-							+ " no lugar do " + valor);
-					node.getEsquerda().getEsquerda()
-							.setDireita(node.getEsquerda().getDireita());
-					node.setEsquerda(node.getEsquerda().getEsquerda());
+					Node esquerda = node.getEsquerda().getEsquerda();
+					Node direita = node.getEsquerda().getDireita();
+					node.setEsquerda(null);
+					inserir2(raiz, esquerda);
+					inserir2(raiz, direita);
 				} else if (node.getEsquerda().getEsquerda() != null) {
-					System.out.println("A esquerda da raiz, Inserindo o valor "
-							+ node.getEsquerda().getEsquerda().getData()
-							+ " no lugar do " + valor);
-					node.setEsquerda(node.getEsquerda().getEsquerda());
+					/*
+					 * se apenas o node pela esquerda.esquerda for nullo então
+					 * fazer os mesmos passos do anteriror porem apenas para o
+					 * node da esquerda.esquerda!
+					 */
+					Node esquerda = node.getEsquerda().getEsquerda();
+					node.setEsquerda(null);
+					inserir2(raiz, esquerda);
 				} else if (node.getEsquerda().getDireita() != null) {
-					System.out.println("A direita da raiz, Inserindo o valor "
-							+ node.getEsquerda().getDireita().getData()
-							+ " no lugar do " + valor);
-					node.setEsquerda(node.getEsquerda().getDireita());
-				} else {
-					System.out.println("A esquerda e direita da raiz é nulo");
+					/*
+					 * se apenas o node pela esquerda.direita for nullo então
+					 * fazer os mesmos passos do primeiro if porem apenas para o
+					 * node da esquerda.direita!
+					 */
+					Node direita = node.getEsquerda().getDireita();
+					node.setEsquerda(null);
+					inserir2(raiz, direita);
+				} else { // caso for nullo para os ambos os lados, simplesmente
+							// setar nullo
 					node.setEsquerda(null);
 				}
 			} else {
@@ -124,24 +132,20 @@ public class ArvoreBinaria {
 			if (node.getDireita().getData() == valor) {
 				if (node.getDireita().getEsquerda() != null
 						&& node.getDireita().getDireita() != null) {
-					System.out.println("A direita da raiz, Inserindo o valor "
-							+ node.getDireita().getEsquerda().getData()
-							+ " no lugar do " + valor);
-					node.getDireita().getEsquerda()
-							.setDireita(node.getDireita().getDireita());
-					node.setDireita(node.getDireita().getEsquerda());
+					Node esquerda = node.getDireita().getEsquerda();
+					Node direita = node.getDireita().getDireita();
+					node.setDireita(null);
+					inserir2(raiz, esquerda);
+					inserir2(raiz, direita);
 				} else if (node.getDireita().getEsquerda() != null) {
-					System.out.println("A esquerda da raiz, Inserindo o valor "
-							+ node.getDireita().getEsquerda().getData()
-							+ " no lugar do " + valor);
-					node.setDireita(node.getDireita().getEsquerda());
+					Node esquerda = node.getDireita().getEsquerda();
+					node.setDireita(null);
+					inserir2(raiz, esquerda);
 				} else if (node.getDireita().getDireita() != null) {
-					System.out.println("A direita da raiz, Inserindo o valor "
-							+ node.getDireita().getDireita().getData()
-							+ " no lugar do " + valor);
-					node.setDireita(node.getDireita().getDireita());
+					Node direita = node.getDireita().getDireita();
+					node.setDireita(null);
+					inserir2(raiz, direita);
 				} else {
-					System.out.println("A esquerda e direita da raiz é nulo");
 					node.setDireita(null);
 				}
 			} else {
@@ -152,6 +156,33 @@ public class ArvoreBinaria {
 			}
 		}
 	}
+
+	private void inserir2(Node node, Node valor) {
+		if (valor.getData() < node.getData()) {
+			if (node.getEsquerda() != null) {
+				inserir2(node.getEsquerda(), valor);
+				System.out.println("node esquerda tem valor "
+						+ node.getEsquerda().getData());
+			} else {
+				System.out.println("  Inserindo node " + valor.getData()
+						+ " a esquerda de " + node.getData());
+				node.setEsquerda(valor);
+			}
+		} else if (valor.getData() > node.getData()) {
+			if (node.getDireita() != null) {
+				inserir2(node.getDireita(), valor);
+				System.out.println("node direita tem valor "
+						+ node.getDireita().getData());
+			} else {
+				System.out.println("  Inserindo node " + valor.getData()
+						+ " a direita de " + node.getData());
+				node.setDireita(valor);
+			}
+		} else {
+			System.out.println(valor + " já existe na arvore");
+		}
+	}
+
 
 	public void prefixado(Node no) {
 		if (no != null) {
@@ -193,9 +224,11 @@ public class ArvoreBinaria {
 	int direita = 0;
 	int pEsquerda = 0;
 	int pDireita = 0;
+	
+	
 
 	public void percorreRaiz(Node no) {
-//		System.out.println("valor do " + no.getData());
+		// System.out.println("valor do " + no.getData());
 		if (no != null) {
 			if (no.getEsquerda() != null) {
 				verificaRaiz(no.getEsquerda());
@@ -262,7 +295,8 @@ public class ArvoreBinaria {
 		if (raiz.getEsquerda() != null) {
 			grau++;
 		}
-		System.out.println(raiz.getData() + "  |  " + grau + "     |   " + nivel);
+		System.out.println(raiz.getData() + "  |  " + grau + "     |   "
+				+ nivel);
 		grau = 0;
 
 		percorreNodesDaAvore(raiz);
@@ -288,9 +322,9 @@ public class ArvoreBinaria {
 			if (no.getEsquerda() != null) {
 				if (no.getEsquerda().getEsquerda() != null) {
 					grau++;
-					if (no.getEsquerda().getDireita() != null) {
-						grau++;
-					}
+				}
+				if (no.getEsquerda().getDireita() != null) {
+					grau++;
 				}
 				getNivelDaArvore(raiz, no.getEsquerda().getData());
 				System.out.println(no.getEsquerda().getData() + "  |  " + grau
@@ -303,9 +337,9 @@ public class ArvoreBinaria {
 			if (no.getDireita() != null) {
 				if (no.getDireita().getDireita() != null) {
 					grau++;
-					if (no.getDireita().getEsquerda() != null) {
-						grau++;
-					}
+				}
+				if (no.getDireita().getEsquerda() != null) {
+					grau++;
 				}
 				getNivelDaArvore(raiz, no.getDireita().getData());
 				System.out.println(no.getDireita().getData() + "  |  " + grau
