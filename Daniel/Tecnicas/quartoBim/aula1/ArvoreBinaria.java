@@ -183,7 +183,6 @@ public class ArvoreBinaria {
 		}
 	}
 
-
 	public void prefixado(Node no) {
 		if (no != null) {
 			System.out.print(no.getData() + " ");
@@ -215,8 +214,8 @@ public class ArvoreBinaria {
 	}
 
 	public boolean isBalanceada() {
-		Node aux = raiz;
-		percorreRaiz(aux);
+		setPercorrer(raiz.getEsquerda());
+		setPercorrer(raiz.getDireita());
 		return balanceada;
 	}
 
@@ -224,8 +223,38 @@ public class ArvoreBinaria {
 	int direita = 0;
 	int pEsquerda = 0;
 	int pDireita = 0;
-	
-	
+
+	private void setPercorrer(Node no) {
+		if (no != null) {
+			System.out.println(no.getData() + " valor do no");
+			if (no.getEsquerda() != null) {
+				esquerda = height(no.getEsquerda());
+				setPercorrer(no.getEsquerda());
+			}
+			if (no.getDireita() != null) {
+				direita = height(no.getDireita());
+				setPercorrer(no.getDireita());
+			}
+			System.out.println("Es " + esquerda + " dir" + direita + " soma " + (esquerda - direita));
+			if ((esquerda - direita) > 1 || (esquerda - direita) < -1) {
+				if (balanceada) {
+					balanceada = false;
+				}
+			}
+		}
+	}
+
+	private int height(Node n) {
+		int u, v;
+		if (n == null)
+			return -1;
+		u = height(n.getEsquerda());
+		v = height(n.getDireita());
+		if (u > v)
+			return u + 1;
+		else
+			return v + 1;
+	}
 
 	public void percorreRaiz(Node no) {
 		// System.out.println("valor do " + no.getData());
@@ -352,3 +381,4 @@ public class ArvoreBinaria {
 	}
 
 }
+
