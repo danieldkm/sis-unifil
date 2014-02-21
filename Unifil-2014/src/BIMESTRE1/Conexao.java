@@ -5,6 +5,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -25,15 +30,15 @@ public class Conexao {
 	public java.sql.Connection getConexao() {
 		try {
 			Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-			// Class.forName("com.mysql.jdbc.Driver");
-			// "jdbc:mysql://localhost/fj21", "root", "");
-			System.out.println("jdbc:mysql://" + ip + ":3306/"+user+","+senha);
-			con = DriverManager.getConnection("jdbc:mysql://" + ip + ":3306/",
+			con = DriverManager.getConnection("jdbc:mysql://" + ip,
 					user, senha);
+			System.out.println("Conectado");
 		} catch (ClassNotFoundException e) {
+			System.out.println("nao Conectado");
 			e.printStackTrace();
 			return null;
 		} catch (SQLException e) {
+			System.out.println("nao Conectado");
 			e.printStackTrace();
 			return null;
 		}
@@ -43,17 +48,17 @@ public class Conexao {
 	public void lerArquivo() {
 		BufferedReader br = null;
 		try {
-			br = new BufferedReader(new FileReader(new File("src/conexao.txt")));
+			br = new BufferedReader(new FileReader(new File("src/Arquivo de configuração.txt")));
 			String next;
 			next = br.readLine();
-			ip = next;
-			System.out.println("IP: " + ip);
+			ip = next.substring(5, next.length());
+//			System.out.println("IP:" + ip);
 			next = br.readLine();
-			user = next;
-			System.out.println("USER: " + user);
+			user = next.substring(10, next.length());;
+//			System.out.println("USER:" + user);
 			next = br.readLine();
-			senha = next;
-			System.out.println("Senha: " + senha);
+			senha = next.substring(10, next.length());;
+//			System.out.println("Senha:" + senha);
 			br.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
