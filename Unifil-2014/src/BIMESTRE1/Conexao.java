@@ -5,15 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
-import com.mysql.jdbc.Connection;
 
 public class Conexao {
 
@@ -24,6 +17,7 @@ public class Conexao {
 	private String ip;
 	private String user;
 	private String senha;
+	private String camanhoArquivo = "src/Arquivo de configuração.txt";
 
 	private java.sql.Connection con;
 
@@ -48,7 +42,7 @@ public class Conexao {
 	public void lerArquivo() {
 		BufferedReader br = null;
 		try {
-			br = new BufferedReader(new FileReader(new File("src/Arquivo de configuração.txt")));
+			br = new BufferedReader(new FileReader(new File(camanhoArquivo)));
 			String next;
 			next = br.readLine();
 			ip = next.substring(5, next.length());
