@@ -21,7 +21,6 @@ public class Controle {
 		FileWriter fw = new FileWriter(file);
 		BufferedWriter bw = new BufferedWriter(fw);
 		
-		bw.write("kct");
 		bw.write("\r\n");
 		bw.flush();
 		bw.close();
