@@ -37,11 +37,12 @@ public class Inserir {
 					new File("insert_people.csv")));
 			String ler;
 			String[] a;
-			Pessoa p = new Pessoa();
+			Pessoa p = null;
 			ArrayList<Pessoa> pessoas = new ArrayList<>();
 			Statement statement = conn.createStatement();
 			while ((ler = br.readLine()) != null) {
 				a = ler.split(";");
+				p = new Pessoa();
 				for (int i = 0; i < a.length; i++) {
 					if (i == 0) {
 						p.setNome(a[i]);
@@ -60,9 +61,10 @@ public class Inserir {
 				pessoas.add(p);
 
 			}
+			String sql ="";
 
 			for (Pessoa pessoa : pessoas) {
-				String sql = "INSERT INTO pessoa (nome, email, codigo, cpf, data_nasc) values ('"
+				sql = "INSERT INTO pessoa (nome, email, codigo, cpf, data_nasc) values ('"
 						+ pessoa.getNome()
 						+ "','"
 						+ pessoa.getEmail()

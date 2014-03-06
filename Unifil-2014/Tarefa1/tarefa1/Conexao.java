@@ -5,19 +5,18 @@ import java.io.File;
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class Conexao {
 
 	String driver = "com.mysql.jdbc.Driver";
 	String nomeArquivo = "config.txt";
 	String url = "jdbc:mysql://";
-	String line;
-	File file = new File(nomeArquivo);
 	Connection conn = null;
 
 	public Connection getConexao() {
 		try {
+			File file = new File(nomeArquivo);
+			String line;
 			BufferedReader in = new BufferedReader(new FileReader(file));
 			line = in.readLine();
 			while (line != null) {
