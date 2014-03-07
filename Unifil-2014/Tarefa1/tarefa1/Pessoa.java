@@ -7,6 +7,19 @@ public class Pessoa {
 	private String codigo;
 	private String cpf;
 	private String data;
+	
+	public Pessoa() {
+	}
+
+	public Pessoa(String nome, String email, String codigo, String cpf,
+			String data) {
+		super();
+		this.nome = nome;
+		this.email = email;
+		this.codigo = codigo;
+		this.cpf = cpf;
+		this.data = data;
+	}
 
 	public String getNome() {
 		return nome;

@@ -1,5 +1,5 @@
 url: localhost
-porta: 3307
+porta: 3306
 database: labiii
 username: root
 password: root

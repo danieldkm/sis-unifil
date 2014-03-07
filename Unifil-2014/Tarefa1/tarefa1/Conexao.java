@@ -3,17 +3,19 @@ package tarefa1;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Conexao {
 
-	String driver = "com.mysql.jdbc.Driver";
-	String nomeArquivo = "config.txt";
-	String url = "jdbc:mysql://";
-	Connection conn = null;
+	private static String driver = "com.mysql.jdbc.Driver";
+	private static String nomeArquivo = "config.txt";
+	private static String url = "jdbc:mysql://";
+	private static Connection conn = null;
 
-	public Connection getConexao() {
+	public static Connection getConexao() {
 		try {
 			File file = new File(nomeArquivo);
 			String line;
@@ -54,7 +56,18 @@ public class Conexao {
 
 			Class.forName(driver);
 			return conn = DriverManager.getConnection(url);
-		} catch (Exception e) {
+		} catch (SQLException e) {
+			System.out.println("\n--- SQLException ---\n");
+			while (e != null) {
+				System.out.println("Mensagem: " + e.getMessage());
+				System.out.println("SQLState: " + e.getSQLState());
+				System.out.println("ErrorCode: " + e.getErrorCode());
+				e = e.getNextException();
+				System.out.println("");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		return null;
