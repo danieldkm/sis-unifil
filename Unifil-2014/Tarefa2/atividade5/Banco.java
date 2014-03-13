@@ -48,6 +48,11 @@ public class Banco {
 		try {
 			String sql = "INSERT INTO PESSOA (nome, email, codigo, cpf, data_nasc) VALUES ( '?', '?' ,'?', '?', '?')";
 			pst = con.prepareStatement(sql);
+			System.out.println("nome " + p.getNome());
+			System.out.println("email " + p.getEmail());
+			System.out.println("codigo " + p.getCodigo());
+			System.out.println("cpf " + p.getCpf());
+			System.out.println("data " + p.getData());
 			pst.setString(1, p.getNome());
 			pst.setString(2, p.getEmail());
 			pst.setString(3, p.getCodigo());

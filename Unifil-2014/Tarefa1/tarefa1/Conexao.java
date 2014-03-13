@@ -52,7 +52,7 @@ public class Conexao {
 			}
 			in.close();
 			System.out.println(url);
-			System.out.println("Conex√£o estabelecida.");
+			System.out.println("Conex„o estabelecida.");
 
 			Class.forName(driver);
 			return conn = DriverManager.getConnection(url);

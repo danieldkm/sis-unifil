@@ -15,10 +15,10 @@ public class Teste {
 		Pessoa p4 = new Pessoa("Pessoa4", "Email4", "codigo4", "cpf4", "Data4");
 		Pessoa p5 = new Pessoa("Pessoa5", "Email5", "codigo5", "cpf5", "Data5");
 		b.inserirPessoa(p1);
-		b.inserirPessoa(p2);
-		b.inserirPessoa(p3);
-		b.inserirPessoa(p4);
-		b.inserirPessoa(p5);
+//		b.inserirPessoa(p2);
+//		b.inserirPessoa(p3);
+//		b.inserirPessoa(p4);
+//		b.inserirPessoa(p5);
 //		
 //		ArrayList<Pessoa> pessoas = b.consultaPessoa();
 //		for (Pessoa p : pessoas) {
