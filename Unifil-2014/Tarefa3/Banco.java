@@ -1,13 +1,8 @@
-package atividade5;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import tarefa1.Conexao;
-import tarefa1.Pessoa;
 
 public class Banco {
 
@@ -28,11 +23,11 @@ public class Banco {
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 				p = new Pessoa();
-				p.setNome(rs.getString(1));
-				p.setEmail(rs.getString(2));
-				p.setCodigo(rs.getString(3));
-				p.setCpf(rs.getString(4));
-				p.setData(rs.getString(5));
+				p.setNome(rs.getString(2));
+				p.setEmail(rs.getString(3));
+				p.setCodigo(rs.getString(4));
+				p.setCpf(rs.getString(5));
+				p.setData(rs.getString(6));
 				ob.add(p);
 			}
 			rs.close();
