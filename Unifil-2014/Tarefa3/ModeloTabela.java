@@ -5,7 +5,7 @@ import javax.swing.table.AbstractTableModel;
 public class ModeloTabela extends AbstractTableModel {
 
 	private ArrayList<Pessoa> pessoas;
-	private String[] colunas = new String[] { "Nome", "Email", "Codigo", "CPF",
+	private String[] colunas = new String[] { "ID", "Nome", "Email", "Codigo", "CPF",
 			"Data Nascimento" };
 
 	public ModeloTabela(ArrayList<Pessoa> pessoas) {
@@ -19,7 +19,7 @@ public class ModeloTabela extends AbstractTableModel {
 
 	@Override
 	public int getColumnCount() {
-		return 5;
+		return 6;
 	}
 
 	@Override
@@ -34,49 +34,60 @@ public class ModeloTabela extends AbstractTableModel {
 		Object value = null;
 		switch (columnIndex) {
 		case 0:
-			value = pessoa.getNome();
+			value = pessoa.getId();
 			break;
 		case 1:
-			value = pessoa.getEmail();
+			value = pessoa.getNome();
 			break;
 		case 2:
-			value = pessoa.getCodigo();
+			value = pessoa.getEmail();
 			break;
 		case 3:
-			value = pessoa.getCpf();
+			value = pessoa.getCodigo();
 			break;
 		case 4:
+			value = pessoa.getCpf();
+			break;
+		case 5:
 			value = pessoa.getData();
 			break;
 		}
 		return value;
 	}
+	
+//	 @Override  
+//	    public void setValueAt(Object valor, int linha, int coluna) {  
+//	        // aqui devemos atualizar o valor de nossos Clientes  
+//	        // vemos em qual linha ele está  
+//	        Pessoa p = pessoas.get(linha);  
+//	        // e vemos o que será atualizado  
+//	        switch (coluna) {  
+//	        case 0:  
+//	            p.setNome(valor.toString());  
+//	            break;  
+//	        case 1:  
+//	            p.setEmail(valor.toString());   
+//	            break;  
+//	        case 2:  
+//	            p.setCodigo(valor.toString()); 
+//	            break;
+//	        case 3:  
+//	            p.setCpf(valor.toString());   
+//	            break;  
+//	        case 4:  
+//	            p.setData(valor.toString());   
+//	            break;  
+//	        }  
+//	        fireTableDataChanged();  
+//	    }
+	 
+	 public void atualizarTabela(ArrayList<Pessoa> ps){
+		 pessoas = ps;
+		 fireTableDataChanged();
+	 }
+	 
+	 public void atualizarTabela(){
+		 fireTableDataChanged();
+	 }
 
-	// @Override
-	// public Class<?> getColumnClass(int rowIndex, int columnIndex) {
-	// Class type = String.class;
-	// switch (columnIndex) {
-	// case 0:
-	//
-	// break;
-	//
-	// default:
-	// break;
-	// }
-	// }
-	// @Override
-	// public Object getValueAt(int rowIndex, int columnIndex) {
-	// Click click = clicks.get(rowIndex);
-	// Object value = null;
-	// switch (columnIndex) {
-	// case 0:
-	// value = click.getX();
-	// break;
-	// case 1:
-	// value = click.getY();
-	// break;
-	// }
-	// return value;
-	// }
-	// }
 }

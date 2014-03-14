@@ -23,6 +23,7 @@ public class Banco {
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 				p = new Pessoa();
+				p.setId(rs.getInt(1));
 				p.setNome(rs.getString(2));
 				p.setEmail(rs.getString(3));
 				p.setCodigo(rs.getString(4));
@@ -62,14 +63,28 @@ public class Banco {
 
 	public void atualizarPessoa(Pessoa p) {
 		try {
-			String sql = "UPDATE PESSOA SET NOME = ?, EMAIL = ?, CODIGO = ?, CPF = ?, DATA_NASC = ? WHERE NOME = "
-					+ p.getNome();
+			String sql = "UPDATE PESSOA SET NOME = ?, EMAIL = ?, CODIGO = ?, CPF = ?, DATA_NASC = ? WHERE id = ?";
 			PreparedStatement pst = con.prepareStatement(sql);
 			pst.setString(1, p.getNome());
 			pst.setString(2, p.getEmail());
 			pst.setString(3, p.getCodigo());
 			pst.setString(4, p.getCpf());
 			pst.setString(5, p.getData());
+			pst.setInt(6, p.getId());
+			pst.executeUpdate();
+			pst.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void removerPessoa(Pessoa p) {
+		try {
+			
+			String sql = "delete from pessoa where nome = ?";
+			PreparedStatement pst = con.prepareStatement(sql);
+			pst.setString(1, p.getNome());
 			pst.executeUpdate();
 			pst.close();
 		} catch (Exception e) {
