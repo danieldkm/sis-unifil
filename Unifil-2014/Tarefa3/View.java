@@ -5,6 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -51,6 +54,18 @@ public class View extends JFrame {
 		
 		setSize(600, 500);
 		setVisible(true);
+		
+		this.addWindowListener(new WindowAdapter() {
+	        public void windowClosing(WindowEvent evt) {
+	            // Encerra a aplicação
+	        	try {
+					Banco.getInstance().close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+	        }
+	    });
+
 	}
 
 	public static void main(String[] args) {
@@ -155,6 +170,7 @@ public class View extends JFrame {
 				try {
 					banco.inserirPessoa(p);
 					atualizarTabela();
+					btnLimpar.doClick();
 				} catch (Exception e) {
 					System.out.println("Erro ao inseriro PESSOA");
 				}
@@ -168,6 +184,7 @@ public class View extends JFrame {
 				try {
 					banco.atualizarPessoa(p);
 					atualizarTabela();
+					btnLimpar.doClick();
 				} catch (Exception e) {
 					System.out.println("Erro ao atualizar PESSOA");
 				}
@@ -178,10 +195,11 @@ public class View extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Pessoa p = new Pessoa(txtNome.getText(), txtCodigo.getText(), txtEmail.getText(), txtCpf.getText(), txtData.getText());
+				Pessoa p = new Pessoa(Integer.parseInt(txtId.getText()), txtNome.getText(), txtCodigo.getText(), txtEmail.getText(), txtCpf.getText(), txtData.getText());
 				try {
 					banco.removerPessoa(p);
 					atualizarTabela();
+					btnLimpar.doClick();
 				} catch (Exception e) {
 					System.out.println("Erro ao consultar PESSOA");
 				}

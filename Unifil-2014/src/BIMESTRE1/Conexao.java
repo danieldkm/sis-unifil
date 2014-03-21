@@ -14,9 +14,9 @@ public class Conexao {
 	// username: lab3
 	// password: 1234
 
-	private String ip;
-	private String user;
-	private String senha;
+	private String ip="localhost:3306";
+	private String user="root";
+	private String senha="root";
 	private String camanhoArquivo = "src/Arquivo de configuração.txt";
 
 	private java.sql.Connection con;

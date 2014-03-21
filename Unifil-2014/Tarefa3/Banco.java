@@ -4,14 +4,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 public class Banco {
 
 	private static Connection con;
 
 	public Banco() {
 		if (con == null) {
-			con = Conexao.getConexao();
+			con = getInstance();
 		}
+	}
+	
+	public static synchronized Connection getInstance(){
+		if(con == null) con = new Conexao().getConexao();
+		return con;
 	}
 
 	public ArrayList<Pessoa> consultaPessoa() {
@@ -82,9 +88,9 @@ public class Banco {
 	public void removerPessoa(Pessoa p) {
 		try {
 			
-			String sql = "delete from pessoa where nome = ?";
+			String sql = "delete from pessoa where id = ?";
 			PreparedStatement pst = con.prepareStatement(sql);
-			pst.setString(1, p.getNome());
+			pst.setInt(1, p.getId());
 			pst.executeUpdate();
 			pst.close();
 		} catch (Exception e) {
