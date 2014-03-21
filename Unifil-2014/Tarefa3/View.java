@@ -65,6 +65,7 @@ public class View extends JFrame {
 				}
 	        }
 	    });
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
 
