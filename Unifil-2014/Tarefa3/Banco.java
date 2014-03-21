@@ -20,6 +20,14 @@ public class Banco {
 		return con;
 	}
 
+	/*
+	 * método de acesso sincronizado para evitar problemas
+	 */
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		throw new CloneNotSupportedException();
+	}
+
 	public ArrayList<Pessoa> consultaPessoa() {
 		ArrayList<Pessoa> ob = new ArrayList<>();
 		Pessoa p = null;
