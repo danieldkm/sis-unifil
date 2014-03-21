@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
 public class Banco {
 
 	private static Connection con;
@@ -14,9 +13,10 @@ public class Banco {
 			con = getInstance();
 		}
 	}
-	
-	public static synchronized Connection getInstance(){
-		if(con == null) con = new Conexao().getConexao();
+
+	public static synchronized Connection getInstance() {
+		if (con == null)
+			con = new Conexao().getConexao();
 		return con;
 	}
 
@@ -83,11 +83,10 @@ public class Banco {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	public void removerPessoa(Pessoa p) {
 		try {
-			
+
 			String sql = "delete from pessoa where id = ?";
 			PreparedStatement pst = con.prepareStatement(sql);
 			pst.setInt(1, p.getId());
