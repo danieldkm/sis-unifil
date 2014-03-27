@@ -81,12 +81,13 @@ public class ModeloTabela extends AbstractTableModel {
 //	        fireTableDataChanged();  
 //	    }
 	 
-	 public void atualizarTabela(ArrayList<Pessoa> ps){
-		 pessoas = ps;
+	 public void atualizarTabela(Pessoa ps){
+		 pessoas.add(ps);
 		 fireTableDataChanged();
 	 }
 	 
 	 public void atualizarTabela(){
+		 pessoas = new Banco().consultaPessoa();
 		 fireTableDataChanged();
 	 }
 

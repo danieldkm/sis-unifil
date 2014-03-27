@@ -60,13 +60,19 @@ public class View extends JFrame {
 	            // Encerra a aplicação
 	        	try {
 					Banco.getInstance().close();
+					System.out.println("Fechando conexão!");
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 	        }
 	    });
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+//		try {
+//			finalize();
+//			System.out.println("Fechando conexão!");
+//		} catch (Throwable e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	public static void main(String[] args) {
@@ -157,10 +163,10 @@ public class View extends JFrame {
 		return new JScrollPane(tabela);
 	}
 	
-	private void atualizarTabela(){
-		pessoas = banco.consultaPessoa();
-		modeloTabela.atualizarTabela(pessoas);
-	}
+//	private void atualizarTabela(){
+//		pessoas = banco.consultaPessoa();
+//		modeloTabela.atualizarTabela(pessoas);
+//	}
 	
 
 	private void setListenerButton() {
@@ -170,7 +176,8 @@ public class View extends JFrame {
 				Pessoa p = new Pessoa(txtNome.getText(), txtCodigo.getText(), txtEmail.getText(), txtCpf.getText(), txtData.getText());
 				try {
 					banco.inserirPessoa(p);
-					atualizarTabela();
+//					modeloTabela.atualizarTabela();
+					modeloTabela.atualizarTabela(p);
 					btnLimpar.doClick();
 				} catch (Exception e) {
 					System.out.println("Erro ao inseriro PESSOA");
@@ -184,7 +191,8 @@ public class View extends JFrame {
 				Pessoa p = new Pessoa(Integer.parseInt(txtId.getText()), txtNome.getText(), txtCodigo.getText(), txtEmail.getText(), txtCpf.getText(), txtData.getText());
 				try {
 					banco.atualizarPessoa(p);
-					atualizarTabela();
+					modeloTabela.atualizarTabela();
+//					modeloTabela.atualizarTabela(p);
 					btnLimpar.doClick();
 				} catch (Exception e) {
 					System.out.println("Erro ao atualizar PESSOA");
@@ -199,7 +207,8 @@ public class View extends JFrame {
 				Pessoa p = new Pessoa(Integer.parseInt(txtId.getText()), txtNome.getText(), txtCodigo.getText(), txtEmail.getText(), txtCpf.getText(), txtData.getText());
 				try {
 					banco.removerPessoa(p);
-					atualizarTabela();
+					modeloTabela.atualizarTabela();
+//					modeloTabela.atualizarTabela(p);
 					btnLimpar.doClick();
 				} catch (Exception e) {
 					System.out.println("Erro ao consultar PESSOA");
