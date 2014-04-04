@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import ConexaoBD.Conexao;
+
 public class Inserir {
 
 	public static void main(String[] args) {

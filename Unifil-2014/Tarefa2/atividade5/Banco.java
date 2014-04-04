@@ -6,7 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import tarefa1.Conexao;
+import ConexaoBD.Conexao;
+
 import tarefa1.Pessoa;
 
 public class Banco {
