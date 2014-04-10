@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Banco {
+public class Banco implements Cloneable {
 
 	private static Connection con;
 
@@ -14,6 +14,9 @@ public class Banco {
 		}
 	}
 
+	/*
+	 * método de acesso sincronizado para evitar problemas de sincronização
+	 */
 	public static synchronized Connection getInstance() {
 		if (con == null)
 			con = new Conexao().getConexao();
@@ -21,7 +24,7 @@ public class Banco {
 	}
 
 	/*
-	 * método de acesso sincronizado para evitar problemas
+	 * método que não deixa clonar
 	 */
 	@Override
 	protected Object clone() throws CloneNotSupportedException {

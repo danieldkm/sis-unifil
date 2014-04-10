@@ -3,7 +3,9 @@ package Pojo;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import ConexaoBD.Conexao;
 
@@ -41,9 +43,17 @@ public class Persistence {
 	// );
 
 	public void inserir(Contato c) {
+		
+		
 		PreparedStatement pst;
 		String sql = "INSERT INTO CONTATOS (nome, email, endereco, dataNascimento) VALUES (?, ? ,?, ?)";
+		
 		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			rs.getString("");
+			rs.getString(1);
+			
 			pst = con.prepareStatement(sql);
 			System.out.println("nome " + c.getNome());
 			System.out.println("email " + c.getEmail());
