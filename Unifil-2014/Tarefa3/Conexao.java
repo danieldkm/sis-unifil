@@ -8,14 +8,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Conexao {
+import javax.sql.rowset.spi.SyncResolver;
+
+public class Conexao implements Cloneable{
 
 	private static String driver = "com.mysql.jdbc.Driver";
 	private static String nomeArquivo = "config.txt";
 	private static String url = "jdbc:mysql://";
 	private static Connection conn = null;
 
-	public static Connection getConexao() {
+	public static synchronized Connection getConexao() {
 		try {
 			File file = new File(nomeArquivo);
 			String line;
@@ -73,6 +75,14 @@ public class Conexao {
 		
 		
 		return null;
+	}
+	
+	/*
+	 * método que não deixa clonar
+	 */
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		throw new CloneNotSupportedException();
 	}
 
 }

@@ -55,7 +55,7 @@ public class ExemploStream {
 
 			ObjectInputStream objLeitura = new ObjectInputStream(arquivoLeitura);
 
-			System.out.println(objLeitura.readObject());
+			System.out.println("Lendo o objeto salvo em um arquivo\n" + objLeitura.readObject());
 
 			objLeitura.close();
 
