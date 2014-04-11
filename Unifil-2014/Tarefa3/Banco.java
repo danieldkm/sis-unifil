@@ -17,7 +17,7 @@ public class Banco implements Cloneable {
 	/*
 	 * método de acesso sincronizado para evitar problemas de sincronização
 	 */
-	public static synchronized Connection getInstance() {
+	public static Connection getInstance() {
 		if (con == null)
 			con = new Conexao().getConexao();
 		return con;

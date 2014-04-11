@@ -41,6 +41,7 @@ public class View extends JFrame {
 	private ArrayList<Pessoa> pessoas = new ArrayList<>();
 	private JTable tabela;
 	private ModeloTabela modeloTabela;
+	private int contadorID = 1;
 
 	public View() {
 		super("Telaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
@@ -176,8 +177,7 @@ public class View extends JFrame {
 				Pessoa p = new Pessoa(txtNome.getText(), txtCodigo.getText(), txtEmail.getText(), txtCpf.getText(), txtData.getText());
 				try {
 					banco.inserirPessoa(p);
-//					modeloTabela.atualizarTabela();
-					modeloTabela.atualizarTabela(p);
+					modeloTabela.atualizarTabela();
 					btnLimpar.doClick();
 				} catch (Exception e) {
 					System.out.println("Erro ao inseriro PESSOA");
