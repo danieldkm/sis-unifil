@@ -1,4 +1,4 @@
-package atividade5;
+package Tarefa2.atividade5;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,8 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import ConexaoBD.Conexao;
-
-import tarefa1.Pessoa;
+import Tarefa1.tarefa1.Pessoa;
 
 public class Banco {
 

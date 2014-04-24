@@ -1,4 +1,4 @@
-package Pojo;
+package Tarefa4.Pojo;
 
 import java.io.Serializable;
 import java.sql.Date;

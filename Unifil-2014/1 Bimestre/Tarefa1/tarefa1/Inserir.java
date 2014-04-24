@@ -1,4 +1,4 @@
-package tarefa1;
+package Tarefa1.tarefa1;
 
 import java.io.BufferedReader;
 import java.io.File;

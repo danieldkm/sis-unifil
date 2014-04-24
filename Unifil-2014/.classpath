@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="Tarefa1"/>
-	<classpathentry kind="src" path="Tarefa2"/>
-	<classpathentry kind="src" path="Tarefa3"/>
-	<classpathentry kind="src" path="Tarefa4"/>
+	<classpathentry kind="src" path="1 Bimestre"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="src/lib/mysql-connector-java-5.1.21-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>

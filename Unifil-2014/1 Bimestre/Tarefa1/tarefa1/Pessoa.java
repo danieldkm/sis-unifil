@@ -1,4 +1,4 @@
-package tarefa1;
+package Tarefa1.tarefa1;
 
 public class Pessoa {
 

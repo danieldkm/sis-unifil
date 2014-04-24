@@ -1,4 +1,4 @@
-package view;
+package Tarefa1.view;
 
 import java.io.BufferedReader;
 import java.io.File;

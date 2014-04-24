@@ -1,8 +1,8 @@
-package atividade5;
+package Tarefa2.atividade5;
 
 import java.util.ArrayList;
 
-import tarefa1.Pessoa;
+import Tarefa1.tarefa1.Pessoa;
 
 public class Teste {
 

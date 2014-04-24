@@ -1,4 +1,4 @@
-package view;
+package Tarefa1.view;
 
 public class Conf {
 

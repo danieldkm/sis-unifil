@@ -1,4 +1,4 @@
-package view;
+package Tarefa1.view;
 
 import java.awt.Container;
 import java.awt.GridLayout;
