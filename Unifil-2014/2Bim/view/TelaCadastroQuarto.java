@@ -3,7 +3,6 @@ package view;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -97,6 +96,11 @@ public class TelaCadastroQuarto {
 		txtCapacidade.setColumns(10);
 		
 		JButton btnEditarTipo = new JButton("Editar tipo");
+		btnEditarTipo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new TelaCadastroTipoQuarto();
+			}
+		});
 		btnEditarTipo.setBounds(241, 35, 89, 23);
 		panel.add(btnEditarTipo);
 
