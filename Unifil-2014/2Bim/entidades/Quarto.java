@@ -4,19 +4,19 @@ public class Quarto {
 
 	private int id;
 	private String descricao;
-	private int tipo;
+	private String tipo;
 	private int capacidade;
 	
 	public Quarto() {
 	}
 	
-	public Quarto(String descricao, int tipo, int capacidade) {
+	public Quarto(String descricao, String tipo, int capacidade) {
 		this.descricao = descricao;
 		this.tipo = tipo;
 		this.capacidade = capacidade;
 	}
 	
-	public Quarto(int id, String descricao, int tipo, int capacidade) {
+	public Quarto(int id, String descricao, String tipo, int capacidade) {
 		this(descricao, tipo, capacidade);
 		this.id = id;
 	}
@@ -37,11 +37,11 @@ public class Quarto {
 		this.descricao = descricao;
 	}
 
-	public int getTipo() {
+	public String getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(int tipo) {
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 
