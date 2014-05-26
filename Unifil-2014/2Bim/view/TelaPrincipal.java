@@ -66,6 +66,22 @@ public class TelaPrincipal {
 		});
 		mnNewMenu.add(mntmNewMenuItem);
 		
+		JMenuItem mntmVisitante = new JMenuItem("Visitante");
+		mntmVisitante.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new TelaCadastroVisitante();
+			}
+		});
+		mnNewMenu.add(mntmVisitante);
+		
+		JMenuItem mntmReserva = new JMenuItem("Reserva");
+		mntmReserva.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new TelaCadastroReserva();
+			}
+		});
+		mnNewMenu.add(mntmReserva);
+		
 		JMenu mnNewMenu_1 = new JMenu("Consulta");
 		menuBar.add(mnNewMenu_1);
 	}

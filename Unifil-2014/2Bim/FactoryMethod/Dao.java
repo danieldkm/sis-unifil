@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entidades.Quarto;
+import entidades.Reserva;
 import entidades.TipoQuarto;
 import entidades.Visitante;
 
@@ -80,7 +81,7 @@ public class Dao {
 
 			if (o instanceof Quarto) {
 				Quarto q = (Quarto) o;
-				sql = "insert into quarto (descricaoQuarto, tipo, capacidade) values (?,?,?)";
+				sql = "INSERT INTO quarto (descricaoQuarto, tipo, capacidade) VALUES (?,(SELECT idTipo FROM tipo_quarto WHERE descricao = ?),?)";
 				pst = con.prepareStatement(sql);
 				pst.setString(1, q.getDescricao());
 				pst.setString(2, q.getTipo());
@@ -90,6 +91,23 @@ public class Dao {
 				sql = "insert into tipo_quarto (descricao) values (?)";
 				pst = con.prepareStatement(sql);
 				pst.setString(1, tq.getDescricao());
+			} else if (o instanceof Visitante) {
+				Visitante v = (Visitante) o;
+				sql = "insert into Visitante (nome, telefone, email) values (?,?,?)";
+				pst = con.prepareStatement(sql);
+				pst.setString(1, v.getNome());
+				pst.setString(2, v.getTelefone());
+				pst.setString(3, v.getEmail());
+			}else if (o instanceof Reserva) {
+				Reserva r = (Reserva) o;
+				sql = "INSERT INTO reserva (idVisitante, idQuarto, data_entrada, data_saida, pagamento, reserva.status) VALUES ((SELECT idVisitante FROM visitante WHERE nome = ?),(SELECT idQuarto FROM quarto WHERE descricaoQuarto = ?),?,?,?,?)";
+				pst = con.prepareStatement(sql);
+				pst.setString(1, r.getVisitante());
+				pst.setString(2, r.getQuarto());
+				pst.setDate(3, r.getDtEntrada2());
+				pst.setDate(4, r.getDtSaida2());
+				pst.setString(5, r.getPagamento());
+				pst.setString(6, r.getStatus());
 			}
 
 			pst.executeUpdate();
@@ -130,7 +148,16 @@ public class Dao {
 				pst.setString(2, q.getTipo());
 				pst.setInt(3, q.getCapacidade());
 				pst.setInt(4, q.getId());
+			} else if (o instanceof Visitante) {
+				Visitante v = (Visitante) o;
+				sql = "update Visitante set nome = ?, telefone = ?, email = ?  where idVisitante = ?";
+				pst = con.prepareStatement(sql);
+				pst.setString(1, v.getNome());
+				pst.setString(2, v.getTelefone());
+				pst.setString(3, v.getEmail());
+				pst.setInt(4, v.getId());
 			}
+
 			pst.executeUpdate();
 			pst.close();
 			con.close();
@@ -155,6 +182,11 @@ public class Dao {
 				sql = "DELETE FROM QUARTO WHERE idQuarto = ?";
 				pst = con.prepareStatement(sql);
 				pst.setInt(1, q.getId());
+			} else if (o instanceof Visitante) {
+				Visitante v = (Visitante) o;
+				sql = "DELETE FROM Visitante WHERE idVisitante = ?";
+				pst = con.prepareStatement(sql);
+				pst.setInt(1, v.getId());
 			}
 			pst.executeUpdate();
 		} catch (Exception e) {
@@ -201,6 +233,18 @@ public class Dao {
 					v = new Visitante(rs.getInt(1), rs.getString(2),
 							rs.getString(3), rs.getString(4));
 					lista.add(v);
+				}
+				rs.close();
+			} else if (o instanceof Reserva) {
+				Reserva r = (Reserva) o;
+				sql = "SELECT codReserva, (SELECT nome FROM visitante WHERE idVisitante = reserva.idVisitante), (SELECT descricaoQuarto FROM quarto WHERE idQuarto = reserva.idQuarto), data_entrada, data_saida, pagamento, reserva.status FROM reserva";
+				pst = con.prepareStatement(sql);
+				ResultSet rs = pst.executeQuery();
+				while (rs.next()) {
+//					r = new Reserva(rs.getInt(1), rs.getString(2),
+//							rs.getString(3), rs.getString(4));
+					r = new Reserva(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getDate(5), rs.getString(6), rs.getString(7));
+					lista.add(r);
 				}
 				rs.close();
 			}

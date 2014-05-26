@@ -30,19 +30,14 @@ import entidades.TipoQuarto;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class TelaCadastroQuarto extends Controller {
+public class TelaCadastroQuarto extends Controller implements Telas {
 
 	private JDialog frmQuarto;
 	private JTextField txtDescricao;
 	private JTextField txtCapacidade;
 	private JTextField buscar;
-	private JTable table;
 	private ArrayList<TipoQuarto> listaTipoQuarto = new ArrayList<>();
-	private ArrayList<Quarto> listaQuarto;
-	private TabelaQuarto tQuarto;
-	private JTable tabela;
 	private JComboBox cbTipo;
-	private Quarto quartoSelecionado;
 
 	/**
 	 * Launch the application.
@@ -231,9 +226,59 @@ public class TelaCadastroQuarto extends Controller {
 		buscar.setColumns(10);
 		
 
-		JScrollPane scrollPane = getTable();
+		JScrollPane scrollPane = getTable("quarto");
 		scrollPane.setBounds(10, 36, 338, 186);
 		panel_2.add(scrollPane);
+		table.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					System.out.println("selecionada "
+							+ table.getModel().getValueAt(
+									table.getSelectedRow(), 0));
+					quartoSelecionado = new Quarto(table.getModel()
+							.getValueAt(table.getSelectedRow(), 1).toString(),
+							table.getModel()
+									.getValueAt(table.getSelectedRow(), 2)
+									.toString(), Integer.parseInt(table
+									.getModel()
+									.getValueAt(table.getSelectedRow(), 3)
+									.toString()));
+					quartoSelecionado.setId(Integer.parseInt(table.getModel()
+							.getValueAt(table.getSelectedRow(), 0).toString()));
+					txtDescricao.setText(quartoSelecionado.getDescricao());
+					txtCapacidade.setText(quartoSelecionado.getCapacidade()
+							+ "");
+					cbTipo.setSelectedItem(quartoSelecionado.getTipo());
+					isEdited = true;
+				}
+			}
+		});
 
 		// table = new JTable();
 		// scrollPane.setViewportView(table);
@@ -265,7 +310,7 @@ public class TelaCadastroQuarto extends Controller {
 		}
 	}
 
-	private boolean validarCampos() {
+	public boolean validarCampos() {
 		if (txtDescricao.getText().equals(null)
 				|| txtDescricao.getText().equals("")) {
 			JOptionPane.showMessageDialog(frmQuarto,
@@ -288,57 +333,4 @@ public class TelaCadastroQuarto extends Controller {
 		return false;
 	}
 
-	private JScrollPane getTable() {
-		listaQuarto = getListaQuarto();
-		tQuarto = new TabelaQuarto(listaQuarto);
-		tabela = new JTable(tQuarto);
-		tabela.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-
-			}
-
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-
-			}
-
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				if (arg0.getClickCount() == 2) {
-					System.out.println("selecionada "
-							+ tabela.getModel().getValueAt(
-									tabela.getSelectedRow(), 0));
-					quartoSelecionado = new Quarto(tabela.getModel()
-							.getValueAt(tabela.getSelectedRow(), 1).toString(),
-							tabela.getModel()
-									.getValueAt(tabela.getSelectedRow(), 2)
-									.toString(), Integer.parseInt(tabela
-									.getModel()
-									.getValueAt(tabela.getSelectedRow(), 3)
-									.toString()));
-					quartoSelecionado.setId(Integer.parseInt(tabela.getModel()
-							.getValueAt(tabela.getSelectedRow(), 0).toString()));
-					txtDescricao.setText(quartoSelecionado.getDescricao());
-					txtCapacidade.setText(quartoSelecionado.getCapacidade()
-							+ "");
-					cbTipo.setSelectedItem(quartoSelecionado.getTipo());
-					isEdited = true;
-				}
-
-			}
-		});
-		return new JScrollPane(tabela);
-	}
 }

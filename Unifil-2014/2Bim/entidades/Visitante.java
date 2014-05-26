@@ -10,13 +10,16 @@ public class Visitante {
 	public Visitante() {
 		// TODO Auto-generated constructor stub
 	}
-
-	public Visitante(int id, String nome, String telefone, String email) {
-		super();
-		this.id = id;
+	
+	public Visitante(String nome, String telefone, String email) {
 		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
+	}
+
+	public Visitante(int id, String nome, String telefone, String email) {
+		this(nome, telefone, email);
+		this.id = id;
 	}
 
 	public int getId() {
