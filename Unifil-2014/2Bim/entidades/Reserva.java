@@ -59,11 +59,10 @@ public class Reserva {
 	}
 	
 	public String getDtEntrada() {
-		SimpleDateFormat dt1 = new SimpleDateFormat("dd-mm-yyyy");
+		SimpleDateFormat dt1 = new SimpleDateFormat("dd-MM-yyyy");
 		if(dtEntrada == null){
 			return null;
 		}
-		System.out.println(dt1.format(dtEntrada));
 		return dt1.format(dtEntrada);
 	}
 
@@ -76,11 +75,10 @@ public class Reserva {
 	}
 	
 	public String getDtSaida() {
-		SimpleDateFormat dt1 = new SimpleDateFormat("dd-mm-yyyy");
+		SimpleDateFormat dt1 = new SimpleDateFormat("dd-MM-yyyy");
 		if(dtSaida == null){
 			return null;
 		}
-		System.out.println(dt1.format(dtSaida));
 		return dt1.format(dtSaida);
 	}
 

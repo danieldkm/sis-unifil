@@ -136,10 +136,6 @@ public class Dao {
 				pst.setInt(2, tq.getId());
 			} else if (o instanceof Quarto) {
 				Quarto q = (Quarto) o;
-				// UPDATE quarto SET descricaoQuarto = 'TesteQuarto1',
-				// tipo = (SELECT idTipo FROM tipo_quarto WHERE descricao = 9),
-				// capacidade = '4'
-				// WHERE idQuarto = 1;
 				sql = "UPDATE quarto SET descricaoQuarto = ?, "
 						+ "tipo = (SELECT idTipo FROM tipo_quarto WHERE descricao = ?), "
 						+ "capacidade = ? " + "WHERE idQuarto = ?;";
@@ -156,6 +152,24 @@ public class Dao {
 				pst.setString(2, v.getTelefone());
 				pst.setString(3, v.getEmail());
 				pst.setInt(4, v.getId());
+			}else if (o instanceof Reserva) {
+				Reserva r = (Reserva) o;
+				sql = "UPDATE reserva SET " +
+						"idVisitante = (SELECT idVisitante FROM visitante WHERE nome = ?), " +
+						"idQuarto = (SELECT idQuarto FROM quarto WHERE descricaoQuarto = ?), " +
+						"data_entrada = ?, " +
+						"data_saida = ?, " +
+						"pagamento = ?, " +
+						"reserva.status = ? " +
+						"WHERE codReserva = ?";
+				pst = con.prepareStatement(sql);
+				pst.setString(1, r.getVisitante());
+				pst.setString(2, r.getQuarto());
+				pst.setDate(3, r.getDtEntrada2());
+				pst.setDate(4, r.getDtSaida2());
+				pst.setString(5, r.getPagamento());
+				pst.setString(6, r.getStatus());
+				pst.setInt(7, r.getId());
 			}
 
 			pst.executeUpdate();
@@ -187,7 +201,13 @@ public class Dao {
 				sql = "DELETE FROM Visitante WHERE idVisitante = ?";
 				pst = con.prepareStatement(sql);
 				pst.setInt(1, v.getId());
+			}else if (o instanceof Reserva) {
+				Reserva r = (Reserva) o;
+				sql = "DELETE FROM Reserva WHERE codReserva = ?";
+				pst = con.prepareStatement(sql);
+				pst.setInt(1, r.getId());
 			}
+			
 			pst.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

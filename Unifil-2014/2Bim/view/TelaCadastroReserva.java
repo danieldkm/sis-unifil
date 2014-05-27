@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.Date;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -167,10 +168,14 @@ public class TelaCadastroReserva extends ControllerTela implements Telas {
 					if (isEdited) {
 						reservaSelecionado.setVisitante(txtVisitante.getText());
 						reservaSelecionado.setQuarto(txtQuarto.getText());
-						// reservaSelecionado.setDtEntrada(txtDtEntrada.getText());//
-						// TODO
-						// reservaSelecionado.setDtSaida(txtDtSaida.getText());
-						// // TODO
+						java.util.Date d = (java.util.Date) datePicker
+								.getModel().getValue();
+						java.sql.Date dataSql = new java.sql.Date(d.getTime());
+						java.util.Date d2 = (java.util.Date) datePicker2
+								.getModel().getValue();
+						java.sql.Date dataSql2 = new java.sql.Date(d2.getTime());
+						reservaSelecionado.setDtEntrada(dataSql);
+						reservaSelecionado.setDtSaida(dataSql2);
 						reservaSelecionado.setPagamento(txtPagamento.getText());
 						reservaSelecionado.setStatus(comboBox.getSelectedItem()
 								.toString());
@@ -223,7 +228,7 @@ public class TelaCadastroReserva extends ControllerTela implements Telas {
 					int r = JOptionPane.showConfirmDialog(frame,
 							"Tem certeza que deseja EXCLUIR!");
 					if (r == 0) {
-						Dao.delete(quartoSelecionado);
+						Dao.delete(reservaSelecionado);
 						JOptionPane.showMessageDialog(frame,
 								"Deletado com sucesso!");
 						frame.dispose();
@@ -283,24 +288,61 @@ public class TelaCadastroReserva extends ControllerTela implements Telas {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 2) {
-					System.out.println("selecionada "
-							+ table.getModel().getValueAt(
-									table.getSelectedRow(), 0));
-					
-//					datePicker.getModel().setValue(table.getModel().getValueAt(table.getSelectedRow(), 3).toString());
-//					datePicker2.getModel().setValue(table.getModel().getValueAt(table.getSelectedRow(), 4).toString());
-//					reservaSelecionado = new Reserva(table.getModel().getValueAt(table.getSelectedRow(), 1).toString(),
-//									table.getModel().getValueAt(table.getSelectedRow(), 2).toString(),
-//									datePicker.getModel().getValue(),
-//									datePicker2.getModel().getValue(),
-//									table.getModel().getValueAt(table.getSelectedRow(), 5).toString(),
-//									table.getModel().getValueAt(table.getSelectedRow(), 6).toString());
-					quartoSelecionado.setId(Integer.parseInt(table.getModel()
+					// System.out.println("selecionada "
+					// + table.getModel().getValueAt(
+					// table.getSelectedRow(), 0));
+					// ------------------------------------------------------------------------------
+					// Setando data
+					String dt1 = table.getModel()
+							.getValueAt(table.getSelectedRow(), 3).toString();
+					String dt2 = table.getModel()
+							.getValueAt(table.getSelectedRow(), 4).toString();
+
+					String a1[] = dt1.split("-");
+					String a2[] = dt2.split("-");
+
+					datePicker.getModel().setDay(Integer.parseInt(a1[0]));
+					datePicker.getModel().setMonth(Integer.parseInt(a1[1]) - 1);
+					datePicker.getModel().setYear(Integer.parseInt(a1[2]));
+					datePicker.getModel().setSelected(true);
+
+					datePicker2.getModel().setDay(Integer.parseInt(a2[0]));
+					datePicker2.getModel()
+							.setMonth(Integer.parseInt(a2[1]) - 1);
+					datePicker2.getModel().setYear(Integer.parseInt(a2[2]));
+					datePicker2.getModel().setSelected(true);
+
+					java.util.Date d1 = (java.util.Date) datePicker.getModel()
+							.getValue();
+					java.sql.Date dataSql1 = new java.sql.Date(d1.getTime());
+
+					java.util.Date d2 = (java.util.Date) datePicker2.getModel()
+							.getValue();
+					java.sql.Date dataSql2 = new java.sql.Date(d2.getTime());
+					// ------------------------------------------------------------------------------Setando
+					reservaSelecionado = new Reserva(table.getModel()
+							.getValueAt(table.getSelectedRow(), 1).toString(),
+							table.getModel()
+									.getValueAt(table.getSelectedRow(), 2)
+									.toString(), dataSql1, dataSql2, table
+									.getModel()
+									.getValueAt(table.getSelectedRow(), 5)
+									.toString(), table.getModel()
+									.getValueAt(table.getSelectedRow(), 6)
+									.toString());
+					reservaSelecionado.setId(Integer.parseInt(table.getModel()
 							.getValueAt(table.getSelectedRow(), 0).toString()));
-//					txtDescricao.setText(quartoSelecionado.getDescricao());
-//					txtCapacidade.setText(quartoSelecionado.getCapacidade()
-//							+ "");
-//					cbTipo.setSelectedItem(quartoSelecionado.getTipo());
+					txtVisitante.setText(reservaSelecionado.getVisitante());
+					txtQuarto.setText(reservaSelecionado.getQuarto());
+					txtPagamento.setText(reservaSelecionado.getPagamento());
+					for (int i = 0; i < 3; i++) {
+						if (comboBox.getSelectedItem().equals(
+								reservaSelecionado.getStatus())) {
+
+						} else {
+							comboBox.setSelectedIndex(i);
+						}
+					}
 					isEdited = true;
 				}
 			}
@@ -337,11 +379,21 @@ public class TelaCadastroReserva extends ControllerTela implements Telas {
 			JOptionPane.showMessageDialog(frame,
 					"Campo Pagamento não foi preenchido");
 			return true;
-			// } else if (txtStatus.getText().equals("")
-			// || txtStatus.getText().equals(null)) {
-			// JOptionPane.showMessageDialog(frame,
-			// "Campo status não foi preenchido");
-			// return true;
+		}
+		try {
+			String aux = "";
+			if(txtPagamento.getText().contains(",")){
+				aux = txtPagamento.getText().replace(",", ".");
+				double n = Double.parseDouble(aux);
+			}else if(txtPagamento.getText().contains(".")){
+				double n = Double.parseDouble(txtPagamento.getText());	
+			} else {
+				int n = Integer.parseInt(txtPagamento.getText());
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(frame,
+					"Campo Pagamento deve ser número para ser cadastrado");
+			return true;
 		}
 		return false;
 	}
