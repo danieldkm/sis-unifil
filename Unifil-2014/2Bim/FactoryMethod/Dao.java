@@ -6,49 +6,53 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+
 import entidades.Quarto;
 import entidades.Reserva;
 import entidades.TipoQuarto;
 import entidades.Visitante;
 
 public class Dao {
-	public static void main(String[] args) {
-		// FabricaDeConexao fabrica = new FabricaDeMySql();
-		// Conexao conexao = fabrica.criarConexao();
-		// conexao.getConexao();
-		//
-		// fabrica = new FabricaDeFireBird();
-		// conexao = fabrica.criarConexao();
-		// conexao.getConexao();
-		//
-		// fabrica = new FabricaDeOracle();
-		// conexao = fabrica.criarConexao();
-		// try {
-		// conexao.getConexao().close();
-		// } catch (SQLException e) {
-		// e.printStackTrace();
-		// }
-
-		Dao t = new Dao();
-
-		t.getConexao(new FabricaDeMySql());
-
-		try {
-			System.out.println("Conexao estabelecida? " + conexao);
-			conexao.close();
-			conexao = null;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		conexao = t.getConexao(new FabricaDeFireBird());
-		try {
-			System.out.println("Conexao estabelecida? " + conexao);
-			conexao.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args) {
+//		// FabricaDeConexao fabrica = new FabricaDeMySql();
+//		// Conexao conexao = fabrica.criarConexao();
+//		// conexao.getConexao();
+//		//
+//		// fabrica = new FabricaDeFireBird();
+//		// conexao = fabrica.criarConexao();
+//		// conexao.getConexao();
+//		//
+//		// fabrica = new FabricaDeOracle();
+//		// conexao = fabrica.criarConexao();
+//		// try {
+//		// conexao.getConexao().close();
+//		// } catch (SQLException e) {
+//		// e.printStackTrace();
+//		// }
+//
+//		Dao t = new Dao();
+//
+//		t.getConexao(new FabricaDeMySql());
+//
+//		try {
+//			System.out.println("Conexao estabelecida? " + conexao);
+//			conexao.close();
+//			conexao = null;
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//
+//		conexao = t.getConexao(new FabricaDeFireBird());
+//		try {
+//			System.out.println("Conexao estabelecida? " + conexao);
+//			conexao.close();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	private Dao() {
 	}
@@ -74,10 +78,10 @@ public class Dao {
 
 	// INSERT
 	public static void insert(Object o) {
+		Connection con = getConexao(new FabricaDeMySql());
+		PreparedStatement pst = null;
 		try {
 			String sql = "";
-			Connection con = getConexao(new FabricaDeMySql());
-			PreparedStatement pst = null;
 
 			if (o instanceof Quarto) {
 				Quarto q = (Quarto) o;
@@ -111,23 +115,26 @@ public class Dao {
 			}
 
 			pst.executeUpdate();
-			pst.close();
-			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally{
+			try {
+				pst.close();
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-
 	}
 
 	// UPDATE
 	public static void update(Object o) {
+		Connection con = getConexao(new FabricaDeMySql());
+		PreparedStatement pst = null;
 		try {
-
 			String sql = "";
-			Connection con = getConexao(new FabricaDeMySql());
-			PreparedStatement pst = null;
 			if (o instanceof TipoQuarto) {
 				TipoQuarto tq = (TipoQuarto) o;
 				sql = "update tipo_quarto set descricao = ? where idTipo = ?";
@@ -171,21 +178,25 @@ public class Dao {
 				pst.setString(6, r.getStatus());
 				pst.setInt(7, r.getId());
 			}
-
 			pst.executeUpdate();
-			pst.close();
-			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				pst.close();
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	// DELETE
 	public static void delete(Object o) {
+		Connection con = getConexao(new FabricaDeMySql());
+		PreparedStatement pst = null;
 		try {
 			String sql = "";
-			Connection con = getConexao(new FabricaDeMySql());
-			PreparedStatement pst = null;
 			if (o instanceof TipoQuarto) {
 				TipoQuarto tq = (TipoQuarto) o;
 				sql = "DELETE FROM TIPO_QUARTO WHERE idTipo = ?";
@@ -207,22 +218,31 @@ public class Dao {
 				pst = con.prepareStatement(sql);
 				pst.setInt(1, r.getId());
 			}
-			
 			pst.executeUpdate();
+			JOptionPane.showMessageDialog(null,
+					"Deletado com sucesso!");
+		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e){
+			JOptionPane.showMessageDialog(null, "Não é possível deletar\nVerifique antes se este item foi cadastrado em uma outra operação");
+			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				pst.close();
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-
 	}
 
 	// SELECT
 	public static ArrayList<Object> select(Object o) {
 		ArrayList<Object> lista = new ArrayList<>();
+		Connection con = getConexao(new FabricaDeMySql());
+		PreparedStatement pst = null;
 		try {
 			String sql = "";
-			Connection con = getConexao(new FabricaDeMySql());
-			PreparedStatement pst = null;
-
 			if (o instanceof TipoQuarto) {
 				TipoQuarto tq = (TipoQuarto) o;
 				sql = "select * from tipo_quarto";
@@ -268,10 +288,15 @@ public class Dao {
 				}
 				rs.close();
 			}
-			pst.close();
-			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally{
+			try {
+				pst.close();
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return lista;

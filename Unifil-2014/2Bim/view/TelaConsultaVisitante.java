@@ -4,24 +4,19 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
-import controller.ControllerTela;
-import entidades.Visitante;
+import controller.ControllerVisitante;
 
-public class TelaConsultaVisitante extends ControllerTela {
+public class TelaConsultaVisitante extends ControllerVisitante {
 
-	private JDialog frame;
-	private JTextField txtBuscar;
 
 	// /**
 	// * Launch the application.
@@ -43,6 +38,7 @@ public class TelaConsultaVisitante extends ControllerTela {
 	 * Create the application.
 	 */
 	public TelaConsultaVisitante() {
+		isConsulta = true;
 		initialize();
 	}
 
@@ -72,19 +68,11 @@ public class TelaConsultaVisitante extends ControllerTela {
 		txtBuscar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				ArrayList<Visitante> novaLista = new ArrayList<>();
-				String bus = "";
-				for (Visitante v : listaVisitante) {
-					bus = v.getId() + v.getNome() + v.getTelefone() + v.getEmail();
-					if(bus.contains(txtBuscar.getText())){
-						novaLista.add(v);
-					}
-				}
-				tVisitante.atualizarTabela(novaLista);
+				actionButtonBuscar(e);
 			}
 		});
 
-		JScrollPane scrollPane = getTable("visitante");
+		JScrollPane scrollPane = getTable();
 		scrollPane.setBounds(10, 36, 457, 372);
 		panel.add(scrollPane);
 		table.addMouseListener(new MouseListener() {
@@ -94,22 +82,7 @@ public class TelaConsultaVisitante extends ControllerTela {
 			@Override public void mouseEntered(MouseEvent e) {}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (e.getClickCount() == 2) {
-					visitanteSelecionado = new Visitante(table.getModel()
-							.getValueAt(table.getSelectedRow(), 1).toString(),
-							table.getModel()
-									.getValueAt(table.getSelectedRow(), 2)
-									.toString(), table.getModel()
-									.getValueAt(table.getSelectedRow(), 3)
-									.toString());
-					visitanteSelecionado.setId(Integer.parseInt(table
-							.getModel().getValueAt(table.getSelectedRow(), 0)
-							.toString()));
-					txtVisitante.setText(visitanteSelecionado.getNome());
-					JOptionPane.showMessageDialog(frame,
-							"Visitante selecionado");
-					frame.dispose();
-				}
+				actionMouseClickedOnTable(e);
 			}
 		});
 

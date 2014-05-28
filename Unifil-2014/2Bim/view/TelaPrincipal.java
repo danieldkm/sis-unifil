@@ -54,7 +54,7 @@ public class TelaPrincipal {
 		menuBar.setBounds(0, 0, 442, 21);
 		frame.getContentPane().add(menuBar);
 		
-		JMenu mnNewMenu = new JMenu("Cadastro");
+		JMenu mnNewMenu = new JMenu("Opera\u00E7\u00E3o");
 		mnNewMenu.setHorizontalAlignment(SwingConstants.LEFT);
 		menuBar.add(mnNewMenu);
 		
@@ -82,7 +82,7 @@ public class TelaPrincipal {
 		});
 		mnNewMenu.add(mntmReserva);
 		
-		JMenu mnNewMenu_1 = new JMenu("Consulta");
+		JMenu mnNewMenu_1 = new JMenu("");
 		menuBar.add(mnNewMenu_1);
 	}
 	private static void addPopup(Component component, final JPopupMenu popup) {
