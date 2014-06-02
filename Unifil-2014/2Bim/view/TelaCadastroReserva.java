@@ -21,8 +21,9 @@ import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 import controller.ControllerReserva;
+import controller.Telas;
 
-public class TelaCadastroReserva extends ControllerReserva {
+public class TelaCadastroReserva /*extends ControllerReserva*/ {
 
 
 
@@ -41,6 +42,17 @@ public class TelaCadastroReserva extends ControllerReserva {
 //			}
 //		});
 //	}
+	
+	private JDialog frame;
+	private JTextField txtVisitante;
+	private JTextField txtQuarto;
+	private JTextField txtPagamento;
+	private JTextField txtBuscar;
+	private JComboBox comboBox;
+	private JDatePickerImpl datePicker;
+	private JDatePickerImpl datePicker2;
+	private Telas controle;
+	
 
 	/**
 	 * Create the application.
@@ -134,7 +146,7 @@ public class TelaCadastroReserva extends ControllerReserva {
 		panel.add(comboBox);
 		comboBox.addItem("Ocupado");
 		comboBox.addItem("Reservado");
-		comboBox.addItem("Disponível");
+		comboBox.addItem("Disponï¿½vel");
 
 		UtilDateModel model = new UtilDateModel();
 		JDatePanelImpl datePanel = new JDatePanelImpl(model);
@@ -156,7 +168,7 @@ public class TelaCadastroReserva extends ControllerReserva {
 		JButton btnNewButton_2 = new JButton("Salvar/Atualizar");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				salvar(e);
+				controle.salvar(e);
 			}
 		});
 		panel_1.add(btnNewButton_2);
@@ -164,7 +176,7 @@ public class TelaCadastroReserva extends ControllerReserva {
 		JButton btnNewButton_3 = new JButton("Novo/Limpar");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				limpar(e);
+				controle.limpar(e);
 			}
 		});
 		panel_1.add(btnNewButton_3);
@@ -172,7 +184,7 @@ public class TelaCadastroReserva extends ControllerReserva {
 		JButton btnNewButton_4 = new JButton("Excluir");
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				excluir(e);
+				controle.excluir(e);
 			}
 		});
 		panel_1.add(btnNewButton_4);
@@ -194,45 +206,46 @@ public class TelaCadastroReserva extends ControllerReserva {
 		txtBuscar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				actionButtonBuscar(e);
+				controle.actionButtonBuscar(e);
 			}
 		});
-
-		JScrollPane scrollPane = getTable();
+		
+		controle = new ControllerReserva(frame, txtVisitante, txtQuarto, txtPagamento, txtBuscar, comboBox, datePicker, datePicker2);
+		JScrollPane scrollPane = controle.getTable();
 		scrollPane.setBounds(12, 40, 388, 153);
 		panel_2.add(scrollPane);
-		table.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				actionMouseClickedOnTable(e);
-			}
-		});
-
+//		table.addMouseListener(new MouseListener() {
+//
+//			@Override
+//			public void mouseReleased(MouseEvent e) {
+//				// TODO Auto-generated method stub
+//
+//			}
+//
+//			@Override
+//			public void mousePressed(MouseEvent e) {
+//				// TODO Auto-generated method stub
+//
+//			}
+//
+//			@Override
+//			public void mouseExited(MouseEvent e) {
+//				// TODO Auto-generated method stub
+//
+//			}
+//
+//			@Override
+//			public void mouseEntered(MouseEvent e) {
+//				// TODO Auto-generated method stub
+//
+//			}
+//
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				actionMouseClickedOnTable(e);
+//			}
+//		});
+		controle.setAddMouseListener();
 		frame.setResizable(false);
 		frame.setModal(true);
 		frame.setVisible(true);

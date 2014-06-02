@@ -122,7 +122,7 @@ public class Dao {
 		} finally{
 			try {
 				pst.close();
-				con.close();
+//				con.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -184,7 +184,7 @@ public class Dao {
 		} finally {
 			try {
 				pst.close();
-				con.close();
+//				con.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -222,14 +222,14 @@ public class Dao {
 			JOptionPane.showMessageDialog(null,
 					"Deletado com sucesso!");
 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e){
-			JOptionPane.showMessageDialog(null, "Não é possível deletar\nVerifique antes se este item foi cadastrado em uma outra operação");
+			JOptionPane.showMessageDialog(null, "Nï¿½o ï¿½ possï¿½vel deletar\nVerifique antes se este item foi cadastrado em uma outra operaï¿½ï¿½o");
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
 				pst.close();
-				con.close();
+//				con.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -293,7 +293,7 @@ public class Dao {
 		} finally{
 			try {
 				pst.close();
-				con.close();
+//				con.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

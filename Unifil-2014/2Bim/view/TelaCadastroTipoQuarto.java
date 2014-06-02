@@ -20,9 +20,10 @@ import javax.swing.UIManager;
 
 import FactoryMethod.Dao;
 import controller.ControllerTipoQuarto;
+import controller.Telas;
 import entidades.TipoQuarto;
 
-public class TelaCadastroTipoQuarto extends ControllerTipoQuarto {
+public class TelaCadastroTipoQuarto /*extends ControllerTipoQuarto*/ {
 
 //	/**
 //	 * Launch the application.
@@ -39,6 +40,13 @@ public class TelaCadastroTipoQuarto extends ControllerTipoQuarto {
 //			}
 //		});
 //	}
+	
+	private TipoQuarto tipoQuartoSelecionado;
+	private boolean isEdited = false;
+	private Telas controle;
+	private JDialog frmCadastroTipoDe;
+	private JTextField txtDescricao;
+	private JTextField txtBuscar;
 
 	/**
 	 * Create the application.
@@ -62,13 +70,13 @@ public class TelaCadastroTipoQuarto extends ControllerTipoQuarto {
 	private void initialize() {
 		frmCadastroTipoDe = new JDialog();
 		frmCadastroTipoDe.setTitle("Cadastro tipo de quarto");
-		frmCadastroTipoDe.setBounds(100, 100, 337, 387);
+		frmCadastroTipoDe.setBounds(100, 100, 400, 387);
 		// frmCadastroTipoDe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmCadastroTipoDe.getContentPane().setLayout(null);
 
 		JPanel panel = new JPanel();
 		panel.setBorder(UIManager.getBorder("FormattedTextField.border"));
-		panel.setBounds(10, 11, 314, 51);
+		panel.setBounds(10, 11, 377, 51);
 		frmCadastroTipoDe.getContentPane().add(panel);
 		panel.setLayout(null);
 
@@ -77,7 +85,7 @@ public class TelaCadastroTipoQuarto extends ControllerTipoQuarto {
 		panel.add(lblDescricao);
 
 		txtDescricao = new JTextField();
-		txtDescricao.setBounds(92, 8, 165, 20);
+		txtDescricao.setBounds(92, 8, 280, 20);
 		panel.add(txtDescricao);
 		txtDescricao.setColumns(10);
 		if (isEdited) {
@@ -86,13 +94,13 @@ public class TelaCadastroTipoQuarto extends ControllerTipoQuarto {
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(UIManager.getBorder("FormattedTextField.border"));
-		panel_1.setBounds(10, 73, 314, 40);
+		panel_1.setBounds(10, 73, 377, 40);
 		frmCadastroTipoDe.getContentPane().add(panel_1);
 
 		JButton btnAtualizar = new JButton("Atualizar/Salvar");
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				salvar(e);
+				controle.salvar(e);
 			}
 		});
 		panel_1.add(btnAtualizar);
@@ -100,7 +108,7 @@ public class TelaCadastroTipoQuarto extends ControllerTipoQuarto {
 		JButton btnCriarNovo = new JButton("Criar novo");
 		btnCriarNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				limpar(e);
+				controle.limpar(e);
 			}
 		});
 		panel_1.add(btnCriarNovo);
@@ -108,14 +116,14 @@ public class TelaCadastroTipoQuarto extends ControllerTipoQuarto {
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				excluir(e);
+				controle.excluir(e);
 			}
 		});
 		panel_1.add(btnExcluir);
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(UIManager.getBorder("FormattedTextField.border"));
-		panel_2.setBounds(10, 124, 311, 224);
+		panel_2.setBounds(10, 124, 377, 224);
 		frmCadastroTipoDe.getContentPane().add(panel_2);
 		panel_2.setLayout(null);
 
@@ -127,38 +135,19 @@ public class TelaCadastroTipoQuarto extends ControllerTipoQuarto {
 		txtBuscar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				actionButtonBuscar(e);
+				controle.actionButtonBuscar(e);
 			}
 		});
-		txtBuscar.setBounds(100, 8, 201, 20);
+		txtBuscar.setBounds(100, 8, 275, 20);
 		panel_2.add(txtBuscar);
 		txtBuscar.setColumns(10);
-
-		JScrollPane scrollPane = getTable();
-		scrollPane.setBounds(10, 37, 289, 175);
+		
+		
+		controle = new ControllerTipoQuarto(frmCadastroTipoDe, txtDescricao, txtBuscar, tipoQuartoSelecionado, isEdited);
+		JScrollPane scrollPane = controle.getTable();
+		scrollPane.setBounds(10, 37, 360, 175);
 		panel_2.add(scrollPane);
-		table.addMouseListener(new MouseListener() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				 actionMouseClickedOnTable(e);
-			}
-		});
+		controle.setAddMouseListener();
 
 		frmCadastroTipoDe.setModal(true);
 		frmCadastroTipoDe.setResizable(false);

@@ -18,9 +18,9 @@ public abstract class Controller {
 	protected JTextField txtBuscar;
 
 
-	protected JScrollPane getTable() {
-		return new JScrollPane(table);
-	}
+//	protected JScrollPane getTable() {
+//		return new JScrollPane(table);
+//	}
 	
 	
 

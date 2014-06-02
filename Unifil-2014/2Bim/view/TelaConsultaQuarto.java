@@ -14,9 +14,13 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
 import controller.ControllerQuarto;
+import controller.Telas;
 
-public class TelaConsultaQuarto extends ControllerQuarto {
-
+public class TelaConsultaQuarto /*extends ControllerQuarto*/ {
+	private JDialog frmQuarto;
+	private Telas controle;
+	private boolean isConsulta;
+	private JTextField txtBuscar;
 
 //	/**
 //	 * Launch the application.
@@ -39,6 +43,7 @@ public class TelaConsultaQuarto extends ControllerQuarto {
 	 */
 	public TelaConsultaQuarto() {
 		isConsulta = true;
+		
 		initialize();
 	}
 
@@ -69,23 +74,25 @@ public class TelaConsultaQuarto extends ControllerQuarto {
 		txtBuscar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				actionButtonBuscar(e);
+				controle.actionButtonBuscar(e);
 			}
 		});
 		
-		JScrollPane scrollPane = getTable();
+		controle = new ControllerQuarto(frmQuarto, txtBuscar, isConsulta);
+		JScrollPane scrollPane = controle.getTable();
 		scrollPane.setBounds(10, 37, 419, 270);
 		panel.add(scrollPane);
-		table.addMouseListener(new MouseListener() {
-			@Override public void mouseReleased(MouseEvent e) {}
-			@Override public void mousePressed(MouseEvent e) {}
-			@Override public void mouseExited(MouseEvent e) {}
-			@Override public void mouseEntered(MouseEvent e) {}
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				actionMouseClickedOnTable(e);
-			}
-		});
+		controle.setAddMouseListener();
+//		table.addMouseListener(new MouseListener() {
+//			@Override public void mouseReleased(MouseEvent e) {}
+//			@Override public void mousePressed(MouseEvent e) {}
+//			@Override public void mouseExited(MouseEvent e) {}
+//			@Override public void mouseEntered(MouseEvent e) {}
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				actionMouseClickedOnTable(e);
+//			}
+//		});
 		
 		frmQuarto.setResizable(false);
 		frmQuarto.setModal(true);

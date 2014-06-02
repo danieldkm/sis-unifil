@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JComboBox;
@@ -24,13 +25,28 @@ public class ControllerQuarto extends ControllerTipoQuarto implements Telas {
 	private TabelaQuarto tQuarto;
 	private Quarto quartoSelecionado;
 
-	protected JDialog frmQuarto;
-	protected JTextField txtDescricao;
-	protected JTextField txtCapacidade;
-	protected ArrayList<TipoQuarto> listaTipoQuarto = new ArrayList<>();
-	protected JComboBox cbTipo;
+	private JDialog frmQuarto;
+	private JTextField txtDescricao;
+	private JTextField txtCapacidade;
+	private ArrayList<TipoQuarto> listaTipoQuarto = new ArrayList<>();
+	private JComboBox cbTipo;
+	
+	public ControllerQuarto(JDialog frame, JTextField txtBuscar, boolean isConsulta) {
+		this.frmQuarto = frame;
+		this.txtBuscar = txtBuscar;
+		this.isConsulta = isConsulta;
+		
+	}
+	
+	public ControllerQuarto(JDialog frame, JTextField txtDescricao, JTextField txtCapacidade, JTextField txtBuscar, JComboBox cb) {
+		frmQuarto = frame;
+		this.txtDescricao = txtDescricao;
+		this.txtCapacidade = txtCapacidade;
+		this.txtBuscar = txtBuscar;
+		cbTipo = cb;
+	}
 
-	protected ArrayList<Quarto> getListaQuarto() {
+	public ArrayList<Quarto> getListaQuarto() {
 		ArrayList<Object> listaObjeto = Dao.select(new Quarto());
 		ArrayList<Quarto> listaQuarto = new ArrayList<>();
 		for (Object o : listaObjeto) {
@@ -40,7 +56,7 @@ public class ControllerQuarto extends ControllerTipoQuarto implements Telas {
 		return listaQuarto;
 	}
 
-	protected JScrollPane getTable() {
+	public JScrollPane getTable() {
 		listaQuarto = getListaQuarto();
 		tQuarto = new TabelaQuarto(listaQuarto);
 		table = new JTable(tQuarto);
@@ -52,12 +68,12 @@ public class ControllerQuarto extends ControllerTipoQuarto implements Telas {
 		if (txtDescricao.getText().equals(null)
 				|| txtDescricao.getText().equals("")) {
 			JOptionPane.showMessageDialog(frmQuarto,
-					"Campo DESCRIÇÃO não foi preenchido");
+					"Campo DESCRIï¿½ï¿½O nï¿½o foi preenchido");
 			return true;
 		} else if (txtCapacidade.getText().equals("")
 				|| txtCapacidade.getText().equals(null)) {
 			JOptionPane.showMessageDialog(frmQuarto,
-					"Campo CAPACIDADE não foi preenchido");
+					"Campo CAPACIDADE nï¿½o foi preenchido");
 			return true;
 		}
 
@@ -65,7 +81,7 @@ public class ControllerQuarto extends ControllerTipoQuarto implements Telas {
 			int n = Integer.parseInt(txtCapacidade.getText());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(frmQuarto,
-					"Campo CAPACIDADE deve ser um número");
+					"Campo CAPACIDADE deve ser um nï¿½mero");
 			return true;
 		}
 		return false;
@@ -117,7 +133,7 @@ public class ControllerQuarto extends ControllerTipoQuarto implements Telas {
 			}
 		} else {
 			JOptionPane.showMessageDialog(frmQuarto,
-					"Quarto não foi selecionado para ser excluído");
+					"Quarto nï¿½o foi selecionado para ser excluï¿½do");
 		}
 	}
 
@@ -170,17 +186,17 @@ public class ControllerQuarto extends ControllerTipoQuarto implements Telas {
 		}
 	}
 
-	protected void verificarTipoQuarto() {
+	public void verificarTipoQuarto() {
 		listaTipoQuarto = getListaTipoQuarto();
+		System.out.println("kct " + listaTipoQuarto);
 		if (listaTipoQuarto.isEmpty()) {
-			System.out.println("Lista de quarto está vazia");
+			System.out.println("Lista de quarto estï¿½ vazia");
 			int r = JOptionPane
 					.showConfirmDialog(
 							frmQuarto,
 							"Para cadastrar um quarto, deve antes cadastrar pelo menos 1 tipo de Quarto!\nDeseja cadastrar agora?");
 			switch (r) {
 			case 0:
-				System.out.println("0");
 				new TelaCadastroTipoQuarto();
 				break;
 			}
@@ -193,6 +209,52 @@ public class ControllerQuarto extends ControllerTipoQuarto implements Telas {
 			frmQuarto.setResizable(false);
 			frmQuarto.setModal(true);
 			frmQuarto.setVisible(true);
+		}
+	}
+	
+	@Override
+	public void setAddMouseListener(){
+		table.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				actionMouseClickedOnTable(e);
+			}
+		});
+	}
+	
+	@Override
+	public void setActionListenerBtn(){
+		for (TipoQuarto tp : listaTipoQuarto) {
+			if (tp.getDescricao().equals(cbTipo.getSelectedItem())) {
+				new TelaCadastroTipoQuarto(tp);
+				frmQuarto.dispose();
+				break;
+			}
 		}
 	}
 }

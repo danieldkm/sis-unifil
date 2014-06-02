@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JComboBox;
@@ -24,11 +25,23 @@ public class ControllerReserva extends Controller implements Telas {
 	private TabelaReserva tReserva;
 	private Reserva reservaSelecionado;
 	
-	protected JDialog frame;
-	protected JTextField txtPagamento;
-	protected JComboBox comboBox;
-	protected JDatePickerImpl datePicker;
-	protected JDatePickerImpl datePicker2;
+	private JDialog frame;
+	private JTextField txtPagamento;
+	private JComboBox comboBox;
+	private JDatePickerImpl datePicker;
+	private JDatePickerImpl datePicker2;
+	
+	public ControllerReserva(JDialog frame, JTextField txtVisitante,JTextField txtQuarto,JTextField txtPagamento,JTextField txtBuscar, JComboBox cbBox, JDatePickerImpl datePicker, JDatePickerImpl datePicker2) {
+		this.frame = frame;
+		this.txtVisitante = txtVisitante;
+		this.txtQuarto = txtQuarto;
+		this.txtPagamento = txtPagamento;
+		this.txtBuscar = txtBuscar;
+		this.comboBox = cbBox;
+		this.datePicker = datePicker;
+		this.datePicker2 = datePicker2;
+	
+	}
 
 	protected ArrayList<Reserva> getListaReserva() {
 		ArrayList<Object> listaObjeto = Dao.select(new Reserva());
@@ -40,7 +53,7 @@ public class ControllerReserva extends Controller implements Telas {
 		return listaReserva;
 	}
 
-	protected JScrollPane getTable() {
+	public JScrollPane getTable() {
 		listaReserva = getListaReserva();
 		tReserva = new TabelaReserva(listaReserva);
 		table = new JTable(tReserva);
@@ -52,25 +65,25 @@ public class ControllerReserva extends Controller implements Telas {
 		if (txtVisitante.getText().equals("")
 				|| txtVisitante.getText().equals(null)) {
 			JOptionPane.showMessageDialog(frame,
-					"Campo Visitante não foi preenchido");
+					"Campo Visitante nï¿½o foi preenchido");
 			return true;
 		} else if (txtQuarto.getText().equals("")
 				|| txtQuarto.getText().equals(null)) {
 			JOptionPane.showMessageDialog(frame,
-					"Campo Quarto não foi preenchido");
+					"Campo Quarto nï¿½o foi preenchido");
 			return true;
 		} else if (datePicker.getModel().getValue() == null) {
 			JOptionPane.showMessageDialog(frame,
-					"Campo data de entrada não foi preenchido");
+					"Campo data de entrada nï¿½o foi preenchido");
 			return true;
 		} else if (datePicker2.getModel().getValue() == null) {
 			JOptionPane.showMessageDialog(frame,
-					"Campo data de saída não foi preenchido");
+					"Campo data de saï¿½da nï¿½o foi preenchido");
 			return true;
 		} else if (txtPagamento.getText().equals("")
 				|| txtPagamento.getText().equals(null)) {
 			JOptionPane.showMessageDialog(frame,
-					"Campo Pagamento não foi preenchido");
+					"Campo Pagamento nï¿½o foi preenchido");
 			return true;
 		}
 		try {
@@ -85,7 +98,7 @@ public class ControllerReserva extends Controller implements Telas {
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(frame,
-					"Campo Pagamento deve ser número para ser cadastrado");
+					"Campo Pagamento deve ser nï¿½mero para ser cadastrado");
 			return true;
 		}
 		return false;
@@ -145,7 +158,7 @@ public class ControllerReserva extends Controller implements Telas {
 			}
 		} else {
 			JOptionPane.showMessageDialog(frame,
-					"Reserva não foi selecionado para ser excluído");
+					"Reserva nï¿½o foi selecionado para ser excluï¿½do");
 		}
 	}
 
@@ -235,5 +248,41 @@ public class ControllerReserva extends Controller implements Telas {
 		tReserva.atualizarTabela(novaLista);
 
 	}
+
+	@Override
+	public void setAddMouseListener() {
+		table.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				actionMouseClickedOnTable(e);
+			}
+		});
+		
+	}
+
+	@Override
+	public void verificarTipoQuarto() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setActionListenerBtn() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

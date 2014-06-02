@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JDialog;
@@ -25,6 +26,24 @@ public class ControllerVisitante extends Controller implements Telas {
 	protected JTextField txtNome;
 	protected JTextField txtTelefone;
 	protected JTextField txtEmail;
+	
+	public ControllerVisitante() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public ControllerVisitante(JDialog frame, JTextField txtBuscar, boolean isConsulta) {
+		this.frame = frame;
+		this.txtBuscar = txtBuscar;
+		this.isConsulta = isConsulta;
+	}
+	
+	public ControllerVisitante(JDialog frame, JTextField txtNome, JTextField txtTelefone, JTextField txtEmail, JTextField txtBuscar) {
+		this.frame = frame;
+		this.txtNome = txtNome;
+		this.txtTelefone = txtTelefone;
+		this.txtEmail = txtEmail;
+		this.txtBuscar = txtBuscar;
+	}
 
 	protected ArrayList<Visitante> getListaVisitante() {
 		ArrayList<Object> listaObjeto = Dao.select(new Visitante());
@@ -36,7 +55,7 @@ public class ControllerVisitante extends Controller implements Telas {
 		return listaVisitante;
 	}
 
-	protected JScrollPane getTable() {
+	public JScrollPane getTable() {
 		listaVisitante = getListaVisitante();
 		tVisitante = new TabelaVisitante(listaVisitante);
 		table = new JTable(tVisitante);
@@ -47,17 +66,17 @@ public class ControllerVisitante extends Controller implements Telas {
 	public boolean validarCampos() {
 		if (txtNome.getText().equals("") || txtNome.getText().equals(null)) {
 			JOptionPane.showMessageDialog(frame,
-					"Campo NOME não foi preenchido");
+					"Campo NOME nï¿½o foi preenchido");
 			return true;
 		} else if (txtTelefone.getText().equals("")
 				|| txtTelefone.getText().equals(null)) {
 			JOptionPane.showMessageDialog(frame,
-					"Campo TELEFONE não foi preenchido");
+					"Campo TELEFONE nï¿½o foi preenchido");
 			return true;
 		} else if (txtEmail.getText().equals("")
 				|| txtEmail.getText().equals(null)) {
 			JOptionPane.showMessageDialog(frame,
-					"Campo E-MAIL não foi preenchido");
+					"Campo E-MAIL nï¿½o foi preenchido");
 			return true;
 		}
 		return false;
@@ -104,7 +123,7 @@ public class ControllerVisitante extends Controller implements Telas {
 			}
 		} else {
 			JOptionPane.showMessageDialog(frame,
-					"Visitante não foi selecionado para ser excluído");
+					"Visitante nï¿½o foi selecionado para ser excluï¿½do");
 		}
 	}
 
@@ -155,5 +174,32 @@ public class ControllerVisitante extends Controller implements Telas {
 		}
 		tVisitante.atualizarTabela(novaLista);
 	}
+
+	@Override
+	public void setAddMouseListener() {
+		table.addMouseListener(new MouseListener() {
+		@Override public void mouseReleased(MouseEvent e) {}
+		@Override public void mousePressed(MouseEvent e) {}
+		@Override public void mouseExited(MouseEvent e) {}
+		@Override public void mouseEntered(MouseEvent e) {}
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			actionMouseClickedOnTable(e);
+		}
+	});
+	}
+
+	@Override
+	public void verificarTipoQuarto() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setActionListenerBtn() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

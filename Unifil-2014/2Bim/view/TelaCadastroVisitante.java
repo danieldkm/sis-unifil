@@ -16,8 +16,9 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 import controller.ControllerVisitante;
+import controller.Telas;
 
-public class TelaCadastroVisitante extends ControllerVisitante {
+public class TelaCadastroVisitante /*extends ControllerVisitante*/{
 
 
 //	/**
@@ -35,6 +36,13 @@ public class TelaCadastroVisitante extends ControllerVisitante {
 //			}
 //		});
 //	}
+	
+	private JDialog frame;
+	private JTextField txtNome;
+	private JTextField txtTelefone;
+	private JTextField txtEmail;
+	private JTextField txtBuscar;
+	private Telas controle;
 
 	/**
 	 * Create the application.
@@ -92,7 +100,7 @@ public class TelaCadastroVisitante extends ControllerVisitante {
 		JButton btnSalvaratualizar = new JButton("Salvar/Atualizar");
 		btnSalvaratualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				salvar(e);
+				controle.salvar(e);
 			}
 		});
 		panel_1.add(btnSalvaratualizar);
@@ -100,7 +108,7 @@ public class TelaCadastroVisitante extends ControllerVisitante {
 		JButton btnNovolimpar = new JButton("Novo/Limpar");
 		btnNovolimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				limpar(e);
+				controle.limpar(e);
 			}
 		});
 		panel_1.add(btnNovolimpar);
@@ -108,7 +116,7 @@ public class TelaCadastroVisitante extends ControllerVisitante {
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				excluir(e);
+				controle.excluir(e);
 			}
 		});
 		panel_1.add(btnExcluir);
@@ -130,23 +138,25 @@ public class TelaCadastroVisitante extends ControllerVisitante {
 		txtBuscar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				actionButtonBuscar(e);
+				controle.actionButtonBuscar(e);
 			}
 		});
 
-		JScrollPane scrollPane = getTable();
+		controle = new ControllerVisitante(frame, txtNome, txtTelefone, txtEmail, txtBuscar);
+		JScrollPane scrollPane = controle.getTable();
 		scrollPane.setBounds(12, 40, 397, 184);
 		panel_2.add(scrollPane);
-		table.addMouseListener(new MouseListener() {
-			@Override public void mouseReleased(MouseEvent e) {}
-			@Override public void mousePressed(MouseEvent e) {}
-			@Override public void mouseExited(MouseEvent e) {}
-			@Override public void mouseEntered(MouseEvent e) {}
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				actionMouseClickedOnTable(e);
-			}
-		});
+//		table.addMouseListener(new MouseListener() {
+//			@Override public void mouseReleased(MouseEvent e) {}
+//			@Override public void mousePressed(MouseEvent e) {}
+//			@Override public void mouseExited(MouseEvent e) {}
+//			@Override public void mouseEntered(MouseEvent e) {}
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				actionMouseClickedOnTable(e);
+//			}
+//		});
+		controle.setAddMouseListener();
 
 		frame.setResizable(false);
 		frame.setModal(true);

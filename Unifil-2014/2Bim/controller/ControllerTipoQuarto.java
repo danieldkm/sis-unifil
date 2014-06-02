@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JDialog;
@@ -19,10 +20,21 @@ public class ControllerTipoQuarto extends Controller implements Telas {
 	
 	private ArrayList<TipoQuarto> listaTipoQuarto;
 	private TabelaTipoQuarto tTipoQuarto;
-	protected TipoQuarto tipoQuartoSelecionado;
-	protected JDialog frmCadastroTipoDe;
-	protected static JTextField txtDescricao;
-	protected static int id;
+	private TipoQuarto tipoQuartoSelecionado;
+	private JDialog frmCadastroTipoDe;
+	private static JTextField txtDescricao;
+	private static int id;
+	
+	public ControllerTipoQuarto() {
+	}
+	
+	public ControllerTipoQuarto(JDialog frmCadastroTipoDe, JTextField txtDescricao,  JTextField txtBuscar, TipoQuarto tipoQuartoSelecionado, boolean isEdited) {
+		this.frmCadastroTipoDe = frmCadastroTipoDe;
+		this.txtDescricao = txtDescricao;
+		this.txtBuscar = txtBuscar;
+		this.tipoQuartoSelecionado = tipoQuartoSelecionado;
+		this.isEdited = isEdited;
+	}
 	
 	protected ArrayList<TipoQuarto> getListaTipoQuarto() {
 		ArrayList<Object> listaObjeto = Dao.select(new TipoQuarto());
@@ -34,7 +46,7 @@ public class ControllerTipoQuarto extends Controller implements Telas {
 		return listaTipoQuarto;
 	}
 	
-	protected JScrollPane getTable() {
+	public JScrollPane getTable() {
 		listaTipoQuarto = getListaTipoQuarto();
 		tTipoQuarto = new TabelaTipoQuarto(listaTipoQuarto);
 		table = new JTable(tTipoQuarto);
@@ -45,13 +57,13 @@ public class ControllerTipoQuarto extends Controller implements Telas {
 	public boolean validarCampos() {
 		if (txtDescricao.getText().equals("")) {
 			JOptionPane.showMessageDialog(frmCadastroTipoDe,
-					"Campo de descrição vazio!!");
+					"Campo de descriï¿½ï¿½o vazio!!");
 			return true;
 		}
 		for (TipoQuarto tq : getListaTipoQuarto()) {
 			if (txtDescricao.getText().equals(tq.getDescricao())) {
 				JOptionPane.showMessageDialog(frmCadastroTipoDe,
-						"Descrição informada ja existe!!");
+						"Descriï¿½ï¿½o informada ja existe!!");
 				return true;
 			}
 		}
@@ -98,7 +110,7 @@ public class ControllerTipoQuarto extends Controller implements Telas {
 		} else {
 			JOptionPane
 					.showMessageDialog(frmCadastroTipoDe,
-							"Tipo do quarto não foi selecionado para ser excluído");
+							"Tipo do quarto nï¿½o foi selecionado para ser excluï¿½do");
 		}
 	}
 
@@ -134,5 +146,37 @@ public class ControllerTipoQuarto extends Controller implements Telas {
 		}
 		tTipoQuarto.atualizarTabela(novaLista);
 	}
+
+	@Override
+	public void setAddMouseListener() {
+		table.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				actionMouseClickedOnTable(e);
+			}
+		});
+		
+	}
+
+	@Override
+	public void verificarTipoQuarto() {
+	}
+
+	@Override
+	public void setActionListenerBtn() {
+	}
+
 
 }

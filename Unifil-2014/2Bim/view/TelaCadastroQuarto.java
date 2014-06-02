@@ -6,6 +6,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -18,9 +19,17 @@ import javax.swing.UIManager;
 
 import controller.ControllerQuarto;
 import entidades.TipoQuarto;
+import controller.Telas;
 
-public class TelaCadastroQuarto extends ControllerQuarto  {
+public class TelaCadastroQuarto /*extends ControllerQuarto*/  {
 
+	private Telas controle;
+	private JDialog frmQuarto;
+	private JTextField txtDescricao;
+	private JTextField txtCapacidade;
+	private JTextField txtBuscar;
+//	private ArrayList<TipoQuarto> listaTipoQuarto = new ArrayList<>();
+	private JComboBox cbTipo;
 
 //	/**
 //	 * Launch the application.
@@ -42,6 +51,7 @@ public class TelaCadastroQuarto extends ControllerQuarto  {
 	 * Create the application.
 	 */
 	public TelaCadastroQuarto() {
+		
 		initialize();
 	}
 
@@ -51,13 +61,13 @@ public class TelaCadastroQuarto extends ControllerQuarto  {
 	private void initialize() {
 		frmQuarto = new JDialog();
 		frmQuarto.setTitle("Cadastro de Quarto");
-		frmQuarto.setBounds(100, 100, 388, 453);
+		frmQuarto.setBounds(100, 100, 407, 453);
 		// frmQuarto.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmQuarto.getContentPane().setLayout(null);
 
 		JPanel panel = new JPanel();
 		panel.setBorder(UIManager.getBorder("FormattedTextField.border"));
-		panel.setBounds(10, 11, 360, 102);
+		panel.setBounds(10, 11, 391, 102);
 		frmQuarto.getContentPane().add(panel);
 		panel.setLayout(null);
 
@@ -92,15 +102,7 @@ public class TelaCadastroQuarto extends ControllerQuarto  {
 		JButton btnEditarTipo = new JButton("Editar tipo");
 		btnEditarTipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				// ArrayList<Object> listaObjeto = Dao.select(new TipoQuarto());
-				// ArrayList<TipoQuarto> listaTipoQuarto = new ArrayList<>();
-				for (TipoQuarto tp : listaTipoQuarto) {
-					if (tp.getDescricao().equals(cbTipo.getSelectedItem())) {
-						new TelaCadastroTipoQuarto(tp);
-						frmQuarto.dispose();
-						break;
-					}
-				}
+				controle.setActionListenerBtn();
 			}
 		});
 		btnEditarTipo.setBounds(241, 35, 107, 23);
@@ -108,13 +110,13 @@ public class TelaCadastroQuarto extends ControllerQuarto  {
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(UIManager.getBorder("FormattedTextField.border"));
-		panel_1.setBounds(10, 124, 360, 40);
+		panel_1.setBounds(10, 124, 391, 40);
 		frmQuarto.getContentPane().add(panel_1);
 
 		JButton btnSalvar = new JButton("Salvar/Atualizar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				salvar(arg0);
+				controle.salvar(arg0);
 			}
 		});
 		panel_1.add(btnSalvar);
@@ -122,76 +124,45 @@ public class TelaCadastroQuarto extends ControllerQuarto  {
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				excluir(e);
+				controle.excluir(e);
 			}
 		});
-
-		JButton btnNovo = new JButton("Novo/Limpar");
-		btnNovo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				limpar(e);
-			}
-		});
-		panel_1.add(btnNovo);
+		
+				JButton btnNovo = new JButton("Novo/Limpar");
+				btnNovo.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						controle.limpar(e);
+					}
+				});
+				panel_1.add(btnNovo);
 		panel_1.add(btnExcluir);
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(UIManager.getBorder("FormattedTextField.border"));
-		panel_2.setBounds(10, 175, 360, 233);
+		panel_2.setBounds(10, 175, 391, 250);
 		frmQuarto.getContentPane().add(panel_2);
 		panel_2.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Pesquisa:");
-		lblNewLabel.setBounds(10, 11, 58, 14);
+		lblNewLabel.setBounds(10, 11, 75, 14);
 		panel_2.add(lblNewLabel);
 
 		txtBuscar = new JTextField();
 		txtBuscar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				actionButtonBuscar(e);
+				controle.actionButtonBuscar(e);
 			}
 		});
-		txtBuscar.setBounds(78, 8, 270, 20);
+		txtBuscar.setBounds(97, 8, 288, 20);
 		panel_2.add(txtBuscar);
 		txtBuscar.setColumns(10);
 
-		JScrollPane scrollPane = getTable();
-		scrollPane.setBounds(10, 36, 338, 186);
+		controle = new ControllerQuarto(frmQuarto, txtDescricao, txtCapacidade, txtBuscar, cbTipo);
+		JScrollPane scrollPane = controle.getTable();
+		scrollPane.setBounds(10, 36, 375, 186);
 		panel_2.add(scrollPane);
-		table.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				actionMouseClickedOnTable(e);
-			}
-		});
-		
-		verificarTipoQuarto();
+		controle.setAddMouseListener();
+		controle.verificarTipoQuarto();
 	}
-	
 }

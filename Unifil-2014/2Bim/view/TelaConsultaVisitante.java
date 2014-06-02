@@ -14,8 +14,9 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
 import controller.ControllerVisitante;
+import controller.Telas;
 
-public class TelaConsultaVisitante extends ControllerVisitante {
+public class TelaConsultaVisitante /*extends ControllerVisitante*/ {
 
 
 	// /**
@@ -33,6 +34,11 @@ public class TelaConsultaVisitante extends ControllerVisitante {
 	// }
 	// });
 	// }
+	
+	private boolean isConsulta;
+	private JDialog frame;
+	private JTextField txtBuscar;
+	private Telas controle;
 
 	/**
 	 * Create the application.
@@ -47,6 +53,7 @@ public class TelaConsultaVisitante extends ControllerVisitante {
 	 */
 	private void initialize() {
 		frame = new JDialog();
+		frame.setTitle("Consulta de Visitante");
 		frame.setBounds(100, 100, 513, 479);
 		frame.getContentPane().setLayout(null);
 
@@ -68,24 +75,25 @@ public class TelaConsultaVisitante extends ControllerVisitante {
 		txtBuscar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				actionButtonBuscar(e);
+				controle.actionButtonBuscar(e);
 			}
 		});
 
-		JScrollPane scrollPane = getTable();
+		controle = new ControllerVisitante(frame, txtBuscar, isConsulta);
+		JScrollPane scrollPane = controle.getTable();
 		scrollPane.setBounds(10, 36, 457, 372);
 		panel.add(scrollPane);
-		table.addMouseListener(new MouseListener() {
-			@Override public void mouseReleased(MouseEvent e) {}
-			@Override public void mousePressed(MouseEvent e) {}
-			@Override public void mouseExited(MouseEvent e) {}
-			@Override public void mouseEntered(MouseEvent e) {}
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				actionMouseClickedOnTable(e);
-			}
-		});
-
+//		table.addMouseListener(new MouseListener() {
+//			@Override public void mouseReleased(MouseEvent e) {}
+//			@Override public void mousePressed(MouseEvent e) {}
+//			@Override public void mouseExited(MouseEvent e) {}
+//			@Override public void mouseEntered(MouseEvent e) {}
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				actionMouseClickedOnTable(e);
+//			}
+//		});
+		controle.setAddMouseListener();
 		frame.setResizable(false);
 		frame.setModal(true);
 		frame.setVisible(true);
