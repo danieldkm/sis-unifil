@@ -45,16 +45,6 @@ public class ControllerVisitante extends Controller implements Telas {
 		this.txtBuscar = txtBuscar;
 	}
 
-	protected ArrayList<Visitante> getListaVisitante() {
-		ArrayList<Object> listaObjeto = Dao.select(new Visitante());
-		ArrayList<Visitante> listaVisitante = new ArrayList<>();
-		for (Object o : listaObjeto) {
-			Visitante v = (Visitante) o;
-			listaVisitante.add(v);
-		}
-		return listaVisitante;
-	}
-
 	public JScrollPane getTable() {
 		listaVisitante = getListaVisitante();
 		tVisitante = new TabelaVisitante(listaVisitante);

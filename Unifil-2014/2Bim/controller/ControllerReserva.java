@@ -43,16 +43,6 @@ public class ControllerReserva extends Controller implements Telas {
 	
 	}
 
-	protected ArrayList<Reserva> getListaReserva() {
-		ArrayList<Object> listaObjeto = Dao.select(new Reserva());
-		ArrayList<Reserva> listaReserva = new ArrayList<>();
-		for (Object o : listaObjeto) {
-			Reserva r = (Reserva) o;
-			listaReserva.add(r);
-		}
-		return listaReserva;
-	}
-
 	public JScrollPane getTable() {
 		listaReserva = getListaReserva();
 		tReserva = new TabelaReserva(listaReserva);

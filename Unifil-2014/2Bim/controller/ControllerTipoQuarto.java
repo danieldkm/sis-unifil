@@ -36,16 +36,6 @@ public class ControllerTipoQuarto extends Controller implements Telas {
 		this.isEdited = isEdited;
 	}
 	
-	protected ArrayList<TipoQuarto> getListaTipoQuarto() {
-		ArrayList<Object> listaObjeto = Dao.select(new TipoQuarto());
-		ArrayList<TipoQuarto> listaTipoQuarto = new ArrayList<>();
-		for (Object o : listaObjeto) {
-			TipoQuarto tq = (TipoQuarto) o;
-			listaTipoQuarto.add(tq);
-		}
-		return listaTipoQuarto;
-	}
-	
 	public JScrollPane getTable() {
 		listaTipoQuarto = getListaTipoQuarto();
 		tTipoQuarto = new TabelaTipoQuarto(listaTipoQuarto);

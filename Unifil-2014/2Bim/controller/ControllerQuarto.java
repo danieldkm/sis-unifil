@@ -46,16 +46,6 @@ public class ControllerQuarto extends ControllerTipoQuarto implements Telas {
 		cbTipo = cb;
 	}
 
-	public ArrayList<Quarto> getListaQuarto() {
-		ArrayList<Object> listaObjeto = Dao.select(new Quarto());
-		ArrayList<Quarto> listaQuarto = new ArrayList<>();
-		for (Object o : listaObjeto) {
-			Quarto q = (Quarto) o;
-			listaQuarto.add(q);
-		}
-		return listaQuarto;
-	}
-
 	public JScrollPane getTable() {
 		listaQuarto = getListaQuarto();
 		tQuarto = new TabelaQuarto(listaQuarto);
