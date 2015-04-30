@@ -13,4 +13,8 @@ public class TreeMap {
 	public Object get(Comparable key) {
 		return topNode == null ? null : topNode.find(key);
 	}
+	
+	public void prin(){
+		topNode.print();
+	}
 }

@@ -28,6 +28,7 @@ public class TreeMapNode {
 	}
 
 	public void add(Comparable key, Object value) {
+		System.out.println("COMPARE " + key.compareTo(itsKey) + " value " + itsValue);
 		if (key.compareTo(itsKey) == 0) {
 			itsValue = value;
 		} else {
@@ -36,9 +37,17 @@ public class TreeMapNode {
 	}
 
 	private void addSubNode(int node, Comparable key, Object value) {
+//		System.out.println("key " + key + " value " + value);
 		if (nodes[node] == null)
 			nodes[node] = new TreeMapNode(key, value);
 		else
 			nodes[node].add(key, value);
+	}
+	
+	public void print(){
+		for (TreeMapNode treeMapNode : nodes) {
+			System.out.println(treeMapNode.itsValue);
+			
+		}
 	}
 }

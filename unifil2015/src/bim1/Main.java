@@ -29,11 +29,13 @@ public class Main {
 //		System.out.println(s);
 		
 		TreeMap tm = new TreeMap();
-		tm.add(1, "daniel");
+//		Node n1 = new Node("A", 1, 0.33);
+		tm.add(1, "daniel1");
 		tm.add(2, "daniel2");
 		tm.add(3, "daniel3");
 		tm.add(4, "daniel4");
-		System.out.println(tm.get(4).toString());
-		System.out.println(tm.topNode.find("daniel"));
+//		tm.prin();
+		System.out.println(tm.get(1).toString());
+		System.out.println(tm.topNode.find(1));
 	}
 }
