@@ -1,0 +1,23 @@
+eclipse juno:
+- no menu help, install new software
+- procure por SVN, ele tem uma logo na cor azul claro, instale
+- instalar SVN
+- logo em seguida instale o SVN Kit
+- feito isso, verifique no menu Windows, preferencias
+- Em team, aba SVN connector, verifica se está marcado o svn kit se não estiver não vai funcionar
+- no projeto, clique com o botão direito do mouse e vá em team, share project
+- no google code, vá em source, copie o endereço https://...
+- cole no campo URL, user = seu login do google e a senha vá no google code na mesma aba onde vc copiou o endereço, clique em password, copie e cole no campo password
+
+
+
+
+eclipse indigo;
+- no menu help, install new software
+- procure por subclipse
+- instalar
+- feito verifique no menu Windows, preferencias
+- Em team, aba SVN connector, verifica se está marcado o svn kit se não estiver não vai funcionar
+- no projeto, clique com o botão direito do mouse e vá em team, share project
+- no google code, vá em source, copie o endereço https://...
+- cole no campo URL, user = seu login do google e a senha vá no google code na mesma aba onde vc copiou o endereço, clique em password, copie e cole no campo password
