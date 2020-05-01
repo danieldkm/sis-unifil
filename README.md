@@ -21,7 +21,7 @@
     <img src="banner.png" alt="Banner">
   </a>
 
-  <h3 align="center">Faculdade Sistemas de Informações</h3>
+  <h3 align="center">Sistemas de Informações</h3>
 
   <p align="center">
     Projetos/Trabalhos/Tarefas desenvolvido para o curso realizado na UniFil em 2011 ~ 2015
